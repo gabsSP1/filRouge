@@ -86,7 +86,6 @@ public class MenuApp extends Activity{
 	            photoFile = createImageFile();
 	        } catch (IOException ex) {
 	            // Error occurred while creating the File
-	        	System.out.println("fseee");
 	        }
 	        // Continue only if the File was successfully created
 	        if (photoFile != null) {
@@ -108,23 +107,28 @@ public class MenuApp extends Activity{
        
 	    File myDir = new File(Environment.getExternalStorageDirectory() +
                 File.separator + "photoBattle"); //pour créer le repertoire dans lequel on va mettre notre fichier
-Boolean success=true;
-if (!myDir.exists()) {
-success = myDir.mkdir(); //On crée le répertoire (s'il n'existe pas!!)
-}
-if (success){
+		Boolean success=true;
+		if (!myDir.exists()) 
+		{
+		success = myDir.mkdir(); //On crée le répertoire (s'il n'existe pas!!)
+		}
+		if (success)
+		{
          
-	 File image = File.createTempFile(
-		        imageFileName,  /* prefix */
-		        ".jpg",         /* suffix */
-		        myDir      /* directory */
-		    );
-	 mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-	    return image;
-}
-else {Log.e("TEST1","ERROR DE CREATION DE DOSSIER");}
-return null;
-	    
+		 File image = File.createTempFile(
+			        imageFileName,  /* prefix */
+			        ".jpg",         /* suffix */
+			        myDir      /* directory */
+			    );
+		 mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+		 return image;
+		}
+		else 
+		{
+			Log.e("TEST1","ERROR DE CREATION DE DOSSIER");
+		}
+		return null;
+			    
 	}
 	
 }
