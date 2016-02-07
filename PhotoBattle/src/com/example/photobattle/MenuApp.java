@@ -39,14 +39,26 @@ public class MenuApp extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.activity_menu_app);
-		Button b=(Button) findViewById(R.id.button1);
-		
-		b.setOnClickListener(new OnClickListener (){
+		Button b2=(Button) findViewById(R.id.button2);
+		Button b3=(Button) findViewById(R.id.button3);
+		b2.setOnClickListener(new OnClickListener (){
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				dispatchTakePictureIntent();
+				
+			}
+			
+		});
+		
+		b3.setOnClickListener(new OnClickListener (){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+		        Intent intentMyAccount = new Intent(getApplicationContext(), Map.class);
+		        startActivity(intentMyAccount);
 				
 			}
 			
