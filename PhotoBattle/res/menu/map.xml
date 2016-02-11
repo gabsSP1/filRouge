@@ -7,5 +7,15 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    
+    <item
+    android:id="@+id/feeds"
+    android:title="Import"/>
+	<item
+	    android:id="@+id/friends"
+	    android:title="Export to Libray"/>
+	<item
+	    android:id="@+id/Delete"
+	    android:title="Delete map"/>
 
 </menu>
