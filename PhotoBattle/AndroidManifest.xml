@@ -3,7 +3,7 @@
     package="com.example.photobattle"
     android:versionCode="1"
     android:versionName="1.0" >
-
+	
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="21" />
@@ -21,9 +21,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MenuApp"
+            android:screenOrientation="landscape"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +34,7 @@
         </activity>
         <activity
             android:name=".Map"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_map" >
         </activity>
     </application>

@@ -9,6 +9,7 @@ import java.util.Vector;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,10 +19,17 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,57 +38,50 @@ import android.widget.TextView;
 //a
 public class Map extends Activity {
 	ListView s;
-	HashMap<Integer, Bitmap> fichierJpeg;
+	HashMap<String, File> fichierJpeg;
 	ActionMode mActionMode;
+	File currentSelectionFile;
+	ImageView imageSelected;
 	int f;
+	Button bDelete;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		f=0;
 		super.onCreate(savedInstanceState);
-		/*getWindow().setFormat(PixelFormat.TRANSLUCENT);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);*/
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		f=0;
 		setContentView(R.layout.activity_map);
+		bDelete= (Button) findViewById(R.id.button_delete);
+		imageSelected=(ImageView)   findViewById(R.id.imageSelected);
 		s=(ListView) findViewById(R.id.scroll);
-		/*s.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-		s.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+		s.setOnItemClickListener(new OnItemClickListener() {
 
 		    @Override
-		    public void onItemCheckedStateChanged(ActionMode mode, int position,
-		                                          long id, boolean checked) {
-		        // Here you can do something when items are selected/de-selected,
-		        // such as update the title in the CAB
-		    }
-
-		    @Override
-		    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-		        // Respond to clicks on the actions in the CAB
+		    public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
 		        
-		                return false;
-		        
+		        imageSelected.setImageBitmap(BitmapFactory.decodeFile(fichierJpeg.get((String)parent.getItemAtPosition(position)).getAbsolutePath()));
+		        currentSelectionFile=fichierJpeg.get((String)parent.getItemAtPosition(position));
+		        view.setSelected(true);
 		    }
-
-		    @Override
-		    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-		        // Inflate the menu for the CAB
-		        MenuInflater inflater = mode.getMenuInflater();
-		        inflater.inflate(R.menu.menu_app, menu);
-		        return true;
-		    }
-
-		    @Override
-		    public void onDestroyActionMode(ActionMode mode) {
-		        // Here you can make any necessary updates to the activity when
-		        // the CAB is removed. By default, selected items are deselected/unchecked.
-		    }
-
-		    @Override
-		    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-		        // Here you can perform updates to the CAB due to
-		        // an invalidate() request
-		        return false;
-		    }
-		});*/
+		});	
 		
+		
+		
+		bDelete.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(currentSelectionFile!=null)
+				{
+					currentSelectionFile.delete();
+					finish();
+					startActivity(getIntent());
+				}
+			}
+			
+		});
 		
 		
 		//Récupération des fichiers jpeg dans le dossier
@@ -89,7 +90,7 @@ public class Map extends Activity {
 	                File.separator + "photoBattle");
 		 File[] fichiers = f2.listFiles();
 		 
-		 fichierJpeg=new  HashMap<Integer, Bitmap>();
+		 fichierJpeg=new  HashMap<String, File>();
 		 for(int i=0; i<fichiers.length;i++)
 		 {
 			 
@@ -109,8 +110,8 @@ public class Map extends Activity {
 				 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				 ImageView tv=new ImageView(this);
 				 tv.setLayoutParams(lparams);
-				 Bitmap myBitmap = BitmapFactory.decodeFile(fichiers[i].getAbsolutePath());
-				 fichierJpeg.put(f,myBitmap);
+				 //File fichier image = BitmapFactory.decodeFile(fichiers[i].getAbsolutePath());
+				 fichierJpeg.put(fichiers[i].getName(),fichiers[i]);
 				 //this.s.addView(tv);
 				 
 			 }
@@ -122,8 +123,9 @@ public class Map extends Activity {
 		 t.setLayoutParams(lparams);
 		 t.setText(Integer.toString(f));
 		// s.addView(t);
-		 Bitmap list2[] = new Bitmap[fichierJpeg.size()];
-		 ArrayAdapterItem adapter =new ArrayAdapterItem(this, R.layout.image_view_layout, fichierJpeg.values().toArray(list2));
+		 File list2[] = new File[fichierJpeg.size()];
+		 String list3[] = new String[fichierJpeg.size()];
+		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, fichierJpeg.keySet().toArray(list3), fichierJpeg.values().toArray(list2));
 		 s.setAdapter(adapter);
 		
 	}
@@ -131,10 +133,10 @@ public class Map extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.map, menu);
+		getMenuInflater().inflate(R.layout.activity_menu_app, menu);
 		return true;
 	}
-
+/*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
@@ -188,5 +190,5 @@ public class Map extends Activity {
 	    public void onDestroyActionMode(ActionMode mode) {
 	        mActionMode = null;
 	    }
-	};
+	};*/
 }

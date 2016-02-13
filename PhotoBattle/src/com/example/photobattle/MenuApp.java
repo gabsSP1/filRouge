@@ -36,6 +36,8 @@ public class MenuApp extends Activity{
 	 
 		// On met l'application en plein écran et sans barre de titre
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.activity_menu_app);

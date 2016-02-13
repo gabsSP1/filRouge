@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_margin="40dp"
+    android:layout_margin="15dp"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -10,7 +10,8 @@
         android:layout_margin="15dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Button" />
+        android:text="Button"
+        android:background="@drawable/draw_button" />
 
     <Button
         android:id="@+id/button2"
