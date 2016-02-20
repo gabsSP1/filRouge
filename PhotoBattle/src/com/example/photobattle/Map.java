@@ -1,20 +1,33 @@
 package com.example.photobattle;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Layout;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,19 +52,28 @@ import android.widget.TextView;
 public class Map extends Activity {
 	ListView s;
 	HashMap<String, File> fichierJpeg;
+	HashMap<String, Bitmap> thumbnail;
 	ActionMode mActionMode;
 	File currentSelectionFile;
 	ImageView imageSelected;
-	int f;
 	Button bDelete;
+	Button importPicture;
+	Button takePicture;
+	File nf;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		f=0;
 		setContentView(R.layout.activity_map);
+		createDirectory("photoBattle");
+		createDirectory("photoBattle" +
+                File.separator+ "Pictures");
+		createDirectory(
+                "photoBattle" +
+                File.separator+ "Thumbnail");
+		
 		bDelete= (Button) findViewById(R.id.button_delete);
 		imageSelected=(ImageView)   findViewById(R.id.imageSelected);
 		s=(ListView) findViewById(R.id.scroll);
@@ -75,21 +97,48 @@ public class Map extends Activity {
 				// TODO Auto-generated method stub
 				if(currentSelectionFile!=null)
 				{
+					File p=new File( "photoBattle" +
+			                File.separator+ "Thumbnail"+currentSelectionFile.getName());
+					p.delete();
 					currentSelectionFile.delete();
-					finish();
-					startActivity(getIntent());
+					restart();
+					
 				}
 			}
 			
 		});
 		
+		importPicture= (Button) findViewById(R.id.import_picture);
+		importPicture.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setType("image/*");
+				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(intent, 89);
+			}
+			
+		});
 		
+		takePicture= (Button) findViewById (R.id.take_picture);
+		takePicture.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dispatchTakePictureIntent();
+			}
+			});
 		//Récupération des fichiers jpeg dans le dossier
 		
 		File f2 = new File(Environment.getExternalStorageDirectory() +
-	                File.separator + "photoBattle");
+	                File.separator + "photoBattle" +
+	                File.separator + "Pictures");
 		 File[] fichiers = f2.listFiles();
-		 
+		 thumbnail=new  HashMap<String, Bitmap>();
 		 fichierJpeg=new  HashMap<String, File>();
 		 for(int i=0; i<fichiers.length;i++)
 		 {
@@ -97,7 +146,7 @@ public class Map extends Activity {
 			String ext="";
 			int k=fichiers[i].getName().length()-1;
 			char p=fichiers[i].getName().charAt(k);
-			while(p!='.' && k>=0)
+			while(p!='.' && k>0)
 			{
 				ext+=p;
 				k--;
@@ -105,27 +154,21 @@ public class Map extends Activity {
 			}
 			 if(ext.equals("gpj"))
 			 {
-				 f++;
-				 LayoutParams lparams = new LayoutParams(
-				 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				 ImageView tv=new ImageView(this);
-				 tv.setLayoutParams(lparams);
-				 //File fichier image = BitmapFactory.decodeFile(fichiers[i].getAbsolutePath());
 				 fichierJpeg.put(fichiers[i].getName(),fichiers[i]);
-				 //this.s.addView(tv);
-				 
+	            Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() +
+		                File.separator + "photoBattle" +
+		                File.separator + "Thumbnail"+File.separator+fichiers[i].getName());
+	            //ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+	            //imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+	            thumbnail.put(fichiers[i].getName(), imageBitmap);
+
 			 }
 			 
 		 }
-		 LayoutParams lparams = new LayoutParams(
-		LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		 TextView t=new TextView(this);
-		 t.setLayoutParams(lparams);
-		 t.setText(Integer.toString(f));
-		// s.addView(t);
-		 File list2[] = new File[fichierJpeg.size()];
+		
+		 Bitmap list2[] = new Bitmap[fichierJpeg.size()];
 		 String list3[] = new String[fichierJpeg.size()];
-		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, fichierJpeg.keySet().toArray(list3), fichierJpeg.values().toArray(list2));
+		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, thumbnail.keySet().toArray(list3), thumbnail.values().toArray(list2));
 		 s.setAdapter(adapter);
 		
 	}
@@ -133,9 +176,34 @@ public class Map extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.layout.activity_menu_app, menu);
+		//getMenuInflater().inflate(R.layout.activity_menu_app, menu);
 		return true;
 	}
+	
+	
+	static final int REQUEST_TAKE_PHOTO = 1;
+
+	private void dispatchTakePictureIntent() {
+	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    // Ensure that there's a camera activity to handle the intent
+	    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+	        // Create the File where the photo should go
+	        File photoFile = null;
+	        try {
+	            photoFile = createImageFile("photoBattle"+File.separator+"Pictures", createPictureName());
+	        } catch (IOException ex) {
+	            // Error occurred while creating the File
+	        }
+	        // Continue only if the File was successfully created
+	        if (photoFile != null) {
+	            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+	                    Uri.fromFile(photoFile));
+	            startActivityForResult(takePictureIntent, 55);
+	            nf=photoFile;
+	        }
+	    }
+	}
+	
 /*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) 
@@ -191,4 +259,118 @@ public class Map extends Activity {
 	        mActionMode = null;
 	    }
 	};*/
+	
+	@Override
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	     super.onActivityResult(requestCode, resultCode, data);
+	  // TODO Auto-generated method stub
+	     super.onActivityResult(requestCode, resultCode, data);
+
+	     if (requestCode == 89){
+	    	  savebitmap(data.getData());
+	      }
+	     if(nf!=null)
+	     {
+	    	 createThumbnail(nf.getAbsolutePath());
+	     }
+	     restart();
+	        
+	}
+	
+	 private void savebitmap(Uri targetUri) {
+	     String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+	      OutputStream outStream = null;
+	      
+	      File file;
+		try {
+			file = createImageFile("photoBattle"+File.separator+"Pictures", createPictureName());
+	         // make a new bitmap from your file
+	         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+	         outStream = new FileOutputStream(file);
+	         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+	         outStream.flush();
+	         outStream.close();
+	         createThumbnail(file.getAbsolutePath());
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+
+	   }
+	 
+	 
+	 private File createImageFile(String rPath, String imageFileName) throws IOException {
+		    // Create an image file name
+		    File myDir = new File(Environment.getExternalStorageDirectory() +
+	                File.separator + rPath); //pour créer le repertoire dans lequel on va mettre notre fichier
+			boolean success=createDirectory(rPath);
+			
+			if (success)
+			{
+	         
+			 File image = new File(myDir.getAbsolutePath()+ File.separator +imageFileName);
+			 return image;
+			}
+			else 
+			{
+				Log.e("TEST1","ERROR DE CREATION DE DOSSIER");
+			}
+			return null;
+				    
+		}
+	 
+	 void createThumbnail(String path)
+	 {
+		 Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+		 Bitmap bmp = Bitmap.createBitmap(100, 70, conf); // this creates a MUTABLE bitmap
+		 Canvas canvas = new Canvas(bmp);
+		 Bitmap imageBitmap=BitmapFactory.decodeFile(path);
+		 int width=imageBitmap.getWidth()*(int) (imageBitmap.getHeight()/70.0);
+         int height=70;
+         ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
+         Bitmap c=(Bitmap.createScaledBitmap(imageBitmap, width, height, false));
+         //c.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+         canvas.drawBitmap(c, (int)(100-width)/2, 0, null);
+         
+         OutputStream outStream = null;
+	      
+	      File file;
+         try {
+        	 file = createImageFile("photoBattle"+File.separator+"Thumbnail", new File(path).getName());
+			outStream = new FileOutputStream(file);
+			bmp.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+	         outStream.flush();
+	         outStream.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         
+	 }
+	 
+	 
+	 void restart()
+	 {
+		 startActivity(getIntent());
+		 finish(); 
+	 }
+	 
+	 boolean createDirectory(String rPath)
+	 {
+		 File myDir = new File(Environment.getExternalStorageDirectory() +
+	                File.separator + rPath); //pour créer le repertoire dans lequel on va mettre notre fichier
+		 boolean success =true;
+		 if (!myDir.exists()) 
+			{
+			success = myDir.mkdir(); //On crée le répertoire (s'il n'existe pas!!)
+			}
+		 return success;
+	 }
+	 
+	 String createPictureName()
+	 {
+		 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		 String imageFileName = "JPEG_" + timeStamp + ".jpg";	
+		 return imageFileName;
+	 }
+	 
 }

@@ -17,14 +17,14 @@ public class MonAdaptateurDeListe extends ArrayAdapter<String> {
 
 	private final Activity context;
 	private final String[] itemname;
-	private final File[] imgid;
-	public MonAdaptateurDeListe(Activity context, String[] itemname, File[] imgid) {
+	private final Bitmap[] imgid;
+	public MonAdaptateurDeListe(Activity context, String[] itemname, Bitmap[] bitmaps) {
 		super(context, R.layout.image_view_layout, itemname);
 		// TODO Auto-generated constructor stub
 		
 		this.context=context;
 		this.itemname=itemname;
-		this.imgid=imgid;
+		this.imgid=bitmaps;
 	}
 
 	public View getView(int position,View view,ViewGroup parent) {
@@ -33,9 +33,10 @@ public class MonAdaptateurDeListe extends ArrayAdapter<String> {
 		
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		TextView extratxt = (TextView) rowView.findViewById(R.id.label);
-		
-		//imageView.setImageBitmap(BitmapFactory.decodeFile(imgid[position].getAbsolutePath()));
-		extratxt.setText(itemname[position].substring(0, 17));
+		imageView.setImageBitmap(imgid[position]);
+		if(itemname[position].length()>17)
+			itemname[position].substring(0, 17);
+		extratxt.setText(itemname[position]);
 		return rowView;
 		
 	}
