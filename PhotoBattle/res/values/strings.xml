@@ -6,5 +6,6 @@
     <string name="title_activity_menu_app">MenuApp</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_edit">EditActivity</string>
 
 </resources>

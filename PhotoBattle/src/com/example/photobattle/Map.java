@@ -1,53 +1,34 @@
 package com.example.photobattle;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PixelFormat;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.Layout;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 //a
 public class Map extends Activity {
 	ListView s;
@@ -59,7 +40,9 @@ public class Map extends Activity {
 	Button bDelete;
 	Button importPicture;
 	Button takePicture;
+	Button edit;
 	File nf;
+	final static String CURRENT_FILE="selcted_file";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,7 +56,11 @@ public class Map extends Activity {
 		createDirectory(
                 "photoBattle" +
                 File.separator+ "Thumbnail");
-		
+		createDirectory(
+                "photoBattle" +
+                File.separator+ "Contours");
+		thumbnail=new  HashMap<String, Bitmap>();
+		 fichierJpeg=new  HashMap<String, File>();
 		bDelete= (Button) findViewById(R.id.button_delete);
 		imageSelected=(ImageView)   findViewById(R.id.imageSelected);
 		s=(ListView) findViewById(R.id.scroll);
@@ -97,12 +84,30 @@ public class Map extends Activity {
 				// TODO Auto-generated method stub
 				if(currentSelectionFile!=null)
 				{
-					File p=new File( "photoBattle" +
-			                File.separator+ "Thumbnail"+currentSelectionFile.getName());
+					File p=new File(Environment.getExternalStorageDirectory() +
+			                File.separator+ "photoBattle" +
+			                File.separator+ "Thumbnail"+
+			                File.separator+currentSelectionFile.getName());
 					p.delete();
 					currentSelectionFile.delete();
-					restart();
+					loadList();
 					
+				}
+			}
+			
+		});
+		
+		edit=(Button) findViewById(R.id.button_edit);
+		edit.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(currentSelectionFile!=null)
+				{
+					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
+					intentMyAccount.putExtra("selected_file", currentSelectionFile.getAbsolutePath());
+			        startActivity(intentMyAccount);
 				}
 			}
 			
@@ -134,42 +139,7 @@ public class Map extends Activity {
 			});
 		//Récupération des fichiers jpeg dans le dossier
 		
-		File f2 = new File(Environment.getExternalStorageDirectory() +
-	                File.separator + "photoBattle" +
-	                File.separator + "Pictures");
-		 File[] fichiers = f2.listFiles();
-		 thumbnail=new  HashMap<String, Bitmap>();
-		 fichierJpeg=new  HashMap<String, File>();
-		 for(int i=0; i<fichiers.length;i++)
-		 {
-			 
-			String ext="";
-			int k=fichiers[i].getName().length()-1;
-			char p=fichiers[i].getName().charAt(k);
-			while(p!='.' && k>0)
-			{
-				ext+=p;
-				k--;
-				p=fichiers[i].getName().charAt(k);
-			}
-			 if(ext.equals("gpj"))
-			 {
-				 fichierJpeg.put(fichiers[i].getName(),fichiers[i]);
-	            Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() +
-		                File.separator + "photoBattle" +
-		                File.separator + "Thumbnail"+File.separator+fichiers[i].getName());
-	            //ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-	            //imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-	            thumbnail.put(fichiers[i].getName(), imageBitmap);
-
-			 }
-			 
-		 }
-		
-		 Bitmap list2[] = new Bitmap[fichierJpeg.size()];
-		 String list3[] = new String[fichierJpeg.size()];
-		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, thumbnail.keySet().toArray(list3), thumbnail.values().toArray(list2));
-		 s.setAdapter(adapter);
+		loadList();
 		
 	}
 
@@ -204,62 +174,6 @@ public class Map extends Activity {
 	    }
 	}
 	
-/*
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) 
-	{
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		switch (id) {
-        case R.id.Delete:
-        	if (mActionMode != null) {
-                return false;
-            }
-
-            // Start the CAB using the ActionMode.Callback defined above
-            mActionMode = this.startActionMode(mActionModeCallback);
-            s.setSelected(true);
-
-        	break;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-	
-	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-
-	    // Called when the action mode is created; startActionMode() was called
-	    @Override
-	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-	        // Inflate a menu resource providing context menu items
-	        MenuInflater inflater = mode.getMenuInflater();
-	        inflater.inflate(R.menu.menu_action_bar, menu);
-	        return true;
-	    }
-
-	    // Called each time the action mode is shown. Always called after onCreateActionMode, but
-	    // may be called multiple times if the mode is invalidated.
-	    @Override
-	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-	        return false; // Return false if nothing is done
-	    }
-
-	    // Called when the user selects a contextual menu item
-	    @Override
-	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-	                return false;
-	        
-	    }
-
-	    // Called when the user exits the action mode
-	    @Override
-	    public void onDestroyActionMode(ActionMode mode) {
-	        mActionMode = null;
-	    }
-	};*/
-	
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	     super.onActivityResult(requestCode, resultCode, data);
@@ -273,12 +187,11 @@ public class Map extends Activity {
 	     {
 	    	 createThumbnail(nf.getAbsolutePath());
 	     }
-	     restart();
+	     loadList();
 	        
 	}
 	
 	 private void savebitmap(Uri targetUri) {
-	     String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
 	      OutputStream outStream = null;
 	      
 	      File file;
@@ -321,15 +234,13 @@ public class Map extends Activity {
 	 void createThumbnail(String path)
 	 {
 		 Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-		 Bitmap bmp = Bitmap.createBitmap(100, 70, conf); // this creates a MUTABLE bitmap
+		 Bitmap bmp = Bitmap.createBitmap(100, 60, conf); // this creates a MUTABLE bitmap
 		 Canvas canvas = new Canvas(bmp);
 		 Bitmap imageBitmap=BitmapFactory.decodeFile(path);
-		 int width=imageBitmap.getWidth()*(int) (imageBitmap.getHeight()/70.0);
-         int height=70;
-         ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-         Bitmap c=(Bitmap.createScaledBitmap(imageBitmap, width, height, false));
-         //c.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-         canvas.drawBitmap(c, (int)(100-width)/2, 0, null);
+		 int height=60;
+		 int width=(int)(imageBitmap.getWidth()*((double)height/imageBitmap.getHeight()));
+         imageBitmap=getResizedBitmap(imageBitmap, width, height);
+         canvas.drawBitmap(imageBitmap, (int)(100-width)/2, 0, null);
          
          OutputStream outStream = null;
 	      
@@ -345,13 +256,6 @@ public class Map extends Activity {
 			e.printStackTrace();
 		}
          
-	 }
-	 
-	 
-	 void restart()
-	 {
-		 startActivity(getIntent());
-		 finish(); 
 	 }
 	 
 	 boolean createDirectory(String rPath)
@@ -372,5 +276,70 @@ public class Map extends Activity {
 		 String imageFileName = "JPEG_" + timeStamp + ".jpg";	
 		 return imageFileName;
 	 }
+	 
+	 public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+		    int width = bm.getWidth();
+		    int height = bm.getHeight();
+		    float scaleWidth = ((float) newWidth) / width;
+		    float scaleHeight = ((float) newHeight) / height;
+		    // CREATE A MATRIX FOR THE MANIPULATION
+		    Matrix matrix = new Matrix();
+		    // RESIZE THE BIT MAP
+		    matrix.postScale(scaleWidth, scaleHeight);
+
+		    // "RECREATE" THE NEW BITMAP
+		    Bitmap resizedBitmap = Bitmap.createBitmap(
+		        bm, 0, 0, width, height, matrix, false);
+		    bm.recycle();
+		    return resizedBitmap;
+		}
+	 
+	 void loadList()
+	 {
+		 s.removeAllViewsInLayout();
+		 File f2 = new File(Environment.getExternalStorageDirectory() +
+	                File.separator + "photoBattle" +
+	                File.separator + "Pictures");
+		 File[] fichiers = f2.listFiles();
+		 thumbnail.clear();
+		 fichierJpeg.clear();
+		 for(int i=0; i<fichiers.length;i++)
+		 {
+			String ext="";
+			int k=fichiers[i].getName().length()-1;
+			char p=fichiers[i].getName().charAt(k);
+			while(p!='.' && k>0)
+			{
+				ext+=p;
+				k--;
+				p=fichiers[i].getName().charAt(k);
+			}
+			 if(ext.equals("gpj"))
+			 {
+				 fichierJpeg.put(fichiers[i].getName(),fichiers[i]);
+	            Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() +
+		                File.separator + "photoBattle" +
+		                File.separator + "Thumbnail"+File.separator+fichiers[i].getName());
+	            thumbnail.put(fichiers[i].getName(), imageBitmap);
+
+			 }
+			 
+		 }
+		
+		 Bitmap list2[] = new Bitmap[fichierJpeg.size()];
+		 String list3[] = new String[fichierJpeg.size()];
+		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, thumbnail.keySet().toArray(list3), thumbnail.values().toArray(list2));
+		 s.setAdapter(adapter);
+	 }
+	 
+	 void restart()
+	 {
+		 startActivity(getIntent());
+		 finish(); 
+	 }
+	public void onRestart(){
+		super.onRestart();
+		loadList();
+	}
 	 
 }
