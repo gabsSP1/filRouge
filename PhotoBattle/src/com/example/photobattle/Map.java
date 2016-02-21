@@ -29,6 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 //a
 public class Map extends Activity {
 	ListView s;
@@ -179,13 +180,23 @@ public class Map extends Activity {
 	     super.onActivityResult(requestCode, resultCode, data);
 	  // TODO Auto-generated method stub
 	     super.onActivityResult(requestCode, resultCode, data);
-
-	     if (requestCode == 89){
+	    /* Toast toast = Toast.makeText(getApplicationContext()
+	    		 , Integer.toString(resultCode), Toast.LENGTH_SHORT);
+	    		 					toast.show();*/
+	     if (requestCode == 89 && data!=null){
 	    	  savebitmap(data.getData());
 	      }
 	     if(nf!=null)
 	     {
-	    	 createThumbnail(nf.getAbsolutePath());
+		     if(nf.getTotalSpace()>20)
+		     {
+		    	 createThumbnail(nf.getAbsolutePath());
+		     }
+		     else
+		     {
+		    	 nf.delete();
+		     }
+		     nf=null;
 	     }
 	     loadList();
 	        
@@ -197,7 +208,6 @@ public class Map extends Activity {
 	      File file;
 		try {
 			file = createImageFile("photoBattle"+File.separator+"Pictures", createPictureName());
-	         // make a new bitmap from your file
 	         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
 	         outStream = new FileOutputStream(file);
 	         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
@@ -316,13 +326,25 @@ public class Map extends Activity {
 			}
 			 if(ext.equals("gpj"))
 			 {
+				 if(fichiers[i].getTotalSpace()>20)
+				 {
 				 fichierJpeg.put(fichiers[i].getName(),fichiers[i]);
 	            Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() +
 		                File.separator + "photoBattle" +
 		                File.separator + "Thumbnail"+File.separator+fichiers[i].getName());
 	            thumbnail.put(fichiers[i].getName(), imageBitmap);
+				 }
+				 else
+				 {
+					 (new File(Environment.getExternalStorageDirectory() +
+				                File.separator + "photoBattle" +
+				                File.separator + "Thumbnail"+File.separator+fichiers[i].getName())).delete();
+					 fichiers[i].delete();
+					 
+				 }
 
 			 }
+			 imageSelected.setImageBitmap(null);
 			 
 		 }
 		
