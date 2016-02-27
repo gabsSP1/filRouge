@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_delete_black_24dp.png",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\drawable-mdpi\\ic_delete_black_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    }
+]
