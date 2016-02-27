@@ -33,7 +33,6 @@ public final class R {
         public static final int button_delete=0x7f09000a;
         public static final int button_edit=0x7f090009;
         public static final int button_start=0x7f090008;
-        public static final int delete_delete=0x7f090013;
         public static final int feeds=0x7f090010;
         public static final int friends=0x7f090011;
         public static final int icon=0x7f09000e;
@@ -54,13 +53,11 @@ public final class R {
     }
     public static final class menu {
         public static final int map=0x7f080000;
-        public static final int menu_action_bar=0x7f080001;
-        public static final int menu_app=0x7f080002;
+        public static final int menu_app=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f070000;
         public static final int app_name=0x7f070001;
-        public static final int delete_delete=0x7f070006;
         public static final int hello_world=0x7f070002;
         public static final int title_activity_edit=0x7f070003;
         public static final int title_activity_map=0x7f070004;

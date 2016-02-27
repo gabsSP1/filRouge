@@ -70,7 +70,7 @@ public class EditActivity extends Activity {
 			}
 			
 		});
-		mapName.setVisibility(100);
+		mapName.setVisibility(View.INVISIBLE);
 		mapName.setText(fbackground.getName());
 		p.setImageBitmap(background);
 		p.setOnClickListener(new OnClickListener(){
@@ -80,11 +80,11 @@ public class EditActivity extends Activity {
 				inEdit=!inEdit;
 				if(inEdit)
 				{
-					mapName.setVisibility(0);
+					mapName.setVisibility(View.VISIBLE);
 				}
 				else
 				{
-					mapName.setVisibility(100);
+					mapName.setVisibility(View.INVISIBLE);
 				}
 			}
 			
