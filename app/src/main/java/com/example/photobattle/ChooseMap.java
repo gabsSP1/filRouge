@@ -35,7 +35,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 //a
-public class Map extends Activity {
+public class ChooseMap extends Activity {
 	ListView s;
 	HashMap<String, File> fichierJpeg;
 	HashMap<String, Bitmap> thumbnail;

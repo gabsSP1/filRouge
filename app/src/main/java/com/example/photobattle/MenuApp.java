@@ -1,26 +1,12 @@
 package com.example.photobattle;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.hardware.camera2.*;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -48,7 +34,7 @@ public class MenuApp extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-		        Intent intentMyAccount = new Intent(getApplicationContext(), Map.class);
+		        Intent intentMyAccount = new Intent(getApplicationContext(), ChooseMap.class);
 		        startActivity(intentMyAccount);
 				
 			}

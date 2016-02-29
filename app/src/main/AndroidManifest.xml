@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Map"
+            android:name=".ChooseMap"
             android:label="@string/title_activity_map"
             android:screenOrientation="landscape" >
         </activity>
