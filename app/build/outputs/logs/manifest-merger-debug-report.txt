@@ -71,14 +71,14 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:32:17-77
 	android:name
 		ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:32:27-74
-activity#com.example.photobattle.Map
+activity#com.example.photobattle.ChooseMap
 ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:35:9-39:20
 	android:screenOrientation
 		ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:38:13-50
 	android:label
 		ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:37:13-55
 	android:name
-		ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:36:13-32
+		ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:36:13-38
 activity#com.example.photobattle.EditActivity
 ADDED from C:\Users\gab\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:40:9-43:20
 	android:label

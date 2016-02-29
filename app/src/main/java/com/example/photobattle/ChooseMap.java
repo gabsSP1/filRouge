@@ -95,6 +95,9 @@ public class ChooseMap extends Activity {
 			                File.separator+ "Thumbnail"+
 			                File.separator+currentSelectionFile.getName());
 					p.delete();
+                    (new File(Environment.getExternalStorageDirectory() +
+                            File.separator + "photoBattle" +
+                            File.separator + "Contours"+File.separator+currentSelectionFile.getName())).delete();
 					currentSelectionFile.delete();
 					loadList();
 					
@@ -112,13 +115,13 @@ public class ChooseMap extends Activity {
 				if(currentSelectionFile!=null)
 				{
 					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
-					intentMyAccount.putExtra("selected_file", currentSelectionFile.getAbsolutePath());
+					intentMyAccount.putExtra("selected_file", Environment.getExternalStorageDirectory()+File.separator +"photoBattle"+File.separator+"Contours"+File.separator+currentSelectionFile.getName());
 			        startActivity(intentMyAccount);
 				}
 			}
 			
 		});
-		
+
 		importPicture= (Button) findViewById(R.id.import_picture);
 		importPicture.setOnClickListener(new OnClickListener(){
 
@@ -358,6 +361,9 @@ public class ChooseMap extends Activity {
 					 (new File(Environment.getExternalStorageDirectory() +
 				                File.separator + "photoBattle" +
 				                File.separator + "Thumbnail"+File.separator+fichiers[i].getName())).delete();
+                     (new File(Environment.getExternalStorageDirectory() +
+                             File.separator + "photoBattle" +
+                             File.separator + "Contours"+File.separator+fichiers[i].getName())).delete();
 					 fichiers[i].delete();
 					 
 				 }

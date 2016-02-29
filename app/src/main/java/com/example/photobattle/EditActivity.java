@@ -53,12 +53,19 @@ public class EditActivity extends Activity {
 				// TODO Auto-generated method stub7
 				File thumbnail=new File(Environment.getExternalStorageDirectory() +
 		                File.separator+"photoBattle"+File.separator+"Thumbnail",fbackground.getName());
+				File contours=new File(Environment.getExternalStorageDirectory() +
+						File.separator+"photoBattle"+File.separator+"Pictures",fbackground.getName());
 				File n=(new File(Environment.getExternalStorageDirectory() +
-		                File.separator+"photoBattle"+File.separator+"Pictures",mapName.getText().toString()));
+		                File.separator+"photoBattle"+File.separator+"Contours",mapName.getText().toString()));
 				if(!n.exists())
-				{fbackground.renameTo(n);
+				{
+
+					fbackground.renameTo(n);
 				thumbnail.renameTo(new File(Environment.getExternalStorageDirectory() +
-		                File.separator+"photoBattle"+File.separator+"Thumbnail",mapName.getText().toString()));}
+		                File.separator+"photoBattle"+File.separator+"Thumbnail",mapName.getText().toString()));
+					contours.renameTo(new File(Environment.getExternalStorageDirectory() +
+							File.separator+"photoBattle"+File.separator+"Pictures",mapName.getText().toString()));
+				}
 				else
 				{
 					Toast toast = Toast.makeText(getApplicationContext()

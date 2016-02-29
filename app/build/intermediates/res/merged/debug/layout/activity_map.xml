@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#DBE0E1"
-    tools:context="com.example.photobattle.Map" >
+    tools:context=".ChooseMap" >
     
 	 <TextView
 	     android:id="@+id/label"
@@ -29,7 +29,7 @@
     android:baselineAligned="false"
     android:orientation="horizontal"
     android:layout_margin="5dp"
-    tools:context="com.example.photobattle.Map" >
+    tools:context=".ChooseMap" >
 	
         
 	    <LinearLayout 
