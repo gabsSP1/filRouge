@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     public Bitmap DoVerticalFilter(Bitmap BitmapGray){
         int w, h, threshold;
 
-        h= BitmapGray.getHeight();
+      dz  h= BitmapGray.getHeight();
         w= BitmapGray.getWidth();
 
         threshold = 100;
