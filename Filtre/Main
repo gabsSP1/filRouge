@@ -1,0 +1,150 @@
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+    private ImageView image;
+    //private TextView tt;
+    private Button change;
+    private Button bw;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        image = (ImageView) findViewById(R.id.image);
+        //tt = (TextView) findViewById(R.id.tt);
+        change = (Button) findViewById(R.id.change);
+        bw = (Button) findViewById(R.id.bw);
+        image.setImageResource(R.drawable.test);
+        change.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                grayScale(image);
+            }
+        });
+
+        bw.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                chgtoBandW(image);
+            }
+        });
+    }
+
+
+    void chgtoBandW(ImageView img){
+        //img.setImageBitmap(source);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+        Bitmap mapnew= Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), Bitmap.Config.ARGB_8888);
+
+        int color = 0;
+        int[][] bmx= new int[bm.getWidth()][bm.getHeight()];
+        for(int i=0;i<bm.getWidth();i++)
+        {
+            for(int j= 0;j<bm.getHeight();j++)
+            {
+                int colorOfPixel = bm.getPixel(i, j);
+                mapnew.setPixel(i,j,colorOfPixel);
+
+            }
+        }
+        mapnew = DoFullFilter(mapnew);
+        img.setImageBitmap(mapnew);
+    }
+
+    public Bitmap DoHorizontalFilter(Bitmap BitmapGray){
+        int w, h, threshold;
+
+        h= BitmapGray.getHeight();
+        w= BitmapGray.getWidth();
+
+        threshold = 100;
+
+        Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+
+        for(int x = 0; x < w-1; ++x) {
+            for(int y = 0; y < h; ++y) {
+
+                int pixel = BitmapGray.getPixel(x, y);
+                int pixelsuivant = BitmapGray.getPixel(x+1,y);
+
+                int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
+                int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
+                if((gray-gNext)*(gray-gNext)< threshold){
+                    BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
+                } else{
+                    BitmapBiner.setPixel(x, y, 0xFF000000);
+                }
+
+            }
+        }
+        return BitmapBiner;
+
+    }
+    public Bitmap DoFullFilter(Bitmap BitmapGray){
+        int w, h, threshold;
+
+        h= BitmapGray.getHeight();
+        w= BitmapGray.getWidth();
+
+        Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+        Bitmap bHor = DoHorizontalFilter(BitmapGray);
+        Bitmap bVer = DoVerticalFilter(BitmapGray);
+        for(int x = 0; x < w; ++x) {
+            for(int y = 0; y < h; ++y) {
+                int horp = bHor.getPixel(x,y);
+                int verp = bVer.getPixel(x,y);
+                if(horp != verp){
+                    BitmapBiner.setPixel(x,y,0xFF000000);
+                }
+                else
+                    BitmapBiner.setPixel(x,y,0xFFFFFFFF);
+            }
+        }
+        return BitmapBiner;
+
+    }
+    public Bitmap DoVerticalFilter(Bitmap BitmapGray){
+        int w, h, threshold;
+
+        h= BitmapGray.getHeight();
+        w= BitmapGray.getWidth();
+
+        threshold = 100;
+
+        Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+
+        for(int x = 0; x < w; ++x) {
+            for(int y = 0; y < h-1; ++y) {
+
+                int pixel = BitmapGray.getPixel(x, y);
+                int pixelsuivant = BitmapGray.getPixel(x,y+1);
+
+                int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
+                int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
+                if((gray-gNext)*(gray-gNext)< threshold){
+                    BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
+                } else{
+                    BitmapBiner.setPixel(x, y, 0xFF000000);
+                }
+
+            }
+        }
+        return BitmapBiner;
+
+    }
+    void grayScale(ImageView img) {
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        image.setColorFilter(filter);
+    }
+
+}
