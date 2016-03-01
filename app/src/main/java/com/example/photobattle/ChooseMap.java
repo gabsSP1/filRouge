@@ -18,6 +18,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -33,6 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 //a
 public class ChooseMap extends Activity {
@@ -47,21 +49,25 @@ public class ChooseMap extends Activity {
 	Button importPicture;
 	Button takePicture;
 	Button edit;
+	Button play;
+	ProgressBar loading;
+    boolean create;
 	File nf;
 	final static String CURRENT_FILE="selcted_file";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        create=false;
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_map);
 		createDirectory("photoBattle");
 		createDirectory("photoBattle" +
-                File.separator+ "Pictures");
+				File.separator + "Pictures");
 		createDirectory(
-                "photoBattle" +
-                File.separator+ "Thumbnail");
+				"photoBattle" +
+						File.separator + "Thumbnail");
 		createDirectory(
                 "photoBattle" +
                 File.separator+ "Contours");
@@ -72,40 +78,47 @@ public class ChooseMap extends Activity {
 		s=(ListView) findViewById(R.id.scroll);
 		s.setOnItemClickListener(new OnItemClickListener() {
 
-		    @Override
-		    public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
-		        
-		        imageSelected.setImageBitmap(BitmapFactory.decodeFile(fichierJpeg.get((String)parent.getItemAtPosition(position)).getAbsolutePath()));
-		        currentSelectionFile=fichierJpeg.get((String)parent.getItemAtPosition(position));
-		        view.setSelected(true);
-		    }
-		});	
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
+
+                imageSelected.setImageBitmap(BitmapFactory.decodeFile(fichierJpeg.get((String) parent.getItemAtPosition(position)).getAbsolutePath()));
+                currentSelectionFile = fichierJpeg.get((String) parent.getItemAtPosition(position));
+                view.setSelected(true);
+            }
+        });
 		
 		
 		
-		bDelete.setOnClickListener(new OnClickListener(){
+		bDelete.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(currentSelectionFile!=null)
-				{
-					File p=new File(Environment.getExternalStorageDirectory() +
-			                File.separator+ "photoBattle" +
-			                File.separator+ "Thumbnail"+
-			                File.separator+currentSelectionFile.getName());
+				if (currentSelectionFile != null) {
+					File p = new File(Environment.getExternalStorageDirectory() +
+							File.separator + "photoBattle" +
+							File.separator + "Thumbnail" +
+							File.separator + currentSelectionFile.getName());
 					p.delete();
-                    (new File(Environment.getExternalStorageDirectory() +
-                            File.separator + "photoBattle" +
-                            File.separator + "Contours"+File.separator+currentSelectionFile.getName())).delete();
+					(new File(Environment.getExternalStorageDirectory() +
+							File.separator + "photoBattle" +
+							File.separator + "Contours" + File.separator + currentSelectionFile.getName())).delete();
 					currentSelectionFile.delete();
 					loadList();
-					
+
 				}
 			}
-			
+
 		});
-		
+
+		play= (Button) findViewById(R.id.button_start);
+		play.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
 		edit=(Button) findViewById(R.id.button_edit);
 		edit.setOnClickListener(new OnClickListener(){
 
@@ -136,7 +149,7 @@ public class ChooseMap extends Activity {
 			}
 			
 		});
-		
+
 		takePicture= (Button) findViewById (R.id.take_picture);
 		takePicture.setOnClickListener(new OnClickListener(){
 
@@ -192,21 +205,23 @@ public class ChooseMap extends Activity {
 	    		 , Integer.toString(resultCode), Toast.LENGTH_SHORT);
 	    		 					toast.show();*/
 	     if (requestCode == 89 && data!=null){
+             create=true;
+
 	    	  savebitmap(data.getData());
 	      }
-	     if(nf!=null)
-	     {
-		     if(nf.getTotalSpace()>20)
-		     {
-		    	 createThumbnail(nf.getAbsolutePath());
-                 createImageContours(nf.getAbsolutePath());
-		     }
-		     else
-		     {
-		    	 nf.delete();
-		     }
-		     nf=null;
-	     }
+        else  if(requestCode==55){
+             if (nf != null && nf.getTotalSpace() > 20) {
+                 create = true;
+             } else {
+                 nf.delete();
+                 create = false;
+             }
+         }
+        else
+         {
+             create=false;
+         }
+
 	     loadList();
 	        
 	}
@@ -224,8 +239,7 @@ public class ChooseMap extends Activity {
 	         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
 	         outStream.flush();
 	         outStream.close();
-	         createThumbnail(file.getAbsolutePath());
-            createImageContours(file.getAbsolutePath());
+            nf=file;
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
@@ -319,7 +333,7 @@ public class ChooseMap extends Activity {
 
 		    // "RECREATE" THE NEW BITMAP
 		    Bitmap resizedBitmap = Bitmap.createBitmap(
-		        bm, 0, 0, width, height, matrix, false);
+					bm, 0, 0, width, height, matrix, false);
 		    bm.recycle();
 		    return resizedBitmap;
 		}
@@ -376,156 +390,213 @@ public class ChooseMap extends Activity {
 		 Bitmap list2[] = new Bitmap[fichierJpeg.size()];
 		 String list3[] = new String[fichierJpeg.size()];
 		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, thumbnail.keySet().toArray(list3), thumbnail.values().toArray(list2));
-		 s.setAdapter(adapter);
+         s.setAdapter(adapter);
 	 }
 
 	public void onRestart(){
-		super.onRestart();
-		loadList();
+        super.onRestart();
+        if(create) {
+            createThumbnail(nf.getAbsolutePath());
+            setContentView(R.layout.layout_loading);
+            loading=(ProgressBar) findViewById(R.id.progressBar);
+            PhotoFilter p=new PhotoFilter(nf.getAbsolutePath());
+            p.execute();
+
+
+        }
+
 	}
 
 
 
 	//Partie de Hugo Monyac
 
-    void createImageContours(String path)
-    {
-        Bitmap bm=BitmapFactory.decodeFile(path);
-        bm=grayScale(bm);
-        bm=chgtoBandW(bm);
-        OutputStream outStream = null;
+	void createImageContours(String path)
+	{
 
-        File file;
-        try {
-            file = createImageFile("photoBattle" +
-                    File.separator+ "Contours", new File(path).getName());
-            outStream = new FileOutputStream(file);
-            bm.compress(Bitmap.CompressFormat.JPEG, 80, outStream);
-            outStream.flush();
-            outStream.close();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+
+	}
+
+
+	public class PhotoFilter extends AsyncTask<Void, Integer, Void> {
+
+
+        String path;
+
+        public PhotoFilter(String p)
+        {
+            super();
+            path=p;
         }
 
-    }
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(getApplicationContext(), "Début du traitement asynchrone", Toast.LENGTH_LONG).show();
+        }
 
 
-	Bitmap chgtoBandW(Bitmap img){
-		//img.setImageBitmap(source)
-		Bitmap mapnew= Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
+        protected void onProgressUpdate(Integer... values){
+            super.onProgressUpdate(values);
+            // Mise à jour de la ProgressBar
+            loading.setProgress(0);
+            loading.setProgress(values[0]);
+        }
 
-		int color = 0;
-		int[][] bmx= new int[img.getWidth()][img.getHeight()];
-		for(int i=0;i<img.getWidth();i++)
-		{
-			for(int j= 0;j<img.getHeight();j++)
+
+        protected Void doInBackground(Void... arg0) {
+
+
+            Bitmap bm= BitmapFactory.decodeFile(path);
+            publishProgress(0);
+            bm=grayScale(bm);
+            publishProgress(10);
+            bm=chgtoBandW(bm);
+            publishProgress(100);
+            OutputStream outStream = null;
+
+            File file;
+            try {
+                file = createImageFile("photoBattle" +
+                        File.separator+ "Contours", new File(path).getName());
+                outStream = new FileOutputStream(file);
+                bm.compress(Bitmap.CompressFormat.JPEG, 80, outStream);
+                outStream.flush();
+                outStream.close();
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            Toast.makeText(getApplicationContext(), "Le traitement asynchrone est terminé", Toast.LENGTH_LONG).show();
+            setContentView(R.layout.activity_map);
+            loadList();
+        }
+
+		Bitmap chgtoBandW(Bitmap img){
+			//img.setImageBitmap(source)
+			Bitmap mapnew= Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
+
+			int color = 0;
+			int[][] bmx= new int[img.getWidth()][img.getHeight()];
+			for(int i=0;i<img.getWidth();i++)
 			{
-				int colorOfPixel = img.getPixel(i, j);
-				mapnew.setPixel(i,j,colorOfPixel);
+				for(int j= 0;j<img.getHeight();j++)
+				{
+					int colorOfPixel = img.getPixel(i, j);
+					mapnew.setPixel(i,j,colorOfPixel);
 
-			}
-		}
-		mapnew = DoFullFilter(mapnew);
-        return mapnew;
-	}
-
-	public Bitmap DoHorizontalFilter(Bitmap BitmapGray){
-		int w, h, threshold;
-
-		h= BitmapGray.getHeight();
-		w= BitmapGray.getWidth();
-
-		threshold = 100;
-
-		Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
-
-		for(int x = 0; x < w-1; ++x) {
-			for(int y = 0; y < h; ++y) {
-
-				int pixel = BitmapGray.getPixel(x, y);
-				int pixelsuivant = BitmapGray.getPixel(x+1,y);
-
-				int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
-				int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
-				if((gray-gNext)*(gray-gNext)< threshold){
-					BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
-				} else{
-					BitmapBiner.setPixel(x, y, 0xFF000000);
 				}
-
 			}
+			mapnew = DoFullFilter(mapnew);
+			return mapnew;
 		}
-		return BitmapBiner;
 
-	}
-	public Bitmap DoFullFilter(Bitmap BitmapGray){
-		int w, h, threshold;
+		public Bitmap DoHorizontalFilter(Bitmap BitmapGray){
+			int w, h, threshold;
 
-		h= BitmapGray.getHeight();
-		w= BitmapGray.getWidth();
 
-		Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
-		Bitmap bHor = DoHorizontalFilter(BitmapGray);
-		Bitmap bVer = DoVerticalFilter(BitmapGray);
-		for(int x = 0; x < w; ++x) {
-			for(int y = 0; y < h; ++y) {
-				int horp = bHor.getPixel(x,y);
-				int verp = bVer.getPixel(x,y);
-				if(horp != verp){
-					BitmapBiner.setPixel(x,y,0xFF000000);
+			h= BitmapGray.getHeight();
+            publishProgress(30);
+			w= BitmapGray.getWidth();
+            publishProgress(55);
+			threshold = 100;
+
+			Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+
+			for(int x = 0; x < w-1; ++x) {
+				for(int y = 0; y < h; ++y) {
+
+					int pixel = BitmapGray.getPixel(x, y);
+					int pixelsuivant = BitmapGray.getPixel(x+1,y);
+
+					int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
+					int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
+					if((gray-gNext)*(gray-gNext)< threshold){
+						BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
+					} else{
+						BitmapBiner.setPixel(x, y, 0xFF000000);
+					}
+
 				}
-				else
-					BitmapBiner.setPixel(x,y,0xFFFFFFFF);
 			}
+			return BitmapBiner;
+
 		}
-		return BitmapBiner;
+		public Bitmap DoFullFilter(Bitmap BitmapGray){
+			int w, h, threshold;
 
-	}
-	public Bitmap DoVerticalFilter(Bitmap BitmapGray){
-		int w, h, threshold;
+			h= BitmapGray.getHeight();
+			w= BitmapGray.getWidth();
 
-        h= BitmapGray.getHeight();
-		w= BitmapGray.getWidth();
-
-		threshold = 100;
-
-		Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
-
-		for(int x = 0; x < w; ++x) {
-			for(int y = 0; y < h-1; ++y) {
-
-				int pixel = BitmapGray.getPixel(x, y);
-				int pixelsuivant = BitmapGray.getPixel(x,y+1);
-
-				int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
-				int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
-				if((gray-gNext)*(gray-gNext)< threshold){
-					BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
-				} else{
-					BitmapBiner.setPixel(x, y, 0xFF000000);
+			Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+			Bitmap bHor = DoHorizontalFilter(BitmapGray);
+			Bitmap bVer = DoVerticalFilter(BitmapGray);
+			for(int x = 0; x < w; ++x) {
+				for(int y = 0; y < h; ++y) {
+					int horp = bHor.getPixel(x,y);
+					int verp = bVer.getPixel(x,y);
+					if(horp != verp){
+						BitmapBiner.setPixel(x,y,0xFF000000);
+					}
+					else
+						BitmapBiner.setPixel(x,y,0xFFFFFFFF);
 				}
-
 			}
+			return BitmapBiner;
+
 		}
-		return BitmapBiner;
+		public Bitmap DoVerticalFilter(Bitmap BitmapGray){
+			int w, h, threshold;
+
+			h= BitmapGray.getHeight();
+			w= BitmapGray.getWidth();
+
+			threshold = 100;
+
+			Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+
+			for(int x = 0; x < w; ++x) {
+				for(int y = 0; y < h-1; ++y) {
+
+					int pixel = BitmapGray.getPixel(x, y);
+					int pixelsuivant = BitmapGray.getPixel(x,y+1);
+
+					int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
+					int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
+					if((gray-gNext)*(gray-gNext)< threshold){
+						BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
+					} else{
+						BitmapBiner.setPixel(x, y, 0xFF000000);
+					}
+
+				}
+			}
+			return BitmapBiner;
+
+		}
+
+		public Bitmap grayScale(Bitmap bmpOriginal)
+		{
+			int width, height;
+			height = bmpOriginal.getHeight();
+			width = bmpOriginal.getWidth();
+
+			Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+			Canvas c = new Canvas(bmpGrayscale);
+			Paint paint = new Paint();
+			ColorMatrix cm = new ColorMatrix();
+			cm.setSaturation(0);
+			ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+			paint.setColorFilter(f);
+			c.drawBitmap(bmpOriginal, 0, 0, paint);
+			return bmpGrayscale;
+		}
 
 	}
 
-    public Bitmap grayScale(Bitmap bmpOriginal)
-    {
-        int width, height;
-        height = bmpOriginal.getHeight();
-        width = bmpOriginal.getWidth();
-
-        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bmpGrayscale);
-        Paint paint = new Paint();
-        ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(0);
-        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-        paint.setColorFilter(f);
-        c.drawBitmap(bmpOriginal, 0, 0, paint);
-        return bmpGrayscale;
-    }
 }
