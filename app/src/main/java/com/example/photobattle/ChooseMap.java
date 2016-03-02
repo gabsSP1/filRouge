@@ -288,16 +288,21 @@ public class ChooseMap extends Activity {
 
                         int m=4;
                       boolean isnumber=true;
+                     boolean change=false;
                          while( m<fichiers[i].getName().length() && isnumber) {
                              try {
                                  if (Integer.parseInt(fichiers[i].getName().substring(3, m)) > nbMap) {
                                      nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
+                                     change=true;
                                  }
                              } catch (Exception e) {
                                  isnumber = false;
                              }
                              m++;
                          }
+                     if(change) {
+                         nbMap++;
+                     }
 
 				 }
 				 else
