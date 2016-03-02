@@ -52,6 +52,7 @@ public class ChooseMap extends Activity {
 	Button play;
 	ProgressBar loading;
     boolean create;
+	int nbMap;
 	File nf;
 	final static String CURRENT_FILE="selcted_file";
 	@Override
@@ -72,95 +73,9 @@ public class ChooseMap extends Activity {
                 "photoBattle" +
                 File.separator+ "Contours");
 		thumbnail=new  HashMap<String, Bitmap>();
-		 fichierJpeg=new  HashMap<String, File>();
-		bDelete= (Button) findViewById(R.id.button_delete);
-		imageSelected=(ImageView)   findViewById(R.id.imageSelected);
-		s=(ListView) findViewById(R.id.scroll);
-		s.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-
-                imageSelected.setImageBitmap(BitmapFactory.decodeFile(fichierJpeg.get((String) parent.getItemAtPosition(position)).getAbsolutePath()));
-                currentSelectionFile = fichierJpeg.get((String) parent.getItemAtPosition(position));
-                view.setSelected(true);
-            }
-        });
-		
-		
-		
-		bDelete.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (currentSelectionFile != null) {
-					File p = new File(Environment.getExternalStorageDirectory() +
-							File.separator + "photoBattle" +
-							File.separator + "Thumbnail" +
-							File.separator + currentSelectionFile.getName());
-					p.delete();
-					(new File(Environment.getExternalStorageDirectory() +
-							File.separator + "photoBattle" +
-							File.separator + "Contours" + File.separator + currentSelectionFile.getName())).delete();
-					currentSelectionFile.delete();
-					loadList();
-
-				}
-			}
-
-		});
-
-		play= (Button) findViewById(R.id.button_start);
-		play.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-
-		edit=(Button) findViewById(R.id.button_edit);
-		edit.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(currentSelectionFile!=null)
-				{
-					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
-					intentMyAccount.putExtra("selected_file", Environment.getExternalStorageDirectory()+File.separator +"photoBattle"+File.separator+"Contours"+File.separator+currentSelectionFile.getName());
-			        startActivity(intentMyAccount);
-				}
-			}
-			
-		});
-
-		importPicture= (Button) findViewById(R.id.import_picture);
-		importPicture.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.setType("image/*");
-				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(intent, 89);
-			}
-			
-		});
-
-		takePicture= (Button) findViewById (R.id.take_picture);
-		takePicture.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				dispatchTakePictureIntent();
-			}
-			});
+		 initComponent();
 		//Récupération des fichiers jpeg dans le dossier
-		
+
 		loadList();
 		
 	}
@@ -315,7 +230,8 @@ public class ChooseMap extends Activity {
 	 String createPictureName()
 	 {
 		 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-		 String imageFileName = "JPEG_" + timeStamp + ".jpg";	
+		 String imageFileName = "map"+nbMap+ ".jpg";
+         nbMap++;
 		 return imageFileName;
 	 }
 
@@ -369,6 +285,20 @@ public class ChooseMap extends Activity {
 		                File.separator + "photoBattle" +
 		                File.separator + "Thumbnail"+File.separator+fichiers[i].getName());
 	            thumbnail.put(fichiers[i].getName(), imageBitmap);
+
+                        int m=4;
+                      boolean isnumber=true;
+                         while( m<fichiers[i].getName().length() && isnumber) {
+                             try {
+                                 if (Integer.parseInt(fichiers[i].getName().substring(3, m)) > nbMap) {
+                                     nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
+                                 }
+                             } catch (Exception e) {
+                                 isnumber = false;
+                             }
+                             m++;
+                         }
+
 				 }
 				 else
 				 {
@@ -382,8 +312,8 @@ public class ChooseMap extends Activity {
 					 
 				 }
 
-			 }
-			 imageSelected.setImageBitmap(null);
+             }
+             imageSelected.setImageBitmap(null);
 			 
 		 }
 		
@@ -392,6 +322,97 @@ public class ChooseMap extends Activity {
 		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, thumbnail.keySet().toArray(list3), thumbnail.values().toArray(list2));
          s.setAdapter(adapter);
 	 }
+
+	public void initComponent()
+	{
+		fichierJpeg=new  HashMap<String, File>();
+		bDelete= (Button) findViewById(R.id.button_delete);
+		imageSelected=(ImageView)   findViewById(R.id.imageSelected);
+		s=(ListView) findViewById(R.id.scroll);
+		s.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
+
+				imageSelected.setImageBitmap(BitmapFactory.decodeFile(fichierJpeg.get((String) parent.getItemAtPosition(position)+".jpg").getAbsolutePath()));
+				currentSelectionFile = fichierJpeg.get((String) parent.getItemAtPosition(position)+".jpg");
+				view.setSelected(true);
+			}
+		});
+
+
+
+		bDelete.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (currentSelectionFile != null) {
+					File p = new File(Environment.getExternalStorageDirectory() +
+							File.separator + "photoBattle" +
+							File.separator + "Thumbnail" +
+							File.separator + currentSelectionFile.getName());
+					p.delete();
+					(new File(Environment.getExternalStorageDirectory() +
+							File.separator + "photoBattle" +
+							File.separator + "Contours" + File.separator + currentSelectionFile.getName())).delete();
+					currentSelectionFile.delete();
+					loadList();
+
+				}
+			}
+
+		});
+
+		play= (Button) findViewById(R.id.button_start);
+		play.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
+		edit=(Button) findViewById(R.id.button_edit);
+		edit.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(currentSelectionFile!=null)
+				{
+					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
+					intentMyAccount.putExtra("selected_file", Environment.getExternalStorageDirectory()+File.separator +"photoBattle"+File.separator+"Contours"+File.separator+currentSelectionFile.getName());
+					startActivity(intentMyAccount);
+				}
+			}
+
+		});
+
+		importPicture= (Button) findViewById(R.id.import_picture);
+		importPicture.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setType("image/*");
+				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(intent, 89);
+			}
+
+		});
+
+		takePicture= (Button) findViewById (R.id.take_picture);
+		takePicture.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dispatchTakePictureIntent();
+			}
+		});
+	}
 
 	public void onRestart(){
         super.onRestart();
@@ -404,19 +425,14 @@ public class ChooseMap extends Activity {
 
 
         }
+		create=false;
+        loadList();
 
 	}
 
 
 
 	//Partie de Hugo Monyac
-
-	void createImageContours(String path)
-	{
-
-
-	}
-
 
 	public class PhotoFilter extends AsyncTask<Void, Integer, Void> {
 
@@ -474,6 +490,7 @@ public class ChooseMap extends Activity {
         protected void onPostExecute(Void result) {
             Toast.makeText(getApplicationContext(), "Le traitement asynchrone est terminé", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_map);
+			initComponent();
             loadList();
         }
 

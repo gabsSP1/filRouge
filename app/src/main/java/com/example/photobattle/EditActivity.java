@@ -45,40 +45,38 @@ public class EditActivity extends Activity {
 		p = (ImageView) findViewById (R.id.pictureEdit);
 		mapName= (EditText) findViewById(R.id.mapName);
 		mapName.setTextColor(Color.BLUE);
-		mapName.setText(fbackground.getName());
-		mapName.setOnEditorActionListener(new OnEditorActionListener(){
+		mapName.setText(fbackground.getName().substring(0, fbackground.getName().indexOf('.')));
+		mapName.setVisibility(View.INVISIBLE);
+
+		mapName.setOnEditorActionListener(new OnEditorActionListener() {
 
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				// TODO Auto-generated method stub7
-				File thumbnail=new File(Environment.getExternalStorageDirectory() +
-		                File.separator+"photoBattle"+File.separator+"Thumbnail",fbackground.getName());
-				File contours=new File(Environment.getExternalStorageDirectory() +
-						File.separator+"photoBattle"+File.separator+"Pictures",fbackground.getName());
-				File n=(new File(Environment.getExternalStorageDirectory() +
-		                File.separator+"photoBattle"+File.separator+"Contours",mapName.getText().toString()));
-				if(!n.exists())
-				{
+				File thumbnail = new File(Environment.getExternalStorageDirectory() +
+						File.separator + "photoBattle" + File.separator + "Thumbnail", fbackground.getName());
+				File picture = new File(Environment.getExternalStorageDirectory() +
+						File.separator + "photoBattle" + File.separator + "Pictures", fbackground.getName());
+				File n = (new File(Environment.getExternalStorageDirectory() +
+						File.separator + "photoBattle" + File.separator + "Contours", mapName.getText().toString() + ".jpg"));
+				if (!n.exists()) {
 
 					fbackground.renameTo(n);
-				thumbnail.renameTo(new File(Environment.getExternalStorageDirectory() +
-		                File.separator+"photoBattle"+File.separator+"Thumbnail",mapName.getText().toString()));
-					contours.renameTo(new File(Environment.getExternalStorageDirectory() +
-							File.separator+"photoBattle"+File.separator+"Pictures",mapName.getText().toString()));
-				}
-				else
-				{
+					thumbnail.renameTo(new File(Environment.getExternalStorageDirectory() +
+							File.separator + "photoBattle" + File.separator + "Thumbnail", mapName.getText().toString() + ".jpg"));
+					picture.renameTo(new File(Environment.getExternalStorageDirectory() +
+							File.separator + "photoBattle" + File.separator + "Pictures", mapName.getText().toString() + ".jpg"));
+				} else {
 					Toast toast = Toast.makeText(getApplicationContext()
-, "File already exists", Toast.LENGTH_SHORT);
-					mapName.setText(fbackground.getName());
+							, "File already exists", Toast.LENGTH_SHORT);
+					mapName.setText(fbackground.getName().substring(0, fbackground.getName().indexOf('.')));
 					toast.show();
 				}
 				return false;
 			}
-			
+
 		});
-		mapName.setVisibility(View.INVISIBLE);
-		mapName.setText(fbackground.getName());
+
 		p.setImageBitmap(background);
 		p.setOnClickListener(new OnClickListener(){
 			@Override

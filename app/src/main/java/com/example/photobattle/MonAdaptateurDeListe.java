@@ -30,13 +30,15 @@ public class MonAdaptateurDeListe extends ArrayAdapter<String> {
 	public View getView(int position,View view,ViewGroup parent) {
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.image_view_layout, null,true);
-		
+
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		TextView extratxt = (TextView) rowView.findViewById(R.id.label);
 		imageView.setImageBitmap(imgid[position]);
-		if(itemname[position].length()>17)
-			itemname[position].substring(0, 17);
+		if( itemname[position].indexOf('.')>0) {
+			itemname[position] = itemname[position].substring(0, itemname[position].indexOf('.'));
+		}
 		extratxt.setText(itemname[position]);
+
 		return rowView;
 		
 	}
