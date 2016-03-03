@@ -77,7 +77,6 @@ public class ChooseMap extends Activity {
 		//Récupération des fichiers jpeg dans le dossier
 
 		loadList();
-		
 	}
 
 	@Override
