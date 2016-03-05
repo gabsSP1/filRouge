@@ -13,6 +13,7 @@ import com.example.valentin.filrouge.R;
 
 /**
  * Created by Valentin on 24/02/2016.
+ * Le personnage. Avec une magnifique détection de collisions.
  */
 public class Personnage {
 
