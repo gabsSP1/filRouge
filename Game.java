@@ -13,7 +13,7 @@ Lance le jeu, et surtout le MainGamePanel
  */
 public class Game extends Activity {
 
-
+//test dsqds
     private static final String TAG = Game.class.getSimpleName();
 
     @Override
