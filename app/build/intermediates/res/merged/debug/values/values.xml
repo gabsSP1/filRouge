@@ -8,6 +8,7 @@
     <string name="app_name">PhotoBattle</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_game">Game</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_menu_app">MenuApp</string>
     <style name="AppBaseTheme" parent="android:Theme.Light">

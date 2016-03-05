@@ -372,7 +372,8 @@ public class ChooseMap extends Activity {
 		play.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
+				startActivity(intentMyAccount);
 			}
 		});
 

@@ -23,6 +23,8 @@ public final class R {
         public static final int draw_button=0x7f020001;
         public static final int ic_delete_black_24dp=0x7f020002;
         public static final int ic_launcher=0x7f020003;
+        public static final int map=0x7f020004;
+        public static final int personnage=0x7f020005;
     }
     public static final class id {
         public static final int Delete=0x7f090013;
@@ -62,8 +64,9 @@ public final class R {
         public static final int app_name=0x7f070001;
         public static final int hello_world=0x7f070002;
         public static final int title_activity_edit=0x7f070003;
-        public static final int title_activity_map=0x7f070004;
-        public static final int title_activity_menu_app=0x7f070005;
+        public static final int title_activity_game=0x7f070004;
+        public static final int title_activity_map=0x7f070005;
+        public static final int title_activity_menu_app=0x7f070006;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 

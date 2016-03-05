@@ -39,7 +39,12 @@
         </activity>
         <activity
             android:name=".EditActivity"
-            android:label="@string/title_activity_edit" >
+            android:label="@string/title_activity_edit"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Game"
+            android:label="@string/title_activity_game"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

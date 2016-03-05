@@ -24,11 +24,19 @@
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\personnage.png",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\personnage.png"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_key.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\drawable-hdpi\\bg_key.xml"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_delete_black_24dp.png",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\ic_delete_black_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\map.png",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\map.png"
     }
 ]
