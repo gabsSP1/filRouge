@@ -258,7 +258,7 @@ public class ChooseMap extends Activity {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, 89);
             }
@@ -363,6 +363,7 @@ public class ChooseMap extends Activity {
 			setContentView(R.layout.activity_map);
             initComponent();
 			loadList();
+            viewFlipper.setDisplayedChild(viewFlipper.getChildCount()-1);
 		}
 
 
