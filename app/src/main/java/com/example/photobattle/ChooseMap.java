@@ -231,6 +231,7 @@ public class ChooseMap extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
+                intentMyAccount.putExtra("selected_file", listPhoto.get(viewFlipper.getDisplayedChild()).getName());
 				startActivity(intentMyAccount);
 			}
 		});
@@ -363,7 +364,7 @@ public class ChooseMap extends Activity {
 			setContentView(R.layout.activity_map);
             initComponent();
 			loadList();
-            viewFlipper.setDisplayedChild(viewFlipper.getChildCount()-1);
+            viewFlipper.setDisplayedChild(viewFlipper.getChildCount() - 1);
 		}
 
 

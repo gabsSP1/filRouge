@@ -43,92 +43,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14769376-16db-4bcb-8a88-40864b240194" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$Loading.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/FileManager.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/PhotoFilter.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$anim.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/background_app.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/background_app.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/delete_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/delete_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/edit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/edit_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/edit_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/full_sound.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/full_sound.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_play.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/icon_play.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_settings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/icon_settings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/import_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/import_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/mute.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/mute.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/take_picture_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/take_picture_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/FileManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/PhotoFilter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/anim.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/anim/anim.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/anim/in_from_left.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/in_from_left.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/anim/in_from_right.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/in_from_right.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/anim/out_to_left.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/out_to_left.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/anim/out_to_right.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/out_to_right.xml" />
-      <change type="DELETED" beforePath="C:\Users\gab\AndroidStudioProjects\filRouge\app\build\intermediates\classes\debug\com\example\photobattle\ChooseMap$PhotoFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\gab\AndroidStudioProjects\filRouge\app\build\intermediates\classes\debug\com\example\photobattle\EditActivity$2.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$Loading.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$Loading.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/EditActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/EditActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/EditActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/EditActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Game.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Game.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainGamePanel.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainGamePanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MenuApp.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MenuApp.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MonAdaptateurDeListe.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MonAdaptateurDeListe.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainThread.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainThread.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Map.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Map.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/pix.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/pix.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/EditActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/EditActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MenuApp.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MenuApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MonAdaptateurDeListe.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MonAdaptateurDeListe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/photobattle/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/photobattle/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_map.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_map.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_menu_app.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_menu_app.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_app.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_app.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-hdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-hdpi-v4.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-mdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-mdpi-v4.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/image_view_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/image_view_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/image_view_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/image_view_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="filRouge.iws" />
@@ -168,24 +105,65 @@
       <file leaf-file-name="ChooseMap.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2931035">
-              <caret line="159" column="43" selection-start-line="159" selection-start-column="43" selection-end-line="169" selection-end-column="21" />
+            <state vertical-scroll-proportion="-2.7068965">
+              <caret line="233" column="58" selection-start-line="233" selection-start-column="58" selection-end-line="233" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4320#6773#0" expanded="true" />
                 <element signature="e#6772#6773#0" expanded="true" />
                 <element signature="e#6805#7277#0" expanded="true" />
                 <element signature="e#7276#7277#0" expanded="true" />
-                <element signature="e#7358#7550#0" expanded="true" />
-                <element signature="e#7549#7550#0" expanded="true" />
-                <element signature="e#7630#8062#0" expanded="true" />
-                <element signature="e#8061#8062#0" expanded="true" />
-                <element signature="e#8163#8597#0" expanded="true" />
-                <element signature="e#8596#8597#0" expanded="true" />
-                <element signature="e#8692#9459#0" expanded="true" />
-                <element signature="e#9458#9459#0" expanded="true" />
-                <element signature="e#10935#10936#0" expanded="true" />
-                <element signature="e#10964#10965#0" expanded="true" />
+                <element signature="e#7358#7667#0" expanded="true" />
+                <element signature="e#7666#7667#0" expanded="true" />
+                <element signature="e#7747#8179#0" expanded="true" />
+                <element signature="e#8178#8179#0" expanded="true" />
+                <element signature="e#8280#8716#0" expanded="true" />
+                <element signature="e#8715#8716#0" expanded="true" />
+                <element signature="e#8811#9578#0" expanded="true" />
+                <element signature="e#9577#9578#0" expanded="true" />
+                <element signature="e#11054#11055#0" expanded="true" />
+                <element signature="e#11083#11084#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainGamePanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Map.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.762069">
+              <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.1034484">
+              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -213,25 +191,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EditActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EditActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/EditActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31632653">
-              <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+            <state vertical-scroll-proportion="-3.0">
+              <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="37" selection-end-column="29" />
               <folding>
                 <element signature="e#1599#2353#0" expanded="true" />
                 <element signature="e#2352#2353#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/FileManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="86" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1779,16 +1747,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Filtre/Main" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_loading.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_edit.xml" />
         <option value="$PROJECT_DIR$/Game.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Personnage.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MenuApp.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_menu_app.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/HorizontalListView.java" />
@@ -1802,8 +1766,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/PhotoFilter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/image_view_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/EditActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java" />
       </list>
     </option>
   </component>
@@ -2037,6 +2005,40 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="photobattle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PhotoBattle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="filRouge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="photobattle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Map.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2331,7 +2333,19 @@
       <option name="project" value="LOCAL" />
       <updated>1457209979418</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Correction bug+ gros changements interface">
+      <created>1457727401142</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1457727401142</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Correction bug+ gros changements interface">
+      <created>1457727852196</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1457727852196</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2354,13 +2368,13 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32369298" sideWeight="0.6945629" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32369298" sideWeight="0.69189763" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.49573562" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32925472" sideWeight="0.5234541" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32369298" sideWeight="0.30810234" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32925472" sideWeight="0.47654584" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.47654584" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.50852877" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.45948827" order="7" side_tool="false" content_ui="tabs" />
@@ -2406,7 +2420,8 @@
     <MESSAGE value="test brancheddd" />
     <MESSAGE value="test brancheddddzzzd" />
     <MESSAGE value="intégration du game" />
-    <option name="LAST_COMMIT_MESSAGE" value="intégration du game" />
+    <MESSAGE value="Correction bug+ gros changements interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction bug+ gros changements interface" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2419,19 +2434,20 @@
           <caret line="189" column="41" selection-start-line="189" selection-start-column="41" selection-end-line="189" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4320#6773#0" expanded="true" />
             <element signature="e#6772#6773#0" expanded="true" />
             <element signature="e#6805#7277#0" expanded="true" />
             <element signature="e#7276#7277#0" expanded="true" />
-            <element signature="e#7358#7550#0" expanded="true" />
-            <element signature="e#7549#7550#0" expanded="true" />
-            <element signature="e#7630#8062#0" expanded="true" />
-            <element signature="e#8061#8062#0" expanded="true" />
-            <element signature="e#8163#8597#0" expanded="true" />
-            <element signature="e#8596#8597#0" expanded="true" />
-            <element signature="e#8692#9459#0" expanded="true" />
-            <element signature="e#9458#9459#0" expanded="true" />
-            <element signature="e#10935#10936#0" expanded="true" />
-            <element signature="e#10964#10965#0" expanded="true" />
+            <element signature="e#7358#7667#0" expanded="true" />
+            <element signature="e#7666#7667#0" expanded="true" />
+            <element signature="e#7747#8179#0" expanded="true" />
+            <element signature="e#8178#8179#0" expanded="true" />
+            <element signature="e#8280#8716#0" expanded="true" />
+            <element signature="e#8715#8716#0" expanded="true" />
+            <element signature="e#8811#9578#0" expanded="true" />
+            <element signature="e#9577#9578#0" expanded="true" />
+            <element signature="e#11054#11055#0" expanded="true" />
+            <element signature="e#11083#11084#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2492,19 +2508,20 @@
           <caret line="374" column="89" selection-start-line="374" selection-start-column="89" selection-end-line="374" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4320#6773#0" expanded="true" />
             <element signature="e#6772#6773#0" expanded="true" />
             <element signature="e#6805#7277#0" expanded="true" />
             <element signature="e#7276#7277#0" expanded="true" />
-            <element signature="e#7358#7550#0" expanded="true" />
-            <element signature="e#7549#7550#0" expanded="true" />
-            <element signature="e#7630#8062#0" expanded="true" />
-            <element signature="e#8061#8062#0" expanded="true" />
-            <element signature="e#8163#8597#0" expanded="true" />
-            <element signature="e#8596#8597#0" expanded="true" />
-            <element signature="e#8692#9459#0" expanded="true" />
-            <element signature="e#9458#9459#0" expanded="true" />
-            <element signature="e#10935#10936#0" expanded="true" />
-            <element signature="e#10964#10965#0" expanded="true" />
+            <element signature="e#7358#7667#0" expanded="true" />
+            <element signature="e#7666#7667#0" expanded="true" />
+            <element signature="e#7747#8179#0" expanded="true" />
+            <element signature="e#8178#8179#0" expanded="true" />
+            <element signature="e#8280#8716#0" expanded="true" />
+            <element signature="e#8715#8716#0" expanded="true" />
+            <element signature="e#8811#9578#0" expanded="true" />
+            <element signature="e#9577#9578#0" expanded="true" />
+            <element signature="e#11054#11055#0" expanded="true" />
+            <element signature="e#11083#11084#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2541,19 +2558,20 @@
           <caret line="374" column="89" selection-start-line="374" selection-start-column="89" selection-end-line="374" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4320#6773#0" expanded="true" />
             <element signature="e#6772#6773#0" expanded="true" />
             <element signature="e#6805#7277#0" expanded="true" />
             <element signature="e#7276#7277#0" expanded="true" />
-            <element signature="e#7358#7550#0" expanded="true" />
-            <element signature="e#7549#7550#0" expanded="true" />
-            <element signature="e#7630#8062#0" expanded="true" />
-            <element signature="e#8061#8062#0" expanded="true" />
-            <element signature="e#8163#8597#0" expanded="true" />
-            <element signature="e#8596#8597#0" expanded="true" />
-            <element signature="e#8692#9459#0" expanded="true" />
-            <element signature="e#9458#9459#0" expanded="true" />
-            <element signature="e#10935#10936#0" expanded="true" />
-            <element signature="e#10964#10965#0" expanded="true" />
+            <element signature="e#7358#7667#0" expanded="true" />
+            <element signature="e#7666#7667#0" expanded="true" />
+            <element signature="e#7747#8179#0" expanded="true" />
+            <element signature="e#8178#8179#0" expanded="true" />
+            <element signature="e#8280#8716#0" expanded="true" />
+            <element signature="e#8715#8716#0" expanded="true" />
+            <element signature="e#8811#9578#0" expanded="true" />
+            <element signature="e#9577#9578#0" expanded="true" />
+            <element signature="e#11054#11055#0" expanded="true" />
+            <element signature="e#11083#11084#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2613,21 +2631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="66" selection-start-line="116" selection-start-column="66" selection-end-line="116" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Personnage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2635,22 +2638,6 @@
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2808,6 +2795,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/EditActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="37" selection-end-column="29" />
+          <folding>
+            <element signature="e#1599#2353#0" expanded="true" />
+            <element signature="e#2352#2353#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2829,35 +2827,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2931035">
-          <caret line="159" column="43" selection-start-line="159" selection-start-column="43" selection-end-line="169" selection-end-column="21" />
+        <state vertical-scroll-proportion="-2.7068965">
+          <caret line="233" column="58" selection-start-line="233" selection-start-column="58" selection-end-line="233" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4320#6773#0" expanded="true" />
             <element signature="e#6772#6773#0" expanded="true" />
             <element signature="e#6805#7277#0" expanded="true" />
             <element signature="e#7276#7277#0" expanded="true" />
-            <element signature="e#7358#7550#0" expanded="true" />
-            <element signature="e#7549#7550#0" expanded="true" />
-            <element signature="e#7630#8062#0" expanded="true" />
-            <element signature="e#8061#8062#0" expanded="true" />
-            <element signature="e#8163#8597#0" expanded="true" />
-            <element signature="e#8596#8597#0" expanded="true" />
-            <element signature="e#8692#9459#0" expanded="true" />
-            <element signature="e#9458#9459#0" expanded="true" />
-            <element signature="e#10935#10936#0" expanded="true" />
-            <element signature="e#10964#10965#0" expanded="true" />
+            <element signature="e#7358#7667#0" expanded="true" />
+            <element signature="e#7666#7667#0" expanded="true" />
+            <element signature="e#7747#8179#0" expanded="true" />
+            <element signature="e#8178#8179#0" expanded="true" />
+            <element signature="e#8280#8716#0" expanded="true" />
+            <element signature="e#8715#8716#0" expanded="true" />
+            <element signature="e#8811#9578#0" expanded="true" />
+            <element signature="e#9577#9578#0" expanded="true" />
+            <element signature="e#11054#11055#0" expanded="true" />
+            <element signature="e#11083#11084#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/EditActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31632653">
-          <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
-          <folding>
-            <element signature="e#1599#2353#0" expanded="true" />
-            <element signature="e#2352#2353#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-4.1034484">
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.762069">
+          <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>

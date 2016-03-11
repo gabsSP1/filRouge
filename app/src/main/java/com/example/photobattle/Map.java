@@ -1,10 +1,13 @@
 package com.example.photobattle;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
+
+import java.io.File;
 
 /**
  * Created by Valentin on 29/02/2016.
@@ -16,7 +19,8 @@ public class Map
 {
     private static final String TAG = Map.class.getSimpleName();
 
-    private Bitmap bm;
+    private Bitmap contours;
+    Bitmap picture;
     private Rect zone;
     private pix obstacles [][];
     private int width;
@@ -25,25 +29,27 @@ public class Map
     private float ratioWidth;
     private MainGamePanel mainGamePanel;
 
-    public Map(Bitmap bm, MainGamePanel mainGamePanel)
+    public Map(String mapName, MainGamePanel mainGamePanel)
     {
-        this.bm = bm;
+
+        this.contours = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+ File.separator+mapName);
+        picture= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+ File.separator+mapName);
         this.mainGamePanel = mainGamePanel;
-        this.bm = bm;
+        this.contours = contours;
     }
 
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(bm, (int)(zone.left/ratioWidth), (int)(zone.top/ratioHeight), null);
+        canvas.drawBitmap(picture, (int)(zone.left/ratioWidth), (int)(zone.top/ratioHeight), null);
     }
 
     public void init()
     {
         float densityScreen = mainGamePanel.getDensity();
-        zone = resizeKeepRatio(bm.getHeight(), bm.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
-        bm = Bitmap.createScaledBitmap(bm, zone.width(), zone.height(), true);
-
+        zone = resizeKeepRatio(contours.getHeight(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
+        contours = Bitmap.createScaledBitmap(contours, zone.width(), zone.height(), true);
+        picture = Bitmap.createScaledBitmap(picture, zone.width(), zone.height(), true);
         ratioWidth = mainGamePanel.getWidth()/(300*densityScreen);
         ratioHeight = mainGamePanel.getHeight()/(300*densityScreen);
 
@@ -59,11 +65,11 @@ public class Map
             }
         }
 
-        for(int i = 0; i < bm.getWidth(); i++)
+        for(int i = 0; i < contours.getWidth(); i++)
         {
-            for(int j = 0; j < bm.getHeight(); j++)
+            for(int j = 0; j < contours.getHeight(); j++)
             {
-                if(bm.getPixel(i,j) != Color.WHITE)
+                if(contours.getPixel(i,j) != Color.WHITE)
                     obstacles[(int)((i+zone.left)*ratioWidth)][(int)((j+zone.top)*ratioHeight)] = pix.GROUND;
             }
         }

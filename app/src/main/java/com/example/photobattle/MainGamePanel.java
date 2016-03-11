@@ -2,7 +2,6 @@ package com.example.photobattle;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,11 +25,11 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Map map;
     private float density;
 
-    public MainGamePanel(Context context)
+    public MainGamePanel(Context context, String mapName)
     {
         super(context);
         getHolder().addCallback(this);
-        map = new Map(BitmapFactory.decodeResource(getResources(), R.drawable.map), this);
+        map = new Map(mapName,this);
         perso = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 0, 0, map);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
@@ -113,13 +112,9 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
 
         //création d'une image buffer
-        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-        Bitmap bmp = Bitmap.createBitmap(map.width(), map.height(), conf); // this creates a MUTABLE bitmap
-        Canvas c = new Canvas(bmp);
-        c.drawColor(Color.BLACK);
-        map.draw(c);
-        perso.draw(c);
-        canvas.drawBitmap(bmp,0,0,null);
+         canvas.drawColor(Color.BLACK);
+        map.draw(canvas);
+        perso.draw(canvas);
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.photobattle;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -21,7 +22,10 @@ public class Game extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(new MainGamePanel(this));
+        Intent intent = getIntent();
+        if (intent != null) {
+            setContentView(new MainGamePanel(this, intent.getStringExtra("selected_file")));
+        }
         Log.d(TAG, "View added");
     }
 
