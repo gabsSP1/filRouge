@@ -248,7 +248,14 @@
                     "endOffset": 98
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 106,
+                        "endColumn": 47,
+                        "endOffset": 149
+                    }
                 }
             },
             {
@@ -260,7 +267,14 @@
                     "endOffset": 146
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endColumn": 47,
+                        "endOffset": 100
+                    }
                 }
             },
             {
@@ -272,7 +286,14 @@
                     "endOffset": 204
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 92,
+                        "endColumn": 57,
+                        "endOffset": 145
+                    }
                 }
             },
             {
@@ -284,7 +305,14 @@
                     "endOffset": 260
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endColumn": 55,
+                        "endOffset": 202
+                    }
                 }
             },
             {
@@ -296,7 +324,14 @@
                     "endOffset": 313
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 224,
+                        "endColumn": 52,
+                        "endOffset": 272
+                    }
                 }
             },
             {
@@ -308,7 +343,14 @@
                     "endOffset": 362
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 48,
+                        "endOffset": 103
+                    }
                 }
             },
             {
@@ -320,7 +362,14 @@
                     "endOffset": 415
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 109,
+                        "endColumn": 52,
+                        "endOffset": 157
+                    }
                 }
             },
             {
@@ -332,7 +381,14 @@
                     "endOffset": 476
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 330,
+                        "endColumn": 60,
+                        "endOffset": 386
+                    }
                 }
             },
             {
@@ -363,7 +419,14 @@
                     "endOffset": 580
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 278,
+                        "endColumn": 50,
+                        "endOffset": 324
+                    }
                 }
             },
             {
@@ -375,7 +438,14 @@
                     "endOffset": 640
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 163,
+                        "endColumn": 59,
+                        "endOffset": 218
+                    }
                 }
             },
             {
@@ -388,7 +458,15 @@
                     "endOffset": 931
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 192,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 484
+                    }
                 }
             },
             {
@@ -401,7 +479,15 @@
                     "endOffset": 1100
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml"
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 525,
+                        "endLine": 18,
+                        "endColumn": 12,
+                        "endOffset": 692
+                    }
                 }
             }
         ]

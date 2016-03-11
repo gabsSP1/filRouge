@@ -1,7 +1,5 @@
 package com.example.photobattle;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -12,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import java.io.File;
 
 public class MenuApp extends Activity{
 	Button b1;
@@ -27,7 +27,7 @@ public class MenuApp extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.activity_menu_app);
-		b1=(Button) findViewById(R.id.button1);
+		b1=(Button) findViewById(R.id.play_menu);
 		
 		b1.setOnClickListener(new OnClickListener (){
 

@@ -6,10 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -114,9 +112,14 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void render(Canvas canvas)
     {
 
-        canvas.drawColor(Color.BLACK);
-        map.draw(canvas);
-        perso.draw(canvas);
+        //création d'une image buffer
+        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
+        Bitmap bmp = Bitmap.createBitmap(map.width(), map.height(), conf); // this creates a MUTABLE bitmap
+        Canvas c = new Canvas(bmp);
+        c.drawColor(Color.BLACK);
+        map.draw(c);
+        perso.draw(c);
+        canvas.drawBitmap(bmp,0,0,null);
 
     }
 

@@ -1,11 +1,7 @@
 package com.example.photobattle;
 
-import java.io.File;
-
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +27,7 @@ public class MonAdaptateurDeListe extends ArrayAdapter<String> {
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.image_view_layout, null,true);
 
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+		ImageView imageView = (ImageView) rowView.findViewById(R.id.selected_image);
 		TextView extratxt = (TextView) rowView.findViewById(R.id.label);
 		imageView.setImageBitmap(imgid[position]);
 		if( itemname[position].indexOf('.')>0) {

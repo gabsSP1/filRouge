@@ -1,82 +1,63 @@
 package com.example.photobattle;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.ActionMode;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+
 //a
 public class ChooseMap extends Activity {
-	ListView s;
-	HashMap<String, File> fichierJpeg;
-	HashMap<String, Bitmap> thumbnail;
-	ActionMode mActionMode;
-	File currentSelectionFile;
-    private ImageView image;
-	ImageView imageSelected;
+	ViewFlipper viewFlipper;
+	ArrayList<File> listPhoto;
 	Button bDelete;
 	Button importPicture;
 	Button takePicture;
 	Button edit;
 	Button play;
+	private float lastX;
 	ProgressBar loading;
-    boolean create;
 	int nbMap;
-	File nf;
-	final static String CURRENT_FILE="selcted_file";
+	String pictureName;
+	static int currentPosition;
+	final static String CURRENT_FILE = "selcted_file";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        create=false;
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_map);
-		createDirectory("photoBattle");
-		createDirectory("photoBattle" +
-				File.separator + "Pictures");
-		createDirectory(
-				"photoBattle" +
-						File.separator + "Thumbnail");
-		createDirectory(
-                "photoBattle" +
-                File.separator+ "Contours");
-		thumbnail=new  HashMap<String, Bitmap>();
-		 initComponent();
+		listPhoto = new ArrayList<File>();
+		FileManager.initialyzeTreeFile();
+		initComponent();
 		//Récupération des fichiers jpeg dans le dossier
+		setNbMap(0);
 
 		loadList();
+        currentPosition=viewFlipper.getDisplayedChild();
 	}
 
 	@Override
@@ -85,290 +66,167 @@ public class ChooseMap extends Activity {
 		//getMenuInflater().inflate(R.layout.activity_menu_app, menu);
 		return true;
 	}
-	
-	
-	static final int REQUEST_TAKE_PHOTO = 1;
-    //gère la prise de la photo
-	private void dispatchTakePictureIntent() {
-	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	    // Ensure that there's a camera activity to handle the intent
-	    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-	        // Create the File where the photo should go
-	        File photoFile = null;
-	        try {
-	            photoFile = createImageFile("photoBattle"+File.separator+"Pictures", createPictureName());
-	        } catch (IOException ex) {
-	            // Error occurred while creating the File
-	        }
-	        // Continue only if the File was successfully created
-	        if (photoFile != null) {
-	            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-	                    Uri.fromFile(photoFile));
-	            startActivityForResult(takePictureIntent, 55);
-	            nf=photoFile;
-	        }
-	    }
-	}
-	
+
+
 	@Override
-	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	     super.onActivityResult(requestCode, resultCode, data);
-	  // TODO Auto-generated method stub
-	     super.onActivityResult(requestCode, resultCode, data);
-	    /* Toast toast = Toast.makeText(getApplicationContext()
-	    		 , Integer.toString(resultCode), Toast.LENGTH_SHORT);
-	    		 					toast.show();*/
-	     if (requestCode == 89 && data!=null){
-             create=true;
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+			case 89:
 
-	    	  savebitmap(data.getData());
-	      }
-        else  if(requestCode==55){
-             if (nf != null && nf.getTotalSpace() > 20) {
-                 create = true;
-             } else {
-                 nf.delete();
-                 create = false;
-             }
-         }
-        else
-         {
-             create=false;
-         }
+				if (data != null && resultCode == Activity.RESULT_OK) {
 
-	     loadList();
-	        
+					try {
+						Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+						FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
+				break;
+
+			case 55:
+
+				try {
+
+					Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
+				} catch (Exception e) {
+				}
+				break;
+
+			default:
+		}
+
+
 	}
 
-
-    //gère l'import de photo
-	 private void savebitmap(Uri targetUri) {
-	      OutputStream outStream = null;
-	      
-	      File file;
-		try {
-			file = createImageFile("photoBattle"+File.separator+"Pictures", createPictureName());
-	         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-	         outStream = new FileOutputStream(file);
-	         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-	         outStream.flush();
-	         outStream.close();
-            nf=file;
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-
-	   }
-	 
-	 //create a file on the indicated path with te indicated name
-	 private File createImageFile(String rPath, String imageFileName) throws IOException {
-		    // Create an image file name
-		    File myDir = new File(Environment.getExternalStorageDirectory() +
-	                File.separator + rPath); //pour créer le repertoire dans lequel on va mettre notre fichier
-			boolean success=createDirectory(rPath);
-			
-			if (success)
-			{
-	         
-			 File image = new File(myDir.getAbsolutePath()+ File.separator +imageFileName);
-			 return image;
-			}
-			else 
-			{
-				Log.e("TEST1","ERROR DE CREATION DE DOSSIER");
-			}
-			return null;
-				    
-		}
-
-
-    //Create a thumbnail in the directory /thumbnail of the file indicated by the parameter path
-	 void createThumbnail(String path)
-	 {
-		 Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-		 Bitmap bmp = Bitmap.createBitmap(100, 60, conf); // this creates a MUTABLE bitmap
-		 Canvas canvas = new Canvas(bmp);
-		 Bitmap imageBitmap=BitmapFactory.decodeFile(path);
-		 int height=60;
-		 int width=(int)(imageBitmap.getWidth()*((double)height/imageBitmap.getHeight()));
-         imageBitmap=getResizedBitmap(imageBitmap, width, height);
-         canvas.drawBitmap(imageBitmap, (int)(100-width)/2, 0, null);
-         
-         OutputStream outStream = null;
-	      
-	      File file;
-         try {
-        	 file = createImageFile("photoBattle"+File.separator+"Thumbnail", new File(path).getName());
-			outStream = new FileOutputStream(file);
-			bmp.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-	         outStream.flush();
-	         outStream.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-         
-	 }
-
-
-    //Create a directory to the indicated path
-	 boolean createDirectory(String rPath)
-	 {
-		 File myDir = new File(Environment.getExternalStorageDirectory() +
-	                File.separator + rPath); //pour créer le repertoire dans lequel on va mettre notre fichier
-		 boolean success =true;
-		 if (!myDir.exists()) 
-			{
-			success = myDir.mkdir(); //On crée le répertoire (s'il n'existe pas!!)
-			}
-		 return success;
-	 }
-
-
-    //Create a name of file that doesn't already exists
-	 String createPictureName()
-	 {
-		 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-		 String imageFileName = "map"+nbMap+ ".jpg";
-         nbMap++;
-		 return imageFileName;
-	 }
-
-
-    //resize a bitmap (bad quality, ideal to make light thumbnail image of a bigger picture)
-	 public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
-		    int width = bm.getWidth();
-		    int height = bm.getHeight();
-		    float scaleWidth = ((float) newWidth) / width;
-		    float scaleHeight = ((float) newHeight) / height;
-		    // CREATE A MATRIX FOR THE MANIPULATION
-		    Matrix matrix = new Matrix();
-		    // RESIZE THE BIT MAP
-		    matrix.postScale(scaleWidth, scaleHeight);
-
-		    // "RECREATE" THE NEW BITMAP
-		    Bitmap resizedBitmap = Bitmap.createBitmap(
-					bm, 0, 0, width, height, matrix, false);
-		    bm.recycle();
-		    return resizedBitmap;
-		}
-
-
-    //Load the list of the picture
-	 void loadList()
-	 {
-		 s.removeAllViewsInLayout();
-		 File f2 = new File(Environment.getExternalStorageDirectory() +
-	                File.separator + "photoBattle" +
-	                File.separator + "Pictures");
-		 File[] fichiers = f2.listFiles();
-		 thumbnail.clear();
-		 fichierJpeg.clear();
-		 for(int i=0; i<fichiers.length;i++)
-		 {
-			String ext="";
-			int k=fichiers[i].getName().length()-1;
-			char p=fichiers[i].getName().charAt(k);
-			while(p!='.' && k>0)
-			{
-				ext+=p;
+	//Load the list of the picture
+	void loadList() {
+		File f2 = new File(FileManager.PICTURE_PATH);
+		File[] fichiers = f2.listFiles();
+		listPhoto.clear();
+        viewFlipper.removeAllViews();
+		for (int i = 0; i < fichiers.length; i++) {
+			String ext = "";
+			int k = fichiers[i].getName().length() - 1;
+			char p = fichiers[i].getName().charAt(k);
+			while (p != '.' && k > 0) {
+				ext += p;
 				k--;
-				p=fichiers[i].getName().charAt(k);
+				p = fichiers[i].getName().charAt(k);
 			}
-			 if(ext.equals("gpj"))
-			 {
-				 if(fichiers[i].getTotalSpace()>20)
-				 {
-				 fichierJpeg.put(fichiers[i].getName(),fichiers[i]);
-	            Bitmap imageBitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() +
-		                File.separator + "photoBattle" +
-		                File.separator + "Thumbnail"+File.separator+fichiers[i].getName());
-	            thumbnail.put(fichiers[i].getName(), imageBitmap);
+			if (ext.equals("gpj")) {
+				if (fichiers[i].getTotalSpace() > 20) {
+					listPhoto.add(fichiers[i]);
+					boolean isnumber = true;
+					boolean change = false;
+					int m=4;
+					while (m < fichiers[i].getName().length() && isnumber) {
+						try {
+							if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
+								nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
+								change = true;
+							}
+						} catch (Exception e) {
+							isnumber = false;
+						}
+						m++;
+					}
+					if (change) {
+						nbMap++;
+					}
+					setNbMap(nbMap);
 
-                        int m=4;
-                      boolean isnumber=true;
-                     boolean change=false;
-                         while( m<fichiers[i].getName().length() && isnumber) {
-                             try {
-                                 if (Integer.parseInt(fichiers[i].getName().substring(3, m)) > nbMap) {
-                                     nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
-                                     change=true;
-                                 }
-                             } catch (Exception e) {
-                                 isnumber = false;
-                             }
-                             m++;
-                         }
-                     if(change) {
-                         nbMap++;
-                     }
+				} else {
+					(new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
+					fichiers[i].delete();
 
-				 }
-				 else
-				 {
-					 (new File(Environment.getExternalStorageDirectory() +
-				                File.separator + "photoBattle" +
-				                File.separator + "Thumbnail"+File.separator+fichiers[i].getName())).delete();
-                     (new File(Environment.getExternalStorageDirectory() +
-                             File.separator + "photoBattle" +
-                             File.separator + "Contours"+File.separator+fichiers[i].getName())).delete();
-					 fichiers[i].delete();
-					 
-				 }
-
-             }
-             imageSelected.setImageBitmap(null);
-			 
-		 }
-		
-		 Bitmap list2[] = new Bitmap[fichierJpeg.size()];
-		 String list3[] = new String[fichierJpeg.size()];
-		 MonAdaptateurDeListe adapter =new MonAdaptateurDeListe(this, thumbnail.keySet().toArray(list3), thumbnail.values().toArray(list2));
-         s.setAdapter(adapter);
-	 }
-
-	public void initComponent()
-	{
-		fichierJpeg=new  HashMap<String, File>();
-		bDelete= (Button) findViewById(R.id.button_delete);
-		imageSelected=(ImageView)   findViewById(R.id.imageSelected);
-		s=(ListView) findViewById(R.id.scroll);
-		s.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-
-				imageSelected.setImageBitmap(BitmapFactory.decodeFile(fichierJpeg.get((String) parent.getItemAtPosition(position)+".jpg").getAbsolutePath()));
-				currentSelectionFile = fichierJpeg.get((String) parent.getItemAtPosition(position)+".jpg");
-				view.setSelected(true);
+				}
 			}
-		});
+		}
+        loadView();
+	}
+
+	public void initComponent() {
+		bDelete = (Button) findViewById(R.id.button_delete);
+		//imageSelected = (ImageView) findViewById(R.id.imageSelected);
+		viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+		/*viewFlipper.setInAnimation(this, android.R.anim.fade_in);
+		viewFlipper.setOutAnimation(this, android.R.anim.fade_out);*/
+        viewFlipper.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent touchevent){
 
 
+                switch (touchevent.getAction())
+                {
+                    // when user first touches the screen to swap
+                    case MotionEvent.ACTION_DOWN:
+                    {
+                        lastX = touchevent.getX();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                    {
+                        float currentX = touchevent.getX();
 
+                        // if left to right swipe on screen
+                        if (lastX < currentX)
+                        {
+                            // If no more View/Child to flip
+                            if (viewFlipper.getDisplayedChild() == 0)
+                                break;
+
+                            // set the required Animation type to ViewFlipper
+                            // The Next screen will come in form Left and current Screen will go OUT
+
+                            viewFlipper.setInAnimation(getApplicationContext(), R.anim.in_from_left);
+                            viewFlipper.setOutAnimation(getApplicationContext(), R.anim.out_to_right);
+                            // Show the next Screen
+                            viewFlipper.showPrevious();
+                        }
+
+                        // if right to left swipe on screen
+                        if (lastX > currentX)
+                        {
+                            if (viewFlipper.getDisplayedChild()==viewFlipper.getChildCount()-1)//viewFlipper.getDisplayedChild() == 1 ||(viewFlipper.getDisplayedChild() == 0) && viewFlipper.getChildCount()==1)
+                                break;
+                            // set the required Animation type to ViewFlipper
+                            // The Next screen will come in form Right and current Screen will go OUT
+
+                            viewFlipper.setInAnimation(getApplicationContext(), R.anim.in_from_right);
+                            viewFlipper.setOutAnimation(getApplicationContext(), R.anim.out_to_left);
+                            // Show The Previous Screen
+                            viewFlipper.showNext();
+                        }
+                        break;
+                    }
+                }
+                currentPosition=viewFlipper.getDisplayedChild();
+                return false;
+
+            }
+
+        });
 		bDelete.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (currentSelectionFile != null) {
-					File p = new File(Environment.getExternalStorageDirectory() +
-							File.separator + "photoBattle" +
-							File.separator + "Thumbnail" +
-							File.separator + currentSelectionFile.getName());
-					p.delete();
-					(new File(Environment.getExternalStorageDirectory() +
-							File.separator + "photoBattle" +
-							File.separator + "Contours" + File.separator + currentSelectionFile.getName())).delete();
-					currentSelectionFile.delete();
+				if (listPhoto.size()!=0) {
+					(new File(FileManager.THRESHOLD_PATH + File.separator + listPhoto.get(viewFlipper.getDisplayedChild()).getName())).delete();
+					listPhoto.get(viewFlipper.getDisplayedChild()).delete();
 					loadList();
-
+                    currentPosition--;
+                    viewFlipper.setDisplayedChild(currentPosition);
 				}
 			}
 
 		});
 
-		play= (Button) findViewById(R.id.button_start);
+		play = (Button) findViewById(R.id.button_start);
 		play.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -377,248 +235,144 @@ public class ChooseMap extends Activity {
 			}
 		});
 
-		edit=(Button) findViewById(R.id.button_edit);
-		edit.setOnClickListener(new OnClickListener(){
+		edit = (Button) findViewById(R.id.button_edit);
+		edit.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(currentSelectionFile!=null)
-				{
+				if (listPhoto.size()!=0) {
 					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
-					intentMyAccount.putExtra("selected_file", Environment.getExternalStorageDirectory()+File.separator +"photoBattle"+File.separator+"Contours"+File.separator+currentSelectionFile.getName());
+					intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + listPhoto.get(viewFlipper.getDisplayedChild()).getName());
 					startActivity(intentMyAccount);
 				}
 			}
 
 		});
 
-		importPicture= (Button) findViewById(R.id.import_picture);
-		importPicture.setOnClickListener(new OnClickListener(){
+		importPicture = (Button) findViewById(R.id.import_picture);
+		importPicture.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.setType("image/*");
-				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(intent, 89);
-			}
-
-		});
-
-		takePicture= (Button) findViewById (R.id.take_picture);
-		takePicture.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				dispatchTakePictureIntent();
-			}
-		});
-	}
-
-	public void onRestart(){
-        super.onRestart();
-        if(create) {
-            createThumbnail(nf.getAbsolutePath());
-            setContentView(R.layout.layout_loading);
-            loading=(ProgressBar) findViewById(R.id.progressBar);
-            PhotoFilter p=new PhotoFilter(nf.getAbsolutePath());
-            p.execute();
-
-
-        }
-		create=false;
-        loadList();
-
-	}
-
-
-
-	//Partie de Hugo Monyac
-
-	public class PhotoFilter extends AsyncTask<Void, Integer, Void> {
-
-
-        String path;
-
-        public PhotoFilter(String p)
-        {
-            super();
-            path=p;
-        }
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(getApplicationContext(), "Début du traitement asynchrone", Toast.LENGTH_LONG).show();
-        }
-
-
-        protected void onProgressUpdate(Integer... values){
-            super.onProgressUpdate(values);
-            // Mise à jour de la ProgressBar
-            loading.setProgress(0);
-            loading.setProgress(values[0]);
-        }
-
-
-        protected Void doInBackground(Void... arg0) {
-
-
-            Bitmap bm= BitmapFactory.decodeFile(path);
-            publishProgress(0);
-            bm=grayScale(bm);
-            publishProgress(10);
-            bm=chgtoBandW(bm);
-            publishProgress(100);
-            OutputStream outStream = null;
-
-            File file;
-            try {
-                file = createImageFile("photoBattle" +
-                        File.separator+ "Contours", new File(path).getName());
-                outStream = new FileOutputStream(file);
-                bm.compress(Bitmap.CompressFormat.JPEG, 80, outStream);
-                outStream.flush();
-                outStream.close();
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 89);
             }
 
+        });
 
-            return null;
-        }
+		takePicture = (Button) findViewById(R.id.take_picture);
+		takePicture.setOnClickListener(new OnClickListener() {
 
-        protected void onPostExecute(Void result) {
-            Toast.makeText(getApplicationContext(), "Le traitement asynchrone est terminé", Toast.LENGTH_LONG).show();
-            setContentView(R.layout.activity_map);
-			initComponent();
-            loadList();
-        }
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                // Ensure that there's a camera activity to handle the intent
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    File photoFile = new File(FileManager.PICTURE_PATH + File.separator + pictureName);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                    startActivityForResult(takePictureIntent, 55);
+                }
+            }
+        });
+	}
 
-		Bitmap chgtoBandW(Bitmap img){
-			//img.setImageBitmap(source)
-			Bitmap mapnew= Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
-
-			int color = 0;
-			int[][] bmx= new int[img.getWidth()][img.getHeight()];
-			for(int i=0;i<img.getWidth();i++)
-			{
-				for(int j= 0;j<img.getHeight();j++)
-				{
-					int colorOfPixel = img.getPixel(i, j);
-					mapnew.setPixel(i,j,colorOfPixel);
-
-				}
-			}
-			mapnew = DoFullFilter(mapnew);
-			return mapnew;
-		}
-
-		public Bitmap DoHorizontalFilter(Bitmap BitmapGray){
-			int w, h, threshold;
-
-
-			h= BitmapGray.getHeight();
-            publishProgress(30);
-			w= BitmapGray.getWidth();
-            publishProgress(55);
-			threshold = 100;
-
-			Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
-
-			for(int x = 0; x < w-1; ++x) {
-				for(int y = 0; y < h; ++y) {
-
-					int pixel = BitmapGray.getPixel(x, y);
-					int pixelsuivant = BitmapGray.getPixel(x+1,y);
-
-					int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
-					int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
-					if((gray-gNext)*(gray-gNext)< threshold){
-						BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
-					} else{
-						BitmapBiner.setPixel(x, y, 0xFF000000);
-					}
-
-				}
-			}
-			return BitmapBiner;
-
-		}
-		public Bitmap DoFullFilter(Bitmap BitmapGray){
-			int w, h, threshold;
-
-			h= BitmapGray.getHeight();
-			w= BitmapGray.getWidth();
-
-			Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
-			Bitmap bHor = DoHorizontalFilter(BitmapGray);
-			Bitmap bVer = DoVerticalFilter(BitmapGray);
-			for(int x = 0; x < w; ++x) {
-				for(int y = 0; y < h; ++y) {
-					int horp = bHor.getPixel(x,y);
-					int verp = bVer.getPixel(x,y);
-					if(horp != verp){
-						BitmapBiner.setPixel(x,y,0xFF000000);
-					}
-					else
-						BitmapBiner.setPixel(x,y,0xFFFFFFFF);
-				}
-			}
-			return BitmapBiner;
-
-		}
-		public Bitmap DoVerticalFilter(Bitmap BitmapGray){
-			int w, h, threshold;
-
-			h= BitmapGray.getHeight();
-			w= BitmapGray.getWidth();
-
-			threshold = 100;
-
-			Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
-
-			for(int x = 0; x < w; ++x) {
-				for(int y = 0; y < h-1; ++y) {
-
-					int pixel = BitmapGray.getPixel(x, y);
-					int pixelsuivant = BitmapGray.getPixel(x,y+1);
-
-					int gray = (Color.red(pixel) +Color.blue(pixel)+Color.green(pixel))/3;
-					int gNext = (Color.red(pixelsuivant) +Color.blue(pixelsuivant)+Color.green(pixelsuivant))/3;
-					if((gray-gNext)*(gray-gNext)< threshold){
-						BitmapBiner.setPixel(x, y, 0xFFFFFFFF);
-					} else{
-						BitmapBiner.setPixel(x, y, 0xFF000000);
-					}
-
-				}
-			}
-			return BitmapBiner;
-
-		}
-
-		public Bitmap grayScale(Bitmap bmpOriginal)
-		{
-			int width, height;
-			height = bmpOriginal.getHeight();
-			width = bmpOriginal.getWidth();
-
-			Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-			Canvas c = new Canvas(bmpGrayscale);
-			Paint paint = new Paint();
-			ColorMatrix cm = new ColorMatrix();
-			cm.setSaturation(0);
-			ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-			paint.setColorFilter(f);
-			c.drawBitmap(bmpOriginal, 0, 0, paint);
-			return bmpGrayscale;
-		}
+	void setNbMap(int i) {
+		nbMap = i;
+		pictureName = "map" + Integer.toString(i) + ".jpg";
 
 	}
 
+    public void loadView()
+    {
+        for(int i=0; i<listPhoto.size(); i++) {
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.image_view_layout, null);
+            Bitmap bm = BitmapFactory.decodeFile(listPhoto.get(i).getPath());
+            ImageView image = (ImageView) view.findViewById(R.id.selected_image);
+            image.setImageBitmap(bm);
+            TextView name = (TextView) view.findViewById(R.id.label);
+            name.setText(listPhoto.get(i).getName().substring(0, listPhoto.get(i).getName().indexOf(".")));
+            viewFlipper.addView(view,i);
+        }
+    }
+
+	public void onRestart() {
+
+        super.onRestart();
+        if ((new File(FileManager.PICTURE_PATH, pictureName).exists())){
+        this.setContentView(R.layout.layout_loading);
+        loading = (ProgressBar) findViewById(R.id.progressBar);
+            Loading l = new Loading();
+            l.execute();
+            viewFlipper.setDisplayedChild(viewFlipper.getChildCount()-1);
+        }
+		else {
+
+            initComponent();
+            loadList();
+            viewFlipper.setDisplayedChild(currentPosition);
+        }
+        super.onRestart();
+
+	}
+
+
+
+	private class Loading extends AsyncTask<Void, Integer, Void>
+	{
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... values){
+			super.onProgressUpdate(values);
+			// Mise à jour de la ProgressBar
+			loading.setProgress(0);
+			loading.setProgress(values[0]);
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+
+
+			Bitmap bm= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName);
+			publishProgress(10);
+			bm=PhotoFilter.grayScale(bm);
+			publishProgress(20);
+			bm=PhotoFilter.chgtoBandW(bm);
+			publishProgress(90);
+			OutputStream outStream = null;
+			FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
+			publishProgress(100);
+			return null;
+
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			setContentView(R.layout.activity_map);
+            initComponent();
+			loadList();
+		}
+
+
+
+	}
+
+
+
 }
+
+
+
+
