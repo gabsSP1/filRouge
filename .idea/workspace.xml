@@ -43,29 +43,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14769376-16db-4bcb-8a88-40864b240194" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$Loading.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap$Loading.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/ChooseMap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Game.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainGamePanel.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainGamePanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainThread.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/MainThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Map.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/Map.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/pix.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/photobattle/pix.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/ChooseMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainGamePanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/MainThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/photobattle/Map.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="filRouge.iws" />
@@ -2345,7 +2326,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457727852196</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Intégration complète du jeu avec choix des maps">
+      <created>1457730266176</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1457730266176</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2421,7 +2408,8 @@
     <MESSAGE value="test brancheddddzzzd" />
     <MESSAGE value="intégration du game" />
     <MESSAGE value="Correction bug+ gros changements interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction bug+ gros changements interface" />
+    <MESSAGE value="Intégration complète du jeu avec choix des maps" />
+    <option name="LAST_COMMIT_MESSAGE" value="Intégration complète du jeu avec choix des maps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
