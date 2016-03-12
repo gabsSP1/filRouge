@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -49,6 +50,7 @@ public class ChooseMap extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		onWindowFocusChanged(true);
 		setContentView(R.layout.activity_map);
 		listPhoto = new ArrayList<File>();
 		FileManager.initialyzeTreeFile();
@@ -230,9 +232,11 @@ public class ChooseMap extends Activity {
 		play.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
-                intentMyAccount.putExtra("selected_file", listPhoto.get(viewFlipper.getDisplayedChild()).getName());
-				startActivity(intentMyAccount);
+                if(listPhoto.size()!=0) {
+                    Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
+                    intentMyAccount.putExtra("selected_file", listPhoto.get(viewFlipper.getDisplayedChild()).getName());
+                    startActivity(intentMyAccount);
+                }
 			}
 		});
 
@@ -292,6 +296,15 @@ public class ChooseMap extends Activity {
 
     public void loadView()
     {
+        if(listPhoto.size()==0)
+        {
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //View view = inflater.inflate(R.layout.image_view_layout, null);
+            TextView t=new TextView((this));
+            t.setText("No map found,\r\n Press the import or take picture Button");
+            t.setGravity(Gravity.CENTER);
+            viewFlipper.addView(t);
+        }
         for(int i=0; i<listPhoto.size(); i++) {
             LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.image_view_layout, null);
@@ -366,13 +379,21 @@ public class ChooseMap extends Activity {
 			loadList();
             viewFlipper.setDisplayedChild(viewFlipper.getChildCount() - 1);
 		}
-
-
-
 	}
 
-
-
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			final View decorView = getWindow().getDecorView();
+			decorView.setSystemUiVisibility(
+					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_FULLSCREEN
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+	}
 }
 
 
