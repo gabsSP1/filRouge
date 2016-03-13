@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +24,7 @@ import java.io.File;
 public class EditActivity extends Activity {
 	Bitmap background;
 	File fbackground;
+	Button back;
 	LinearLayout l;
 	EditText mapName;
 	ImageView p;
@@ -28,9 +32,10 @@ public class EditActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		/*getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);*/
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        onWindowFocusChanged(true);
 		setContentView(R.layout.activity_edit);
 		Intent intent = getIntent();
 		if (intent != null) {
@@ -39,6 +44,13 @@ public class EditActivity extends Activity {
 			background = BitmapFactory.decodeFile(fbackground.getAbsolutePath());
 		}
 		inEdit = false;
+		back=(Button) findViewById(R.id.back_edit);
+		back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditActivity.this.finish();
+			}
+		});
 		p = (ImageView) findViewById(R.id.pictureEdit);
 		mapName = (EditText) findViewById(R.id.mapName);
 		mapName.setTextColor(Color.BLUE);

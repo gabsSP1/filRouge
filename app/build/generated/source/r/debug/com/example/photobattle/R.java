@@ -10,10 +10,11 @@ package com.example.photobattle;
 public final class R {
     public static final class anim {
         public static final int anim=0x7f040000;
-        public static final int in_from_left=0x7f040001;
-        public static final int in_from_right=0x7f040002;
-        public static final int out_to_left=0x7f040003;
-        public static final int out_to_right=0x7f040004;
+        public static final int anim_button=0x7f040001;
+        public static final int in_from_left=0x7f040002;
+        public static final int in_from_right=0x7f040003;
+        public static final int out_to_left=0x7f040004;
+        public static final int out_to_right=0x7f040005;
     }
     public static final class attr {
     }
@@ -26,43 +27,47 @@ public final class R {
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int background_app=0x7f020000;
-        public static final int bg_key=0x7f020001;
-        public static final int delete_icon=0x7f020002;
-        public static final int draw_button=0x7f020003;
-        public static final int edit=0x7f020004;
-        public static final int edit_icon=0x7f020005;
-        public static final int full_sound=0x7f020006;
-        public static final int ic_delete_black_24dp=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int icon_play=0x7f020009;
-        public static final int icon_settings=0x7f02000a;
-        public static final int import_icon=0x7f02000b;
-        public static final int map=0x7f02000c;
-        public static final int mute=0x7f02000d;
-        public static final int personnage=0x7f02000e;
-        public static final int take_picture_icon=0x7f02000f;
+        public static final int back_icon=0x7f020000;
+        public static final int background_app=0x7f020001;
+        public static final int bg_key=0x7f020002;
+        public static final int delete_icon=0x7f020003;
+        public static final int draw_button=0x7f020004;
+        public static final int edit=0x7f020005;
+        public static final int edit_icon=0x7f020006;
+        public static final int full_sound=0x7f020007;
+        public static final int ic_delete_black_24dp=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int icon_play=0x7f02000a;
+        public static final int icon_settings=0x7f02000b;
+        public static final int import_icon=0x7f02000c;
+        public static final int map=0x7f02000d;
+        public static final int mute=0x7f02000e;
+        public static final int personnage=0x7f02000f;
+        public static final int take_picture_icon=0x7f020010;
     }
     public static final class id {
-        public static final int Delete=0x7f0a0012;
-        public static final int Settings=0x7f0a000c;
-        public static final int action_settings=0x7f0a000f;
-        public static final int button_delete=0x7f0a0009;
+        public static final int Delete=0x7f0a0015;
+        public static final int Settings=0x7f0a000f;
+        public static final int action_settings=0x7f0a0012;
+        public static final int back_chooseMap=0x7f0a000c;
+        public static final int back_edit=0x7f0a0004;
+        public static final int button_delete=0x7f0a000b;
         public static final int button_edit=0x7f0a0008;
         public static final int button_start=0x7f0a0007;
-        public static final int feeds=0x7f0a0010;
-        public static final int friends=0x7f0a0011;
-        public static final int import_picture=0x7f0a0006;
-        public static final int label=0x7f0a0003;
+        public static final int feeds=0x7f0a0013;
+        public static final int friends=0x7f0a0014;
+        public static final int import_picture=0x7f0a000a;
+        public static final int label=0x7f0a0005;
+        public static final int linearLayout=0x7f0a0002;
         public static final int mainlayout=0x7f0a0000;
-        public static final int mapName=0x7f0a0002;
+        public static final int mapName=0x7f0a0003;
         public static final int pictureEdit=0x7f0a0001;
-        public static final int play_menu=0x7f0a000a;
-        public static final int progressBar=0x7f0a000e;
-        public static final int selected_image=0x7f0a000d;
-        public static final int sound=0x7f0a000b;
-        public static final int take_picture=0x7f0a0005;
-        public static final int view_flipper=0x7f0a0004;
+        public static final int play_menu=0x7f0a000d;
+        public static final int progressBar=0x7f0a0011;
+        public static final int selected_image=0x7f0a0010;
+        public static final int sound=0x7f0a000e;
+        public static final int take_picture=0x7f0a0009;
+        public static final int view_flipper=0x7f0a0006;
     }
     public static final class layout {
         public static final int activity_edit=0x7f030000;

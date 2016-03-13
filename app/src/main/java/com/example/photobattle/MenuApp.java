@@ -8,15 +8,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import java.io.File;
 
 public class MenuApp extends Activity{
 	Button b1;
-	File myDir;
+	Button settings;
+	Animation animStart;
+	Animation animSettings;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		this.overridePendingTransition(0, 0);
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -24,20 +29,46 @@ public class MenuApp extends Activity{
 		onWindowFocusChanged(true);
 		setContentView(R.layout.activity_menu_app);
 
-		b1=(Button) findViewById(R.id.play_menu);
 
-		b1.setOnClickListener(new OnClickListener (){
+		b1=(Button) findViewById(R.id.play_menu);
+		animStart = AnimationUtils.loadAnimation(this, R.anim.anim_button);
+		//b1.setAnimation(myAnim);
+		b1.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-		        Intent intentMyAccount = new Intent(getApplicationContext(), ChooseMap.class);
-		        startActivity(intentMyAccount);
+				v.startAnimation(animStart);
 
 			}
 
 		});
 
+		animStart.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				Intent intentMyAccount = new Intent(getApplicationContext(), ChooseMap.class);
+				startActivity(intentMyAccount);
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+
+			}
+		});
+
+		settings=(Button) findViewById(R.id.Settings);
+		animSettings=AnimationUtils.loadAnimation(this, R.anim.anim_button);
+		settings.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				v.startAnimation(animSettings);
+			}
+		});
 
 	}
 	public void onRestart()

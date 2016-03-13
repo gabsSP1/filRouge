@@ -36,13 +36,12 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:text="New Button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="2dp"
         android:id="@+id/back_edit"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/linearLayout"
         android:background="@drawable/back_icon"
-        android:layout_marginBottom="26dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

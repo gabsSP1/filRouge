@@ -1,5 +1,37 @@
 [
     {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+    },
+    {
+        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
+        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
+    },
+    {
+        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
+        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+    },
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
+        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
+    },
+    {
+        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
+        "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\layout\\activity_map.xml"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\layout\\activity_edit.xml"
     },
@@ -8,31 +40,19 @@
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\layout\\image_view_layout.xml"
     },
     {
+        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
+        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
-    },
-    {
-        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
-        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
-    },
-    {
-        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
-        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
-    },
-    {
-        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
-        "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
-    },
-    {
-        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
-        "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\layout\\activity_map.xml"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
     },
     {
-        "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
-        "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
+        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
     }
 ]

@@ -37,6 +37,7 @@ public class ChooseMap extends Activity {
 	Button takePicture;
 	Button edit;
 	Button play;
+	Button backButton;
 	private float lastX;
 	ProgressBar loading;
 	int nbMap;
@@ -46,9 +47,10 @@ public class ChooseMap extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		this.overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		onWindowFocusChanged(true);
 		setContentView(R.layout.activity_map);
@@ -227,7 +229,14 @@ public class ChooseMap extends Activity {
 			}
 
 		});
-
+		backButton=(Button)findViewById(R.id.back_chooseMap);
+		backButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ChooseMap.this.finish();
+				ChooseMap.this.overridePendingTransition(R.anim.in_from_left,R.anim.out_to_right);
+			}
+		});
 		play = (Button) findViewById(R.id.button_start);
 		play.setOnClickListener(new OnClickListener() {
 			@Override

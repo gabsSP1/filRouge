@@ -1,5 +1,31 @@
 [
     {
+        "outputFile": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 220,
+                        "endLine": 9,
+                        "endColumn": 12,
+                        "endOffset": 366
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
         "map": [
             {
@@ -26,7 +52,7 @@
         ]
     },
     {
-        "outputFile": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -38,14 +64,14 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 220,
+                        "startOffset": 227,
                         "endLine": 9,
                         "endColumn": 12,
-                        "endOffset": 366
+                        "endOffset": 375
                     }
                 }
             }
