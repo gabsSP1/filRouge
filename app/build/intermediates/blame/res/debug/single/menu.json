@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\map.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\menu\\map.xml"
+    },
+    {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_app.xml",
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\menu\\menu_app.xml"
     },
@@ -18,6 +22,10 @@
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_app.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\menu\\menu_app.xml"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_app.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\menu\\menu_app.xml"
     },
     {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\map.xml",
