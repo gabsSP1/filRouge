@@ -1,0 +1,139 @@
+package com.example.valentin.filrouge;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+/**
+ * Created by Valentin on 26/02/2016.
+ * Là où on prévois les trucs.
+ */
+public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
+{
+    private static final String TAG = MainGamePanel.class.getSimpleName();
+
+
+
+    private MainThread thread;
+    private Personnage persoOne;
+    private Personnage persoTwo;
+    private Map map;
+    private float density;
+
+    public MainGamePanel(Context context)
+    {
+        super(context);
+        getHolder().addCallback(this);
+        map = new Map(BitmapFactory.decodeResource(getResources(), R.drawable.map), this);
+        persoOne = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 0, 0, map);
+        persoTwo = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 50, 0, map);
+        thread = new MainThread(getHolder(), this);
+        setFocusable(true);
+        density = context.getResources().getDisplayMetrics().density;
+
+
+
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
+    {
+
+    }
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder)
+    {
+        thread.setRunning(true);
+        thread.start();
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder)
+    {
+        boolean retry = true;
+        while(retry)
+        {
+            try
+            {
+                thread.join();
+                retry = false;
+            }
+            catch(InterruptedException e)
+            {
+
+            }
+        }
+        Log.d(TAG, "Thread was shut down cleanly");
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if(event.getAction() == MotionEvent.ACTION_MOVE ||event.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            if(event.getY() > getHeight() - 100)
+            {
+                thread.setRunning(false);
+                ((Activity)getContext()).finish();
+            }
+
+            else
+            {
+                if(event.getX() < getWidth()/2)
+                    persoOne.goLeft();
+                else
+                    persoOne.goRight();
+                if(event.getY() < 300)
+                    persoOne.jump();
+                //Log.d(TAG, "Coords: x=" + event.getX() + ", y=" + event.getY());
+            }
+            return true;
+        }
+        else if(event.getAction() == MotionEvent.ACTION_UP)
+        {
+            persoOne.idle();
+            //Log.d(TAG, "STOP !");
+            return false;
+        }
+        Log.d(TAG, "MotionEvent : " + event.getAction());
+        return super.onTouchEvent(event);
+    }
+
+    public void init()
+    {
+        map.init();
+        persoOne.init();
+        persoTwo.init();
+    }
+
+
+    public void render(Canvas canvas)
+    {
+
+        canvas.drawColor(Color.BLACK);
+        map.draw(canvas);
+        persoTwo.draw(canvas);
+        persoOne.draw(canvas);
+
+    }
+
+    public void update()
+    {
+        persoOne.update();
+    }
+
+    public float getDensity() {return density;}
+
+
+
+}
