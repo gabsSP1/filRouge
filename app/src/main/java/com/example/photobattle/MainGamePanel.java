@@ -2,11 +2,14 @@ package com.example.photobattle;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -21,16 +24,18 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
 
     private MainThread thread;
-    private Personnage perso;
+    private Personnage persoOne;
+    private Personnage persoTwo;
     private Map map;
     private float density;
 
-    public MainGamePanel(Context context, String mapName)
+    public MainGamePanel(Context context, String pictureName)
     {
         super(context);
         getHolder().addCallback(this);
-        map = new Map(mapName,this);
-        perso = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 0, 0, map);
+        map = new Map(pictureName, this);
+        persoOne = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 0, 0, map);
+        persoTwo = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 50, 0, map);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
         density = context.getResources().getDisplayMetrics().density;
@@ -81,19 +86,22 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
                 thread.setRunning(false);
                 ((Activity)getContext()).finish();
             }
+
             else
             {
                 if(event.getX() < getWidth()/2)
-                    perso.setVX(-10.0f);
+                    persoOne.goLeft();
                 else
-                    perso.setVX(10.0f);
+                    persoOne.goRight();
+                if(event.getY() < 300)
+                    persoOne.jump();
                 //Log.d(TAG, "Coords: x=" + event.getX() + ", y=" + event.getY());
             }
             return true;
         }
         else if(event.getAction() == MotionEvent.ACTION_UP)
         {
-            perso.setVX(0.0f);
+            persoOne.idle();
             //Log.d(TAG, "STOP !");
             return false;
         }
@@ -104,23 +112,24 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void init()
     {
         map.init();
-        perso.init();
+        persoOne.init();
+        persoTwo.init();
     }
 
 
     public void render(Canvas canvas)
     {
 
-        //création d'une image buffer
-         canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.BLACK);
         map.draw(canvas);
-        perso.draw(canvas);
+        persoTwo.draw(canvas);
+        persoOne.draw(canvas);
 
     }
 
     public void update()
     {
-       perso.update();
+        persoOne.update();
     }
 
     public float getDensity() {return density;}

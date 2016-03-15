@@ -21,7 +21,7 @@ public class ServerThread extends Thread {
 
     /**
      * Le run du thread
-     * Lit depuis le socket de l'utilisateur et envoie les informations correspondantes à la classe Server en fonction de la commande reçue
+     * Lit depuis le socket de l'utilisateur et envoie les informations correspondantes  la classe Server en fonction de la commande reï¿½ue
      */
     public void run() {
         Command com;
@@ -44,7 +44,7 @@ public class ServerThread extends Thread {
 
             }
         } catch (Exception e) {
-            System.err.println("Déconnexion d'un client");
+            System.err.println("Dï¿½connexion d'un client");
         }
     }
 

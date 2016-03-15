@@ -20,41 +20,37 @@ public class Map
     private static final String TAG = Map.class.getSimpleName();
 
     private Bitmap contours;
-    Bitmap picture;
+    private Bitmap photoOriginal;
     private Rect zone;
     private pix obstacles [][];
     private int width;
     private int height;
-    private float ratioHeight;
-    private float ratioWidth;
+    private float density;
     private MainGamePanel mainGamePanel;
 
-    public Map(String mapName, MainGamePanel mainGamePanel)
+    public Map(String pictureName, MainGamePanel mainGamePanel)
     {
-
-        this.contours = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+ File.separator+mapName);
-        picture= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+ File.separator+mapName);
+        contours = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+ File.separator+pictureName);
+        photoOriginal=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+ File.separator+pictureName);
         this.mainGamePanel = mainGamePanel;
-        this.contours = contours;
+
     }
 
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(picture, (int)(zone.left/ratioWidth), (int)(zone.top/ratioHeight), null);
+        canvas.drawBitmap(photoOriginal, dpToPixel(zone.left), dpToPixel(zone.top), null);
     }
 
     public void init()
     {
-        float densityScreen = mainGamePanel.getDensity();
-        zone = resizeKeepRatio(contours.getHeight(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
+        density = mainGamePanel.getDensity();
+        zone = resizeKeepRatio(contours.getWidth(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
         contours = Bitmap.createScaledBitmap(contours, zone.width(), zone.height(), true);
-        picture = Bitmap.createScaledBitmap(picture, zone.width(), zone.height(), true);
-        ratioWidth = mainGamePanel.getWidth()/(300*densityScreen);
-        ratioHeight = mainGamePanel.getHeight()/(300*densityScreen);
+        photoOriginal=Bitmap.createScaledBitmap(photoOriginal, zone.width(), zone.height(), true);
 
-        height = (int)(mainGamePanel.getHeight() * ratioHeight);
-        width = (int)(mainGamePanel.getWidth() * ratioWidth);
+        height = pixelToDp(mainGamePanel.getHeight());
+        width = pixelToDp(mainGamePanel.getWidth());
         obstacles = new pix [width][height];
 
         for(int i = 0; i < width; i++)
@@ -70,16 +66,16 @@ public class Map
             for(int j = 0; j < contours.getHeight(); j++)
             {
                 if(contours.getPixel(i,j) != Color.WHITE)
-                    obstacles[(int)((i+zone.left)*ratioWidth)][(int)((j+zone.top)*ratioHeight)] = pix.GROUND;
+                    obstacles[pixelToDp(i+zone.left)][pixelToDp(j+zone.top)] = pix.GROUND;
             }
         }
 
-        zone = new Rect((int)(zone.left*ratioWidth), (int)(zone.top*ratioHeight), (int)(zone.right*ratioWidth), (int)(zone.bottom*ratioHeight));
+        zone = new Rect(pixelToDp(zone.left), pixelToDp(zone.top), pixelToDp(zone.right), pixelToDp(zone.bottom));
 
 
     }
 
-    private Rect resizeKeepRatio(int previousWidth, int previousHeight, int maxWidth, int maxHeight)
+    public Rect resizeKeepRatio(int previousWidth, int previousHeight, int maxWidth, int maxHeight)
     {
 
         Log.d(TAG, "previousWidth : " + previousWidth + "; previousHeight : " + previousHeight + "; maxWidth : " + maxWidth + "; maxHeight : " + maxHeight + ";");
@@ -115,15 +111,16 @@ public class Map
     }
 
 
-    public int coordXToPixel(int coordX)
+    public int dpToPixel(int dp)
     {
-        return (int)(coordX/ratioWidth);
+        return (int)(dp*density);
     }
 
-    public int coordYToPixel(int coordY)
+    public int pixelToDp(int pixel)
     {
-        return (int)(coordY/ratioHeight);
+        return (int)(pixel/density);
     }
+
 
     public int left(){ return zone.left;}
     public int right(){ return zone.right;}

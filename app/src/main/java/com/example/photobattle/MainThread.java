@@ -1,9 +1,11 @@
 package com.example.photobattle;
 
 
-import android.graphics.Canvas;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.graphics.Canvas;
 
 /**
  * Created by Valentin on 26/02/2016.
@@ -14,7 +16,7 @@ public class MainThread extends Thread
 
     private static final String TAG = MainThread.class.getSimpleName();
 
-    private final static int 	MAX_FPS = 30;
+    private final static int 	MAX_FPS = 50;
     // maximum number of frames to be skipped
     private final static int	MAX_FRAME_SKIPS = 5;
     // the frame period

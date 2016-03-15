@@ -3,13 +3,14 @@ package com.example.photobattle;
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.Image;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.widget.ImageView;
 
-
+import com.example.photobattle.*;
 
 /**
  * Created by Valentin on 24/02/2016.
@@ -19,16 +20,21 @@ public class Personnage {
 
     private static final String TAG = Personnage.class.getSimpleName();
 
-    private final float GRAVITY = 0.5f;
-    private final float VITESSE_Y_MAX = 30.0f;
-    private final float VITESSE_X_MAX = 20.0f;
+    private final float GRAVITY = 0.2f;
+    private final float VITESSE_Y_MAX = 10.0f;
+    private final float VITESSE_X_MAX = 6.6f;
 
+    enum etatPerso{ON_GROUND, JUMP};
+
+    private etatPerso etat;
     private int x;
     private int y;
     private float vX;
     private float vY;
     private Bitmap sprite;
     private Map map;
+    private float vitesseRatioX;
+    private float vitesseRatioY;
 
 
     public Personnage(Bitmap image, int x, int y, Map map)
@@ -39,6 +45,7 @@ public class Personnage {
         vY = 0.0f;
         sprite = image;
         this.map = map;
+        etat = etatPerso.JUMP;
     }
 
     public Bitmap getSprite() {
@@ -53,7 +60,7 @@ public class Personnage {
         return x;
     }
 
-    public void setX(int x) {
+    private void setX(int x) {
         if(x > map.right())
             x = map.left();
         else if(x < map.left())
@@ -65,7 +72,7 @@ public class Personnage {
         return y;
     }
 
-    public void setY(int y)
+    private void setY(int y)
     {
         if(y > map.bottom())
             y = map.top();
@@ -78,10 +85,10 @@ public class Personnage {
         return vX;
     }
 
-    public void setVX(float vX)
+    private void setVX(float vX)
     {
-        if(vX > VITESSE_X_MAX)
-            vX = VITESSE_X_MAX;
+        if(vX > VITESSE_X_MAX*vitesseRatioX)
+            vX = VITESSE_X_MAX*vitesseRatioX;
         this.vX = vX;
     }
 
@@ -89,37 +96,71 @@ public class Personnage {
         return vY;
     }
 
-    public void setVY(float vY)
+    private void setVY(float vY)
     {
-        if(vY > VITESSE_Y_MAX)
-            vY = VITESSE_Y_MAX;
+        if(vY > VITESSE_Y_MAX*vitesseRatioY)
+            vY = VITESSE_Y_MAX*vitesseRatioY;
         this.vY = vY;
     }
 
+    public void goRight()
+    {
+        setVX(3.3f);
+    }
+
+    public void goLeft()
+    {
+        setVX(-3.3f);
+    }
+
+    public void idle()
+    {
+        setVX(0.0f);
+    }
+
+    public void jump()
+    {
+        if(etat != etatPerso.JUMP)
+        {
+            setVY(-5.0f);
+            etat = etatPerso.JUMP;
+        }
+    }
+
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(sprite, map.coordXToPixel(x), map.coordYToPixel(y), null);
+        Paint p = new Paint();
+        p.setStyle(Paint.Style.STROKE);
+        canvas.drawBitmap(sprite, map.dpToPixel(x), map.dpToPixel(y), null);
+
+        canvas.drawRect(map.dpToPixel(x), map.dpToPixel(y), map.dpToPixel(x)+sprite.getWidth(),map.dpToPixel(y)+sprite.getHeight(), p);
+
     }
 
     public void update()
     {
-        setVY(vY + GRAVITY);
-        setY((int)(y+vY));
-        setX((int) (x + vX));
+        setVY(vitesseRatioY*(vY + GRAVITY));
+        setY((int)(y+vY*vitesseRatioY));
+        setX((int) (x + vX*vitesseRatioX));
         move(x,y);
     }
 
     public void init()
     {
-        x = (map.left()+map.right())/2;
-        y = (map.top()+map.bottom())/2;
+        x = map.left();
+        y = map.top();
+        vitesseRatioY = map.getScreenHeigth()/360;
+        vitesseRatioX = map.getScreenWidth()/640;
+        Log.d(TAG, "Sprite width :"+ sprite.getWidth()+"; height :" +sprite.getHeight()+";");
+        //Rect zone = map.resizeKeepRatio(sprite.getHeight(), sprite.getHeight(), map.dpToPixel((map.getScreenWidth()*4)/640), map.dpToPixel((map.getScreenHeigth()*7)/360));
+        sprite = Bitmap.createScaledBitmap(sprite, map.dpToPixel((map.getScreenWidth()*14)/640), map.dpToPixel((map.getScreenHeigth()*21)/360), true);
     }
 
 
 
     public void move(int x, int y) {
         pix[][] obstacles = map.getObstacles();
-        int height = map.coordYToPixel(sprite.getHeight());
-        int width = map.coordXToPixel(sprite.getWidth());
+        int height = map.pixelToDp(sprite.getHeight());
+        int width = map.pixelToDp(sprite.getWidth());
 
 
         if (x > 0 && y > 0) {
@@ -135,8 +176,8 @@ public class Personnage {
                 outloop:
                 for (int i = x - (int) vX; i >= x; i--) {
                     int m = i;
-                    if(i >= map.right())
-                        m = i - map.width();
+                    if(m >= map.right())
+                        m = m - map.width();
 
                     for (int j = y; j < y + height/2; j++) {
                         int k = j;
@@ -158,13 +199,20 @@ public class Personnage {
 
                             stairs = y+height - j;
                             for (int l = y - stairs; l < y; l++) {
-                                 k = l;
-                                if (l >= map.bottom())
-                                    k = l - map.height();
-                                if (obstacles[m][k] == pix.GROUND) {
+                                for (int p = m; p <= m+width+1; p++)
+                                {
+                                    int z = p;
+                                    if(z > map.right())
+                                        z = m - map.width();
+                                    k = l;
+                                    if (l >= map.bottom())
+                                        k = l - map.height();
+                                    if (obstacles[z][k] == pix.GROUND)
+                                    {
 
-                                    goRight = i - x + 1;
-                                    break outloop;
+                                        goRight = i - x + 1;
+                                        break outloop;
+                                    }
                                 }
                             }
                         }
@@ -211,13 +259,19 @@ public class Personnage {
 
                             stairs = y+height - j;
                             for (int l = y - stairs; l < y; l++) {
-                                 k = l;
-                                if (j >= map.bottom())
-                                    k = j - map.height();
-                                if (obstacles[m][k] == pix.GROUND) {
-
-                                    goLeft = x - i - 1;
-                                    break outloop;
+                                for(int p = m-1; p<= m+width; p++)
+                                {
+                                    int z = p;
+                                    if(z < 0)
+                                        z = z + map.width();
+                                    k = l;
+                                    if (j >= map.bottom())
+                                        k = j - map.height();
+                                    if (obstacles[z][k] == pix.GROUND)
+                                    {
+                                        goLeft = x + width - i + 1;
+                                        break outloop;
+                                    }
                                 }
                             }
                         }
@@ -240,12 +294,12 @@ public class Personnage {
                     int m = i;
                     if(i > map.right())
                         m = i - map.width();
-                    for (int j = y-(int)vY; j <= y; j--) {
+                    for (int j = y-(int)vY; j >= y; j--) {
                         int k = j;
                         if (j >= map.bottom())
                             k = j - map.height();
                         if (obstacles[m][k] == pix.GROUND) {
-                            goDown = y+height-j+1;
+                            goDown = y-j+1;
                             break outloop;
                         }
                     }
@@ -266,6 +320,7 @@ public class Personnage {
                             k = j - map.height();
                         if (obstacles[m][k] == pix.GROUND) {
                             goUp = y+height-j;
+                            etat = etatPerso.ON_GROUND;
                             vY = 0.f;
                             break outloop;
                         }

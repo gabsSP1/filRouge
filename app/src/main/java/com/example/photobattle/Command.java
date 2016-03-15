@@ -5,7 +5,7 @@ package com.example.photobattle;
  */
 public class Command {
 
-    //Informations à envoyer
+    //Informations  envoyer
     private int coordJ1X;
     private int coordJ1Y;
     private int coordJ2X;
