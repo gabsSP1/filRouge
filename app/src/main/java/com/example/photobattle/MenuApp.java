@@ -38,6 +38,7 @@ public class MenuApp extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				System.out.println("appui play");
 				v.startAnimation(animStart);
 
 			}
@@ -67,6 +68,7 @@ public class MenuApp extends Activity{
 			@Override
 			public void onClick(View v) {
 				v.startAnimation(animSettings);
+				System.out.println("appui settings");
 			}
 		});
 
