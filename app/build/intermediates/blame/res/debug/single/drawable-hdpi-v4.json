@@ -20,12 +20,20 @@
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\take_picture_icon.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\full_sound.png",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\full_sound.png"
     },
     {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_key.xml",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\bg_key.xml"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\import_icon.png",
@@ -52,8 +60,16 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\icon_settings.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\background_app.jpg",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\background_app.jpg"
+    },
+    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_key.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\bg_key.xml"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\delete_icon.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\delete_icon.png"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\personnage.png",
@@ -76,8 +92,16 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\edit_icon.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\draw_button.xml",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\draw_button.xml"
+    },
+    {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\full_sound.png",
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\full_sound.png"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\full_sound.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\full_sound.png"
     },
     {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\draw_button.xml",
@@ -96,12 +120,24 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\map.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\personnage.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\personnage.png"
+    },
+    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\background_app.jpg",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\background_app.jpg"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\map.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\map.png"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\draw_button.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\drawable-hdpi\\draw_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_play.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\icon_play.png"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_key.xml",
@@ -120,6 +156,10 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\draw_button.xml"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_settings.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\icon_settings.png"
+    },
+    {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\map.png",
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\map.png"
     },
@@ -136,6 +176,10 @@
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\icon_settings.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\import_icon.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\import_icon.png"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_key.xml",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\drawable-hdpi\\bg_key.xml"
     },
@@ -146,6 +190,10 @@
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\personnage.png",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\personnage.png"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\edit_icon.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\edit_icon.png"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_play.png",
@@ -180,8 +228,20 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\delete_icon.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\edit.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\edit.png"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mute.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\mute.png"
+    },
+    {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\bg_key.xml",
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\bg_key.xml"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_delete_black_24dp.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\ic_delete_black_24dp.png"
     },
     {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\draw_button.xml",
@@ -198,6 +258,14 @@
     {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\background_app.jpg",
         "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\background_app.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\back_icon.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\back_icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\take_picture_icon.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-hdpi\\take_picture_icon.png"
     },
     {
         "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mute.png",

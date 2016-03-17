@@ -20,6 +20,14 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_delete_black_24dp.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-mdpi\\ic_delete_black_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_delete_black_24dp.png",
         "source": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-mdpi\\ic_delete_black_24dp.png"
     },

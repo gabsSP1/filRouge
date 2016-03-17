@@ -18,10 +18,10 @@ class PhotoFilter {
 
     static Bitmap  chgtoBandW(Bitmap img){
         //img.setImageBitmap(source)
-        Bitmap mapnew= Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
+       /* Bitmap mapnew= Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
 
-        int color = 0;
-        int[][] bmx= new int[img.getWidth()][img.getHeight()];
+        //int color = 0;
+        //int[][] bmx= new int[img.getWidth()][img.getHeight()];
         for(int i=0;i<img.getWidth();i++)
         {
             for(int j= 0;j<img.getHeight();j++)
@@ -30,7 +30,8 @@ class PhotoFilter {
                 mapnew.setPixel(i,j,colorOfPixel);
 
             }
-        }
+        }*/
+        Bitmap mapnew = img;
         mapnew = DoFullFilter(mapnew);
         return mapnew;
     }
@@ -70,7 +71,7 @@ class PhotoFilter {
         h= BitmapGray.getHeight();
         w= BitmapGray.getWidth();
 
-        Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
+        //Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
         Bitmap bHor = DoHorizontalFilter(BitmapGray);
         Bitmap bVer = DoVerticalFilter(BitmapGray);
         for(int x = 0; x < w; ++x) {
@@ -78,13 +79,13 @@ class PhotoFilter {
                 int horp = bHor.getPixel(x,y);
                 int verp = bVer.getPixel(x,y);
                 if(horp != verp){
-                    BitmapBiner.setPixel(x,y,0xFF000000);
+                    BitmapGray.setPixel(x,y,0xFF000000);
                 }
                 else
-                    BitmapBiner.setPixel(x,y,0xFFFFFFFF);
+                    BitmapGray.setPixel(x,y,0xFFFFFFFF);
             }
         }
-        return BitmapBiner;
+        return BitmapGray;
 
     }
     public static Bitmap DoVerticalFilter(Bitmap BitmapGray){
