@@ -411,6 +411,11 @@ public class ChooseMap extends Activity {
 							| View.SYSTEM_UI_FLAG_FULLSCREEN
 							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
 	}
+
+	public void loadImage(String path)
+	{
+		Bitmap bm= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName);
+	}
 }
 
 

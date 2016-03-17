@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChooseMap"
-    android:background="@drawable/background_app">
+    android:background="@drawable/background_app"
+    android:focusableInTouchMode="false">
     
 	 <TextView
 	     android:id="@+id/label"
@@ -31,9 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clickable="true"
-            android:focusable="true"
             android:layout_weight="18"
-            android:focusableInTouchMode="true"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp">
