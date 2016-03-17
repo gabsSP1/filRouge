@@ -61,8 +61,8 @@ public class Personnage {
     }
 
     private void setX(int x) {
-        if(x > map.right())
-            x = map.left();
+        if(x >= map.right())
+            x -= map.width();
         else if(x < map.left())
             x = map.right();
         this.x = x;
@@ -207,7 +207,7 @@ public class Personnage {
                                     k = l;
                                     if (l >= map.bottom())
                                         k = l - map.height();
-                                    if (l < 0)
+                                    if (l < map.top())
                                         k = l + map.height();
                                     if (obstacles[z][k] == pix.GROUND)
                                     {
@@ -264,12 +264,12 @@ public class Personnage {
                                 for(int p = m-1; p<= m+width; p++)
                                 {
                                     int z = p;
-                                    if(p < 0)
+                                    if(p < map.left())
                                         z = p + map.width();
                                     k = l;
                                     if (l >= map.bottom())
                                         k = l - map.height();
-                                    if(l < 0)
+                                    if(l < map.top())
                                         k = l + map.height();
                                     if (obstacles[z][k] == pix.GROUND)
                                     {

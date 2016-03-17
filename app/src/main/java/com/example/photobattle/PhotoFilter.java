@@ -15,7 +15,7 @@ import android.graphics.Paint;
 
 class PhotoFilter {
 
-    public final static int THRESHOLD = 100;
+    public final static int THRESHOLD = 500;
 
     static Bitmap  chgtoBandW(Bitmap img){
         //img.setImageBitmap(source)
