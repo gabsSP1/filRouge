@@ -369,14 +369,21 @@ public class ChooseMap extends Activity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 
-
-			Bitmap bm= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName);
 			Display display = getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
-			int height = Math.min(bm.getHeight(), size.y);
-			int width = Math.min(bm.getWidth(), size.x);
-			bm = Bitmap.createScaledBitmap(bm, width, height, true);
+
+			BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+			bmOptions.inJustDecodeBounds = true;
+
+			BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName, bmOptions);
+
+			int scaleFactor = Math.min(bmOptions.outWidth/size.x, bmOptions.outHeight/size.y);
+			bmOptions.inJustDecodeBounds = false;
+			bmOptions.inSampleSize = scaleFactor;
+
+			Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName, bmOptions);
+
 			publishProgress(10);
 			bm=PhotoFilter.grayScale(bm);
 			publishProgress(20);
