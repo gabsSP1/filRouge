@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.util.Size;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +30,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Mat.*;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 //a
 public class ChooseMap extends Activity {
 	ViewFlipper viewFlipper;
@@ -45,10 +56,32 @@ public class ChooseMap extends Activity {
 	static int currentPosition;
 	final static String CURRENT_FILE = "selcted_file";
 
+	private BaseLoaderCallback mOpenCVCallBack = new BaseLoaderCallback(this) {
+		@Override
+		public void onManagerConnected(int status) {
+			switch (status) {
+				case LoaderCallbackInterface.SUCCESS: {
+					//Log.i(TAG, "OpenCV loaded successfully");
+					// Create and set View
+					//setContentView(R.layout.);
+				}
+				break;
+				default: {
+					super.onManagerConnected(status);
+				}
+				break;
+			}
+		}
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
 		super.onCreate(savedInstanceState);
+		if (!OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_2, this, mOpenCVCallBack))
+		{
+			//Log.e(TAG, "Cannot connect to OpenCV Manager");
+		}
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -77,14 +110,30 @@ public class ChooseMap extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
+
 		switch (requestCode) {
-			case 89:
+			case 89://appel depuis import
 
 				if (data != null && resultCode == Activity.RESULT_OK) {
 
 					try {
 						Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
 						FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
+
+						Mat edges = new Mat(bm.getHeight(),bm.getWidth(),1);
+
+						Mat original = new Mat(bm.getHeight(),bm.getWidth(),1);
+
+						Utils.bitmapToMat(bm, original);
+						bm.recycle();
+						Imgproc.Canny(original, edges, 50, 100);
+						//Core.flip(edges, edges, 1);
+						Mat edges2 = new Mat(bm.getHeight(),bm.getWidth(),1);
+						//Core.flip(edges, edges2, 3);
+						Mat invertcolormatrix= new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+						Core.subtract(invertcolormatrix, edges, edges);
+						Utils.matToBitmap(edges2, bm);
+						FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -92,11 +141,23 @@ public class ChooseMap extends Activity {
 				}
 				break;
 
-			case 55:
+			case 55://appel depuis appareil
 
 				try {
 
 					Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
+					Mat edges = new Mat();
+					Mat original = new Mat();
+					Utils.bitmapToMat(bm, original);
+					bm.recycle();
+					Imgproc.Canny(original, edges, 50, 100);
+					//Core.flip(edges, edges, 1);
+					Mat edges2 = new Mat();
+					Core.flip(edges, edges2, 3);
+					Mat invertcolormatrix= new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+					Core.subtract(invertcolormatrix, edges, edges);
+					Utils.matToBitmap(edges2, bm);
+					FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
 				} catch (Exception e) {
 				}
 				break;
@@ -329,19 +390,19 @@ public class ChooseMap extends Activity {
 	public void onRestart() {
 
         super.onRestart();
-        if ((new File(FileManager.PICTURE_PATH, pictureName).exists())){
+       /* if ((new File(FileManager.PICTURE_PATH, pictureName).exists())){
         this.setContentView(R.layout.layout_loading);
         loading = (ProgressBar) findViewById(R.id.progressBar);
             Loading l = new Loading();
             l.execute();
             viewFlipper.setDisplayedChild(viewFlipper.getChildCount()-1);
         }
-		else {
+		else {*/
 
             initComponent();
             loadList();
             viewFlipper.setDisplayedChild(currentPosition);
-        }
+        //}
         super.onRestart();
 
 	}

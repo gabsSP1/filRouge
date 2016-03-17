@@ -8,6 +8,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
+import org.opencv.imgproc.Imgproc;
 /**
  * Created by gab on 09/03/2016.
  */
