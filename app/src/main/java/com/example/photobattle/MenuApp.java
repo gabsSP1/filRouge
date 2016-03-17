@@ -33,7 +33,7 @@ public class MenuApp extends Activity{
 		b1=(Button) findViewById(R.id.play_menu);
 		animStart = AnimationUtils.loadAnimation(this, R.anim.anim_button);
 		//b1.setAnimation(myAnim);
-		b1.setOnClickListener(new OnClickListener() {
+		b1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -63,7 +63,7 @@ public class MenuApp extends Activity{
 
 		settings=(Button) findViewById(R.id.Settings);
 		animSettings=AnimationUtils.loadAnimation(this, R.anim.anim_button);
-		settings.setOnClickListener(new OnClickListener() {
+		settings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				v.startAnimation(animSettings);
