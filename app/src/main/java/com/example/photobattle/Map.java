@@ -76,7 +76,6 @@ public class Map
                 obstacles[i][j] = pix.VIDE;
             }
         }
-
         for(int i = 0; i < contours.getWidth(); i++)
         {
             for(int j = 0; j < contours.getHeight(); j++)
@@ -110,7 +109,7 @@ public class Map
 
         if(ratioWidth<ratioHeight)
         {
-            newDimensions = new Rect(0, (int)((maxHeight-previousHeight*ratioWidth)/2), maxWidth, (int)((maxHeight+previousHeight*ratioWidth/2)));
+            newDimensions = new Rect(0, (int)((maxHeight-previousHeight*ratioWidth)/2), maxWidth, (int)((maxHeight+previousHeight*ratioWidth)/2));
         }
         else
         {
