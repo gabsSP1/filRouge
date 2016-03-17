@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -369,6 +371,12 @@ public class ChooseMap extends Activity {
 
 
 			Bitmap bm= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName);
+			Display display = getWindowManager().getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			int height = Math.min(bm.getHeight(), size.y);
+			int width = Math.min(bm.getWidth(), size.x);
+			bm = Bitmap.createScaledBitmap(bm, width, height, true);
 			publishProgress(10);
 			bm=PhotoFilter.grayScale(bm);
 			publishProgress(20);
