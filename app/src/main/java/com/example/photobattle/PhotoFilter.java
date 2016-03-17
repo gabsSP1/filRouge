@@ -15,6 +15,7 @@ import android.graphics.Paint;
 
 class PhotoFilter {
 
+    public final static int THRESHOLD = 100;
 
     static Bitmap  chgtoBandW(Bitmap img){
         //img.setImageBitmap(source)
@@ -42,7 +43,7 @@ class PhotoFilter {
 
         h= BitmapGray.getHeight();
         w= BitmapGray.getWidth();
-        threshold = 100;
+        threshold = THRESHOLD;
 
         Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
 
@@ -94,7 +95,7 @@ class PhotoFilter {
         h= BitmapGray.getHeight();
         w= BitmapGray.getWidth();
 
-        threshold = 100;
+        threshold = THRESHOLD;
 
         Bitmap BitmapBiner = Bitmap.createBitmap(BitmapGray);
 

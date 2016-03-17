@@ -27,23 +27,39 @@ public class Map
     private int height;
     private float density;
     private MainGamePanel mainGamePanel;
+    private String pictureName;
 
     public Map(String pictureName, MainGamePanel mainGamePanel)
     {
-        contours = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+ File.separator+pictureName);
-        photoOriginal=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+ File.separator+pictureName);
+        this.pictureName = pictureName;
         this.mainGamePanel = mainGamePanel;
-
     }
 
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(photoOriginal, dpToPixel(zone.left), dpToPixel(zone.top), null);
+        canvas.drawBitmap(contours, dpToPixel(zone.left), dpToPixel(zone.top), null);
     }
 
     public void init()
     {
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+
+        BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName, bmOptions);
+        int scaleFactorPhoto = Math.min(bmOptions.outWidth / mainGamePanel.getWidth(), bmOptions.outHeight / mainGamePanel.getHeight());
+        BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+File.separator+pictureName, bmOptions);
+        int scaleFactorContours = Math.min(bmOptions.outWidth / mainGamePanel.getWidth(), bmOptions.outHeight / mainGamePanel.getHeight());
+
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactorPhoto;
+
+        photoOriginal = BitmapFactory.decodeFile(FileManager.PICTURE_PATH+ File.separator+pictureName, bmOptions);
+
+        bmOptions.inSampleSize = scaleFactorContours;
+
+        contours = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+ File.separator+pictureName, bmOptions);
+
         density = mainGamePanel.getDensity();
         zone = resizeKeepRatio(contours.getWidth(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
         contours = Bitmap.createScaledBitmap(contours, zone.width(), zone.height(), true);
@@ -88,12 +104,7 @@ public class Map
 
         Log.d(TAG, "ratioWidth : " +ratioWidth+ "; ratioHeight : "+ratioHeight+";");
 
-        if(ratioWidth < 1 && ratioHeight < 1)
-        {
-            float temp = ratioWidth;
-            ratioWidth = ratioHeight;
-            ratioHeight = temp;
-        }
+
 
         Log.d(TAG, "(2) ratioWidth : " + ratioWidth + "; (2) ratioHeight : " + ratioHeight + ";");
 

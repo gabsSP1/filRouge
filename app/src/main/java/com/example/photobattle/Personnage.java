@@ -207,6 +207,8 @@ public class Personnage {
                                     k = l;
                                     if (l >= map.bottom())
                                         k = l - map.height();
+                                    if (l < 0)
+                                        k = l + map.height();
                                     if (obstacles[z][k] == pix.GROUND)
                                     {
 
@@ -244,7 +246,7 @@ public class Personnage {
                         if (j >= map.bottom())
                             k = j - map.height();
                         if (obstacles[m][k] == pix.GROUND) {
-                            goLeft = x+width-i+1;
+                            goLeft = x+width-i;
                             break outloop;
                         }
                     }
@@ -262,14 +264,16 @@ public class Personnage {
                                 for(int p = m-1; p<= m+width; p++)
                                 {
                                     int z = p;
-                                    if(z < 0)
-                                        z = z + map.width();
+                                    if(p < 0)
+                                        z = p + map.width();
                                     k = l;
-                                    if (j >= map.bottom())
-                                        k = j - map.height();
+                                    if (l >= map.bottom())
+                                        k = l - map.height();
+                                    if(l < 0)
+                                        k = l + map.height();
                                     if (obstacles[z][k] == pix.GROUND)
                                     {
-                                        goLeft = x + width - i + 1;
+                                        goLeft = x + width - i;
                                         break outloop;
                                     }
                                 }
@@ -292,14 +296,14 @@ public class Personnage {
                 outloop:
                 for (int i = x; i <= x + width; i++) {
                     int m = i;
-                    if(i > map.right())
+                    if(i >= map.right())
                         m = i - map.width();
                     for (int j = y-(int)vY; j >= y; j--) {
                         int k = j;
                         if (j >= map.bottom())
                             k = j - map.height();
                         if (obstacles[m][k] == pix.GROUND) {
-                            goDown = y-j+1;
+                            goDown = j-y+1;
                             break outloop;
                         }
                     }
