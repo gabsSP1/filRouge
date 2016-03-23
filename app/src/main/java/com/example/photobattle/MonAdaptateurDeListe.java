@@ -27,7 +27,7 @@ public class MonAdaptateurDeListe extends ArrayAdapter<String> {
 		LayoutInflater inflater=context.getLayoutInflater();
 		View rowView=inflater.inflate(R.layout.image_view_layout, null,true);
 
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.selected_image);
+		ImageView imageView = (ImageView) rowView.findViewById(R.id.image_view_layout);
 		TextView extratxt = (TextView) rowView.findViewById(R.id.label);
 		imageView.setImageBitmap(imgid[position]);
 		if( itemname[position].indexOf('.')>0) {

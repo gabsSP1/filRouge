@@ -19,6 +19,7 @@ public class MenuApp extends Activity{
 	Button settings;
 	Animation animStart;
 	Animation animSettings;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		this.overridePendingTransition(0, 0);
@@ -28,7 +29,7 @@ public class MenuApp extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		onWindowFocusChanged(true);
 		setContentView(R.layout.activity_menu_app);
-
+		onWindowFocusChanged(true);
 
 		b1=(Button) findViewById(R.id.play_menu);
 		animStart = AnimationUtils.loadAnimation(this, R.anim.anim_button);

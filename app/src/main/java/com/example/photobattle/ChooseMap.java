@@ -1,8 +1,12 @@
 package com.example.photobattle;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -10,264 +14,289 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.Layout;
 import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
+import android.widget.Toast;
+
+import com.example.photobattle.R;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-//a
-public class ChooseMap extends Activity {
-	ViewFlipper viewFlipper;
-	ArrayList<File> listPhoto;
-	Button bDelete;
-	Button importPicture;
-	Button takePicture;
-	Button edit;
-	Button play;
-	Button backButton;
-	private float lastX;
-	ProgressBar loading;
-	int nbMap;
-	String pictureName;
-	static int currentPosition;
-	final static String CURRENT_FILE = "selcted_file";
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		this.overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
-		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		onWindowFocusChanged(true);
-		setContentView(R.layout.activity_map);
-		listPhoto = new ArrayList<File>();
-		FileManager.initialyzeTreeFile();
-		initComponent();
-		//Récupération des fichiers jpeg dans le dossier
-		setNbMap(0);
-
-		loadList();
-        currentPosition=viewFlipper.getDisplayedChild();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.layout.activity_menu_app, menu);
-		return true;
-	}
+public class ChooseMap extends FragmentActivity {
+    public static final String EXTRA_IMAGE = "extra_image";
+    static List<String> filesName;
+    private ImagePagerAdapter mAdapter;
+    private ViewPager mPager;
+    int nbMap;
+    Button bDelete;
+    Button importPicture;
+    Button takePicture;
+    Button edit;
+    Button play;
+    Button backButton;
+    TextView mTextView;
+    String pictureName;
+    Dialog dialog;
+    int position;
 
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode) {
-			case 89:
 
-				if (data != null && resultCode == Activity.RESULT_OK) {
+    // A static dataset to back the ViewPager adapter
 
-					try {
-						Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-						FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        onWindowFocusChanged(true);
+        setContentView(R.layout.activity_map);
+        setNbMap(0);
+        loadList();
+        initComponent();
+    }
 
-				}
-				break;
+    public static class ImagePagerAdapter extends FragmentStatePagerAdapter {
+        private final int mSize;
 
-			case 55:
+        public ImagePagerAdapter(android.support.v4.app.FragmentManager fm, int size) {
+            super(fm);
+            mSize = size;
+        }
 
-				try {
+        @Override
+        public int getCount() {
+            return mSize;
+        }
 
-					Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
-				} catch (Exception e) {
-				}
-				break;
+        @Override
+        public Fragment getItem(int position) {
+            return ImageDetailFragment.newInstance(position);
+        }
+    }
 
-			default:
-		}
+    public void loadBitmap(String name, ImageView imageView, TextView textView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView, textView);
+        task.execute(name);
+    }
 
+    class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
+        private final WeakReference<ImageView> imageViewReference;
+        private final WeakReference<TextView> textViewReferences;
+        private String data = "";
 
-	}
+        public BitmapWorkerTask(ImageView imageView, TextView textView) {
+            // Use a WeakReference to ensure the ImageView can be garbage collected
+            imageViewReference = new WeakReference<ImageView>(imageView);
+            textViewReferences = new WeakReference<TextView>(textView);
+        }
 
-	//Load the list of the picture
-	void loadList() {
-		File f2 = new File(FileManager.PICTURE_PATH);
-		File[] fichiers = f2.listFiles();
-		listPhoto.clear();
-        viewFlipper.removeAllViews();
-		for (int i = 0; i < fichiers.length; i++) {
-			String ext = "";
-			int k = fichiers[i].getName().length() - 1;
-			char p = fichiers[i].getName().charAt(k);
-			while (p != '.' && k > 0) {
-				ext += p;
-				k--;
-				p = fichiers[i].getName().charAt(k);
-			}
-			if (ext.equals("gpj")) {
-				if (fichiers[i].getTotalSpace() > 20) {
-					listPhoto.add(fichiers[i]);
-					boolean isnumber = true;
-					boolean change = false;
-					int m=4;
-					while (m < fichiers[i].getName().length() && isnumber) {
-						try {
-							if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
-								nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
-								change = true;
-							}
-						} catch (Exception e) {
-							isnumber = false;
-						}
-						m++;
-					}
-					if (change) {
-						nbMap++;
-					}
-					setNbMap(nbMap);
+        // Decode image in background.
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            data = params[0];
+            /*Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);*/
+            System.out.println("load " + data);
+            Bitmap b=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+data);
+            int height=650;
+            int width=b.getWidth()*height/b.getHeight();
+            return Bitmap.createScaledBitmap(b,width,height,false);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
+        }
 
-				} else {
-					(new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
-					fichiers[i].delete();
-
-				}
-			}
-		}
-        loadView();
-	}
-
-	public void initComponent() {
-		bDelete = (Button) findViewById(R.id.button_delete);
-		//imageSelected = (ImageView) findViewById(R.id.imageSelected);
-		viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
-		/*viewFlipper.setInAnimation(this, android.R.anim.fade_in);
-		viewFlipper.setOutAnimation(this, android.R.anim.fade_out);*/
-        viewFlipper.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent touchevent){
-
-
-                switch (touchevent.getAction())
-                {
-                    // when user first touches the screen to swap
-                    case MotionEvent.ACTION_DOWN:
-                    {
-                        lastX = touchevent.getX();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:
-                    {
-                        float currentX = touchevent.getX();
-
-                        // if left to right swipe on screen
-                        if (lastX < currentX)
-                        {
-                            // If no more View/Child to flip
-                            if (viewFlipper.getDisplayedChild() == 0)
-                                break;
-
-                            // set the required Animation type to ViewFlipper
-                            // The Next screen will come in form Left and current Screen will go OUT
-
-                            viewFlipper.setInAnimation(getApplicationContext(), R.anim.in_from_left);
-                            viewFlipper.setOutAnimation(getApplicationContext(), R.anim.out_to_right);
-                            // Show the next Screen
-                            viewFlipper.showPrevious();
-                        }
-
-                        // if right to left swipe on screen
-                        if (lastX > currentX)
-                        {
-                            if (viewFlipper.getDisplayedChild()==viewFlipper.getChildCount()-1)//viewFlipper.getDisplayedChild() == 1 ||(viewFlipper.getDisplayedChild() == 0) && viewFlipper.getChildCount()==1)
-                                break;
-                            // set the required Animation type to ViewFlipper
-                            // The Next screen will come in form Right and current Screen will go OUT
-
-                            viewFlipper.setInAnimation(getApplicationContext(), R.anim.in_from_right);
-                            viewFlipper.setOutAnimation(getApplicationContext(), R.anim.out_to_left);
-                            // Show The Previous Screen
-                            viewFlipper.showNext();
-                        }
-                        break;
-                    }
+        // Once complete, see if ImageView is still around and set bitmap.
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (imageViewReference != null && bitmap != null) {
+                final ImageView imageView = imageViewReference.get();
+                final TextView textView = textViewReferences.get();
+                if (imageView != null) {
+                    imageView.setImageBitmap(bitmap);
+                    textView.setText(data.substring(0, data.indexOf('.')));
                 }
-                currentPosition=viewFlipper.getDisplayedChild();
-                return false;
 
+            }
+        }
+    }
+
+    void loadList() {
+        if(mPager!=null)
+            mPager.removeAllViews();
+        filesName=new ArrayList<>();
+        File f2 = new File(FileManager.PICTURE_PATH);
+        File[] fichiers = f2.listFiles();
+
+        Arrays.sort(fichiers, new Comparator<File>() {
+            public int compare(File f1, File f2) {
+                return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
+            }
+        });
+        for (int i = 0; i < fichiers.length; i++) {
+            String ext = "";
+            int k = fichiers[i].getName().length() - 1;
+            char p = fichiers[i].getName().charAt(k);
+            while (p != '.' && k > 0) {
+                ext += p;
+                k--;
+                p = fichiers[i].getName().charAt(k);
+            }
+            if (ext.equals("gpj")) {
+                if (fichiers[i].getTotalSpace() > 20) {
+                    boolean isnumber = true;
+                    boolean change = false;
+                    filesName.add(fichiers[i].getName());
+                    int m=4;
+                    while (m < fichiers[i].getName().length() && isnumber) {
+                        try {
+                            if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
+                                nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
+                                change = true;
+                            }
+                        } catch (Exception e) {
+                            isnumber = false;
+                        }
+                        m++;
+                    }
+
+                    if (change) {
+                        nbMap++;
+                    }
+                    setNbMap(nbMap);;
+
+
+                } else {
+                    (new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
+                    fichiers[i].delete();
+
+                }
+            }
+        }
+    }
+
+
+
+    public static Bitmap decodeSampledBitmapFromResource(String res,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(res, options);
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(res, options);
+    }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+
+    public void initComponent() {
+
+        bDelete = (Button) findViewById(R.id.button_delete);
+        //imageSelected = (ImageView) findViewById(R.id.imageSelected);
+
+        bDelete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (filesName.size()!=0) {
+
+                                   showDialog();
+
+                }
+                else
+                {
+                    Toast.makeText(ChooseMap.this, "No file to delete", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
-		bDelete.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (listPhoto.size()!=0) {
-					(new File(FileManager.THRESHOLD_PATH + File.separator + listPhoto.get(viewFlipper.getDisplayedChild()).getName())).delete();
-					listPhoto.get(viewFlipper.getDisplayedChild()).delete();
-					loadList();
-                    currentPosition--;
-                    viewFlipper.setDisplayedChild(currentPosition);
-				}
-			}
-
-		});
-		backButton=(Button)findViewById(R.id.back_chooseMap);
-		backButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ChooseMap.this.finish();
-				ChooseMap.this.overridePendingTransition(R.anim.in_from_left,R.anim.out_to_right);
-			}
-		});
-		play = (Button) findViewById(R.id.button_start);
-		play.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-                if(listPhoto.size()!=0) {
+        mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), filesName.size());
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(mAdapter);
+        mPager.setCurrentItem(position);
+        mTextView=(TextView) findViewById(R.id.image_name);
+        backButton=(Button)findViewById(R.id.back_chooseMap);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChooseMap.this.finish();
+                ChooseMap.this.overridePendingTransition(R.anim.in_from_left,R.anim.out_to_right);
+            }
+        });
+        play = (Button) findViewById(R.id.button_start);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(filesName.size()!=0) {
                     Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
-                    intentMyAccount.putExtra("selected_file", listPhoto.get(viewFlipper.getDisplayedChild()).getName());
+                    intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
                     startActivity(intentMyAccount);
                 }
-			}
-		});
+            }
+        });
 
-		edit = (Button) findViewById(R.id.button_edit);
-		edit.setOnClickListener(new OnClickListener() {
+        edit = (Button) findViewById(R.id.button_edit);
+        edit.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (listPhoto.size()!=0) {
-					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
-					intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + listPhoto.get(viewFlipper.getDisplayedChild()).getName());
-					startActivity(intentMyAccount);
-				}
-			}
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (filesName.size()!=0) {
+                    Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
+                    intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()));
+                    startActivity(intentMyAccount);
+                }
+            }
 
-		});
+        });
 
-		importPicture = (Button) findViewById(R.id.import_picture);
-		importPicture.setOnClickListener(new OnClickListener() {
+        importPicture = (Button) findViewById(R.id.import_picture);
+        importPicture.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -281,8 +310,8 @@ public class ChooseMap extends Activity {
 
         });
 
-		takePicture = (Button) findViewById(R.id.take_picture);
-		takePicture.setOnClickListener(new OnClickListener() {
+        takePicture = (Button) findViewById(R.id.take_picture);
+        takePicture.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -297,132 +326,87 @@ public class ChooseMap extends Activity {
                 }
             }
         });
-	}
-
-	void setNbMap(int i) {
-		nbMap = i;
-		pictureName = "map" + Integer.toString(i) + ".jpg";
-
-	}
-
-    public void loadView()
-    {
-        if(listPhoto.size()==0)
-        {
-            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            //View view = inflater.inflate(R.layout.image_view_layout, null);
-            TextView t=new TextView((this));
-            t.setText("No map found,\r\n Press the import or take picture Button");
-            t.setGravity(Gravity.CENTER);
-            viewFlipper.addView(t);
-        }
-        for(int i=0; i<listPhoto.size(); i++) {
-            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.image_view_layout, null);
-            Bitmap bm = BitmapFactory.decodeFile(listPhoto.get(i).getPath());
-            ImageView image = (ImageView) view.findViewById(R.id.selected_image);
-            image.setImageBitmap(bm);
-            TextView name = (TextView) view.findViewById(R.id.label);
-            name.setText(listPhoto.get(i).getName().substring(0, listPhoto.get(i).getName().indexOf(".")));
-            viewFlipper.addView(view,i);
-        }
     }
 
-	public void onRestart() {
 
-        super.onRestart();
-        if ((new File(FileManager.PICTURE_PATH, pictureName).exists())){
-        this.setContentView(R.layout.layout_loading);
-        loading = (ProgressBar) findViewById(R.id.progressBar);
-            Loading l = new Loading();
-            l.execute();
-            viewFlipper.setDisplayedChild(viewFlipper.getChildCount()-1);
+    void setNbMap(int i) {
+        nbMap = i;
+        pictureName = "map" + Integer.toString(i) + ".jpg";
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 89:
+
+                if (data != null && resultCode == Activity.RESULT_OK) {
+
+                    try {
+                        Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                        FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                break;
+
+            case 55:
+
+                try {
+
+                    Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
+                } catch (Exception e) {
+                }
+                break;
+
+            default:
         }
-		else {
 
-            initComponent();
-            loadList();
-            viewFlipper.setDisplayedChild(currentPosition);
-        }
-        super.onRestart();
-
-	}
+        loadList();
+        initComponent();
+    }
 
 
+    private void showDialog() throws Resources.NotFoundException {
+        new AlertDialog.Builder(this)
+.setTitle("Delete Map")
+.setMessage("Do you really want to delete this map?")
+.setIcon(android.R.drawable.ic_dialog_alert)
+.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-	private class Loading extends AsyncTask<Void, Integer, Void>
-	{
+    public void onClick(DialogInterface dialog, int whichButton) {
+        position=mPager.getCurrentItem()-1;
+        (new File(FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
+        (new File(FileManager.PICTURE_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
+        loadList();
+        initComponent();
+    }
+})
+ .setNegativeButton(android.R.string.no, null).show();
+    }
 
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-		}
 
-		@Override
-		protected void onProgressUpdate(Integer... values){
-			super.onProgressUpdate(values);
-			// Mise à jour de la ProgressBar
-			loading.setProgress(0);
-			loading.setProgress(values[0]);
-		}
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            final View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+    }
 
-		@Override
-		protected Void doInBackground(Void... arg0) {
 
-			Display display = getWindowManager().getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
 
-			BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-			bmOptions.inJustDecodeBounds = true;
-
-			BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName, bmOptions);
-
-			int scaleFactor = Math.min(bmOptions.outWidth/size.x, bmOptions.outHeight/size.y);
-			bmOptions.inJustDecodeBounds = false;
-			bmOptions.inSampleSize = scaleFactor;
-
-			Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName, bmOptions);
-
-			publishProgress(10);
-			bm=PhotoFilter.grayScale(bm);
-			publishProgress(20);
-			bm=PhotoFilter.chgtoBandW(bm);
-			publishProgress(90);
-			OutputStream outStream = null;
-			FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
-			publishProgress(100);
-			return null;
-
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			setContentView(R.layout.activity_map);
-            initComponent();
-			loadList();
-            viewFlipper.setDisplayedChild(viewFlipper.getChildCount() - 1);
-		}
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			final View decorView = getWindow().getDecorView();
-			decorView.setSystemUiVisibility(
-					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-							| View.SYSTEM_UI_FLAG_FULLSCREEN
-							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
-	}
-
-	public void loadImage(String path)
-	{
-		Bitmap bm= BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+pictureName);
-	}
 }
 
 

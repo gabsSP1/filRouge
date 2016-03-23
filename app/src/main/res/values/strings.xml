@@ -8,6 +8,8 @@
     <string name="title_activity_map">Map</string>
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_game">Game</string>
+    <string name="no">No</string>
+    <string name="yes">yes</string>
 
 
 </resources>

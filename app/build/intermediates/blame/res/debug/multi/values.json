@@ -267,14 +267,7 @@
                     "endOffset": 98
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 106,
-                        "endColumn": 47,
-                        "endOffset": 149
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml"
                 }
             },
             {
@@ -286,14 +279,7 @@
                     "endOffset": 146
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 57,
-                        "endColumn": 47,
-                        "endOffset": 100
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\color.xml"
                 }
             },
             {
@@ -305,14 +291,7 @@
                     "endOffset": 204
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 92,
-                        "endColumn": 57,
-                        "endOffset": 145
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml"
                 }
             },
             {
@@ -324,14 +303,7 @@
                     "endOffset": 260
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 151,
-                        "endColumn": 55,
-                        "endOffset": 202
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\dimens.xml"
                 }
             },
             {
@@ -343,14 +315,7 @@
                     "endOffset": 313
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 224,
-                        "endColumn": 52,
-                        "endOffset": 272
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
                 }
             },
             {
@@ -362,14 +327,7 @@
                     "endOffset": 362
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 59,
-                        "endColumn": 48,
-                        "endOffset": 103
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
                 }
             },
             {
@@ -381,14 +339,7 @@
                     "endOffset": 415
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 109,
-                        "endColumn": 52,
-                        "endOffset": 157
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
                 }
             },
             {
@@ -396,17 +347,17 @@
                     "startLine": 9,
                     "startColumn": 4,
                     "startOffset": 420,
-                    "endColumn": 60,
-                    "endOffset": 476
+                    "endColumn": 33,
+                    "endOffset": 449
                 },
                 "from": {
                     "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
-                        "startLine": 8,
+                        "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 330,
-                        "endColumn": 60,
-                        "endOffset": 386
+                        "startOffset": 446,
+                        "endColumn": 33,
+                        "endOffset": 475
                     }
                 }
             },
@@ -414,99 +365,93 @@
                 "to": {
                     "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 481,
-                    "endColumn": 52,
-                    "endOffset": 529
+                    "startOffset": 454,
+                    "endColumn": 60,
+                    "endOffset": 510
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
-                    "position": {
-                        "startLine": 9,
-                        "startColumn": 4,
-                        "startOffset": 392,
-                        "endColumn": 52,
-                        "endOffset": 440
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
                 }
             },
             {
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 534,
-                    "endColumn": 50,
-                    "endOffset": 580
+                    "startOffset": 515,
+                    "endColumn": 52,
+                    "endOffset": 563
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 278,
-                        "endColumn": 50,
-                        "endOffset": 324
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
                 }
             },
             {
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 585,
-                    "endColumn": 59,
-                    "endOffset": 640
+                    "startOffset": 568,
+                    "endColumn": 50,
+                    "endOffset": 614
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 163,
-                        "endColumn": 59,
-                        "endOffset": 218
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
                 }
             },
             {
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 645,
-                    "endLine": 19,
-                    "endColumn": 12,
-                    "endOffset": 931
+                    "startOffset": 619,
+                    "endColumn": 59,
+                    "endOffset": 674
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml",
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 679,
+                    "endColumn": 35,
+                    "endOffset": 710
+                },
+                "from": {
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
-                        "startLine": 6,
+                        "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 192,
-                        "endLine": 12,
-                        "endColumn": 12,
-                        "endOffset": 484
+                        "startOffset": 481,
+                        "endColumn": 35,
+                        "endOffset": 512
                     }
                 }
             },
             {
                 "to": {
-                    "startLine": 20,
+                    "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 936,
-                    "endLine": 23,
+                    "startOffset": 715,
+                    "endLine": 21,
                     "endColumn": 12,
-                    "endOffset": 1100
+                    "endOffset": 1001
                 },
                 "from": {
-                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 525,
-                        "endLine": 18,
-                        "endColumn": 12,
-                        "endOffset": 692
-                    }
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1006,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1170
+                },
+                "from": {
+                    "file": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values\\styles.xml"
                 }
             }
         ]
