@@ -119,20 +119,15 @@ public class ChooseMap extends Activity {
 					try {
 						Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
 						FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
-
-						Mat edges = new Mat(bm.getHeight(),bm.getWidth(),1);
-
-						Mat original = new Mat(bm.getHeight(),bm.getWidth(),1);
-
-						Utils.bitmapToMat(bm, original);
-						bm.recycle();
-						Imgproc.Canny(original, edges, 50, 100);
-						//Core.flip(edges, edges, 1);
-						Mat edges2 = new Mat(bm.getHeight(),bm.getWidth(),1);
-						//Core.flip(edges, edges2, 3);
-						Mat invertcolormatrix= new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+						bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+						Mat mImg = new Mat();
+						Utils.bitmapToMat(bm, mImg);
+						Mat edges = new Mat();
+						Imgproc.Canny(mImg,edges,50,100);
+						bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+						Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
 						Core.subtract(invertcolormatrix, edges, edges);
-						Utils.matToBitmap(edges2, bm);
+						Utils.matToBitmap(edges, bm);
 						FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -146,17 +141,15 @@ public class ChooseMap extends Activity {
 				try {
 
 					Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
+					bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+					Mat mImg = new Mat();
+					Utils.bitmapToMat(bm, mImg);
 					Mat edges = new Mat();
-					Mat original = new Mat();
-					Utils.bitmapToMat(bm, original);
-					bm.recycle();
-					Imgproc.Canny(original, edges, 50, 100);
-					//Core.flip(edges, edges, 1);
-					Mat edges2 = new Mat();
-					Core.flip(edges, edges2, 3);
-					Mat invertcolormatrix= new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+					Imgproc.Canny(mImg,edges,50,100);
+					bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+					Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
 					Core.subtract(invertcolormatrix, edges, edges);
-					Utils.matToBitmap(edges2, bm);
+					Utils.matToBitmap(edges, bm);
 					FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
 				} catch (Exception e) {
 				}
