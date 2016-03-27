@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
+import android.graphics.Point;//
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
