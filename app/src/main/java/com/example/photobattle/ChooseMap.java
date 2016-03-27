@@ -340,14 +340,25 @@ public class ChooseMap extends FragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode) {
-            case 89:
+            case 89://appel depuis import
 
                 if (data != null && resultCode == Activity.RESULT_OK) {
 
                     try {
                         Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                         FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
+                        bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+                        Mat mImg = new Mat();
+                        Utils.bitmapToMat(bm, mImg);
+                        Mat edges = new Mat();
+                        Imgproc.Canny(mImg,edges,50,100);
+                        bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+                        Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+                        Core.subtract(invertcolormatrix, edges, edges);
+                        Utils.matToBitmap(edges, bm);
+                        FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -355,20 +366,30 @@ public class ChooseMap extends FragmentActivity {
                 }
                 break;
 
-            case 55:
+            case 55://appel depuis appareil
 
                 try {
 
                     Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
+                    bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+                    Mat mImg = new Mat();
+                    Utils.bitmapToMat(bm, mImg);
+                    Mat edges = new Mat();
+                    Imgproc.Canny(mImg,edges,50,100);
+                    bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+                    Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+                    Core.subtract(invertcolormatrix, edges, edges);
+                    Utils.matToBitmap(edges, bm);
+                    FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
                 } catch (Exception e) {
                 }
                 break;
 
             default:
         }
-
         loadList();
         initComponent();
+
     }
 
 
