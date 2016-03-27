@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "C:\\Users\\Valentin\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -26,7 +26,7 @@
         ]
     },
     {
-        "outputFile": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -38,7 +38,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -52,7 +52,7 @@
         ]
     },
     {
-        "outputFile": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -64,7 +64,33 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 227,
+                        "endLine": 9,
+                        "endColumn": 12,
+                        "endOffset": 375
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -72,32 +98,6 @@
                         "endLine": 9,
                         "endColumn": 12,
                         "endOffset": 366
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endLine": 4,
-                    "endColumn": 12,
-                    "endOffset": 201
-                },
-                "from": {
-                    "file": "C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\values-v14\\styles.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 227,
-                        "endLine": 9,
-                        "endColumn": 12,
-                        "endOffset": 375
                     }
                 }
             }
@@ -120,10 +120,36 @@
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 227,
+                        "startOffset": 220,
                         "endLine": 9,
                         "endColumn": 12,
-                        "endOffset": 375
+                        "endOffset": 366
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\PhotoBattle\\app\\src\\main\\res\\values-v14\\styles.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 220,
+                        "endLine": 9,
+                        "endColumn": 12,
+                        "endOffset": 366
                     }
                 }
             }

@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;//
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,300 +40,331 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Mat.*;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
 public class ChooseMap extends FragmentActivity {
-    public static final String EXTRA_IMAGE = "extra_image";
-    static List<String> filesName;
-    private ImagePagerAdapter mAdapter;
-    private ViewPager mPager;
-    int nbMap;
-    Button bDelete;
-    Button importPicture;
-    Button takePicture;
-    Button edit;
-    Button play;
-    Button backButton;
-    TextView mTextView;
-    String pictureName;
-    Dialog dialog;
-    int position;
+	public static final String EXTRA_IMAGE = "extra_image";
+	static List<String> filesName;
+	private ImagePagerAdapter mAdapter;
+	private ViewPager mPager;
+	int nbMap;
+	Button bDelete;
+	Button importPicture;
+	Button takePicture;
+	Button edit;
+	Button play;
+	Button backButton;
+	TextView mTextView;
+	String pictureName;
+	Dialog dialog;
+	int position;
 
-
-
-    // A static dataset to back the ViewPager adapter
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        onWindowFocusChanged(true);
-        setContentView(R.layout.activity_map);
-        setNbMap(0);
-        loadList();
-        initComponent();
-    }
-
-    public static class ImagePagerAdapter extends FragmentStatePagerAdapter {
-        private final int mSize;
-
-        public ImagePagerAdapter(android.support.v4.app.FragmentManager fm, int size) {
-            super(fm);
-            mSize = size;
-        }
-
+    private BaseLoaderCallback mOpenCVCallBack = new BaseLoaderCallback(this) {
         @Override
-        public int getCount() {
-            return mSize;
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS: {
+                    //Log.i(TAG, "OpenCV loaded successfully");
+                    // Create and set View
+                    //setContentView(R.layout.);
+                }
+                break;
+                default: {
+                    super.onManagerConnected(status);
+                }
+                break;
+            }
         }
+    };
 
-        @Override
-        public Fragment getItem(int position) {
-            return ImageDetailFragment.newInstance(position);
+	// A static dataset to back the ViewPager adapter
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		onWindowFocusChanged(true);
+		setContentView(R.layout.activity_map);
+        if (!OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_2, this, mOpenCVCallBack))
+        {
+            //Log.e(TAG, "Cannot connect to OpenCV Manager");
         }
-    }
+		setNbMap(0);
+		loadList();
+		initComponent();
+	}
 
-    public void loadBitmap(String name, ImageView imageView, TextView textView) {
-        BitmapWorkerTask task = new BitmapWorkerTask(imageView, textView);
-        task.execute(name);
-    }
+	public static class ImagePagerAdapter extends FragmentStatePagerAdapter {
+		private final int mSize;
 
-    class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
-        private final WeakReference<ImageView> imageViewReference;
-        private final WeakReference<TextView> textViewReferences;
-        private String data = "";
+		public ImagePagerAdapter(android.support.v4.app.FragmentManager fm, int size) {
+			super(fm);
+			mSize = size;
+		}
 
-        public BitmapWorkerTask(ImageView imageView, TextView textView) {
-            // Use a WeakReference to ensure the ImageView can be garbage collected
-            imageViewReference = new WeakReference<ImageView>(imageView);
-            textViewReferences = new WeakReference<TextView>(textView);
-        }
+		@Override
+		public int getCount() {
+			return mSize;
+		}
 
-        // Decode image in background.
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            data = params[0];
+		@Override
+		public Fragment getItem(int position) {
+			return ImageDetailFragment.newInstance(position);
+		}
+	}
+
+	public void loadBitmap(String name, ImageView imageView, TextView textView) {
+		BitmapWorkerTask task = new BitmapWorkerTask(imageView, textView);
+		task.execute(name);
+	}
+
+	class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
+		private final WeakReference<ImageView> imageViewReference;
+		private final WeakReference<TextView> textViewReferences;
+		private String data = "";
+
+		public BitmapWorkerTask(ImageView imageView, TextView textView) {
+			// Use a WeakReference to ensure the ImageView can be garbage collected
+			imageViewReference = new WeakReference<ImageView>(imageView);
+			textViewReferences = new WeakReference<TextView>(textView);
+		}
+
+		// Decode image in background.
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			data = params[0];
             /*Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);*/
-            System.out.println("load " + data);
-            Bitmap b=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+data);
-            int height=650;
-            int width=b.getWidth()*height/b.getHeight();
-            return Bitmap.createScaledBitmap(b,width,height,false);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
-        }
+			System.out.println("load " + data);
+			Bitmap b=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+data);
+			int height=650;
+			int width=b.getWidth()*height/b.getHeight();
+			return Bitmap.createScaledBitmap(b,width,height,false);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
+		}
 
-        // Once complete, see if ImageView is still around and set bitmap.
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            if (imageViewReference != null && bitmap != null) {
-                final ImageView imageView = imageViewReference.get();
-                final TextView textView = textViewReferences.get();
-                if (imageView != null) {
-                    imageView.setImageBitmap(bitmap);
-                    textView.setText(data.substring(0, data.indexOf('.')));
-                }
+		// Once complete, see if ImageView is still around and set bitmap.
+		@Override
+		protected void onPostExecute(Bitmap bitmap) {
+			if (imageViewReference != null && bitmap != null) {
+				final ImageView imageView = imageViewReference.get();
+				final TextView textView = textViewReferences.get();
+				if (imageView != null) {
+					imageView.setImageBitmap(bitmap);
+					textView.setText(data.substring(0, data.indexOf('.')));
+				}
 
-            }
-        }
-    }
+			}
+		}
+	}
 
-    void loadList() {
-        if(mPager!=null)
-            mPager.removeAllViews();
-        filesName=new ArrayList<>();
-        File f2 = new File(FileManager.PICTURE_PATH);
-        File[] fichiers = f2.listFiles();
+	void loadList() {
+		if(mPager!=null)
+			mPager.removeAllViews();
+		filesName=new ArrayList<>();
+		File f2 = new File(FileManager.PICTURE_PATH);
+		File[] fichiers = f2.listFiles();
 
-        Arrays.sort(fichiers, new Comparator<File>() {
-            public int compare(File f1, File f2) {
-                return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
-            }
-        });
-        for (int i = 0; i < fichiers.length; i++) {
-            String ext = "";
-            int k = fichiers[i].getName().length() - 1;
-            char p = fichiers[i].getName().charAt(k);
-            while (p != '.' && k > 0) {
-                ext += p;
-                k--;
-                p = fichiers[i].getName().charAt(k);
-            }
-            if (ext.equals("gpj")) {
-                if (fichiers[i].getTotalSpace() > 20) {
-                    boolean isnumber = true;
-                    boolean change = false;
-                    filesName.add(fichiers[i].getName());
-                    int m=4;
-                    while (m < fichiers[i].getName().length() && isnumber) {
-                        try {
-                            if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
-                                nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
-                                change = true;
-                            }
-                        } catch (Exception e) {
-                            isnumber = false;
-                        }
-                        m++;
-                    }
+		Arrays.sort(fichiers, new Comparator<File>() {
+			public int compare(File f1, File f2) {
+				return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
+			}
+		});
+		for (int i = 0; i < fichiers.length; i++) {
+			String ext = "";
+			int k = fichiers[i].getName().length() - 1;
+			char p = fichiers[i].getName().charAt(k);
+			while (p != '.' && k > 0) {
+				ext += p;
+				k--;
+				p = fichiers[i].getName().charAt(k);
+			}
+			if (ext.equals("gpj")) {
+				if (fichiers[i].getTotalSpace() > 20) {
+					boolean isnumber = true;
+					boolean change = false;
+					filesName.add(fichiers[i].getName());
+					int m=4;
+					while (m < fichiers[i].getName().length() && isnumber) {
+						try {
+							if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
+								nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
+								change = true;
+							}
+						} catch (Exception e) {
+							isnumber = false;
+						}
+						m++;
+					}
 
-                    if (change) {
-                        nbMap++;
-                    }
-                    setNbMap(nbMap);;
-
-
-                } else {
-                    (new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
-                    fichiers[i].delete();
-
-                }
-            }
-        }
-    }
+					if (change) {
+						nbMap++;
+					}
+					setNbMap(nbMap);;
 
 
+				} else {
+					(new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
+					fichiers[i].delete();
 
-    public static Bitmap decodeSampledBitmapFromResource(String res,
-                                                         int reqWidth, int reqHeight) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(res, options);
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(res, options);
-    }
-
-    public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
+				}
+			}
+		}
+	}
 
 
-    public void initComponent() {
 
-        bDelete = (Button) findViewById(R.id.button_delete);
-        //imageSelected = (ImageView) findViewById(R.id.imageSelected);
+	public static Bitmap decodeSampledBitmapFromResource(String res,
+														 int reqWidth, int reqHeight) {
 
-        bDelete.setOnClickListener(new View.OnClickListener() {
+		// First decode with inJustDecodeBounds=true to check dimensions
+		final BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(res, options);
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
+		options.inJustDecodeBounds = false;
+		return BitmapFactory.decodeFile(res, options);
+	}
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                if (filesName.size()!=0) {
+	public static int calculateInSampleSize(
+			BitmapFactory.Options options, int reqWidth, int reqHeight) {
+		// Raw height and width of image
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		int inSampleSize = 1;
 
-                                   showDialog();
+		if (height > reqHeight || width > reqWidth) {
 
-                }
-                else
-                {
-                    Toast.makeText(ChooseMap.this, "No file to delete", Toast.LENGTH_SHORT).show();
-                }
-            }
+			final int halfHeight = height / 2;
+			final int halfWidth = width / 2;
 
-        });
-        mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), filesName.size());
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(mAdapter);
-        mPager.setCurrentItem(position);
-        mTextView=(TextView) findViewById(R.id.image_name);
-        backButton=(Button)findViewById(R.id.back_chooseMap);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChooseMap.this.finish();
-                ChooseMap.this.overridePendingTransition(R.anim.in_from_left,R.anim.out_to_right);
-            }
-        });
-        play = (Button) findViewById(R.id.button_start);
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(filesName.size()!=0) {
-                    Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
+			// Calculate the largest inSampleSize value that is a power of 2 and keeps both
+			// height and width larger than the requested height and width.
+			while ((halfHeight / inSampleSize) > reqHeight
+					&& (halfWidth / inSampleSize) > reqWidth) {
+				inSampleSize *= 2;
+			}
+		}
+
+		return inSampleSize;
+	}
+
+
+	public void initComponent() {
+
+		bDelete = (Button) findViewById(R.id.button_delete);
+		//imageSelected = (ImageView) findViewById(R.id.imageSelected);
+
+		bDelete.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (filesName.size()!=0) {
+
+					showDialog();
+
+				}
+				else
+				{
+					Toast.makeText(ChooseMap.this, "No file to delete", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+		});
+		mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), filesName.size());
+		mPager = (ViewPager) findViewById(R.id.pager);
+		mPager.setAdapter(mAdapter);
+		mPager.setCurrentItem(position);
+		mTextView=(TextView) findViewById(R.id.image_name);
+		backButton=(Button)findViewById(R.id.back_chooseMap);
+		backButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ChooseMap.this.finish();
+				ChooseMap.this.overridePendingTransition(R.anim.in_from_left,R.anim.out_to_right);
+			}
+		});
+		play = (Button) findViewById(R.id.button_start);
+		play.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(filesName.size()!=0) {
+					Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                     intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
-                    startActivity(intentMyAccount);
-                }
-            }
-        });
+					startActivity(intentMyAccount);
+				}
+			}
+		});
 
-        edit = (Button) findViewById(R.id.button_edit);
-        edit.setOnClickListener(new View.OnClickListener() {
+		edit = (Button) findViewById(R.id.button_edit);
+		edit.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                if (filesName.size()!=0) {
-                    Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
-                    intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()));
-                    startActivity(intentMyAccount);
-                }
-            }
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (filesName.size()!=0) {
+					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
+					intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()));
+					startActivity(intentMyAccount);
+				}
+			}
 
-        });
+		});
 
-        importPicture = (Button) findViewById(R.id.import_picture);
-        importPicture.setOnClickListener(new View.OnClickListener() {
+		importPicture = (Button) findViewById(R.id.import_picture);
+		importPicture.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 89);
-            }
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setType("image/*");
+				//intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(intent, 89);
+			}
 
-        });
+		});
 
-        takePicture = (Button) findViewById(R.id.take_picture);
-        takePicture.setOnClickListener(new View.OnClickListener() {
+		takePicture = (Button) findViewById(R.id.take_picture);
+		takePicture.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                    File photoFile = new File(FileManager.PICTURE_PATH + File.separator + pictureName);
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                    startActivityForResult(takePictureIntent, 55);
-                }
-            }
-        });
-    }
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				// Ensure that there's a camera activity to handle the intent
+				if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+					// Create the File where the photo should go
+					File photoFile = new File(FileManager.PICTURE_PATH + File.separator + pictureName);
+					takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+					startActivityForResult(takePictureIntent, 55);
+				}
+			}
+		});
+	}
 
 
-    void setNbMap(int i) {
-        nbMap = i;
-        pictureName = "map" + Integer.toString(i) + ".jpg";
+	void setNbMap(int i) {
+		nbMap = i;
+		pictureName = "map" + Integer.toString(i) + ".jpg";
 
-    }
+	}
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -387,44 +418,44 @@ public class ChooseMap extends FragmentActivity {
 
             default:
         }
-        loadList();
-        initComponent();
 
-    }
-
-
-    private void showDialog() throws Resources.NotFoundException {
-        new AlertDialog.Builder(this)
-.setTitle("Delete Map")
-.setMessage("Do you really want to delete this map?")
-.setIcon(android.R.drawable.ic_dialog_alert)
-.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-    public void onClick(DialogInterface dialog, int whichButton) {
-        position=mPager.getCurrentItem()-1;
-        (new File(FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
-        (new File(FileManager.PICTURE_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
-        loadList();
-        initComponent();
-    }
-})
- .setNegativeButton(android.R.string.no, null).show();
-    }
+		loadList();
+		initComponent();
+	}
 
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            final View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
-    }
+	private void showDialog() throws Resources.NotFoundException {
+		new AlertDialog.Builder(this)
+				.setTitle("Delete Map")
+				.setMessage("Do you really want to delete this map?")
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int whichButton) {
+						position=mPager.getCurrentItem()-1;
+						(new File(FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
+						(new File(FileManager.PICTURE_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
+						loadList();
+						initComponent();
+					}
+				})
+				.setNegativeButton(android.R.string.no, null).show();
+	}
+
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			final View decorView = getWindow().getDecorView();
+			decorView.setSystemUiVisibility(
+					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+							| View.SYSTEM_UI_FLAG_FULLSCREEN
+							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+	}
 
 
 
