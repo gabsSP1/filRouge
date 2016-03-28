@@ -66,6 +66,7 @@ public class ChooseMap extends FragmentActivity {
 	String pictureName;
 	Dialog dialog;
 	int position;
+	boolean editP;
 
     private BaseLoaderCallback mOpenCVCallBack = new BaseLoaderCallback(this) {
         @Override
@@ -100,6 +101,7 @@ public class ChooseMap extends FragmentActivity {
         {
             //Log.e(TAG, "Cannot connect to OpenCV Manager");
         }
+		editP=false;
 		setNbMap(0);
 		loadList();
 		initComponent();
@@ -224,45 +226,6 @@ public class ChooseMap extends FragmentActivity {
 	}
 
 
-
-	public static Bitmap decodeSampledBitmapFromResource(String res,
-														 int reqWidth, int reqHeight) {
-
-		// First decode with inJustDecodeBounds=true to check dimensions
-		final BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(res, options);
-		final int height = options.outHeight;
-		final int width = options.outWidth;
-		options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
-		options.inJustDecodeBounds = false;
-		return BitmapFactory.decodeFile(res, options);
-	}
-
-	public static int calculateInSampleSize(
-			BitmapFactory.Options options, int reqWidth, int reqHeight) {
-		// Raw height and width of image
-		final int height = options.outHeight;
-		final int width = options.outWidth;
-		int inSampleSize = 1;
-
-		if (height > reqHeight || width > reqWidth) {
-
-			final int halfHeight = height / 2;
-			final int halfWidth = width / 2;
-
-			// Calculate the largest inSampleSize value that is a power of 2 and keeps both
-			// height and width larger than the requested height and width.
-			while ((halfHeight / inSampleSize) > reqHeight
-					&& (halfWidth / inSampleSize) > reqWidth) {
-				inSampleSize *= 2;
-			}
-		}
-
-		return inSampleSize;
-	}
-
-
 	public void initComponent() {
 
 		bDelete = (Button) findViewById(R.id.button_delete);
@@ -317,6 +280,8 @@ public class ChooseMap extends FragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (filesName.size()!=0) {
+					editP=true;
+					position=mPager.getCurrentItem();
 					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
 					intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()));
 					startActivity(intentMyAccount);
@@ -384,12 +349,13 @@ public class ChooseMap extends FragmentActivity {
                         Mat mImg = new Mat();
                         Utils.bitmapToMat(bm, mImg);
                         Mat edges = new Mat();
-                        Imgproc.Canny(mImg,edges,50,100);
+                        Imgproc.Canny(mImg,edges,100,100);
                         bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
                         Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                         Core.subtract(invertcolormatrix, edges, edges);
                         Utils.matToBitmap(edges, bm);
                         FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
+						bm.recycle();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -406,19 +372,19 @@ public class ChooseMap extends FragmentActivity {
                     Mat mImg = new Mat();
                     Utils.bitmapToMat(bm, mImg);
                     Mat edges = new Mat();
-                    Imgproc.Canny(mImg,edges,50,100);
+                    Imgproc.Canny(mImg,edges,100,100);
                     bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
                     Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                     Core.subtract(invertcolormatrix, edges, edges);
                     Utils.matToBitmap(edges, bm);
                     FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
+					bm.recycle();
                 } catch (Exception e) {
                 }
                 break;
 
             default:
         }
-
 		loadList();
 		initComponent();
 	}
@@ -442,7 +408,16 @@ public class ChooseMap extends FragmentActivity {
 				.setNegativeButton(android.R.string.no, null).show();
 	}
 
+	protected void onRestart() {
+		super.onRestart();
+		loadList();
+		initComponent();
+		if(editP) {
+			mPager.setCurrentItem(position);
+			editP=false;
+		}
 
+	}
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);

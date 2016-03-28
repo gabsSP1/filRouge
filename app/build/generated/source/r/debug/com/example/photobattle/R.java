@@ -72,32 +72,33 @@ containing a value of this type.
         public static final int take_picture_icon=0x7f020010;
     }
     public static final class id {
-        public static final int Delete=0x7f0a0019;
-        public static final int Settings=0x7f0a0012;
-        public static final int action_settings=0x7f0a0016;
+        public static final int Delete=0x7f0a001a;
+        public static final int Settings=0x7f0a0013;
+        public static final int action_settings=0x7f0a0017;
         public static final int any=0x7f0a0000;
         public static final int back=0x7f0a0001;
-        public static final int back_chooseMap=0x7f0a000f;
+        public static final int back_chooseMap=0x7f0a0010;
         public static final int back_edit=0x7f0a0007;
-        public static final int button_delete=0x7f0a000e;
-        public static final int button_edit=0x7f0a000b;
-        public static final int button_start=0x7f0a000a;
-        public static final int feeds=0x7f0a0017;
-        public static final int friends=0x7f0a0018;
+        public static final int button_delete=0x7f0a000f;
+        public static final int button_edit=0x7f0a000c;
+        public static final int button_start=0x7f0a000b;
+        public static final int feeds=0x7f0a0018;
+        public static final int friends=0x7f0a0019;
         public static final int front=0x7f0a0002;
-        public static final int image_name=0x7f0a0014;
-        public static final int image_view_layout=0x7f0a0013;
-        public static final int import_picture=0x7f0a000d;
-        public static final int label=0x7f0a0008;
-        public static final int linearLayout=0x7f0a0005;
+        public static final int image_name=0x7f0a0015;
+        public static final int image_view_layout=0x7f0a0014;
+        public static final int import_picture=0x7f0a000e;
+        public static final int label=0x7f0a0009;
         public static final int mainlayout=0x7f0a0003;
-        public static final int mapName=0x7f0a0006;
-        public static final int pager=0x7f0a0009;
-        public static final int pictureEdit=0x7f0a0004;
-        public static final int play_menu=0x7f0a0010;
-        public static final int progressBar=0x7f0a0015;
-        public static final int sound=0x7f0a0011;
-        public static final int take_picture=0x7f0a000c;
+        public static final int mapName=0x7f0a0004;
+        public static final int pager=0x7f0a000a;
+        public static final int param1=0x7f0a0008;
+        public static final int param2=0x7f0a0006;
+        public static final int pictureEdit=0x7f0a0005;
+        public static final int play_menu=0x7f0a0011;
+        public static final int progressBar=0x7f0a0016;
+        public static final int sound=0x7f0a0012;
+        public static final int take_picture=0x7f0a000d;
     }
     public static final class layout {
         public static final int activity_edit=0x7f030000;
