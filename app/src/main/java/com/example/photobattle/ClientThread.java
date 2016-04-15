@@ -31,6 +31,11 @@ public class ClientThread extends Thread {
                 if (com.getTypeAction().startsWith("setcoo")) {
 
                 }
+
+                //Si la commande est un envoie de map
+                if (com.getTypeAction().equals("sendmap")) {
+
+                }
             }
 
         } catch (IOException e) {

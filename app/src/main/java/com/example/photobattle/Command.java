@@ -1,5 +1,7 @@
 package com.example.photobattle;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -15,6 +17,8 @@ public class Command implements Serializable {
     private int coordX;
     private int coordY;
 
+    private Bitmap map;
+
     private String typeAction;
 
     public Command(String typeAct, int coX, int coY) {
@@ -22,6 +26,12 @@ public class Command implements Serializable {
 
         coordX = coX;
         coordY = coY;
+    }
+
+    public Command(Bitmap map) {
+        typeAction = "sendmap";
+
+        this.map = map;
     }
 
     public int getcoordX() {
@@ -34,6 +44,10 @@ public class Command implements Serializable {
 
     public String getTypeAction() {
         return typeAction;
+    }
+
+    public Bitmap getMap() {
+        return map;
     }
 
     @Override

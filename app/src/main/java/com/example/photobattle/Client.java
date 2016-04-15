@@ -1,5 +1,7 @@
 package com.example.photobattle;
 
+import android.graphics.Bitmap;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -60,6 +62,25 @@ public class Client {
         try {
             oos.writeObject(com);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Envoie la map pour la partie
+     *
+     * @param map          la map à envoyer
+     * @param serverSocket le socket d'échange
+     */
+    public static void sendMap(Bitmap map, Socket serverSocket) {
+        Command com;
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+            com = new Command(map);
+            oos.writeObject(map);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
