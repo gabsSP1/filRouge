@@ -1,32 +1,78 @@
 package com.example.photobattle;
 
-/**
- * Created by Tom on 21/02/2016.
- */
-
 import java.io.*;
 import java.net.*;
-import java.util.LinkedList;
 
-public class Server {
+/**
+ * Thread acceptant les connexions des deux clients
+ *
+ * @author Tom
+ */
+public class Server extends Thread {
 
-    static Server s = new Server();
+    static int port;
+    static Socket socJ1;
+    static Socket socJ2;
 
+    public Server(int port) {
+        Server.port = port;
+    }
 
-    public static void launchServer(int port) {
+    /**
+     * Run du thread. Accepte la connexion des deux clients
+     */
+    public void run() {
         ServerSocket listenSocket;
 
         try {
-            listenSocket = new ServerSocket(port); //port
+            listenSocket = new ServerSocket(port);
             System.out.println("Server ready...");
 
-            Socket clientSocket = listenSocket.accept();
-            System.out.println("Connexion from:" + clientSocket.getInetAddress());
-            ServerThread ct = new ServerThread(clientSocket, s);
+            // Admission du premier Client (l'host)
+            socJ1 = listenSocket.accept();
+            System.out.println("Connexion from:" + socJ1.getInetAddress());
+            ServerThread ct = new ServerThread(socJ1, this);
             ct.start();
-            ObjectOutputStream socOut = new ObjectOutputStream(clientSocket.getOutputStream());
+
+            // Admission du deuxième Client
+            socJ2 = listenSocket.accept();
+            System.out.println("Connexion from:" + socJ2.getInetAddress());
+            ServerThread ct2 = new ServerThread(socJ2, this);
+            ct2.start();
+
         } catch (Exception e) {
             System.err.println("Error in Server:" + e);
         }
     }
+
+    /**
+     * Envoie une commande aux joueurs concernés
+     *
+     * @param com
+     *            la commande à envoyer
+     */
+    public void sendCommand(Command com) {
+        // Si on veut bouger un joueur sur l'écran du J1
+        if (com.getTypeAction().equals("setcooj1")) {
+            try {
+                ObjectOutputStream socOut = new ObjectOutputStream(socJ1.getOutputStream());
+                socOut.writeObject(com);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        // Si on veut bouger un joueur sur l'écran du J2
+        else if (com.getTypeAction().equals("setcooj2")) {
+            try {
+                ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
+                socOut.writeObject(com);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

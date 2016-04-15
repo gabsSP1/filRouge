@@ -8,33 +8,53 @@ import java.net.Socket;
  */
 public class Client {
 
-    Socket serverSocket;
-    ObjectOutputStream oos;
-    boolean isHost;
-
-
-    Client(String host, int port, boolean iH) {
+    /**
+     * Se connecte au serveur et renvoie son Socket
+     *
+     * @param host
+     *            l'ip du serveur ("localhost" si en local)
+     * @param port
+     *            le port du serveur
+     * @return le Socket d'échange
+     */
+    public static Socket connect(String host, int port) {
+        Socket serverSocket = null;
         try {
             serverSocket = new Socket(host, port);
-            oos = new ObjectOutputStream(serverSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        isHost = iH;
-    }
-
-    void runListeningThread() {
         ClientThread ct = new ClientThread(serverSocket);
         ct.start();
+
+        return serverSocket;
     }
 
-    void sendCoordinates(int x, int y) {
+    /**
+     * Envoie au serveur les nouvelles coordonnées du joueur
+     *
+     * @param x
+     * @param y
+     * @param isHost
+     *            true si le joueur qui envoie les coordonnées héberge le
+     *            serveur (et est donc J1)
+     * @param serverSocket
+     *            le socket d'échange
+     */
+    public static void sendCoordinates(int x, int y, boolean isHost, Socket serverSocket) {
         Command com;
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         if (isHost) {
-            com = new Command("setcooj1", x, y, 0, 0);
+            com = new Command("setcooj2", x, y);
         } else {
-            com = new Command("setcooj2", 0, 0, x, y);
+            com = new Command("setcooj1", x, y);
         }
 
         try {
@@ -44,5 +64,23 @@ public class Client {
         }
     }
 
+    public static void main(String[] args) {
+        Socket serverSocket = connect("localhost", 20200);
+        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String message = stdIn.readLine();
+            if (message.split(" ")[2].equals("true")) {
+                sendCoordinates(Integer.valueOf(message.split(" ")[0]), Integer.valueOf(message.split(" ")[1]), true,
+                        serverSocket);
+            } else {
+                sendCoordinates(Integer.valueOf(message.split(" ")[0]), Integer.valueOf(message.split(" ")[1]), false,
+                        serverSocket);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }

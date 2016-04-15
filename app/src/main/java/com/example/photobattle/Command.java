@@ -1,44 +1,44 @@
 package com.example.photobattle;
 
-/**
- * Created by Tom on 29/02/2016.
- */
-public class Command {
+import java.io.Serializable;
 
-    //Informations  envoyer
-    private int coordJ1X;
-    private int coordJ1Y;
-    private int coordJ2X;
-    private int coordJ2Y;
+/**
+ * Objet echangé sur les Sockets entre serveur et client
+ *
+ * @author Tom
+ */
+public class Command implements Serializable {
+
+    private static final long serialVersionUID = -7543408412075826284L;
+
+    // Informations envoyées
+    private int coordX;
+    private int coordY;
 
     private String typeAction;
 
-    Command(String typeAct, int coJ1X, int coJ1Y, int coJ2X, int coJ2Y) {
+    public Command(String typeAct, int coX, int coY) {
         typeAction = typeAct;
 
-        coordJ1X = coJ1X;
-        coordJ1Y = coJ1Y;
-        coordJ2X = coJ2X;
-        coordJ2Y = coJ2Y;
+        coordX = coX;
+        coordY = coY;
     }
 
-    public int getCoordJ1X() {
-        return coordJ1X;
+    public int getcoordX() {
+        return coordX;
     }
 
-    public int getCoordJ1Y() {
-        return coordJ1Y;
-    }
-
-    public int getCoordJ2X() {
-        return coordJ2X;
-    }
-
-    public int getCoordJ2Y() {
-        return coordJ2Y;
+    public int getcoordY() {
+        return coordY;
     }
 
     public String getTypeAction() {
         return typeAction;
     }
+
+    @Override
+    public String toString() {
+        return "Command [coordX=" + coordX + ", coordY=" + coordY + ", typeAction=" + typeAction + "]";
+    }
+
 }

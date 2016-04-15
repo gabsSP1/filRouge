@@ -1,18 +1,15 @@
 package com.example.photobattle;
 
-/**
- * Created by Tom on 21/02/2016.
- */
-
 import java.io.*;
 import java.net.*;
 
+/**
+ * Thread lisant les commandes envoyées par le client
+ */
 public class ServerThread extends Thread {
 
     private Socket clientSocket;
-    private String pseudo = "";
     private Server serverFrom;
-
 
     ServerThread(Socket s, Server se) {
         this.clientSocket = s;
@@ -20,8 +17,8 @@ public class ServerThread extends Thread {
     }
 
     /**
-     * Le run du thread
-     * Lit depuis le socket de l'utilisateur et envoie les informations correspondantes  la classe Server en fonction de la commande re�ue
+     * Le run du thread Lit depuis le socket de l'utilisateur et envoie la
+     * commande au Serveur pour qu'il la distribue correctement
      */
     public void run() {
         Command com;
@@ -30,21 +27,14 @@ public class ServerThread extends Thread {
             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
             while (true) {
                 com = (Command) ois.readObject();
-
-                //Si on veut bouger le joueur 1
-                if (com.getTypeAction().equals("setcooj1")) {
-
-                }
-
-                //Si on veut bouger le joueur 2
-                else if (com.getTypeAction().equals("setcooj2")) {
-
-                }
-
-
+                System.out.println(com);
+                serverFrom.sendCommand(com);
             }
-        } catch (Exception e) {
-            System.err.println("D�connexion d'un client");
+
+        } catch (IOException e) {
+            System.err.println("Deconnexion d'un des clients");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

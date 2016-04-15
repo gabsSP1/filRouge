@@ -4,11 +4,13 @@ import java.io.*;
 import java.net.Socket;
 
 /**
- * Created by Tom on 29/02/2016.
+ * Thread pour la lecture des informations sur le Socket du serveur
+ *
+ * @author Tom
  */
 public class ClientThread extends Thread {
 
-    Socket serverSocket;
+    private Socket serverSocket;
 
     ClientThread(Socket s) {
         serverSocket = s;
@@ -25,14 +27,14 @@ public class ClientThread extends Thread {
             while (true) {
                 com = (Command) ois.readObject();
 
-                if (com.getTypeAction().equals("setcoo")) {
+                // Si la commande est un déplacement de l'autre joueur
+                if (com.getTypeAction().startsWith("setcoo")) {
 
                 }
             }
 
-
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Deconnexion du serveur");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
