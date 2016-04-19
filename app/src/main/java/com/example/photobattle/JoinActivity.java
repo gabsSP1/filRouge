@@ -41,13 +41,7 @@ public class JoinActivity extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
             BazarStatic.host =false;
-            Connect_activity.socket = Client.connect(host, Connect_activity.PORT);
-            while(MainGamePanel.map == null || !launch);
-            if( Connect_activity.socket != null)
-            {
-                Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
-                startActivity(intentMyAccount);
-            }
+            Connect_activity.socket = Client.connect(host, Connect_activity.PORT, getApplicationContext());
             return null;
         }
     }

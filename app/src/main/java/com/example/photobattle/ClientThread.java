@@ -1,5 +1,8 @@
 package com.example.photobattle;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -9,10 +12,11 @@ import java.net.Socket;
  * @author Tom
  */
 public class ClientThread extends Thread {
-
+    Context context;
     private Socket serverSocket;
-    ClientThread(Socket s) {
+    ClientThread(Socket s, Context context) {
         serverSocket = s;
+        this.context=context;
     }
 
     /**
@@ -39,7 +43,9 @@ public class ClientThread extends Thread {
                 }
 
                 if (com.getTypeAction().equals("launch")) {
-                    JoinActivity.launch = true;
+                    Intent intentMyAccount = new Intent(context, Game.class);
+                    intentMyAccount.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intentMyAccount);
                 }
             }
 

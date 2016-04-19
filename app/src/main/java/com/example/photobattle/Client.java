@@ -1,5 +1,6 @@
 package com.example.photobattle;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import java.io.*;
@@ -19,7 +20,7 @@ public class Client {
      *            le port du serveur
      * @return le Socket d'échange
      */
-    public static Socket connect(String host, int port) {
+    public static Socket connect(String host, int port, Context context) {
         Socket serverSocket = null;
         try {
             serverSocket = new Socket(host, port);
@@ -27,7 +28,7 @@ public class Client {
             e.printStackTrace();
         }
 
-        ClientThread ct = new ClientThread(serverSocket);
+        ClientThread ct = new ClientThread(serverSocket, context);
         ct.start();
 
         return serverSocket;

@@ -64,7 +64,7 @@ public class Connect_activity extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            socket = Client.connect("localhost", PORT);
+            socket = Client.connect("localhost", PORT, getApplicationContext());
             Map map = new Map(pictureName);
             MainGamePanel.map =map;
             BazarStatic.host =true;
