@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':AndEngine'
 include ':openCVLibrary310'

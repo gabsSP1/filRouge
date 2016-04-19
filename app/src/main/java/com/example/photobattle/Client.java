@@ -72,36 +72,36 @@ public class Client {
      * @param map          la map à envoyer
      * @param serverSocket le socket d'échange
      */
-    public static void sendMap(Bitmap map, Socket serverSocket) {
+    public static void sendMap(Map map, Socket serverSocket) {
         Command com;
         ObjectOutputStream oos = null;
         try {
             oos = new ObjectOutputStream(serverSocket.getOutputStream());
             com = new Command(map);
-            oos.writeObject(map);
+            oos.writeObject(com);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        Socket serverSocket = connect("localhost", 20200);
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            String message = stdIn.readLine();
-            if (message.split(" ")[2].equals("true")) {
-                sendCoordinates(Integer.valueOf(message.split(" ")[0]), Integer.valueOf(message.split(" ")[1]), true,
-                        serverSocket);
-            } else {
-                sendCoordinates(Integer.valueOf(message.split(" ")[0]), Integer.valueOf(message.split(" ")[1]), false,
-                        serverSocket);
-            }
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        Socket serverSocket = connect("localhost", 20200);
+//        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+//        try {
+//            String message = stdIn.readLine();
+//            if (message.split(" ")[2].equals("true")) {
+//                sendCoordinates(Integer.valueOf(message.split(" ")[0]), Integer.valueOf(message.split(" ")[1]), true,
+//                        serverSocket);
+//            } else {
+//                sendCoordinates(Integer.valueOf(message.split(" ")[0]), Integer.valueOf(message.split(" ")[1]), false,
+//                        serverSocket);
+//            }
+//
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//    }
 
 }

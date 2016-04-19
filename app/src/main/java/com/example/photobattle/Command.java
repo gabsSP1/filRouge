@@ -17,7 +17,7 @@ public class Command implements Serializable {
     private int coordX;
     private int coordY;
 
-    private Bitmap map;
+    private Map map;
 
     private String typeAction;
 
@@ -28,7 +28,7 @@ public class Command implements Serializable {
         coordY = coY;
     }
 
-    public Command(Bitmap map) {
+    public Command(Map map) {
         typeAction = "sendmap";
 
         this.map = map;
@@ -46,7 +46,7 @@ public class Command implements Serializable {
         return typeAction;
     }
 
-    public Bitmap getMap() {
+    public Map getMap() {
         return map;
     }
 

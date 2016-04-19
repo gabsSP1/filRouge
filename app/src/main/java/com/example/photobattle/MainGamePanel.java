@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.AsyncTask;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -24,24 +26,34 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
 
 
     private MainThread thread;
-    private Personnage persoOne;
-    private Personnage persoTwo;
-    private Map map;
+    public static Personnage persoOne;
+    public static Personnage persoTwo;
+    public static Map map;
     private float density;
 
-    public MainGamePanel(Context context, String pictureName)
+    public MainGamePanel(Context context, AttributeSet attributeSet)
     {
-        super(context);
+        super(context, attributeSet);
         getHolder().addCallback(this);
-        map = new Map(pictureName, this);
-        persoOne = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 0, 0, map);
-        persoTwo = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 50, 0, map);
+//        map = new Map(pictureName, this);
+
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
         density = context.getResources().getDisplayMetrics().density;
+        persoOne = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 0, 0, map);
+        persoTwo = new Personnage(BitmapFactory.decodeResource(getResources(), R.drawable.personnage), 50, 0, map);
 
 
+    }
 
+    public MainGamePanel(Context context)
+    {
+        super(context);
+    }
+
+    public MainGamePanel(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -79,6 +91,8 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+//        persoOne.setY(0);
+//        persoOne.setX(0);
         if(event.getAction() == MotionEvent.ACTION_MOVE ||event.getAction() == MotionEvent.ACTION_DOWN)
         {
             if(event.getY() > getHeight() - 100)
@@ -106,12 +120,13 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
             return false;
         }
         Log.d(TAG, "MotionEvent : " + event.getAction());
+
         return super.onTouchEvent(event);
     }
 
     public void init()
     {
-        map.init();
+        map.init(this);
         persoOne.init();
         persoTwo.init();
     }
@@ -133,6 +148,11 @@ public class MainGamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public float getDensity() {return density;}
+
+    public void setMap(Map map) {
+        this.map = map;
+
+    }
 
 
 

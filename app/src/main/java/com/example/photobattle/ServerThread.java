@@ -27,12 +27,13 @@ public class ServerThread extends Thread {
             ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
             while (true) {
                 com = (Command) ois.readObject();
-                System.out.println(com);
-                serverFrom.sendCommand(com);
+//                System.out.println(com);
+               serverFrom.sendCommand(com);
             }
 
         } catch (IOException e) {
             System.err.println("Deconnexion d'un des clients");
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

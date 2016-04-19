@@ -11,7 +11,6 @@ import java.net.Socket;
 public class ClientThread extends Thread {
 
     private Socket serverSocket;
-
     ClientThread(Socket s) {
         serverSocket = s;
     }
@@ -29,12 +28,13 @@ public class ClientThread extends Thread {
 
                 // Si la commande est un déplacement de l'autre joueur
                 if (com.getTypeAction().startsWith("setcoo")) {
-
+                    MainGamePanel.persoTwo.setX(com.getcoordX());
+                    MainGamePanel.persoTwo.setY(com.getcoordY());
                 }
 
                 //Si la commande est un envoie de map
                 if (com.getTypeAction().equals("sendmap")) {
-
+                    MainGamePanel.map = com.getMap();
                 }
             }
 

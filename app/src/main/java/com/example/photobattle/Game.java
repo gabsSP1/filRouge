@@ -16,7 +16,7 @@ import java.io.File;
 Lance le jeu, et surtout le MainGamePanel
  */
 public class Game extends Activity {
-
+    MainGamePanel mainGamePanel;
 
     private static final String TAG = Game.class.getSimpleName();
 
@@ -30,12 +30,14 @@ public class Game extends Activity {
         onWindowFocusChanged(true);
         Intent intent = getIntent();
         String s="";
-        if (intent != null) {
-
-            s = intent.getStringExtra("selected_file");
-
-        }
-        setContentView(new MainGamePanel(this,s));
+//        if (intent != null) {
+//
+//            s = intent.getStringExtra("selected_file");
+//
+//        }
+        setContentView(R.layout.game_layout);
+//        mainGamePanel = (MainGamePanel) findViewById(R.id.panel);
+//        mainGamePanel.setMap(new Map(s));
         Log.d(TAG, "View added");
     }
 

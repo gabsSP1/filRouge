@@ -3,6 +3,7 @@ package com.example.photobattle;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.graphics.Canvas;
@@ -26,11 +27,12 @@ public class MainThread extends Thread
     private SurfaceHolder surfaceHolder;
     private MainGamePanel gamePanel;
     private boolean running;
-
+    boolean isHost;
 
     public MainThread(SurfaceHolder surfaceHolder, MainGamePanel gamePanel)
     {
         super();
+        this.isHost = isHost;
         this.surfaceHolder = surfaceHolder;
         this.gamePanel = gamePanel;
     }
@@ -63,6 +65,8 @@ public class MainThread extends Thread
                 {
                     beginTime = System.currentTimeMillis();
                     framesSkipped = 0;
+                    SendCommande send =new SendCommande();
+                    send.execute();
                     this.gamePanel.update();
                     this.gamePanel.render(canvas);
 
@@ -83,6 +87,8 @@ public class MainThread extends Thread
                         // we need to catch up
                         // update without rendering
                         this.gamePanel.update();
+                        send =new SendCommande();
+                        send.execute();
                         // add frame period to check if in next frame
                         sleepTime += FRAME_PERIOD;
                         framesSkipped++;
@@ -95,6 +101,16 @@ public class MainThread extends Thread
                     surfaceHolder.unlockCanvasAndPost(canvas);
                 }
             }
+        }
+    }
+
+    public class SendCommande extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Client.sendCoordinates(MainGamePanel.persoOne.getX(), MainGamePanel.persoOne.getY(), BazarStatic.host, Connect_activity.socket);
+            return null;
         }
     }
 }

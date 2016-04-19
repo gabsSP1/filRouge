@@ -67,6 +67,7 @@ public class ChooseMap extends FragmentActivity {
 	Dialog dialog;
 	int position;
 	boolean editP;
+	Button onLine;
 
     private BaseLoaderCallback mOpenCVCallBack = new BaseLoaderCallback(this) {
         @Override
@@ -177,52 +178,62 @@ public class ChooseMap extends FragmentActivity {
 		filesName=new ArrayList<>();
 		File f2 = new File(FileManager.PICTURE_PATH);
 		File[] fichiers = f2.listFiles();
-
-		Arrays.sort(fichiers, new Comparator<File>() {
-			public int compare(File f1, File f2) {
-				return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
-			}
-		});
-		for (int i = 0; i < fichiers.length; i++) {
-			String ext = "";
-			int k = fichiers[i].getName().length() - 1;
-			char p = fichiers[i].getName().charAt(k);
-			while (p != '.' && k > 0) {
-				ext += p;
-				k--;
-				p = fichiers[i].getName().charAt(k);
-			}
-			if (ext.equals("gpj")) {
-				if (fichiers[i].getTotalSpace() > 20) {
-					boolean isnumber = true;
-					boolean change = false;
-					filesName.add(fichiers[i].getName());
-					int m=4;
-					while (m < fichiers[i].getName().length() && isnumber) {
-						try {
-							if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
-								nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
-								change = true;
+		mTextView=(TextView) findViewById(R.id.no_picture);
+		if(fichiers.length != 0)
+		{
+			mTextView.setVisibility(View.INVISIBLE);
+			Arrays.sort(fichiers, new Comparator<File>() {
+				public int compare(File f1, File f2) {
+					return Long.valueOf(f2.lastModified()).compareTo(f1.lastModified());
+				}
+			});
+			for (int i = 0; i < fichiers.length; i++) {
+				String ext = "";
+				int k = fichiers[i].getName().length() - 1;
+				char p = fichiers[i].getName().charAt(k);
+				while (p != '.' && k > 0) {
+					ext += p;
+					k--;
+					p = fichiers[i].getName().charAt(k);
+				}
+				if (ext.equals("gpj")) {
+					if (fichiers[i].getTotalSpace() > 20) {
+						boolean isnumber = true;
+						boolean change = false;
+						filesName.add(fichiers[i].getName());
+						int m = 4;
+						while (m < fichiers[i].getName().length() && isnumber) {
+							try {
+								if (Integer.parseInt(fichiers[i].getName().substring(3, m)) >= nbMap) {
+									nbMap = Integer.parseInt(fichiers[i].getName().substring(3, m));
+									change = true;
+								}
+							} catch (Exception e) {
+								isnumber = false;
 							}
-						} catch (Exception e) {
-							isnumber = false;
+							m++;
 						}
-						m++;
+
+						if (change) {
+							nbMap++;
+						}
+						setNbMap(nbMap);
+						;
+
+
+					} else {
+						(new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
+						fichiers[i].delete();
+
 					}
-
-					if (change) {
-						nbMap++;
-					}
-					setNbMap(nbMap);;
-
-
-				} else {
-					(new File(FileManager.THRESHOLD_PATH + File.separator + fichiers[i].getName())).delete();
-					fichiers[i].delete();
-
 				}
 			}
 		}
+
+        else
+        {
+            mTextView.setVisibility(View.VISIBLE);
+        }
 	}
 
 
@@ -248,11 +259,21 @@ public class ChooseMap extends FragmentActivity {
 			}
 
 		});
+		onLine =(Button) findViewById(R.id.button_online);
+		onLine.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(filesName.size()!=0) {
+					Intent intentMyAccount = new Intent(getApplicationContext(), Connect_activity.class);
+					intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
+					startActivity(intentMyAccount);
+				}
+			}
+		});
 		mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), filesName.size());
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
 		mPager.setCurrentItem(position);
-		mTextView=(TextView) findViewById(R.id.image_name);
 		backButton=(Button)findViewById(R.id.back_chooseMap);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override

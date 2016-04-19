@@ -60,7 +60,7 @@ public class Personnage {
         return x;
     }
 
-    private void setX(int x) {
+    public void setX(int x) {
         if(x >= map.right())
             x -= map.width();
         else if(x < map.left())
@@ -72,7 +72,7 @@ public class Personnage {
         return y;
     }
 
-    private void setY(int y)
+    public void setY(int y)
     {
         if(y > map.bottom())
             y = map.top();
@@ -342,4 +342,6 @@ public class Personnage {
 
 
     }
+
+
 }

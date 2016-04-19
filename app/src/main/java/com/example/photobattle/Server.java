@@ -1,5 +1,7 @@
 package com.example.photobattle;
 
+import android.widget.TextView;
+
 import java.io.*;
 import java.net.*;
 
@@ -13,7 +15,7 @@ public class Server extends Thread {
     static int port;
     static Socket socJ1;
     static Socket socJ2;
-
+    Command map;
     public Server(int port) {
         Server.port = port;
     }
@@ -39,7 +41,13 @@ public class Server extends Thread {
             System.out.println("Connexion from:" + socJ2.getInetAddress());
             ServerThread ct2 = new ServerThread(socJ2, this);
             ct2.start();
-
+            try {
+                ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
+                socOut.writeObject(map);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             System.err.println("Error in Server:" + e);
         }
@@ -76,13 +84,7 @@ public class Server extends Thread {
 
         //Si on envoie la map
         else if (com.getTypeAction().equals("sendmap")) {
-            try {
-                ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
-                socOut.writeObject(com);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            map=com;
         }
     }
 
