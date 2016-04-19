@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.andengine.entity.text.Text;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
