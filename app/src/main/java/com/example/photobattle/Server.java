@@ -81,7 +81,16 @@ public class Server extends Thread {
                 e.printStackTrace();
             }
         }
-
+        else if(com.getTypeAction().equals("launch"))
+        {
+            try {
+                ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
+                socOut.writeObject(com);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         //Si on envoie la map
         else if (com.getTypeAction().equals("sendmap")) {
             map=com;

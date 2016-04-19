@@ -22,8 +22,9 @@ public class ClientThread extends Thread {
         Command com;
 
         try {
-            ObjectInputStream ois = new ObjectInputStream(serverSocket.getInputStream());
+
             while (true) {
+                ObjectInputStream ois = new ObjectInputStream(serverSocket.getInputStream());
                 com = (Command) ois.readObject();
 
                 // Si la commande est un déplacement de l'autre joueur
@@ -36,10 +37,15 @@ public class ClientThread extends Thread {
                 if (com.getTypeAction().equals("sendmap")) {
                     MainGamePanel.map = com.getMap();
                 }
+
+                if (com.getTypeAction().equals("launch")) {
+                    JoinActivity.launch = true;
+                }
             }
 
         } catch (IOException e) {
             System.err.println("Deconnexion du serveur");
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

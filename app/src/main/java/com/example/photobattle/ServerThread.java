@@ -24,8 +24,9 @@ public class ServerThread extends Thread {
         Command com;
 
         try {
-            ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+
             while (true) {
+                ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
                 com = (Command) ois.readObject();
 //                System.out.println(com);
                serverFrom.sendCommand(com);

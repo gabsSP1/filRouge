@@ -51,6 +51,7 @@ public class Connect_activity extends Activity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Client.lauch(socket);
                 Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                 intentMyAccount.putExtra("selected_file", pictureName);
                 startActivity(intentMyAccount);

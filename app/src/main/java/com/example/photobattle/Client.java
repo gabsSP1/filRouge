@@ -85,6 +85,19 @@ public class Client {
         }
     }
 
+    public static  void lauch (Socket serverSocket)
+    {
+        Command com = new Command("launch", 0 , 0);
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+            oos.writeObject(com);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 //    public static void main(String[] args) {
 //        Socket serverSocket = connect("localhost", 20200);
 //        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));

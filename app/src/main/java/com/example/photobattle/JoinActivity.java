@@ -13,11 +13,13 @@ import java.net.Socket;
 public class JoinActivity extends Activity {
     EditText editText;
     Button bjoin;
+    static boolean  launch;
     Socket client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+        launch=false;
         editText = (EditText) findViewById(R.id.ipfield);
         bjoin = (Button) findViewById(R.id.bjoin);
         String s="";
@@ -39,9 +41,9 @@ public class JoinActivity extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
             BazarStatic.host =false;
-            client = Client.connect(host, Connect_activity.PORT);
-            while(MainGamePanel.map == null);
-            if( client != null)
+            Connect_activity.socket = Client.connect(host, Connect_activity.PORT);
+            while(MainGamePanel.map == null || !launch);
+            if( Connect_activity.socket != null)
             {
                 Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                 startActivity(intentMyAccount);
@@ -49,5 +51,6 @@ public class JoinActivity extends Activity {
             return null;
         }
     }
+
 
 }
