@@ -10,7 +10,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AndEngine" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/openCVLibrary310" />
           </set>
@@ -18,7 +17,6 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AndEngine" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/openCVLibrary310" />
           </set>

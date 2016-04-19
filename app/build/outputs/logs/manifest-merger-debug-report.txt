@@ -18,22 +18,7 @@ ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:2:1-5
 uses-sdk
 ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:7:5-9:41
 MERGED from [filRouge:openCVLibrary310:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\openCVLibrary310\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [filRouge:AndEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.0.1] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:9:9-38
 		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
@@ -42,8 +27,6 @@ MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRou
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:8:9-35
 		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
 		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
-	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:23:9-75
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:11:5-81
 	android:name
@@ -76,21 +59,7 @@ ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:20:5-
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:20:19-67
 application
 ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:22:5-51:19
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.3.0] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.0.1] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:25:9-41
 	android:allowBackup
