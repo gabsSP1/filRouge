@@ -2,18 +2,19 @@ package com.example.photobattle;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 public class Connect_activity extends Activity {
@@ -36,7 +37,7 @@ public class Connect_activity extends Activity {
 
         s = new Server(PORT);
         s.start();
-        ipLocale.setText(getIPLoc());
+        ipLocale.setText("Mon IP Locale : " + getIPLoc());
         ipGlobale.setText(getIPGlob());
         LaunchClient l =new LaunchClient();
         l.execute();
@@ -56,6 +57,8 @@ public class Connect_activity extends Activity {
                 startActivity(intentMyAccount);
             }
         });
+
+
 
     }
 
@@ -80,6 +83,11 @@ public class Connect_activity extends Activity {
 
     private String getIPLoc()
     {
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
+        return String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff),
+                (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));
+        /*
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
                 NetworkInterface intf = en.nextElement();
@@ -93,7 +101,7 @@ public class Connect_activity extends Activity {
         } catch (SocketException e) {
             // Log.e(Constants.LOG_TAG, e.getMessage(), e);
         }
-        return null;
+        return null;*/
     }
     public void afficherAdresse() throws SocketException {
         Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
