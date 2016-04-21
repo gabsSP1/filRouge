@@ -40,6 +40,7 @@ public class ClientThread extends Thread {
                 //Si la commande est un envoie de map
                 if (com.getTypeAction().equals("sendmap")) {
                     MainGamePanel.map = com.getMap();
+                    MainGamePanel.map.convert();
                 }
 
                 if (com.getTypeAction().equals("launch")) {

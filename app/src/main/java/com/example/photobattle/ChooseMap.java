@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -93,10 +94,7 @@ public class ChooseMap extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		onWindowFocusChanged(true);
+		FullScreencall();
 		setContentView(R.layout.activity_map);
         if (!OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_2, this, mOpenCVCallBack))
         {
@@ -439,22 +437,19 @@ public class ChooseMap extends FragmentActivity {
 		}
 
 	}
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			final View decorView = getWindow().getDecorView();
-			decorView.setSystemUiVisibility(
-					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-							| View.SYSTEM_UI_FLAG_FULLSCREEN
-							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+
+
+	public void FullScreencall() {
+		if(Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+			View v = this.getWindow().getDecorView();
+			v.setSystemUiVisibility(View.GONE);
+		} else if(Build.VERSION.SDK_INT >= 19) {
+			//for new api versions.
+			View decorView = getWindow().getDecorView();
+			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+			decorView.setSystemUiVisibility(uiOptions);
+		}
 	}
-
-
-
 }
 
 

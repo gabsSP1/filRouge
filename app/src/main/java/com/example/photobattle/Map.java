@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -24,28 +25,39 @@ enum pix {VIDE, GROUND};
 public class Map implements Serializable {
     private static final String TAG = Map.class.getSimpleName();
 
-    private Bitmap contours;
-    private Bitmap photoOriginal;
+    private transient Bitmap contours;
+    private transient Bitmap photoOriginal;
     private Rect zone;
     private pix obstacles [][];
     private int width;
     private int height;
     private float density;
     private String pictureName;
-    BitmapFactory.Options bmOptions;
-    private static ByteBuffer dst1;
-    private static byte[] bytesar1;
-    private static ByteBuffer dst2;
-    private static byte[] bytesar2;
-    private static ByteBuffer dst1r;
-    private static byte[] bytesar1r;
-    private static ByteBuffer dst2r;
-    private static byte[] bytesar2r;
+    byte[] bytePicture;
+    byte[] byteContours;
+    //    BitmapFactory.Options bmOptions;
+//    private static ByteBuffer dst1;
+//    private static byte[] bytesar1;
+//    private static ByteBuffer dst2;
+//    private static byte[] bytesar2;
+//    private static ByteBuffer dst1r;
+//    private static byte[] bytesar1r;
+//    private static ByteBuffer dst2r;
+//    private static byte[] bytesar2r;
     public Map(String pictureName)
     {
         this.pictureName = pictureName;
-        contours = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+ File.separator+pictureName);
-        photoOriginal = BitmapFactory.decodeFile(FileManager.PICTURE_PATH+ File.separator+pictureName);
+        contours =  BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
+                ,  1080);
+        photoOriginal =BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
+                ,  1080);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        contours.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byteContours = stream.toByteArray();
+        ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+        photoOriginal.compress(Bitmap.CompressFormat.PNG, 100, stream2);
+        bytePicture = stream.toByteArray();
+
     }
 
 
@@ -62,7 +74,7 @@ public class Map implements Serializable {
         density = mainGamePanel.getDensity();
         zone = resizeKeepRatio(contours.getWidth(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
         contours = Bitmap.createScaledBitmap(contours, zone.width(), zone.height(), true);
-        photoOriginal=Bitmap.createScaledBitmap(photoOriginal, zone.width(), zone.height(), true);
+//        photoOriginal=Bitmap.createScaledBitmap(photoOriginal, zone.width(), zone.height(), true);
 
         height = pixelToDp(mainGamePanel.getHeight());
         width = pixelToDp(mainGamePanel.getWidth());
@@ -141,125 +153,129 @@ public class Map implements Serializable {
     public int getScreenHeigth() {return height;}
     public pix[][] getObstacles(){return obstacles;}
 
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-
-//        out.writeChars(pictureName);
-
-        out.writeInt(contours.getRowBytes());
-        out.writeInt(contours.getHeight());
-        out.writeInt(contours.getWidth());
-
-
-
-
-        int bmSize = contours.getRowBytes() * contours.getHeight();
-       if(dst1==null || bmSize > dst1.capacity())
-           dst1= ByteBuffer.allocate(bmSize);
-
-        out.writeInt(dst1.capacity());
-
-        dst1.position(0);
-
-        contours.copyPixelsToBuffer(dst1);
-        if(bytesar1==null || bmSize > bytesar1.length)
-            bytesar1=new byte[bmSize];
-
-        dst1.position(0);
-        dst1.get(bytesar1);
-
-
-        out.write(bytesar1, 0, bytesar1.length);
-
-
-
-
-
-        out.writeInt(photoOriginal.getRowBytes());
-        out.writeInt(photoOriginal.getHeight());
-        out.writeInt(photoOriginal.getWidth());
-        bmSize = photoOriginal.getRowBytes() * photoOriginal.getHeight();
-        if(dst2==null || bmSize > dst2.capacity())
-            dst2= ByteBuffer.allocate(bmSize);
-
-        out.writeInt(dst2.capacity());
-
-        dst2.position(0);
-
-        photoOriginal.copyPixelsToBuffer(dst2);
-        if(bytesar2r==null || bmSize > bytesar2r.length)
-            bytesar2r=new byte[bmSize];
-
-        dst2.position(0);
-        dst2.get(bytesar2r);
-
-
-        out.write(bytesar2r, 0, bytesar2r.length);
-
+    public void convert() {
+        this.contours = BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length);
+        this.photoOriginal = BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length);
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+    //    private void writeObject(ObjectOutputStream out) throws IOException {
+//
+//////        out.writeChars(pictureName);
+////
+////        out.writeInt(contours.getRowBytes());
+////        out.writeInt(contours.getHeight());
+////        out.writeInt(contours.getWidth());
+////
+////
+////
+////
+////        int bmSize = contours.getRowBytes() * contours.getHeight();
+////       if(dst1==null || bmSize > dst1.capacity())
+////           dst1= ByteBuffer.allocate(bmSize);
+////
+////        out.writeInt(dst1.capacity());
+////
+////        dst1.position(0);
+////
+////        contours.copyPixelsToBuffer(dst1);
+////        if(bytesar1==null || bmSize > bytesar1.length)
+////            bytesar1=new byte[bmSize];
+////
+////        dst1.position(0);
+////        dst1.get(bytesar1);
+////
+////
+////        out.write(bytesar1, 0, bytesar1.length);
+//
+//
+//
+//
+//
+//        out.writeInt(contours.getRowBytes());
+//        out.writeInt(contours.getHeight());
+//        out.writeInt(contours.getWidth());
+//        int bmSize = contours.getRowBytes() * contours.getHeight();
+//        if(dst2==null || bmSize > dst2.capacity())
+//            dst2= ByteBuffer.allocate(bmSize);
+//
+//        out.writeInt(dst2.capacity());
+//
+//        dst2.position(0);
+//
+//        contours.copyPixelsToBuffer(dst2);
+//        if(bytesar2r==null || bmSize > bytesar2r.length)
+//            bytesar2r=new byte[bmSize];
+//
+//        dst2.position(0);
+//        dst2.get(bytesar2r);
+//
+//
+//        out.write(bytesar2r, 0, bytesar2r.length);
+//
+//    }
 
-//        pictureName=in.read();
-
-
-        int nbRowBytes=in.readInt();
-        int height=in.readInt();
-        int width=in.readInt();
-
-        int bmSize=in.readInt();
-        System.out.println(bmSize);
-
-
-        if(bytesar2r==null || bmSize > bytesar2r.length)
-            bytesar2r= new byte[bmSize];
-
-
-        int offset=0;
-
-        while(offset < bmSize-in.available()){
-            offset+= in.read(bytesar2r, offset, in.available());
-        }
-        in.read(bytesar2r, offset, bmSize-offset);
-
-
-        if(dst2r==null || bmSize > dst2r.capacity())
-            dst2r= ByteBuffer.allocate(bmSize);
-        dst2r.position(0);
-        dst2r.put(bytesar2r);
-        dst2r.position(0);
-        contours=Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        contours.copyPixelsFromBuffer(dst2r);
-
-
-
-         nbRowBytes=in.readInt();
-         height=in.readInt();
-         width=in.readInt();
-
-         bmSize=in.readInt();
-
-
-
-        if(bytesar1r==null || bmSize > bytesar1r.length)
-            bytesar1r= new byte[bmSize];
-
-
-         offset=0;
-
-        while(in.available()>0){
-            offset+= in.read(bytesar1r, offset, in.available());
-        }
-
-
-        if(dst1r==null || bmSize > dst1r.capacity())
-            dst1r= ByteBuffer.allocate(bmSize);
-        dst1r.position(0);
-        dst1r.put(bytesar1r);
-        dst1r.position(0);
-        photoOriginal=Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        photoOriginal.copyPixelsFromBuffer(dst1r);
-        //in.close();
-    }
+//    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+//
+////        pictureName=in.read();
+//
+//
+////        int nbRowBytes=in.readInt();
+////        int height=in.readInt();
+////        int width=in.readInt();
+////
+////        int bmSize=in.readInt();
+////        System.out.println(bmSize);
+////
+////
+////        if(bytesar2r==null || bmSize > bytesar2r.length)
+////            bytesar2r= new byte[bmSize];
+////
+////
+////        int offset=0;
+////
+////        while(in.available()>0){
+////            offset+= in.read(bytesar2r, offset, in.available());
+////        }
+////        in.read(bytesar2r, offset, bmSize-offset);
+////
+////
+////        if(dst2r==null || bmSize > dst2r.capacity())
+////            dst2r= ByteBuffer.allocate(bmSize);
+////        dst2r.position(0);
+////        dst2r.put(bytesar2r);
+////        dst2r.position(0);
+////        contours=Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+////        contours.copyPixelsFromBuffer(dst2r);
+//
+//
+//
+//        int nbRowBytes=in.readInt();
+//        int height=in.readInt();
+//        int width=in.readInt();
+//
+//        int bmSize=in.readInt();
+//
+//
+//
+//        if(bytesar1r==null || bmSize > bytesar1r.length)
+//            bytesar1r= new byte[bmSize];
+//
+//
+//        int offset=0;
+//
+//        while(in.available()>0){
+//            offset+= in.read(bytesar1r, offset, in.available());
+//        }
+//
+//
+//        if(dst1r==null || bmSize > dst1r.capacity())
+//            dst1r= ByteBuffer.allocate(bmSize);
+//        dst1r.position(0);
+//        dst1r.put(bytesar1r);
+//        dst1r.position(0);
+//        contours=Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
+//        contours.copyPixelsFromBuffer(dst1r);
+//        //in.close();
+//    }
 
 }

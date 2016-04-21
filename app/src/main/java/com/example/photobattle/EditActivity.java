@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
@@ -46,17 +47,16 @@ public class EditActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        onWindowFocusChanged(true);
+        FullScreencall();
 		setContentView(R.layout.activity_edit);
 		Intent intent = getIntent();
 		if (intent != null) {
 
 			fbackground = new File(intent.getStringExtra("selected_file"));
-			background = BitmapFactory.decodeFile(fbackground.getAbsolutePath());
-			original = BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+fbackground.getName());
+			background = BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+fbackground.getName()
+			 ,  1080);
+			original =  BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+fbackground.getName()
+					,  1080);
 		}
 		inEdit = false;
 		back=(Button) findViewById(R.id.back_edit);
@@ -200,17 +200,15 @@ public class EditActivity extends Activity {
 					show();
 				}
 
-		@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			final View decorView = getWindow().getDecorView();
-			decorView.setSystemUiVisibility(
-					View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-							| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-							| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-							| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-							| View.SYSTEM_UI_FLAG_FULLSCREEN
-							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+	public void FullScreencall() {
+		if(Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+			View v = this.getWindow().getDecorView();
+			v.setSystemUiVisibility(View.GONE);
+		} else if(Build.VERSION.SDK_INT >= 19) {
+			//for new api versions.
+			View decorView = getWindow().getDecorView();
+			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+			decorView.setSystemUiVisibility(uiOptions);
+		}
 	}
 }
