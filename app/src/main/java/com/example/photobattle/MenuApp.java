@@ -1,6 +1,9 @@
 package com.example.photobattle;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +17,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import java.io.File;
+import java.util.List;
 
-public class MenuApp extends Activity{
+public class MenuApp extends BaseActivity{
 	Button b1;
 	Button settings;
 	Animation animStart;
@@ -29,6 +33,9 @@ public class MenuApp extends Activity{
 		FullScreencall();
 		setContentView(R.layout.activity_menu_app);
 		FileManager.initialyzeTreeFile();
+
+		Sound.playFightMusic(this.getApplicationContext());
+
 		b1=(Button) findViewById(R.id.play_menu);
 		animStart = AnimationUtils.loadAnimation(this, R.anim.anim_button);
 		//b1.setAnimation(myAnim);
@@ -38,6 +45,7 @@ public class MenuApp extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				System.out.println("appui play");
+				Sound.playSound(MenuApp.this, R.raw.open);
 				v.startAnimation(animStart);
 
 			}

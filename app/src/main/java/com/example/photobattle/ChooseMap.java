@@ -51,7 +51,7 @@ import org.opencv.core.Mat.*;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public class ChooseMap extends FragmentActivity {
+public class ChooseMap extends BaseActivity {
 	public static final String EXTRA_IMAGE = "extra_image";
 	static List<String> filesName;
 	private ImagePagerAdapter mAdapter;
@@ -104,6 +104,7 @@ public class ChooseMap extends FragmentActivity {
 		setNbMap(0);
 		loadList();
 		initComponent();
+		Sound.resumeMusic();
 	}
 
 	public static class ImagePagerAdapter extends FragmentStatePagerAdapter {

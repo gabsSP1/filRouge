@@ -17,7 +17,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-public class JoinActivity extends Activity {
+public class JoinActivity extends BaseActivity {
     EditText editText;
     Button bjoin;
     static boolean  launch;

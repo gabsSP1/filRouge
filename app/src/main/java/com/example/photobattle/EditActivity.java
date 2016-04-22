@@ -33,7 +33,7 @@ import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 
-public class EditActivity extends Activity {
+public class EditActivity extends BaseActivity {
 	Bitmap background;
 	Bitmap original;
 	File fbackground;
