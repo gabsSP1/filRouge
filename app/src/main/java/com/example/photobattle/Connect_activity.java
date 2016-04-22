@@ -35,7 +35,7 @@ public class Connect_activity extends BaseActivity {
         statusCo =(TextView) findViewById(R.id.co);
         play =(Button) findViewById(R.id.bstart);
         play.setText("En attente d'une connection...");
-        s = new Server(PORT);
+        s = new Server(PORT,this);
         s.start();
         ipLocale.setText("Mon IP Locale : " + getIPLoc());
         ipGlobale.setText(getIPGlob());
@@ -122,16 +122,8 @@ public class Connect_activity extends BaseActivity {
         return "d";
     }
 
-    /*public void connectionSucessful(final String ip)
+    public static void connexionSucessful(final String ip)
     {
-        runOnUiThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-
-                        play.setText("Connecté à " + ip);
-
-                    }
-                });
-    }*/
+        play.setText("Connecté à " + ip);
+    }
 }
