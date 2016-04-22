@@ -1,5 +1,6 @@
 package com.example.photobattle;
 
+import android.app.Activity;
 import android.widget.TextView;
 
 import java.io.*;
@@ -16,7 +17,12 @@ public class Server extends Thread {
     static Socket socJ1;
     static Socket socJ2;
     Command map;
-
+    static int port;
+    Activity act;
+    public Server(int port,Activity pact) {
+        Server.port = port;
+        act = pact;
+    }
 
     /**
      * Run du thread. Accepte la connexion des deux clients
@@ -37,6 +43,15 @@ public class Server extends Thread {
             // Admission du deuxième Client
             socJ2 = listenSocket.accept();
             System.out.println("Connexion from:" + socJ2.getInetAddress());
+            act.runOnUiThread(
+                    new Thread() {
+                        @Override
+                        public void run() {
+
+                            Connect_activity.connexionSucessful(socJ2.getInetAddress().toString());
+
+                        }
+                    });
             ServerThread ct2 = new ServerThread(socJ2, this);
             ct2.start();
             try {

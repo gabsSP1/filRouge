@@ -18,12 +18,12 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-public class Connect_activity extends Activity {
+public class Connect_activity extends BaseActivity {
     TextView ipLocale;
     TextView ipGlobale;
     TextView statusCo;
     Server s;
-    Button play;
+    static Button play;
     String pictureName;
     static Socket socket;
     final static int PORT = 3297;
@@ -36,7 +36,7 @@ public class Connect_activity extends Activity {
         ipLocale = (TextView) findViewById(R.id.ip_loc);
         statusCo =(TextView) findViewById(R.id.co);
 
-        s = new Server();
+        s = new Server(PORT,this);
         s.start();
         ipLocale.setText("Mon IP Locale : " + getIPLoc());
         ipGlobale.setText(getIPGlob());
@@ -49,6 +49,7 @@ public class Connect_activity extends Activity {
 
         }
         play =(Button) findViewById(R.id.bstart);
+        play.setText("En attente d'une connection...");
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,5 +135,10 @@ public class Connect_activity extends Activity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
+    }
+
+    public static void connexionSucessful(final String ip)
+    {
+        play.setText("Connecté à " + ip);
     }
 }
