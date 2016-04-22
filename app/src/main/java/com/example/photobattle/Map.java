@@ -31,7 +31,9 @@ public class Map implements Serializable {
     private pix obstacles [][];
     private int width;
     private int height;
-    private float density;
+    private int widthPi;
+    private int heightPi;
+    private static float density;
     private String pictureName;
     byte[] bytePicture;
     byte[] byteContours;
@@ -75,7 +77,8 @@ public class Map implements Serializable {
         zone = resizeKeepRatio(contours.getWidth(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
         contours = Bitmap.createScaledBitmap(contours, zone.width(), zone.height(), true);
 //        photoOriginal=Bitmap.createScaledBitmap(photoOriginal, zone.width(), zone.height(), true);
-
+        heightPi=mainGamePanel.getHeight()-2*BazarStatic.deltaHeight;
+        widthPi=mainGamePanel.getWidth()-2*BazarStatic.deltaWidth;
         height = pixelToDp(mainGamePanel.getHeight());
         width = pixelToDp(mainGamePanel.getWidth());
         obstacles = new pix [width][height];
@@ -98,7 +101,6 @@ public class Map implements Serializable {
 
         zone = new Rect(pixelToDp(zone.left), pixelToDp(zone.top), pixelToDp(zone.right), pixelToDp(zone.bottom));
 
-
     }
 
     public Rect resizeKeepRatio(int previousWidth, int previousHeight, int maxWidth, int maxHeight)
@@ -106,11 +108,10 @@ public class Map implements Serializable {
 
         Log.d(TAG, "previousWidth : " + previousWidth + "; previousHeight : " + previousHeight + "; maxWidth : " + maxWidth + "; maxHeight : " + maxHeight + ";");
         Rect newDimensions;
-        float ratioWidth;
-        float ratioHeight;
 
-        ratioWidth = (float)maxWidth/(float)previousWidth;
-        ratioHeight = (float)maxHeight/(float)previousHeight;
+
+        float ratioWidth = (float)maxWidth/(float)previousWidth;
+        float ratioHeight = (float)maxHeight/(float)previousHeight;
 
         Log.d(TAG, "ratioWidth : " +ratioWidth+ "; ratioHeight : "+ratioHeight+";");
 
@@ -121,23 +122,31 @@ public class Map implements Serializable {
         if(ratioWidth<ratioHeight)
         {
             newDimensions = new Rect(0, (int)((maxHeight-previousHeight*ratioWidth)/2), maxWidth, (int)((maxHeight+previousHeight*ratioWidth)/2));
+            BazarStatic.ratio = ratioWidth;
+            BazarStatic.deltaHeight=(int)((maxHeight-previousHeight*ratioWidth)/2);
+            BazarStatic.deltaWidth=0;
         }
         else
         {
             newDimensions = new Rect((int)((maxWidth-previousWidth*ratioHeight)/2), 0, (int)((maxWidth+previousWidth*ratioHeight)/2), maxHeight);
+            BazarStatic.ratio = ratioHeight;
+            BazarStatic.deltaHeight=0;
+            BazarStatic.deltaWidth = (int)((maxWidth-previousWidth*ratioHeight)/2);
         }
+        System.out.println("ratio:"+BazarStatic.ratio+" deltaH "+BazarStatic.deltaHeight+" deltaW"+BazarStatic.deltaWidth);
 
         Log.d(TAG,"Top : " +newDimensions.top+"; Left : " +newDimensions.left+"; Right : " +newDimensions.right+"; Bottom : " +newDimensions.bottom+";");
+//        System.out.println("Ratio :"+BazarStatic.ratio);
         return newDimensions;
     }
 
 
-    public int dpToPixel(int dp)
+    public static int dpToPixel(int dp)
     {
         return (int)(dp*density);
     }
 
-    public int pixelToDp(int pixel)
+    public static int pixelToDp(int pixel)
     {
         return (int)(pixel/density);
     }
@@ -152,6 +161,14 @@ public class Map implements Serializable {
     public int getScreenWidth() {return width;}
     public int getScreenHeigth() {return height;}
     public pix[][] getObstacles(){return obstacles;}
+
+    public int getWidthPi() {
+        return widthPi;
+    }
+
+    public int getHeightPi() {
+        return heightPi;
+    }
 
     public void convert() {
         this.contours = BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length);

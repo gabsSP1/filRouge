@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,17 +26,17 @@ public class Connect_activity extends Activity {
     Button play;
     String pictureName;
     static Socket socket;
-    final static int PORT = 1500;
+    final static int PORT = 3297;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect_activity);
-
+        FullScreencall();
         ipGlobale = (TextView) findViewById(R.id.ip_glob);
         ipLocale = (TextView) findViewById(R.id.ip_loc);
         statusCo =(TextView) findViewById(R.id.co);
 
-        s = new Server(PORT);
+        s = new Server();
         s.start();
         ipLocale.setText("Mon IP Locale : " + getIPLoc());
         ipGlobale.setText(getIPGlob());
@@ -66,16 +67,16 @@ public class Connect_activity extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            socket = Client.connect("localhost", PORT, getApplicationContext());
-            Map map = new Map(pictureName);
-            MainGamePanel.map =map;
-            BazarStatic.host =true;
-            Client.sendMap(map, socket);
             try {
                 afficherAdresse();
             } catch (SocketException e) {
                 e.printStackTrace();
             }
+            socket = Client.connect("localhost", getApplicationContext());
+            Map map = new Map(pictureName);
+            MainGamePanel.map =map;
+            BazarStatic.host =true;
+            Client.sendMap(map, socket);
             return null;
         }
 
@@ -121,5 +122,17 @@ public class Connect_activity extends Activity {
     private String getIPGlob()
     {
         return "d";
+    }
+
+    public void FullScreencall() {
+        if(Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if(Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
     }
 }

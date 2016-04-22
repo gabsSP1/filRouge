@@ -16,6 +16,8 @@ public class BazarStatic {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inDither = true;
         options.inJustDecodeBounds = true;
         System.out.println(res);
         Bitmap b=BitmapFactory.decodeFile(res);
@@ -49,4 +51,8 @@ public class BazarStatic {
 
         return inSampleSize;
     }
+
+    public static float ratio;
+    public static int deltaWidth;
+    public static int deltaHeight;
 }

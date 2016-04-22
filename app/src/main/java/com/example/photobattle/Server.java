@@ -12,13 +12,11 @@ import java.net.*;
  */
 public class Server extends Thread {
 
-    static int port;
+
     static Socket socJ1;
     static Socket socJ2;
     Command map;
-    public Server(int port) {
-        Server.port = port;
-    }
+
 
     /**
      * Run du thread. Accepte la connexion des deux clients
@@ -27,7 +25,7 @@ public class Server extends Thread {
         ServerSocket listenSocket;
 
         try {
-            listenSocket = new ServerSocket(port);
+            listenSocket = new ServerSocket(Connect_activity.PORT);
             System.out.println("Server ready...");
 
             // Admission du premier Client (l'host)

@@ -16,14 +16,13 @@ public class Client {
      *
      * @param host
      *            l'ip du serveur ("localhost" si en local)
-     * @param port
-     *            le port du serveur
+
      * @return le Socket d'échange
      */
-    public static Socket connect(String host, int port, Context context) {
+    public static Socket connect(String host,  Context context) {
         Socket serverSocket = null;
         try {
-            serverSocket = new Socket(host, port);
+            serverSocket = new Socket(host, Connect_activity.PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,9 +54,9 @@ public class Client {
             e1.printStackTrace();
         }
         if (isHost) {
-            com = new Command("setcooj2", x, y);
+            com = new Command("setcooj2", (int)((Map.dpToPixel(x)/BazarStatic.ratio-BazarStatic.deltaWidth)), (int)((Map.dpToPixel(y))/BazarStatic.ratio-BazarStatic.deltaHeight));
         } else {
-            com = new Command("setcooj1", x, y);
+            com = new Command("setcooj1",  (int)((Map.dpToPixel(x)-BazarStatic.deltaWidth)/BazarStatic.ratio), (int)((Map.dpToPixel(y)-BazarStatic.deltaHeight)/BazarStatic.ratio));
         }
 
         try {

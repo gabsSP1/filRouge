@@ -78,7 +78,7 @@ public class Personnage {
             y = map.top();
         else if(y < map.top())
             y = map.bottom();
-            this.y = y;
+        this.y = y;
     }
 
     public float getVX() {
@@ -150,9 +150,17 @@ public class Personnage {
         y = map.top();
         vitesseRatioY = map.getScreenHeigth()/360;
         vitesseRatioX = map.getScreenWidth()/640;
-        Log.d(TAG, "Sprite width :"+ sprite.getWidth()+"; height :" +sprite.getHeight()+";");
+
         //Rect zone = map.resizeKeepRatio(sprite.getHeight(), sprite.getHeight(), map.dpToPixel((map.getScreenWidth()*4)/640), map.dpToPixel((map.getScreenHeigth()*7)/360));
-        sprite = Bitmap.createScaledBitmap(sprite, map.dpToPixel((map.getScreenWidth()*14)/640), map.dpToPixel((map.getScreenHeigth()*21)/360), true);
+//        sprite = Bitmap.createScaledBitmap(sprite, map.dpToPixel((map.getScreenWidth()*14)/640), map.dpToPixel((map.getScreenHeigth()*21)/360), true);
+        if(BazarStatic.deltaWidth==0) {
+            sprite = Bitmap.createScaledBitmap(sprite, (int) (map.getWidthPi() / 50.0), (int) (1.5 * (int) (map.getWidthPi() / 50.0)), true);
+        }
+        else
+        {
+            sprite = Bitmap.createScaledBitmap(sprite, (int) (8*map.getHeightPi() / 225.0),  ((int) (12*map.getHeightPi() / 225.0)), true);
+        }
+        Log.d(TAG, "Sprite width :"+ sprite.getWidth()+"; height :" +sprite.getHeight()+";");
     }
 
 
