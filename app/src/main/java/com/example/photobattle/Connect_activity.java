@@ -17,12 +17,12 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-public class Connect_activity extends Activity {
+public class Connect_activity extends BaseActivity {
     TextView ipLocale;
     TextView ipGlobale;
     TextView statusCo;
     Server s;
-    Button play;
+    static Button play;
     String pictureName;
     static Socket socket;
     final static int PORT = 1500;
@@ -48,6 +48,7 @@ public class Connect_activity extends Activity {
 
         }
         play =(Button) findViewById(R.id.bstart);
+        play.setText("En attente d'une connection...");
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,5 +122,10 @@ public class Connect_activity extends Activity {
     private String getIPGlob()
     {
         return "d";
+    }
+
+    public static void connexionSuccess(String ip)
+    {
+        play.setText("Connexion a "+ip);
     }
 }

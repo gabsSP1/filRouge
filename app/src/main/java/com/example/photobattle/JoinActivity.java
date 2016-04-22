@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import java.net.Socket;
 
-public class JoinActivity extends Activity {
+public class JoinActivity extends BaseActivity {
     EditText editText;
     Button bjoin;
     static boolean  launch;

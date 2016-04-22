@@ -16,7 +16,7 @@ import java.io.File;
 /*
 Lance le jeu, et surtout le MainGamePanel
  */
-public class Game extends Activity {
+public class Game extends BaseActivity {
     MainGamePanel mainGamePanel;
 
     private static final String TAG = Game.class.getSimpleName();
