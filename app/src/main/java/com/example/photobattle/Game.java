@@ -37,6 +37,7 @@ public class Game extends Activity {
 //        mainGamePanel = (MainGamePanel) findViewById(R.id.panel);
 //        mainGamePanel.setMap(new Map(s));
         Log.d(TAG, "View added");
+        Sound.playFightMusic(Game.this);
     }
 
     @Override
