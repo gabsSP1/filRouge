@@ -14,7 +14,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 public class Connect_activity extends BaseActivity {
@@ -34,7 +33,8 @@ public class Connect_activity extends BaseActivity {
         ipGlobale = (TextView) findViewById(R.id.ip_glob);
         ipLocale = (TextView) findViewById(R.id.ip_loc);
         statusCo =(TextView) findViewById(R.id.co);
-
+        play =(Button) findViewById(R.id.bstart);
+        play.setText("En attente d'une connection...");
         s = new Server(PORT);
         s.start();
         ipLocale.setText("Mon IP Locale : " + getIPLoc());
@@ -47,8 +47,6 @@ public class Connect_activity extends BaseActivity {
             pictureName = intent.getStringExtra("selected_file");
 
         }
-        play =(Button) findViewById(R.id.bstart);
-        play.setText("En attente d'une connection...");
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,8 +122,16 @@ public class Connect_activity extends BaseActivity {
         return "d";
     }
 
-    public static void connexionSuccess(String ip)
+    /*public void connectionSucessful(final String ip)
     {
-        play.setText("Connexion a "+ip);
-    }
+        runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                        play.setText("Connecté à " + ip);
+
+                    }
+                });
+    }*/
 }

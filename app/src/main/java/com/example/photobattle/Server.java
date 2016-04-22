@@ -1,5 +1,7 @@
 package com.example.photobattle;
 
+import android.app.Activity;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.*;
@@ -19,6 +21,7 @@ public class Server extends Thread {
     public Server(int port) {
         Server.port = port;
     }
+
 
     /**
      * Run du thread. Accepte la connexion des deux clients
