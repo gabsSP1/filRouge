@@ -1,5 +1,6 @@
 package com.example.photobattle;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,9 +15,11 @@ import java.net.Socket;
 public class ClientThread extends Thread {
     Context context;
     private Socket serverSocket;
-    ClientThread(Socket s, Context context) {
+    Activity act;
+    ClientThread(Socket s, Context context, Activity act) {
         serverSocket = s;
         this.context=context;
+        this.act = act;
     }
 
     /**
@@ -41,6 +44,15 @@ public class ClientThread extends Thread {
                 if (com.getTypeAction().equals("sendmap")) {
                     MainGamePanel.map = com.getMap();
                     MainGamePanel.map.convert();
+                    Command conf = new Command("okmap", 0 , 0);
+                    ObjectOutputStream oos = null;
+                    try {
+                        oos = new ObjectOutputStream(serverSocket.getOutputStream());
+                        oos.writeObject(conf);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 }
 
                 if (com.getTypeAction().equals("launch")) {
@@ -48,6 +60,17 @@ public class ClientThread extends Thread {
                     intentMyAccount.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intentMyAccount);
                 }
+
+                if (com.getTypeAction().equals("okmap")) act.runOnUiThread(
+                        new Thread() {
+                            @Override
+                            public void run() {
+
+                                Connect_activity.addToLog("Map reçue, jeu prêt");
+                                Connect_activity.permitLaunch();
+
+                            }
+                        });
             }
 
         } catch (IOException e) {

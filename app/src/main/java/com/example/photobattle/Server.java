@@ -1,7 +1,6 @@
 package com.example.photobattle;
 
 import android.app.Activity;
-import android.widget.TextView;
 
 import java.io.*;
 import java.net.*;
@@ -43,12 +42,13 @@ public class Server extends Thread {
             // Admission du deuxième Client
             socJ2 = listenSocket.accept();
             System.out.println("Connexion from:" + socJ2.getInetAddress());
+            sendLog("Connecté à " + socJ2.getInetAddress());
             act.runOnUiThread(
                     new Thread() {
                         @Override
                         public void run() {
 
-                            Connect_activity.connexionSucessful(socJ2.getInetAddress().toString());
+                            Connect_activity.connexionSucessful();
 
                         }
                     });
@@ -56,13 +56,16 @@ public class Server extends Thread {
             ct2.start();
             try {
                 ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
+                sendLog("Envoi de la map");
                 socOut.writeObject(map);
+                sendLog("Map envoyée");
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                System.err.println("Erreur lors de l'envoi de la map");
+                sendLog("Erreur lors de l'envoi de la map");
             }
         } catch (Exception e) {
             System.err.println("Error in Server:" + e);
+            sendLog("Erreur lors du lancement du serveur");
         }
     }
 
@@ -74,40 +77,63 @@ public class Server extends Thread {
      */
     public void sendCommand(Command com) {
         // Si on veut bouger un joueur sur l'écran du J1
-        if (com.getTypeAction().equals("setcooj1")) {
-            try {
-                ObjectOutputStream socOut = new ObjectOutputStream(socJ1.getOutputStream());
-                socOut.writeObject(com);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+        switch (com.getTypeAction()) {
+            case "setcooj1":
+                try {
+                    ObjectOutputStream socOut = new ObjectOutputStream(socJ1.getOutputStream());
+                    socOut.writeObject(com);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
 
-        // Si on veut bouger un joueur sur l'écran du J2
-        else if (com.getTypeAction().equals("setcooj2")) {
-            try {
-                ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
-                socOut.writeObject(com);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            // Si on veut bouger un joueur sur l'écran du J2
+            case "setcooj2":
+                try {
+                    ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
+                    socOut.writeObject(com);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case "launch":
+                try {
+                    ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
+                    socOut.writeObject(com);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case "okmap":
+                try {
+                    ObjectOutputStream socOut = new ObjectOutputStream(socJ1.getOutputStream());
+                    socOut.writeObject(com);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            //Si on envoie la map
+            case "sendmap":
+                map = com;
+                break;
         }
-        else if(com.getTypeAction().equals("launch"))
-        {
-            try {
-                ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
-                socOut.writeObject(com);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        //Si on envoie la map
-        else if (com.getTypeAction().equals("sendmap")) {
-            map=com;
-        }
+    }
+
+    public void sendLog(final String s)
+    {
+        act.runOnUiThread(
+                new Thread() {
+                    @Override
+                    public void run() {
+
+                        Connect_activity.addToLog(s);
+
+                    }
+                });
     }
 
 }
