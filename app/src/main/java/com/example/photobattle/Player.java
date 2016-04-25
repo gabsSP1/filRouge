@@ -1,7 +1,6 @@
 package com.example.photobattle;
 
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -11,6 +10,8 @@ import org.andengine.extension.physics.box2d.PhysicsConnector;
 import org.andengine.extension.physics.box2d.PhysicsFactory;
 import org.andengine.extension.physics.box2d.PhysicsWorld;
 import org.andengine.extension.physics.box2d.util.constants.PhysicsConstants;
+import org.andengine.opengl.texture.region.ITiledTextureRegion;
+import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 
@@ -24,9 +25,9 @@ public class Player extends AnimatedSprite
     private final int height =128;
     private final int width =64;;
     private Body body;
-    float vX;
-    float vY;
-    Map map;
+    private float vX;
+    private float vY;
+    private Map map;
     private etatPerso etat;
 
     private final float GRAVITY = 1f;
@@ -38,20 +39,28 @@ public class Player extends AnimatedSprite
     // CONSTRUCTOR
     // ---------------------------------------------
 
-    public Player(float pX, float pY, VertexBufferObjectManager vbo, Camera camera, PhysicsWorld physicsWorld)
+    public Player(float pX, float pY, VertexBufferObjectManager vbo, ITiledTextureRegion textureRegion, Camera camera, PhysicsWorld physicsWorld, boolean j1)
     {
-        super(pX, pY, Game.PlayerRegion, vbo);
+        super(pX, pY, textureRegion, vbo);
         map =BazarStatic.map;
         vX = 0.0f;
         vY = 0.0f;
         etat = etatPerso.JUMP;
-        createPhysics(camera, physicsWorld);
+        if(j1)
+        {
+            createPhysicsJ1(physicsWorld);
+        }
+        else
+        {
+            createPhysicsJ2(physicsWorld);
+        }
     }
 
-    private void createPhysics(final Camera camera, PhysicsWorld physicsWorld)
+
+    private void createPhysicsJ2(PhysicsWorld physicsWorld)
     {
         body = PhysicsFactory.createBoxBody(physicsWorld, this, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
-        body.setUserData("player");
+        body.setUserData("per2");
         body.setFixedRotation(false);
 
         physicsWorld.registerPhysicsConnector(new PhysicsConnector(this, body, true, false)
@@ -60,43 +69,30 @@ public class Player extends AnimatedSprite
             public void onUpdate(float pSecondsElapsed)
             {
                 super.onUpdate(pSecondsElapsed);
-////                camera.onUpdate(0.1f);
-//
-//                float yVel = body.getLinearVelocity().y;
-//                float xVel = body.getLinearVelocity().x;
-//                if (getpY()+ height < 0)
-//                {
-//                    setpY(Game.CAMERA_HEIGHT);
-//                    System.out.println(body.getPosition().x*PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT+" "+body.getPosition().y*PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT);
-//                }
-//                else if(getpY()>Game.CAMERA_HEIGHT)
-//                {
-////                    System.out.println(body.getPosition().x*PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT+" "+body.getPosition().y*PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT);
-//                  setpY(-height);
-//                }
-//
-//                else if (getpX()+ width < 0)
-//                {
-//                   setpX(Game.CAMERA_WIDTH);
-//                }
-//                else if(getpX()>Game.CAMERA_WIDTH)
-//                {
-//                    setpX(-width);
-//                }
-//                body.setLinearVelocity(new Vector2(Game.dirX, Game.dirY));
-//                if(yVel > maxYSpeed)
-//                {
-//                    body.setLinearVelocity(new Vector2( xVel , maxYSpeed ));
-//                }
-                
+                System.out.println("x : "+getpX()+" Vx : "+vX+" y:"+getpY()+" vY "+vY);
+            }
+        });
+    }
+
+    private void createPhysicsJ1(PhysicsWorld physicsWorld)
+    {
+        body = PhysicsFactory.createBoxBody(physicsWorld, this, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
+        body.setUserData("per");
+        body.setFixedRotation(false);
+
+        physicsWorld.registerPhysicsConnector(new PhysicsConnector(this, body, true, false)
+        {
+            @Override
+            public void onUpdate(float pSecondsElapsed)
+            {
+                super.onUpdate(pSecondsElapsed);
                 int x=(int)(getpX()+ vX);
                  setVY((vY + GRAVITY));
                 int y =(int)(getpY()+ vY);
-                System.out.println("x : "+x+" Vx : "+vX+" y:"+y+" vY "+vY);
+
                 setpY(y);
                 setpX(x);
                 move(x,y);
-
 
             }
         });
@@ -328,7 +324,8 @@ public class Player extends AnimatedSprite
 
 
         }
-
+        if(BazarStatic.onLine)
+        Client.sendCoordinates(x, y, BazarStatic.host, Connect_activity.socket);
          setpX(x);
         setpY(y);
 

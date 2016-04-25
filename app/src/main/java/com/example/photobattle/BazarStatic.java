@@ -11,6 +11,7 @@ import android.provider.Settings;
 public class BazarStatic {
     public static boolean host;
     public static Map map;
+    public static boolean onLine =false;
 
     public static Bitmap decodeSampledBitmapFromResource(String res
                                                          , int reqHeight) {
@@ -53,7 +54,5 @@ public class BazarStatic {
         return inSampleSize;
     }
 
-    public static float ratio;
-    public static int deltaWidth;
-    public static int deltaHeight;
+
 }

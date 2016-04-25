@@ -57,7 +57,7 @@ public class Server extends Thread {
             try {
                 ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
                 sendLog("Envoi de la map");
-                socOut.writeObject(map);
+                socOut.writeObject(new Command(BazarStatic.map));
                 sendLog("Map envoyée");
             } catch (IOException e) {
                 System.err.println("Erreur lors de l'envoi de la map");

@@ -44,12 +44,6 @@ public class Connect_activity extends BaseActivity {
         ipGlobale.setText(getIPGlob());
         LaunchClient l =new LaunchClient();
         l.execute();
-        Intent intent = getIntent();
-        if (intent != null) {
-
-            pictureName = intent.getStringExtra("selected_file");
-
-        }
         play =(Button) findViewById(R.id.bstart);
         play.setText("En attente d'une connection...");
         play.setClickable(false);
@@ -57,8 +51,8 @@ public class Connect_activity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Client.lauch(socket);
+                BazarStatic.onLine =true;
                 Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
-                intentMyAccount.putExtra("selected_file", pictureName);
                 startActivity(intentMyAccount);
             }
         });
@@ -77,10 +71,8 @@ public class Connect_activity extends BaseActivity {
                 e.printStackTrace();
             }
             socket = Client.connect("localhost", getApplicationContext(), Connect_activity.this);
-            Map map = new Map(pictureName);
-            BazarStatic.map =map;
+            System.out.println("pictureaName");
             BazarStatic.host =true;
-            Client.sendMap(map, socket);
             return null;
         }
 
