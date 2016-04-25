@@ -22,6 +22,7 @@ public class Connect_activity extends BaseActivity {
     TextView ipLocale;
     TextView ipGlobale;
     TextView statusCo;
+    static TextView logConnexion;
     Server s;
     static Button play;
     String pictureName;
@@ -35,6 +36,7 @@ public class Connect_activity extends BaseActivity {
         ipGlobale = (TextView) findViewById(R.id.ip_glob);
         ipLocale = (TextView) findViewById(R.id.ip_loc);
         statusCo =(TextView) findViewById(R.id.co);
+        logConnexion =(TextView) findViewById(R.id.log);
 
         s = new Server(PORT,this);
         s.start();
@@ -50,6 +52,7 @@ public class Connect_activity extends BaseActivity {
         }
         play =(Button) findViewById(R.id.bstart);
         play.setText("En attente d'une connection...");
+        play.setClickable(false);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +76,7 @@ public class Connect_activity extends BaseActivity {
             } catch (SocketException e) {
                 e.printStackTrace();
             }
-            socket = Client.connect("localhost", getApplicationContext());
+            socket = Client.connect("localhost", getApplicationContext(), Connect_activity.this);
             Map map = new Map(pictureName);
             BazarStatic.map =map;
             BazarStatic.host =true;
@@ -137,8 +140,19 @@ public class Connect_activity extends BaseActivity {
         }
     }
 
-    public static void connexionSucessful(final String ip)
+    public static void connexionSucessful()
     {
-        play.setText("Connecté à " + ip);
+        play.setText("Connecté...");
+    }
+
+    public static void addToLog(String s)
+    {
+        logConnexion.setText(logConnexion.getText()+"\n" + s);
+    }
+
+    public static void permitLaunch()
+    {
+        play.setClickable(true);
+        play.setText("Lancer le jeu");
     }
 }

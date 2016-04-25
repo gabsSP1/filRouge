@@ -57,7 +57,7 @@ public class JoinActivity extends BaseActivity {
                 e.printStackTrace();
             }
             BazarStatic.host =false;
-            Connect_activity.socket = Client.connect(host, getApplicationContext());
+            Connect_activity.socket = Client.connect(host, getApplicationContext(),null);
             return null;
         }
     }

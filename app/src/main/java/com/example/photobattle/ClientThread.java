@@ -1,5 +1,6 @@
 package com.example.photobattle;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,9 +15,11 @@ import java.net.Socket;
 public class ClientThread extends Thread {
     Context context;
     private Socket serverSocket;
-    ClientThread(Socket s, Context context) {
+    Activity act;
+    ClientThread(Socket s, Context context, Activity act) {
         serverSocket = s;
         this.context=context;
+        this.act = act;
     }
 
     /**
@@ -33,14 +36,23 @@ public class ClientThread extends Thread {
 
                 // Si la commande est un déplacement de l'autre joueur
                 if (com.getTypeAction().startsWith("setcoo")) {
-                    /*MainGamePanel.persoTwo.setX(Map.pixelToDp((int)(com.getcoordX()*BazarStatic.ratio+BazarStatic.deltaWidth)));
-                    MainGamePanel.persoTwo.setY(Map.pixelToDp((int)(com.getcoordY()*BazarStatic.ratio+BazarStatic.deltaHeight)));*/
+                    MainGamePanel.persoTwo.setX(Map.pixelToDp((int)(com.getcoordX()*BazarStatic.ratio+BazarStatic.deltaWidth)));
+                    MainGamePanel.persoTwo.setY(Map.pixelToDp((int)(com.getcoordY()*BazarStatic.ratio+BazarStatic.deltaHeight)));
                 }
 
                 //Si la commande est un envoie de map
                 if (com.getTypeAction().equals("sendmap")) {
-                    BazarStatic.map = com.getMap();
-                    BazarStatic.map.convert();
+                    MainGamePanel.map = com.getMap();
+                    MainGamePanel.map.convert();
+                    Command conf = new Command("okmap", 0 , 0);
+                    ObjectOutputStream oos = null;
+                    try {
+                        oos = new ObjectOutputStream(serverSocket.getOutputStream());
+                        oos.writeObject(conf);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 }
 
                 if (com.getTypeAction().equals("launch")) {
@@ -48,6 +60,17 @@ public class ClientThread extends Thread {
                     intentMyAccount.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intentMyAccount);
                 }
+
+                if (com.getTypeAction().equals("okmap")) act.runOnUiThread(
+                        new Thread() {
+                            @Override
+                            public void run() {
+
+                                Connect_activity.addToLog("Map reçue, jeu prêt");
+                                Connect_activity.permitLaunch();
+
+                            }
+                        });
             }
 
         } catch (IOException e) {
