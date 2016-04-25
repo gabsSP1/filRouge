@@ -33,14 +33,14 @@ public class ClientThread extends Thread {
 
                 // Si la commande est un déplacement de l'autre joueur
                 if (com.getTypeAction().startsWith("setcoo")) {
-                    MainGamePanel.persoTwo.setX(Map.pixelToDp((int)(com.getcoordX()*BazarStatic.ratio+BazarStatic.deltaWidth)));
-                    MainGamePanel.persoTwo.setY(Map.pixelToDp((int)(com.getcoordY()*BazarStatic.ratio+BazarStatic.deltaHeight)));
+                    /*MainGamePanel.persoTwo.setX(Map.pixelToDp((int)(com.getcoordX()*BazarStatic.ratio+BazarStatic.deltaWidth)));
+                    MainGamePanel.persoTwo.setY(Map.pixelToDp((int)(com.getcoordY()*BazarStatic.ratio+BazarStatic.deltaHeight)));*/
                 }
 
                 //Si la commande est un envoie de map
                 if (com.getTypeAction().equals("sendmap")) {
-                    MainGamePanel.map = com.getMap();
-                    MainGamePanel.map.convert();
+                    BazarStatic.map = com.getMap();
+                    BazarStatic.map.convert();
                 }
 
                 if (com.getTypeAction().equals("launch")) {

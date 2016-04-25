@@ -59,28 +59,8 @@ public class Map implements Serializable {
         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
         photoOriginal.compress(Bitmap.CompressFormat.PNG, 100, stream2);
         bytePicture = stream.toByteArray();
-
-    }
-
-
-    public void draw(Canvas canvas)
-    {
-        canvas.drawBitmap(contours, dpToPixel(zone.left), dpToPixel(zone.top), null);
-    }
-
-    public void init(MainGamePanel mainGamePanel)
-    {
-
-
-
-        density = mainGamePanel.getDensity();
-        zone = resizeKeepRatio(contours.getWidth(), contours.getHeight(), mainGamePanel.getWidth(), mainGamePanel.getHeight());
-        contours = Bitmap.createScaledBitmap(contours, zone.width(), zone.height(), true);
-//        photoOriginal=Bitmap.createScaledBitmap(photoOriginal, zone.width(), zone.height(), true);
-        heightPi=mainGamePanel.getHeight()-2*BazarStatic.deltaHeight;
-        widthPi=mainGamePanel.getWidth()-2*BazarStatic.deltaWidth;
-        height = pixelToDp(mainGamePanel.getHeight());
-        width = pixelToDp(mainGamePanel.getWidth());
+        width = contours.getWidth();
+        height = contours.getHeight();
         obstacles = new pix [width][height];
 
         for(int i = 0; i < width; i++)
@@ -90,89 +70,40 @@ public class Map implements Serializable {
                 obstacles[i][j] = pix.VIDE;
             }
         }
-        for(int i = 0; i < contours.getWidth(); i++)
+        int p = 0;
+        for(int i = 0; i < width; i++)
         {
-            for(int j = 0; j < contours.getHeight(); j++)
+            for(int j = 0; j < height; j++)
             {
-                if(contours.getPixel(i,j) != Color.WHITE)
-                    obstacles[pixelToDp(i+zone.left)][pixelToDp(j+zone.top)] = pix.GROUND;
+                if(contours.getPixel(i,j) != Color.WHITE) {
+                    obstacles[i][j] = pix.GROUND;
+                    p++;
+                }
             }
         }
-
-        zone = new Rect(pixelToDp(zone.left), pixelToDp(zone.top), pixelToDp(zone.right), pixelToDp(zone.bottom));
+        System.out.println(p);
 
     }
 
-    public Rect resizeKeepRatio(int previousWidth, int previousHeight, int maxWidth, int maxHeight)
-    {
-
-        Log.d(TAG, "previousWidth : " + previousWidth + "; previousHeight : " + previousHeight + "; maxWidth : " + maxWidth + "; maxHeight : " + maxHeight + ";");
-        Rect newDimensions;
 
 
-        float ratioWidth = (float)maxWidth/(float)previousWidth;
-        float ratioHeight = (float)maxHeight/(float)previousHeight;
-
-        Log.d(TAG, "ratioWidth : " +ratioWidth+ "; ratioHeight : "+ratioHeight+";");
-
-
-
-        Log.d(TAG, "(2) ratioWidth : " + ratioWidth + "; (2) ratioHeight : " + ratioHeight + ";");
-
-        if(ratioWidth<ratioHeight)
-        {
-            newDimensions = new Rect(0, (int)((maxHeight-previousHeight*ratioWidth)/2), maxWidth, (int)((maxHeight+previousHeight*ratioWidth)/2));
-            BazarStatic.ratio = ratioWidth;
-            BazarStatic.deltaHeight=(int)((maxHeight-previousHeight*ratioWidth)/2);
-            BazarStatic.deltaWidth=0;
-        }
-        else
-        {
-            newDimensions = new Rect((int)((maxWidth-previousWidth*ratioHeight)/2), 0, (int)((maxWidth+previousWidth*ratioHeight)/2), maxHeight);
-            BazarStatic.ratio = ratioHeight;
-            BazarStatic.deltaHeight=0;
-            BazarStatic.deltaWidth = (int)((maxWidth-previousWidth*ratioHeight)/2);
-        }
-        System.out.println("ratio:"+BazarStatic.ratio+" deltaH "+BazarStatic.deltaHeight+" deltaW"+BazarStatic.deltaWidth);
-
-        Log.d(TAG,"Top : " +newDimensions.top+"; Left : " +newDimensions.left+"; Right : " +newDimensions.right+"; Bottom : " +newDimensions.bottom+";");
-//        System.out.println("Ratio :"+BazarStatic.ratio);
-        return newDimensions;
+    public Bitmap getContours() {
+        return contours;
     }
 
 
-    public static int dpToPixel(int dp)
-    {
-        return (int)(dp*density);
-    }
-
-    public static int pixelToDp(int pixel)
-    {
-        return (int)(pixel/density);
-    }
 
 
-    public int left(){ return zone.left;}
-    public int right(){ return zone.right;}
-    public int top(){ return zone.top;}
-    public int bottom(){ return zone.bottom;}
-    public int width(){ return zone.width();}
-    public int height(){ return zone.height();}
-    public int getScreenWidth() {return width;}
-    public int getScreenHeigth() {return height;}
     public pix[][] getObstacles(){return obstacles;}
 
-    public int getWidthPi() {
-        return widthPi;
-    }
-
-    public int getHeightPi() {
-        return heightPi;
-    }
 
     public void convert() {
         this.contours = BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length);
         this.photoOriginal = BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length);
+    }
+
+    public Bitmap getPhotoOriginal() {
+        return photoOriginal;
     }
 
     //    private void writeObject(ObjectOutputStream out) throws IOException {

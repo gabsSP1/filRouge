@@ -43,15 +43,6 @@ public class Server extends Thread {
             // Admission du deuxième Client
             socJ2 = listenSocket.accept();
             System.out.println("Connexion from:" + socJ2.getInetAddress());
-            act.runOnUiThread(
-                    new Thread() {
-                        @Override
-                        public void run() {
-
-                            Connect_activity.connexionSucessful(socJ2.getInetAddress().toString());
-
-                        }
-                    });
             ServerThread ct2 = new ServerThread(socJ2, this);
             ct2.start();
             try {
@@ -64,6 +55,15 @@ public class Server extends Thread {
         } catch (Exception e) {
             System.err.println("Error in Server:" + e);
         }
+        act.runOnUiThread(
+                new Thread() {
+                    @Override
+                    public void run() {
+
+                        Connect_activity.connexionSucessful(socJ2.getInetAddress().toString());
+
+                    }
+                });
     }
 
     /**

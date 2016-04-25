@@ -45,12 +45,12 @@ containing a value of this type.
         public static final int show_fps=0x7f010000;
     }
     public static final class color {
-        public static final int default_color=0x7f070000;
-        public static final int pressed_color=0x7f070001;
+        public static final int default_color=0x7f080000;
+        public static final int pressed_color=0x7f080001;
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
         public static final int back_icon=0x7f020000;
@@ -72,44 +72,44 @@ containing a value of this type.
         public static final int take_picture_icon=0x7f020010;
     }
     public static final class id {
-        public static final int Delete=0x7f0a0025;
-        public static final int Settings=0x7f0a001c;
-        public static final int action_settings=0x7f0a0022;
-        public static final int any=0x7f0a0000;
-        public static final int back=0x7f0a0001;
-        public static final int back_chooseMap=0x7f0a0019;
-        public static final int back_edit=0x7f0a000b;
-        public static final int bjoin=0x7f0a000e;
-        public static final int bstart=0x7f0a0006;
-        public static final int button_delete=0x7f0a0018;
-        public static final int button_edit=0x7f0a0015;
-        public static final int button_online=0x7f0a0013;
-        public static final int button_start=0x7f0a0014;
-        public static final int co=0x7f0a0005;
-        public static final int feeds=0x7f0a0023;
-        public static final int friends=0x7f0a0024;
-        public static final int front=0x7f0a0002;
-        public static final int image_name=0x7f0a0020;
-        public static final int image_view_layout=0x7f0a001f;
-        public static final int import_picture=0x7f0a0017;
-        public static final int ip_glob=0x7f0a0004;
-        public static final int ip_loc=0x7f0a0003;
-        public static final int ipfield=0x7f0a000d;
-        public static final int join=0x7f0a001d;
-        public static final int label=0x7f0a000f;
-        public static final int linearLayout=0x7f0a0012;
-        public static final int mainlayout=0x7f0a0007;
-        public static final int mapName=0x7f0a0008;
-        public static final int no_picture=0x7f0a0010;
-        public static final int pager=0x7f0a0011;
-        public static final int panel=0x7f0a001e;
-        public static final int param1=0x7f0a000c;
-        public static final int param2=0x7f0a000a;
-        public static final int pictureEdit=0x7f0a0009;
-        public static final int play_menu=0x7f0a001a;
-        public static final int progressBar=0x7f0a0021;
-        public static final int sound=0x7f0a001b;
-        public static final int take_picture=0x7f0a0016;
+        public static final int Delete=0x7f0b0025;
+        public static final int Settings=0x7f0b001c;
+        public static final int action_settings=0x7f0b0022;
+        public static final int any=0x7f0b0000;
+        public static final int back=0x7f0b0001;
+        public static final int back_chooseMap=0x7f0b0019;
+        public static final int back_edit=0x7f0b000b;
+        public static final int bjoin=0x7f0b000e;
+        public static final int bstart=0x7f0b0006;
+        public static final int button_delete=0x7f0b0018;
+        public static final int button_edit=0x7f0b0015;
+        public static final int button_online=0x7f0b0013;
+        public static final int button_start=0x7f0b0014;
+        public static final int co=0x7f0b0005;
+        public static final int feeds=0x7f0b0023;
+        public static final int friends=0x7f0b0024;
+        public static final int front=0x7f0b0002;
+        public static final int image_name=0x7f0b0020;
+        public static final int image_view_layout=0x7f0b001f;
+        public static final int import_picture=0x7f0b0017;
+        public static final int ip_glob=0x7f0b0004;
+        public static final int ip_loc=0x7f0b0003;
+        public static final int ipfield=0x7f0b000d;
+        public static final int join=0x7f0b001d;
+        public static final int label=0x7f0b000f;
+        public static final int linearLayout=0x7f0b0012;
+        public static final int mainlayout=0x7f0b0007;
+        public static final int mapName=0x7f0b0008;
+        public static final int no_picture=0x7f0b0010;
+        public static final int pager=0x7f0b0011;
+        public static final int panel=0x7f0b001e;
+        public static final int param1=0x7f0b000c;
+        public static final int param2=0x7f0b000a;
+        public static final int pictureEdit=0x7f0b0009;
+        public static final int play_menu=0x7f0b001a;
+        public static final int progressBar=0x7f0b0021;
+        public static final int sound=0x7f0b001b;
+        public static final int take_picture=0x7f0b0016;
     }
     public static final class layout {
         public static final int activity_connect_activity=0x7f030000;
@@ -122,19 +122,23 @@ containing a value of this type.
         public static final int layout_loading=0x7f030007;
     }
     public static final class menu {
-        public static final int map=0x7f090000;
-        public static final int menu_app=0x7f090001;
+        public static final int map=0x7f0a0000;
+        public static final int menu_app=0x7f0a0001;
+    }
+    public static final class raw {
+        public static final int mus_fight=0x7f050000;
+        public static final int open=0x7f050001;
     }
     public static final class string {
-        public static final int action_settings=0x7f080000;
-        public static final int app_name=0x7f080001;
-        public static final int hello_world=0x7f080002;
-        public static final int no=0x7f080003;
-        public static final int title_activity_edit=0x7f080004;
-        public static final int title_activity_game=0x7f080005;
-        public static final int title_activity_map=0x7f080006;
-        public static final int title_activity_menu_app=0x7f080007;
-        public static final int yes=0x7f080008;
+        public static final int action_settings=0x7f090000;
+        public static final int app_name=0x7f090001;
+        public static final int hello_world=0x7f090002;
+        public static final int no=0x7f090003;
+        public static final int title_activity_edit=0x7f090004;
+        public static final int title_activity_game=0x7f090005;
+        public static final int title_activity_map=0x7f090006;
+        public static final int title_activity_menu_app=0x7f090007;
+        public static final int yes=0x7f090008;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 
@@ -145,10 +149,10 @@ containing a value of this type.
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
     public static final class styleable {
         /** Attributes that can be used with a CameraBridgeViewBase.

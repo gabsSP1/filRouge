@@ -10,6 +10,7 @@ import android.provider.Settings;
  */
 public class BazarStatic {
     public static boolean host;
+    public static Map map;
 
     public static Bitmap decodeSampledBitmapFromResource(String res
                                                          , int reqHeight) {

@@ -1,182 +1,26 @@
 [
     {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_slide_out_top.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim_button.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim_button.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_slide_out_bottom.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_popup_exit.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_right.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
     },
     {
-        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_right.xml",
-        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
-    },
-    {
-        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim_button.xml",
-        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim_button.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_popup_enter.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
-    },
-    {
-        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim.xml",
-        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim_button.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim_button.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_fade_out.xml"
-    },
-    {
-        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
-        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_slide_in_top.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
-        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim_button.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\anim_button.xml"
     },
     {
-        "merged": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
-    },
-    {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\Gabriel\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\C:\\Users\\gab\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
-        "merged": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim_button.xml",
-        "source": "C:\\home\\akainiro\\AndroidStudioProjects\\filRouge\\E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim_button.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
     }
 ]

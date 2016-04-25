@@ -75,7 +75,7 @@ public class Connect_activity extends BaseActivity {
             }
             socket = Client.connect("localhost", getApplicationContext());
             Map map = new Map(pictureName);
-            MainGamePanel.map =map;
+            BazarStatic.map =map;
             BazarStatic.host =true;
             Client.sendMap(map, socket);
             return null;

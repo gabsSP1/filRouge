@@ -47,23 +47,23 @@ public class Client {
     public static void sendCoordinates(int x, int y, boolean isHost, Socket serverSocket) {
         Command com;
         ObjectOutputStream oos = null;
-        try {
-            oos = new ObjectOutputStream(serverSocket.getOutputStream());
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        if (isHost) {
-            com = new Command("setcooj2", (int)((Map.dpToPixel(x)/BazarStatic.ratio-BazarStatic.deltaWidth)), (int)((Map.dpToPixel(y))/BazarStatic.ratio-BazarStatic.deltaHeight));
-        } else {
-            com = new Command("setcooj1",  (int)((Map.dpToPixel(x)-BazarStatic.deltaWidth)/BazarStatic.ratio), (int)((Map.dpToPixel(y)-BazarStatic.deltaHeight)/BazarStatic.ratio));
-        }
-
-        try {
-            oos.writeObject(com);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+//        } catch (IOException e1) {
+//            // TODO Auto-generated catch block
+//            e1.printStackTrace();
+//        }
+////        if (isHost) {
+////            com = new Command("setcooj2", (int)((Map.dpToPixel(x)/BazarStatic.ratio-BazarStatic.deltaWidth)), (int)((Map.dpToPixel(y))/BazarStatic.ratio-BazarStatic.deltaHeight));
+////        } else {
+////            com = new Command("setcooj1",  (int)((Map.dpToPixel(x)-BazarStatic.deltaWidth)/BazarStatic.ratio), (int)((Map.dpToPixel(y)-BazarStatic.deltaHeight)/BazarStatic.ratio));
+////        }
+//
+//        try {
+//            oos.writeObject(com);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**

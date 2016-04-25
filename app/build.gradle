@@ -18,6 +18,9 @@ android {
 }
 
 dependencies {
+    compile project(':andEngine')
+    compile project(':andEnginePhysicsBox2DExtension')
     compile project(':openCVLibrary310')
     compile 'com.android.support:support-v4:23.0.+'
+    compile files('src/main/res/lib.jar')
 }
