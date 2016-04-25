@@ -69,7 +69,7 @@ public class Player extends AnimatedSprite
             public void onUpdate(float pSecondsElapsed)
             {
                 super.onUpdate(pSecondsElapsed);
-                System.out.println("x : "+getpX()+" Vx : "+vX+" y:"+getpY()+" vY "+vY);
+
             }
         });
     }
@@ -89,7 +89,10 @@ public class Player extends AnimatedSprite
                 int x=(int)(getpX()+ vX);
                  setVY((vY + GRAVITY));
                 int y =(int)(getpY()+ vY);
+                if(BazarStatic.onLine) {
+                    Client.sendCoordinates(getpX(), getpY(), true, Connect_activity.socket);
 
+                }
                 setpY(y);
                 setpX(x);
                 move(x,y);
@@ -109,7 +112,7 @@ public class Player extends AnimatedSprite
     }
 
 
-    private void setpX(int x)
+    public void setpX(int x)
     {
         if (x+ height < 0)
         {
@@ -122,7 +125,7 @@ public class Player extends AnimatedSprite
         body.setTransform((x+width/2)/PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, body.getPosition().y, 0);
     }
 
-    private void setpY(int y)
+    public void setpY(int y)
     {
         if (y+ height < 0)
         {
@@ -324,8 +327,7 @@ public class Player extends AnimatedSprite
 
 
         }
-        if(BazarStatic.onLine)
-        Client.sendCoordinates(x, y, BazarStatic.host, Connect_activity.socket);
+
          setpX(x);
         setpY(y);
 

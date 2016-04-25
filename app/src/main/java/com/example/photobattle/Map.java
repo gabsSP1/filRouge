@@ -34,9 +34,9 @@ public class Map implements Serializable {
     public Map(String pictureName)
     {
         contours =  BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
-                ,  650);
+                ,  1080);
         photoOriginal =BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
-                ,  650);
+                ,  1080);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         contours.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byteContours = stream.toByteArray();

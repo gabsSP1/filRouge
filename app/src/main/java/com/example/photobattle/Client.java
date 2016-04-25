@@ -54,11 +54,14 @@ public class Client {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        if (isHost) {
+        if(BazarStatic.host) {
             com = new Command("setcooj2", x, y);
-        } else {
-            com = new Command("setcooj1",  x, y);
         }
+        else
+        {
+            com = new Command("setcooj1", x, y);
+        }
+
 
         try {
             oos.writeObject(com);

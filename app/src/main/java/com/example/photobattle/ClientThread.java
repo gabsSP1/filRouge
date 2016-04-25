@@ -34,8 +34,11 @@ public class ClientThread extends Thread {
                 ObjectInputStream ois = new ObjectInputStream(serverSocket.getInputStream());
                 com =  (Command) ois.readObject();
                     if (com.getTypeAction().startsWith("setcoo")) {
-                        GameScene.persoTwo.setX(com.getcoordX());
-                        GameScene.persoTwo.setY(com.getcoordY());
+                        if(GameScene.persoTwo!=null) {
+                            GameScene.persoTwo.setpX(com.getcoordX());
+                            GameScene.persoTwo.setpY(com.getcoordY());
+                            System.out.println("rec" + " " + com.getcoordX() + " " + com.getcoordY());
+                        }
                     }
 
                     //Si la commande est un envoie de map

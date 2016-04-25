@@ -56,6 +56,7 @@ public class GameScene extends Scene {
         if (BazarStatic.onLine)
         {
             persoTwo = new Player(50f, 50f, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, false);
+            this.attachChild(persoTwo);
         }
         System.out.println(persoTwo);
         int width = BazarStatic.map.getContours().getWidth();
@@ -64,7 +65,7 @@ public class GameScene extends Scene {
 
 
         this.attachChild(persoOne);
-        this.attachChild(persoTwo);
+
     }
 
 

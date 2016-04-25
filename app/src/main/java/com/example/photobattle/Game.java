@@ -41,7 +41,8 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas backgroundTexture;
     private ITiledTextureRegion playerOneTextureRegion;
     private ITiledTextureRegion playerTwoTextureRegion;
-    private BitmapTextureAtlas playerTexture;
+    private BitmapTextureAtlas playerTexture1;
+    private BitmapTextureAtlas playerTexture2;
 
     private JoystickView joystickView;
 
@@ -70,10 +71,12 @@ public class Game extends SimpleBaseGameActivity {
     public Scene onCreateScene() {
 
 //        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("/");
-        playerTexture = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
-        playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture, this, "personnage.png", 0, 0, 1, 1);
-        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture, this, "personnage.png", 0, 0, 1, 1);
-        playerTexture.load();
+        playerTexture1 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
+        playerTexture2 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
+        playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
+        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture2, this, "personnage.png", 0, 0, 1, 1);
+        playerTexture1.load();
+        playerTexture2.load();
 
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
