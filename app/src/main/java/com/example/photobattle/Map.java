@@ -42,7 +42,7 @@ public class Map implements Serializable {
         byteContours = stream.toByteArray();
         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
         photoOriginal.compress(Bitmap.CompressFormat.PNG, 100, stream2);
-        bytePicture = stream.toByteArray();
+        bytePicture = stream2.toByteArray();
         computeObstacle();
 
 

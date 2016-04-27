@@ -38,11 +38,9 @@ public class Connect_activity extends BaseActivity {
         statusCo =(TextView) findViewById(R.id.co);
         logConnexion =(TextView) findViewById(R.id.log);
 
-        s = new Server(PORT,this);
-        s.start();
         ipLocale.setText("Mon IP Locale : " + getIPLoc());
         ipGlobale.setText(getIPGlob());
-        LaunchClient l =new LaunchClient();
+        LaunchClient l =new LaunchClient(this);
         l.execute();
         play =(Button) findViewById(R.id.bstart);
         play.setText("En attente d'une connection...");
@@ -63,13 +61,16 @@ public class Connect_activity extends BaseActivity {
 
     public class LaunchClient extends AsyncTask<Void, Void, Void> {
 
-        @Override
+
+        Activity activity;
+        LaunchClient(Activity activity)
+        {
+            this.activity = activity;
+        }
         protected Void doInBackground(Void... params) {
-            try {
-                afficherAdresse();
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
+            BazarStatic.map =new Map(BazarStatic.nomMap);
+            s = new Server(PORT,activity);
+            s.start();
             socket = Client.connect("localhost", getApplicationContext(), Connect_activity.this);
             System.out.println("pictureaName");
             BazarStatic.host =true;
@@ -77,6 +78,7 @@ public class Connect_activity extends BaseActivity {
         }
 
     }
+
 
     private String getIPLoc()
     {

@@ -38,7 +38,7 @@ public class Server extends Thread {
             System.out.println("Connexion from:" + socJ1.getInetAddress());
             ServerThread ct = new ServerThread(socJ1, this);
             ct.start();
-
+            sendLog("Server Ready");
             // Admission du deuxième Client
             socJ2 = listenSocket.accept();
             System.out.println("Connexion from:" + socJ2.getInetAddress());

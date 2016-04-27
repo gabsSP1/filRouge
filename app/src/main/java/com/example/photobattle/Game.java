@@ -34,8 +34,8 @@ import Joystick.JoystickView;
 Lance le jeu, et surtout le MainGamePanel
  */
 public class Game extends SimpleBaseGameActivity {
-    public final static int CAMERA_WIDTH = BazarStatic.map.getPhotoOriginal().getWidth();
-    public final static int CAMERA_HEIGHT = BazarStatic.map.getPhotoOriginal().getHeight();
+    public static int CAMERA_WIDTH;
+    public static int CAMERA_HEIGHT;
     private GameScene scene ;
     private TextureRegion backgroundTextureRegion;
     private BitmapTextureAtlas backgroundTexture;
@@ -51,7 +51,12 @@ public class Game extends SimpleBaseGameActivity {
 
 
     public EngineOptions onCreateEngineOptions() {
-
+        if(!BazarStatic.onLine)
+        {
+            BazarStatic.map = new Map(BazarStatic.nomMap);
+        }
+        CAMERA_WIDTH = BazarStatic.map.getPhotoOriginal().getWidth();
+        CAMERA_HEIGHT = BazarStatic.map.getPhotoOriginal().getHeight();
         camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 
         return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);

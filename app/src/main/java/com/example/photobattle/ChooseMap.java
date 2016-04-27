@@ -263,10 +263,11 @@ public class ChooseMap extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if(filesName.size()!=0) {
-					BazarStatic.map = new Map(filesName.get(mPager.getCurrentItem()));
 					Intent intentMyAccount = new Intent(getApplicationContext(), Connect_activity.class);
 					intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
+					BazarStatic.nomMap = filesName.get(mPager.getCurrentItem());
 					startActivity(intentMyAccount);
+
 				}
 			}
 		});
@@ -287,10 +288,10 @@ public class ChooseMap extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if(filesName.size()!=0) {
-					BazarStatic.map = new Map(filesName.get(mPager.getCurrentItem()));
 					Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                     intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
 					startActivity(intentMyAccount);
+					BazarStatic.nomMap = filesName.get(mPager.getCurrentItem());
 				}
 			}
 		});
