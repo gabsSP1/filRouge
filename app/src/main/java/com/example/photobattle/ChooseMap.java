@@ -288,6 +288,7 @@ public class ChooseMap extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if(filesName.size()!=0) {
+					Sound.playSound(ChooseMap.this,R.raw.open);
 					Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                     intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
 					startActivity(intentMyAccount);

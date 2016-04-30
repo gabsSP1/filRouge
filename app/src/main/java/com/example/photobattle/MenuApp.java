@@ -25,6 +25,7 @@ public class MenuApp extends BaseActivity{
 	Animation animStart;
 	Animation animSettings;
 	Button join;
+	Button mute;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MenuApp extends BaseActivity{
 		setContentView(R.layout.activity_menu_app);
 		FileManager.initialyzeTreeFile();
 
-		Sound.playFightMusic(this.getApplicationContext());
+		Sound.playMenuMusic(this.getApplicationContext());
 
 		b1=(Button) findViewById(R.id.play_menu);
 		animStart = AnimationUtils.loadAnimation(this, R.anim.anim_button);
@@ -83,6 +84,17 @@ public class MenuApp extends BaseActivity{
 			public void onClick(View v) {
 				v.startAnimation(animSettings);
 				System.out.println("appui settings");
+			}
+		});
+		mute = (Button) findViewById(R.id.sound);
+		mute.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				if(Sound.muteMusic()==1)
+					mute.setBackgroundResource(R.drawable.full_sound);
+				else
+					mute.setBackgroundResource(R.drawable.mute);
 			}
 		});
 

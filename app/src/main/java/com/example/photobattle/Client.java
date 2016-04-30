@@ -12,6 +12,8 @@ import java.net.Socket;
  */
 public class Client {
 
+    static Socket serverSocket=null;
+
     /**
      * Se connecte au serveur et renvoie son Socket
      *
@@ -21,7 +23,6 @@ public class Client {
      * @return le Socket d'échange
      */
     public static Socket connect(String host,  Context context, Activity act) {
-        Socket serverSocket = null;
         try {
             serverSocket = new Socket(host, Connect_activity.PORT);
         } catch (IOException e) {
@@ -89,7 +90,7 @@ public class Client {
         }
     }
 
-    public static  void lauch (Socket serverSocket)
+    public static  void launch(Socket serverSocket)
     {
         Command com = new Command("launch", 0 , 0);
         ObjectOutputStream oos = null;
@@ -99,6 +100,30 @@ public class Client {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    public static void sendQuit()
+    {
+        Command com = new Command("quit", 0 , 0);
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+            oos.writeObject(com);
+        } catch (IOException e) {
+            System.err.println("Erreur dans l'envoi du quit");
+        }
+    }
+
+    public static void sendReady()
+    {
+        Command com = new Command("ready", 0 , 0);
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+            oos.writeObject(com);
+        } catch (IOException e) {
+            System.err.println("Erreur dans l'envoi du ready");
         }
     }
 
