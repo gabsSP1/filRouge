@@ -148,11 +148,8 @@ public class ChooseMap extends BaseActivity {
             /*Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);*/
-			System.out.println("load " + data);
-			Bitmap b=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+data);
-			int height=650;
-			int width=b.getWidth()*height/b.getHeight();
-			return Bitmap.createScaledBitmap(b,width,height,false);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
+
+			return BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data, 650);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
 		}
 
 		// Once complete, see if ImageView is still around and set bitmap.
@@ -368,12 +365,12 @@ public class ChooseMap extends BaseActivity {
                     try {
                         Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                         FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
-                        bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+                        bm = bm.copy(Bitmap.Config.ARGB_4444, true);
                         Mat mImg = new Mat();
                         Utils.bitmapToMat(bm, mImg);
                         Mat edges = new Mat();
                         Imgproc.Canny(mImg,edges,100,100);
-                        bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+                        bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_4444);
                         Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                         Core.subtract(invertcolormatrix, edges, edges);
                         Utils.matToBitmap(edges, bm);
@@ -391,12 +388,12 @@ public class ChooseMap extends BaseActivity {
                 try {
 
                     Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
-                    bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+                    bm = bm.copy(Bitmap.Config.ARGB_4444, true);
                     Mat mImg = new Mat();
                     Utils.bitmapToMat(bm, mImg);
                     Mat edges = new Mat();
                     Imgproc.Canny(mImg,edges,100,100);
-                    bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+                    bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_4444);
                     Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                     Core.subtract(invertcolormatrix, edges, edges);
                     Utils.matToBitmap(edges, bm);

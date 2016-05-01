@@ -42,6 +42,10 @@ public class GameScene extends Scene {
         this.activity = activity;
         this.vbom = vbom;
         this.camera = camera;
+        if(!BazarStatic.onLine)
+        {
+            createScene();
+        }
     }
 
     //---------------------------------------------
@@ -88,7 +92,10 @@ public class GameScene extends Scene {
 
     public  void disposeScene()
     {
-
+        persoOne.detachSelf();
+//        persoTwo.dispose();
+        this.detachSelf();
+        this.dispose();
     }
 
     private void loadLevel(int levelID)
@@ -100,5 +107,7 @@ public class GameScene extends Scene {
 
 
     }
+
+
 
 }

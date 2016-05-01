@@ -50,6 +50,7 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas playerTexture1;
     private BitmapTextureAtlas playerTexture2;
     private Button quit;
+    SpriteBackground sprite;
 
     private JoystickView joystickView;
 
@@ -83,8 +84,8 @@ public class Game extends SimpleBaseGameActivity {
     public Scene onCreateScene() {
 
 //        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("/");
-        playerTexture1 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
-        playerTexture2 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
+        playerTexture1 = new BitmapTextureAtlas(this.getTextureManager(), 128, 256);
+        playerTexture2 = new BitmapTextureAtlas(this.getTextureManager(), 128, 256);
         playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
         playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture2, this, "personnage.png", 0, 0, 1, 1);
         playerTexture1.load();
@@ -96,11 +97,12 @@ public class Game extends SimpleBaseGameActivity {
 
         scene.setBackground(new Background(255, 255, 255));
 
-        SpriteBackground sprite = new SpriteBackground(new Sprite(0,0, backgroundTextureRegion, this.getVertexBufferObjectManager()));
+        sprite = new SpriteBackground(new Sprite(0,0, backgroundTextureRegion, this.getVertexBufferObjectManager()));
         backgroundTexture.load();
         scene.setBackground(sprite);
-
-        Client.sendReady();
+        if(BazarStatic.onLine) {
+            Client.sendReady();
+        }
 
         return scene;
 
@@ -109,6 +111,22 @@ public class Game extends SimpleBaseGameActivity {
     public void onPopulateScene() throws Exception {
         // TODO Auto-generated method stub
 
+    }
+
+    public void onDestroy()
+    {
+        super.onDestroy();
+        backgroundTexture.unload();
+        playerTexture2.unload();
+        playerTexture1.unload();
+        playerTexture1 = null;
+        playerOneTextureRegion = null;
+        playerTwoTextureRegion =null;
+        backgroundTextureRegion =null;
+        scene.disposeScene();
+        BazarStatic.map.recycle();
+        BazarStatic.map = null;
+        System.gc();
     }
 
     public void FullScreencall() {
@@ -131,7 +149,7 @@ public class Game extends SimpleBaseGameActivity {
 
     @Override
     protected void onSetContentView() {
-
+        FullScreencall();
         final RelativeLayout relativeLayout = new RelativeLayout(this);
         final FrameLayout.LayoutParams relativeLayoutLayoutParams = new FrameLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -188,19 +206,28 @@ public class Game extends SimpleBaseGameActivity {
 
             }
         });
-        this.setContentView(relativeLayout, relativeLayoutLayoutParams);
-
-        Sound.playFightMusic(Game.this);
-        /*quit = (Button) findViewById(R.id.quit);
+        quit = new Button(this);
+        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(300, 300);
+        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        buttonLayoutParmas2.setMargins(105, 0, 0, 5);
+        relativeLayout.addView(quit, buttonLayoutParmas3);
         quit.setText("X");
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Client.sendQuit();
+                if(BazarStatic.onLine) {
+                    Client.sendQuit();
+                }
                 Game.this.finish();
             }
-        });*/
-        ClientThread.setGameActivity(this);
+        });
+        this.setContentView(relativeLayout, relativeLayoutLayoutParams);
+
+        Sound.playFightMusic(Game.this);
+        if(BazarStatic.onLine) {
+            ClientThread.setGameActivity(this);
+        }
     }
 
     public ITiledTextureRegion getPlayerOneTextureRegion() {
@@ -218,8 +245,9 @@ public class Game extends SimpleBaseGameActivity {
         {
             Sound.pauseMusic();
         }
-
-        Client.sendQuit();
+        if(BazarStatic.onLine) {
+            Client.sendQuit();
+        }
         this.finish();
     }
 

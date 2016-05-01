@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import java.util.WeakHashMap;
 
 /**
  * Created by Valentin on 29/02/2016.
@@ -25,20 +26,25 @@ enum pix {VIDE, GROUND};
 
 public class Map implements Serializable {
     private static final String TAG = Map.class.getSimpleName();
-
-    private transient  WeakReference<Bitmap> contours;
-    private transient WeakReference<Bitmap> photoOriginal;
     private transient pix obstacles [][];
     byte[] bytePicture;
     byte[] byteContours;
+    WeakReference<Bitmap> contours;
+    WeakReference<Bitmap> photoOriginal;
+    Bitmap b;
+    Bitmap c;
 
     public Map(String pictureName)
     {
-        contours =   new WeakReference<Bitmap>(BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
-                ,  1080));
-        photoOriginal =  new WeakReference<Bitmap>(BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
-                ,  1080));
+        c= BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
+                ,  1080);
+        b= BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
+                ,  1080);
+        contours =  new WeakReference<Bitmap>(c);
+        photoOriginal = new WeakReference<Bitmap>(b);
+        System.out.println(photoOriginal.get());
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        System.out.println(contours.get());
         contours.get().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byteContours = stream.toByteArray();
         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
@@ -49,6 +55,8 @@ public class Map implements Serializable {
 
 
     }
+
+
 
     public void computeObstacle()
     {
@@ -84,7 +92,7 @@ public class Map implements Serializable {
 
 
     public void convert() {
-        this.contours =  new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length));
+        this.contours = new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length));
         this.photoOriginal = new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length));
         computeObstacle();
     }
@@ -95,13 +103,15 @@ public class Map implements Serializable {
 
     public void recycle()
     {
-        contours.get().recycle();
+        c.recycle();
+        b.recycle();
+        b=null;
+        c=null;
         contours.clear();
-        contours= null;
-        photoOriginal.get().recycle();
         photoOriginal.clear();
-        photoOriginal= null;
-
+        contours = null;
+        photoOriginal =null;
+        System.gc();
     }
 
 
