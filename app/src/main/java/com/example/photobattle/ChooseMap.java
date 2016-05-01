@@ -104,7 +104,6 @@ public class ChooseMap extends BaseActivity {
 		setNbMap(0);
 		loadList();
 		initComponent();
-		Sound.resumeMusic();
 	}
 
 	public static class ImagePagerAdapter extends FragmentStatePagerAdapter {

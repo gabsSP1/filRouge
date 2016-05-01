@@ -45,12 +45,20 @@ public class Sound {
     }
 
     public static void pauseMusic() {
-        musicPlayer.pause();
+        if(musicPlayer != null)
+            musicPlayer.pause();
     }
 
-    public static void resumeMusic()
+    public static void resumeMusic(Context cont,int resId)
     {
-        musicPlayer.start();
+        if(musicPlayer == null)
+        {
+            musicPlayer = MediaPlayer.create(cont,resId);
+            musicPlayer.start();
+            musicPlayer.setLooping(true);
+        }
+        else
+            musicPlayer.start();
     }
 
     public static float muteMusic() {

@@ -27,7 +27,7 @@ public class BaseActivity extends FragmentActivity {
         super.onResume();
         if(isAppOnForeground(this))
         {
-            Sound.resumeMusic();
+            Sound.resumeMusic(this,R.raw.mus_menu);
         }
     }
 

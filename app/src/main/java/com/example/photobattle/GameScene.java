@@ -42,8 +42,6 @@ public class GameScene extends Scene {
         this.activity = activity;
         this.vbom = vbom;
         this.camera = camera;
-        createScene();
-
     }
 
     //---------------------------------------------

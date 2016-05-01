@@ -42,7 +42,7 @@ Lance le jeu, et surtout le MainGamePanel
 public class Game extends SimpleBaseGameActivity {
     public static int CAMERA_WIDTH;
     public static int CAMERA_HEIGHT;
-    private GameScene scene ;
+    private static GameScene scene ;
     private TextureRegion backgroundTextureRegion;
     private BitmapTextureAtlas backgroundTexture;
     private ITiledTextureRegion playerOneTextureRegion;
@@ -100,6 +100,8 @@ public class Game extends SimpleBaseGameActivity {
         backgroundTexture.load();
         scene.setBackground(sprite);
 
+        Client.sendReady();
+
         return scene;
 
     }
@@ -155,7 +157,7 @@ public class Game extends SimpleBaseGameActivity {
         android.widget.RelativeLayout.LayoutParams buttonLayoutParmas2 = new RelativeLayout.LayoutParams(300, 300);
         buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        buttonLayoutParmas2.setMargins(105, 0, 0 , 5);
+        buttonLayoutParmas2.setMargins(105, 0, 0, 5);
         relativeLayout.addView(button, buttonLayoutParmas2);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +174,7 @@ public class Game extends SimpleBaseGameActivity {
             @Override
             public void OnMoved(int pan, int tilt) {
 
-                    GameScene.persoOne.setVX(pan);
+                GameScene.persoOne.setVX(pan);
 
             }
 
@@ -189,7 +191,7 @@ public class Game extends SimpleBaseGameActivity {
         this.setContentView(relativeLayout, relativeLayoutLayoutParams);
 
         Sound.playFightMusic(Game.this);
-        quit = (Button) findViewById(R.id.quit);
+        /*quit = (Button) findViewById(R.id.quit);
         quit.setText("X");
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,9 +199,8 @@ public class Game extends SimpleBaseGameActivity {
                 Client.sendQuit();
                 Game.this.finish();
             }
-        });
+        });*/
         ClientThread.setGameActivity(this);
-        Client.sendReady();
     }
 
     public ITiledTextureRegion getPlayerOneTextureRegion() {
@@ -217,6 +218,9 @@ public class Game extends SimpleBaseGameActivity {
         {
             Sound.pauseMusic();
         }
+
+        Client.sendQuit();
+        this.finish();
     }
 
     public void onResume()
@@ -224,7 +228,7 @@ public class Game extends SimpleBaseGameActivity {
         super.onResume();
         if(isAppOnForeground(this))
         {
-            Sound.resumeMusic();
+            Sound.resumeMusic(this,R.raw.mus_fight);
         }
     }
 
@@ -260,5 +264,10 @@ public class Game extends SimpleBaseGameActivity {
             }
         }
         return false;
+    }
+
+    public static void launchGame()
+    {
+        scene.createScene();
     }
 }
