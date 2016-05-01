@@ -29,27 +29,23 @@ public class Map implements Serializable {
     private transient pix obstacles [][];
     byte[] bytePicture;
     byte[] byteContours;
-    WeakReference<Bitmap> contours;
-    WeakReference<Bitmap> photoOriginal;
-    Bitmap b;
-    Bitmap c;
+    transient Bitmap contours;
+    transient Bitmap photoOriginal;
 
     public Map(String pictureName)
     {
-        c= BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
+
+        contours =  BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
                 ,  1080);
-        b= BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
+        photoOriginal =BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
                 ,  1080);
-        contours =  new WeakReference<Bitmap>(c);
-        photoOriginal = new WeakReference<Bitmap>(b);
-        System.out.println(photoOriginal.get());
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        System.out.println(contours.get());
-        contours.get().compress(Bitmap.CompressFormat.PNG, 100, stream);
+        contours.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byteContours = stream.toByteArray();
         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-        photoOriginal.get().compress(Bitmap.CompressFormat.PNG, 100, stream2);
+        photoOriginal.compress(Bitmap.CompressFormat.PNG, 100, stream2);
         bytePicture = stream2.toByteArray();
+
         computeObstacle();
 
 
@@ -60,8 +56,8 @@ public class Map implements Serializable {
 
     public void computeObstacle()
     {
-        int width = contours.get().getWidth();
-        int height = contours.get().getHeight();
+        int width = contours.getWidth();
+        int height = contours.getHeight();
         obstacles = new pix [width][height];
         for(int i = 0; i < width; i++)
         {
@@ -74,7 +70,7 @@ public class Map implements Serializable {
         {
             for(int j = 0; j < height; j++)
             {
-                if(contours.get().getPixel(i,j) != Color.WHITE) {
+                if(contours.getPixel(i,j) != Color.WHITE) {
                     obstacles[i][j] = pix.GROUND;
                 }
             }
@@ -82,7 +78,7 @@ public class Map implements Serializable {
     }
 
     public Bitmap getContours() {
-        return contours.get();
+        return contours;
     }
 
 
@@ -92,25 +88,23 @@ public class Map implements Serializable {
 
 
     public void convert() {
-        this.contours = new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length));
-        this.photoOriginal = new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length));
+        this.contours = BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length);
+        this.photoOriginal = BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length);
         computeObstacle();
     }
 
     public Bitmap getPhotoOriginal() {
-        return photoOriginal.get();
+        return photoOriginal;
     }
 
     public void recycle()
     {
-        c.recycle();
-        b.recycle();
-        b=null;
-        c=null;
-        contours.clear();
-        photoOriginal.clear();
+        contours.recycle();
+        photoOriginal.recycle();
         contours = null;
         photoOriginal =null;
+
+
         System.gc();
     }
 
