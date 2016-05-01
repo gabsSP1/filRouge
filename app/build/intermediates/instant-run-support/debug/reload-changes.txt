@@ -1,2 +1,0 @@
-CHANGED,E:\Dev\AndroidProject\filRouge\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\photobattle\BazarStatic$override.class
-CHANGED,E:\Dev\AndroidProject\filRouge\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class

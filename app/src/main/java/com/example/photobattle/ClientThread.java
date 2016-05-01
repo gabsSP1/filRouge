@@ -15,11 +15,12 @@ import java.net.Socket;
 public class ClientThread extends Thread {
     Context context;
     private Socket serverSocket;
-    Activity act;
+    Activity connectActivity;
+    static Activity gameActivity = null;
     ClientThread(Socket s, Context context, Activity act) {
         serverSocket = s;
         this.context=context;
-        this.act = act;
+        this.connectActivity = act;
     }
 
     /**
@@ -62,7 +63,7 @@ public class ClientThread extends Thread {
                         context.startActivity(intentMyAccount);
                     }
 
-                    if (com.getTypeAction().equals("okmap")) act.runOnUiThread(
+                    if (com.getTypeAction().equals("okmap")) connectActivity.runOnUiThread(
                             new Thread() {
                                 @Override
                                 public void run() {
@@ -72,6 +73,21 @@ public class ClientThread extends Thread {
 
                                 }
                             });
+                    else if(com.getTypeAction().equals("quit"))
+                    {
+                        gameActivity.finish();
+                        break;
+                    }
+
+                    else if(com.getTypeAction().equals("ready"))
+                    {
+                        ObjectInputStream ois2 = new ObjectInputStream(serverSocket.getInputStream());
+                        com = (Command) ois2.readObject();
+                        if(com.getTypeAction().equals("ready"))
+                        {
+                            System.out.println("Tous les joueurs sont prêts");
+                        }
+                    }
                 }
         } catch (IOException e) {
             System.err.println("Deconnexion du serveur");
@@ -79,6 +95,11 @@ public class ClientThread extends Thread {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setGameActivity(Activity gact)
+    {
+        gameActivity = gact;
     }
 
 }

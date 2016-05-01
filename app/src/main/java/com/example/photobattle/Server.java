@@ -75,7 +75,7 @@ public class Server extends Thread {
      * @param com
      *            la commande à envoyer
      */
-    public void sendCommand(Command com) {
+    public void sendCommand(Command com, Socket socketfrom) {
         // Si on veut bouger un joueur sur l'écran du J1
         switch (com.getTypeAction()) {
             case "setcooj1":
@@ -119,6 +119,36 @@ public class Server extends Thread {
             //Si on envoie la map
             case "sendmap":
                 map = com;
+                break;
+            //Message pour lancer le jeu
+            case "ready":
+                try {
+                    ObjectOutputStream socOut1 = new ObjectOutputStream(socJ1.getOutputStream());
+                    ObjectOutputStream socOut2 = new ObjectOutputStream(socJ2.getOutputStream());
+                    socOut1.writeObject(com);
+                    socOut2.writeObject(com);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+
+            case "quit":
+                try {
+                    if(socketfrom.equals(socJ1))
+                    {
+                        ObjectOutputStream socOut= new ObjectOutputStream(socJ2.getOutputStream());
+                        socOut.writeObject(com);
+                    }
+                    else
+                    {
+                        ObjectOutputStream socOut = new ObjectOutputStream(socJ1.getOutputStream());
+                        socOut.writeObject(com);
+                    }
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 break;
         }
     }

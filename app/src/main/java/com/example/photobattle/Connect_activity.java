@@ -15,7 +15,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 public class Connect_activity extends BaseActivity {
@@ -48,7 +47,7 @@ public class Connect_activity extends BaseActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Client.lauch(socket);
+                Client.launch(socket);
                 BazarStatic.onLine =true;
                 Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                 startActivity(intentMyAccount);

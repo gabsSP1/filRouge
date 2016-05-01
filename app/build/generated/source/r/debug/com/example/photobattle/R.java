@@ -72,9 +72,9 @@ containing a value of this type.
         public static final int take_picture_icon=0x7f020010;
     }
     public static final class id {
-        public static final int Delete=0x7f0b0026;
+        public static final int Delete=0x7f0b0027;
         public static final int Settings=0x7f0b001d;
-        public static final int action_settings=0x7f0b0023;
+        public static final int action_settings=0x7f0b0024;
         public static final int any=0x7f0b0000;
         public static final int back=0x7f0b0001;
         public static final int back_chooseMap=0x7f0b001a;
@@ -86,11 +86,11 @@ containing a value of this type.
         public static final int button_online=0x7f0b0014;
         public static final int button_start=0x7f0b0015;
         public static final int co=0x7f0b0005;
-        public static final int feeds=0x7f0b0024;
-        public static final int friends=0x7f0b0025;
+        public static final int feeds=0x7f0b0025;
+        public static final int friends=0x7f0b0026;
         public static final int front=0x7f0b0002;
-        public static final int image_name=0x7f0b0021;
-        public static final int image_view_layout=0x7f0b0020;
+        public static final int image_name=0x7f0b0022;
+        public static final int image_view_layout=0x7f0b0021;
         public static final int import_picture=0x7f0b0018;
         public static final int ip_glob=0x7f0b0004;
         public static final int ip_loc=0x7f0b0003;
@@ -108,7 +108,8 @@ containing a value of this type.
         public static final int param2=0x7f0b000b;
         public static final int pictureEdit=0x7f0b000a;
         public static final int play_menu=0x7f0b001b;
-        public static final int progressBar=0x7f0b0022;
+        public static final int progressBar=0x7f0b0023;
+        public static final int quit=0x7f0b0020;
         public static final int sound=0x7f0b001c;
         public static final int take_picture=0x7f0b0017;
     }
@@ -128,7 +129,8 @@ containing a value of this type.
     }
     public static final class raw {
         public static final int mus_fight=0x7f050000;
-        public static final int open=0x7f050001;
+        public static final int mus_menu=0x7f050001;
+        public static final int open=0x7f050002;
     }
     public static final class string {
         public static final int action_settings=0x7f090000;

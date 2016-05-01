@@ -1,6 +1,10 @@
 package com.example.photobattle;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -26,6 +30,8 @@ import org.andengine.opengl.view.RenderSurfaceView;
 import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import java.util.List;
+
 import Joystick.JoystickMovedListener;
 import Joystick.JoystickView;
 
@@ -42,6 +48,8 @@ public class Game extends SimpleBaseGameActivity {
     private ITiledTextureRegion playerOneTextureRegion;
     private ITiledTextureRegion playerTwoTextureRegion;
     private BitmapTextureAtlas playerTexture1;
+    private BitmapTextureAtlas playerTexture2;
+    private Button quit;
 
     private JoystickView joystickView;
 
@@ -76,9 +84,11 @@ public class Game extends SimpleBaseGameActivity {
 
 //        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("/");
         playerTexture1 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
+        playerTexture2 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
         playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
-        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
+        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture2, this, "personnage.png", 0, 0, 1, 1);
         playerTexture1.load();
+        playerTexture2.load();
 
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
@@ -119,7 +129,7 @@ public class Game extends SimpleBaseGameActivity {
 
     @Override
     protected void onSetContentView() {
-        FullScreencall();
+
         final RelativeLayout relativeLayout = new RelativeLayout(this);
         final FrameLayout.LayoutParams relativeLayoutLayoutParams = new FrameLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -178,16 +188,18 @@ public class Game extends SimpleBaseGameActivity {
         });
         this.setContentView(relativeLayout, relativeLayoutLayoutParams);
 
-
-    }
-
-    public void onDestroy(){
-        super.onDestroy();
-        playerTexture1.unload();
-        backgroundTexture.unload();
-        BazarStatic.map =null;
-        System.gc();
-        System.out.println("unload");
+        Sound.playFightMusic(Game.this);
+        quit = (Button) findViewById(R.id.quit);
+        quit.setText("X");
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Client.sendQuit();
+                Game.this.finish();
+            }
+        });
+        ClientThread.setGameActivity(this);
+        Client.sendReady();
     }
 
     public ITiledTextureRegion getPlayerOneTextureRegion() {
@@ -196,5 +208,57 @@ public class Game extends SimpleBaseGameActivity {
 
     public ITiledTextureRegion getPlayerTwoTextureRegion() {
         return playerTwoTextureRegion;
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        if(isApplicationBroughtToBackground(this))
+        {
+            Sound.pauseMusic();
+        }
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        if(isAppOnForeground(this))
+        {
+            Sound.resumeMusic();
+        }
+    }
+
+    public static boolean isApplicationBroughtToBackground(final Context context)
+    {
+        final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        final List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty())
+        {
+            final ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAppOnForeground(final Context context)
+    {
+        final ActivityManager activityManager = (ActivityManager)     context.getSystemService(Context.ACTIVITY_SERVICE);
+        final List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null)
+        {
+            return false;
+        }
+        final String packageName = context.getPackageName();
+        for (final ActivityManager.RunningAppProcessInfo appProcess : appProcesses)
+        {
+            if ((appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) && appProcess.processName.equals(packageName))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

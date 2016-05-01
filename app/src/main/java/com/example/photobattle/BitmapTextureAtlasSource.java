@@ -27,7 +27,7 @@ public class BitmapTextureAtlasSource extends BaseTextureAtlasSource implements 
     @Override
     public Bitmap onLoadBitmap(Config pBitmapConfig)
     {
-        return Bitmap.createBitmap(mColors, mTextureWidth, mTextureHeight, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(mColors, mTextureWidth, mTextureHeight, Config.RGB_565);
     }
 
     @Override
