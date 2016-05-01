@@ -1,2 +1,2 @@
-include ':app', ':andEngine', ':andEnginePhysicsBox2DExtension'
+include ':app', ':andEngine', ':andEnginePhysicsBox2DExtension', ':ImageLoader'
 include ':openCVLibrary310'

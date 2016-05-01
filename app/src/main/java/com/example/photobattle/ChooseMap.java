@@ -150,10 +150,7 @@ public class ChooseMap extends BaseActivity {
             Point size = new Point();
             display.getSize(size);*/
 			System.out.println("load " + data);
-			Bitmap b=BitmapFactory.decodeFile(FileManager.PICTURE_PATH+File.separator+data);
-			int height=650;
-			int width=b.getWidth()*height/b.getHeight();
-			return Bitmap.createScaledBitmap(b,width,height,false);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
+			return BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data, 650);//decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+data,1,500);
 		}
 
 		// Once complete, see if ImageView is still around and set bitmap.
@@ -288,10 +285,11 @@ public class ChooseMap extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if(filesName.size()!=0) {
+					BazarStatic.nomMap = filesName.get(mPager.getCurrentItem());
 					Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                     intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
 					startActivity(intentMyAccount);
-					BazarStatic.nomMap = filesName.get(mPager.getCurrentItem());
+					ChooseMap.this.finish();
 				}
 			}
 		});
@@ -431,8 +429,8 @@ public class ChooseMap extends BaseActivity {
 				.setNegativeButton(android.R.string.no, null).show();
 	}
 
-	protected void onRestart() {
-		super.onRestart();
+	public void onResume() {
+		super.onResume();
 		loadList();
 		initComponent();
 		if(editP) {
@@ -441,8 +439,6 @@ public class ChooseMap extends BaseActivity {
 		}
 
 	}
-
-
 	public void FullScreencall() {
 		if(Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
 			View v = this.getWindow().getDecorView();

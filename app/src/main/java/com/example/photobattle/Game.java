@@ -42,7 +42,6 @@ public class Game extends SimpleBaseGameActivity {
     private ITiledTextureRegion playerOneTextureRegion;
     private ITiledTextureRegion playerTwoTextureRegion;
     private BitmapTextureAtlas playerTexture1;
-    private BitmapTextureAtlas playerTexture2;
 
     private JoystickView joystickView;
 
@@ -77,11 +76,9 @@ public class Game extends SimpleBaseGameActivity {
 
 //        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("/");
         playerTexture1 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
-        playerTexture2 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
         playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
-        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture2, this, "personnage.png", 0, 0, 1, 1);
+        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
         playerTexture1.load();
-        playerTexture2.load();
 
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
@@ -122,7 +119,7 @@ public class Game extends SimpleBaseGameActivity {
 
     @Override
     protected void onSetContentView() {
-
+        FullScreencall();
         final RelativeLayout relativeLayout = new RelativeLayout(this);
         final FrameLayout.LayoutParams relativeLayoutLayoutParams = new FrameLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -182,6 +179,15 @@ public class Game extends SimpleBaseGameActivity {
         this.setContentView(relativeLayout, relativeLayoutLayoutParams);
 
 
+    }
+
+    public void onDestroy(){
+        super.onDestroy();
+        playerTexture1.unload();
+        backgroundTexture.unload();
+        BazarStatic.map =null;
+        System.gc();
+        System.out.println("unload");
     }
 
     public ITiledTextureRegion getPlayerOneTextureRegion() {

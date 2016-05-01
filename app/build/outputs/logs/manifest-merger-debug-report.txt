@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:2:1-55:12
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:2:1-56:12
 	xmlns:android
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -69,7 +69,7 @@ ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:22:5-
 	android:name
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:22:19-67
 application
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:24:5-53:19
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:24:5-54:19
 MERGED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:5-46
 MERGED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:5-46
 MERGED from [com.android.support:support-v4:23.0.1] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
@@ -83,53 +83,57 @@ MERGED from [com.android.support:support-v4:23.0.1] E:\Dev\AndroidProject\filRou
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:26:9-45
 	android:theme
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:28:9-67
+	android:hardwareAccelerated
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:29:9-43
+	android:largeHeap
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:29:44-68
 activity#com.example.photobattle.MenuApp
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:29:9-38:20
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:30:9-39:20
 	android:screenOrientation
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:32:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:33:13-50
 	android:label
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:31:13-45
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:32:13-45
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:30:13-36
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:31:13-36
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:33:13-37:29
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:34:13-38:29
 action#android.intent.action.MAIN
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:34:17-69
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:35:17-69
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:34:25-66
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:35:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:36:17-77
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:37:17-77
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:36:27-74
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:37:27-74
 activity#com.example.photobattle.ChooseMap
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:39:9-42:53
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:40:9-43:53
 	android:screenOrientation
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:42:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:43:13-50
 	android:label
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:41:13-55
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:42:13-55
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:40:13-38
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:41:13-38
 activity#com.example.photobattle.EditActivity
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:43:9-46:53
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:44:9-47:53
 	android:screenOrientation
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:46:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:47:13-50
 	android:label
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:45:13-56
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:46:13-56
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:44:13-41
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:45:13-41
 activity#com.example.photobattle.Game
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:47:9-50:53
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:48:9-51:53
 	android:screenOrientation
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:50:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:51:13-50
 	android:label
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:49:13-56
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:50:13-56
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:48:13-33
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:49:13-33
 activity#com.example.photobattle.Connect_activity
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:51:9-54
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:9-54
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:51:19-51
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:19-51
 activity#com.example.photobattle.JoinActivity
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:9-59
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:9-59
 	android:name
-		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:19-47
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:19-47
