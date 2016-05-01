@@ -36,26 +36,22 @@ public class Connect_activity extends BaseActivity {
         ipLocale = (TextView) findViewById(R.id.ip_loc);
         statusCo =(TextView) findViewById(R.id.co);
         logConnexion =(TextView) findViewById(R.id.log);
-
         ipLocale.setText("Mon IP Locale : " + getIPLoc());
         ipGlobale.setText(getIPGlob());
-        LaunchClient l =new LaunchClient(this);
-        l.execute();
+        /*LaunchClient l =new LaunchClient(this);
+        l.execute();*/
         play =(Button) findViewById(R.id.bstart);
         play.setText("En attente d'une connection...");
-        play.setClickable(false);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Client.launch(socket);
-                BazarStatic.onLine =true;
+                BazarStatic.onLine = true;
                 Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                 startActivity(intentMyAccount);
             }
         });
-
-
-
+        play.setClickable(false);
     }
 
     public class LaunchClient extends AsyncTask<Void, Void, Void> {
@@ -147,5 +143,14 @@ public class Connect_activity extends BaseActivity {
     {
         play.setClickable(true);
         play.setText("Lancer le jeu");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        logConnexion.setText("");
+        play.setText("En attente d'une connection...");
+        LaunchClient l =new LaunchClient(this);
+        l.execute();
     }
 }

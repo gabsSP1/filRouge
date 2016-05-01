@@ -80,11 +80,13 @@ public class ClientThread extends Thread {
 
                     else if(com.getTypeAction().equals("ready"))
                     {
+                        System.out.println("1/2 joueur prêt");
                         ObjectInputStream ois2 = new ObjectInputStream(serverSocket.getInputStream());
                         com = (Command) ois2.readObject();
                         if(com.getTypeAction().equals("ready"))
                         {
                             System.out.println("Tous les joueurs sont prêts");
+                            Game.launchGame();
                         }
                     }
                 }
