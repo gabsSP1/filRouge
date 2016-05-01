@@ -1,5 +1,13 @@
 [
     {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\open.ogg",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\raw\\open.ogg"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_menu.mp3",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\mus_menu.mp3"
+    },
+    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\open.ogg",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\open.ogg"
     },
@@ -8,7 +16,11 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\mus_fight.mp3"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_menu.mp3",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\mus_menu.mp3"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_menu.mp3",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\raw\\mus_menu.mp3"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_fight.mp3",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\raw\\mus_fight.mp3"
     }
 ]

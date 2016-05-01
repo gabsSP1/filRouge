@@ -1,10 +1,18 @@
 [
     {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_app.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\menu\\menu_app.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_app.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\menu\\menu_app.xml"
+    },
+    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\map.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\menu\\map.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_app.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\menu\\menu_app.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\menu\\map.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\menu\\map.xml"
     }
 ]

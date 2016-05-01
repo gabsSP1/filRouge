@@ -1,10 +1,18 @@
 [
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_delete_black_24dp.png",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\drawable-xhdpi\\ic_delete_black_24dp.png"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_delete_black_24dp.png",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-xhdpi\\ic_delete_black_24dp.png"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
     }
 ]

@@ -1,15 +1,43 @@
 [
     {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_layout.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\game_layout.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_join.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_join.xml"
+    },
+    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_join.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_join.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_layout.xml",
@@ -20,15 +48,19 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_connect_activity.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_connect_activity.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_connect_activity.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_join.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_join.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
     }
 ]

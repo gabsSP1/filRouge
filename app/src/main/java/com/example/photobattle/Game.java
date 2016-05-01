@@ -76,7 +76,6 @@ public class Game extends SimpleBaseGameActivity {
         BitmapTextureAtlasSource source = new BitmapTextureAtlasSource(BazarStatic.map.getPhotoOriginal());
          backgroundTexture = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
         backgroundTexture.addTextureAtlasSource(source, 0, 0);
-
         backgroundTextureRegion = (TextureRegion) TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
     }
 
@@ -86,16 +85,12 @@ public class Game extends SimpleBaseGameActivity {
         playerTexture1 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
         playerTexture2 = new BitmapTextureAtlas(this.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
         playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
-        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture2, this, "personnage.png", 0, 0, 1, 1);
+        playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTexture1, this, "personnage.png", 0, 0, 1, 1);
         playerTexture1.load();
-        playerTexture2.load();
 
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
         scene = new GameScene(mEngine, this, camera, getVertexBufferObjectManager());
-
-        scene.setBackground(new Background(255, 255, 255));
-
         SpriteBackground sprite = new SpriteBackground(new Sprite(0,0, backgroundTextureRegion, this.getVertexBufferObjectManager()));
         backgroundTexture.load();
         scene.setBackground(sprite);
@@ -104,9 +99,12 @@ public class Game extends SimpleBaseGameActivity {
 
     }
 
-    public void onPopulateScene() throws Exception {
-        // TODO Auto-generated method stub
-
+    public void onDestroy()
+    {
+        super.onDestroy();
+        BazarStatic.map.recycle();
+        BazarStatic.map = null;
+        System.gc();
     }
 
     public void FullScreencall() {
@@ -186,20 +184,29 @@ public class Game extends SimpleBaseGameActivity {
 
             }
         });
-        this.setContentView(relativeLayout, relativeLayoutLayoutParams);
-
-        Sound.playFightMusic(Game.this);
-        quit = (Button) findViewById(R.id.quit);
+        quit =new Button(this);
+        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(300, 300);
+        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        buttonLayoutParmas2.setMargins(105, 0, 0 , 5);
+        relativeLayout.addView(quit, buttonLayoutParmas3);
         quit.setText("X");
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(BazarStatic.onLine)
                 Client.sendQuit();
                 Game.this.finish();
             }
         });
+        this.setContentView(relativeLayout, relativeLayoutLayoutParams);
+
+        Sound.playFightMusic(Game.this);
+
         ClientThread.setGameActivity(this);
-        Client.sendReady();
+        if(BazarStatic.onLine && !BazarStatic.host) {
+            Client.sendReady();
+        }
     }
 
     public ITiledTextureRegion getPlayerOneTextureRegion() {

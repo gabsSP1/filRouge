@@ -38,7 +38,6 @@ public class ClientThread extends Thread {
                         if(GameScene.persoTwo!=null) {
                             GameScene.persoTwo.setpX(com.getcoordX());
                             GameScene.persoTwo.setpY(com.getcoordY());
-                            System.out.println("rec" + " " + com.getcoordX() + " " + com.getcoordY());
                         }
                     }
 

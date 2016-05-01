@@ -26,7 +26,7 @@ public class Connect_activity extends BaseActivity {
     static Button play;
     String pictureName;
     static Socket socket;
-    final static int PORT = 3297;
+    final static int PORT = 5234;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

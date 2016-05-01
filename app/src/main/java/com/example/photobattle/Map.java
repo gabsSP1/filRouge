@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
@@ -25,23 +26,23 @@ enum pix {VIDE, GROUND};
 public class Map implements Serializable {
     private static final String TAG = Map.class.getSimpleName();
 
-    private transient Bitmap contours;
-    private transient Bitmap photoOriginal;
+    private transient  WeakReference<Bitmap> contours;
+    private transient WeakReference<Bitmap> photoOriginal;
     private transient pix obstacles [][];
     byte[] bytePicture;
     byte[] byteContours;
 
     public Map(String pictureName)
     {
-        contours =  BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
-                ,  1080);
-        photoOriginal =BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
-                ,  1080);
+        contours =   new WeakReference<Bitmap>(BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
+                ,  1080));
+        photoOriginal =  new WeakReference<Bitmap>(BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
+                ,  1080));
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        contours.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        contours.get().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byteContours = stream.toByteArray();
         ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-        photoOriginal.compress(Bitmap.CompressFormat.PNG, 100, stream2);
+        photoOriginal.get().compress(Bitmap.CompressFormat.PNG, 100, stream2);
         bytePicture = stream2.toByteArray();
         computeObstacle();
 
@@ -51,8 +52,8 @@ public class Map implements Serializable {
 
     public void computeObstacle()
     {
-        int width = contours.getWidth();
-        int height = contours.getHeight();
+        int width = contours.get().getWidth();
+        int height = contours.get().getHeight();
         obstacles = new pix [width][height];
         for(int i = 0; i < width; i++)
         {
@@ -65,7 +66,7 @@ public class Map implements Serializable {
         {
             for(int j = 0; j < height; j++)
             {
-                if(contours.getPixel(i,j) != Color.WHITE) {
+                if(contours.get().getPixel(i,j) != Color.WHITE) {
                     obstacles[i][j] = pix.GROUND;
                 }
             }
@@ -73,7 +74,7 @@ public class Map implements Serializable {
     }
 
     public Bitmap getContours() {
-        return contours;
+        return contours.get();
     }
 
 
@@ -83,13 +84,24 @@ public class Map implements Serializable {
 
 
     public void convert() {
-        this.contours = BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length);
-        this.photoOriginal = BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length);
+        this.contours =  new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(byteContours, 0, byteContours.length));
+        this.photoOriginal = new WeakReference<Bitmap>(BitmapFactory.decodeByteArray(bytePicture, 0, bytePicture.length));
         computeObstacle();
     }
 
     public Bitmap getPhotoOriginal() {
-        return photoOriginal;
+        return photoOriginal.get();
+    }
+
+    public void recycle()
+    {
+        contours.get().recycle();
+        contours.clear();
+        contours= null;
+        photoOriginal.get().recycle();
+        photoOriginal.clear();
+        photoOriginal= null;
+
     }
 
 

@@ -1,135 +1,139 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:2:1-55:12
-	package
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:3:5-38
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-	android:versionName
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:5:5-30
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-	android:versionCode
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:4:5-28
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:2:1-56:12
 	xmlns:android
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:2:11-69
+	package
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:3:5-38
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+	android:versionCode
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
 uses-sdk
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:7:5-9:41
-MERGED from [filRouge:andEngine:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [filRouge:andEnginePhysicsBox2DExtension:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\andEnginePhysicsBox2DExtension\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [filRouge:andEngine:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [filRouge:openCVLibrary310:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\openCVLibrary310\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:support-v4:23.0.1] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:20:5-43
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:7:5-9:41
+MERGED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [filRouge:andEnginePhysicsBox2DExtension:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\andEnginePhysicsBox2DExtension\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [filRouge:openCVLibrary310:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\openCVLibrary310\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:23.0.1] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:9:9-38
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:9:9-38
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:8:9-35
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
-		INJECTED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:8:9-35
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
+		INJECTED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:11:5-76
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:11:5-76
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:11:22-73
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:11:22-73
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:12:5-81
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:12:5-81
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:12:22-78
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:12:22-78
 uses-permission#android.permission.CAMERA
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:13:5-65
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:13:5-65
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:13:22-62
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:13:22-62
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:14:5-75
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:14:5-75
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:14:22-72
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:14:22-72
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:15:5-80
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:15:5-80
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:15:22-77
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:15:22-77
 uses-permission#android.permission.INTERNET
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:16:5-67
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:16:5-67
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:16:22-64
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:16:22-64
 uses-permission#android.permission.GET_TASKS
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:17:5-68
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:17:5-68
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:17:22-65
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:17:22-65
 uses-feature#android.hardware.camera
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:19:5-21:36
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:19:5-21:36
 	android:required
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:21:9-33
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:21:9-33
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:20:9-47
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:20:9-47
 uses-feature#android.hardware.camera.autofocus
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:22:5-70
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:22:5-70
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:22:19-67
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:22:19-67
 application
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:24:5-53:19
-MERGED from [filRouge:andEngine:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:5-46
-MERGED from [filRouge:andEngine:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:5-46
-MERGED from [com.android.support:support-v4:23.0.1] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
-	android:label
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:27:9-41
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:24:5-54:19
+MERGED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:5-46
+MERGED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:5-46
+MERGED from [com.android.support:support-v4:23.0.1] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
 	android:debuggable
-		ADDED from [filRouge:andEngine:unspecified] E:\Tom\AndroidStudioProjects\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:18-43
+		ADDED from [filRouge:andEngine:unspecified] E:\Dev\AndroidProject\filRouge\app\build\intermediates\exploded-aar\filRouge\AndEngine\unspecified\AndroidManifest.xml:11:18-43
+	android:label
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:27:9-41
 	android:allowBackup
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:25:9-35
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:25:9-35
 	android:icon
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:26:9-45
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:26:9-45
 	android:theme
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:28:9-67
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:28:9-67
+	android:hardwareAccelerated
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:29:9-43
+	android:largeHeap
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:29:44-68
 activity#com.example.photobattle.MenuApp
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:29:9-38:20
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:30:9-39:20
 	android:screenOrientation
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:32:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:33:13-50
 	android:label
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:31:13-45
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:32:13-45
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:30:13-36
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:31:13-36
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:33:13-37:29
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:34:13-38:29
 action#android.intent.action.MAIN
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:34:17-69
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:35:17-69
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:34:25-66
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:35:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:36:17-77
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:37:17-77
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:36:27-74
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:37:27-74
 activity#com.example.photobattle.ChooseMap
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:39:9-42:53
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:40:9-43:53
 	android:screenOrientation
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:42:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:43:13-50
 	android:label
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:41:13-55
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:42:13-55
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:40:13-38
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:41:13-38
 activity#com.example.photobattle.EditActivity
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:43:9-46:53
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:44:9-47:53
 	android:screenOrientation
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:46:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:47:13-50
 	android:label
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:45:13-56
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:46:13-56
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:44:13-41
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:45:13-41
 activity#com.example.photobattle.Game
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:47:9-50:53
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:48:9-51:53
 	android:screenOrientation
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:50:13-50
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:51:13-50
 	android:label
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:49:13-56
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:50:13-56
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:48:13-33
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:49:13-33
 activity#com.example.photobattle.Connect_activity
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:51:9-54
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:9-54
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:51:19-51
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:19-51
 activity#com.example.photobattle.JoinActivity
-ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:52:9-59
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:9-59
 	android:name
-		ADDED from E:\Tom\AndroidStudioProjects\filRouge\app\src\main\AndroidManifest.xml:52:19-47
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:19-47
