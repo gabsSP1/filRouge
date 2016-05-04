@@ -54,9 +54,9 @@ public class EditActivity extends BaseActivity {
 
 			fbackground = new File(intent.getStringExtra("selected_file"));
 			background = BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+fbackground.getName()
-			 ,  1080);
+			 ,  BazarStatic.reqHeight);
 			original =  BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+fbackground.getName()
-					,  1080);
+					,  BazarStatic.reqHeight);
 		}
 		inEdit = false;
 		back=(Button) findViewById(R.id.back_edit);

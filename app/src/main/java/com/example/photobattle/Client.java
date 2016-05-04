@@ -115,7 +115,7 @@ public class Client {
         }
     }
 
-    public static void sendReady()
+    public static void sendReady(Socket serverSocket)
     {
         Command com = new Command("ready", 0 , 0);
         ObjectOutputStream oos = null;

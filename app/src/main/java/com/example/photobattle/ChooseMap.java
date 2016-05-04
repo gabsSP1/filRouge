@@ -261,6 +261,7 @@ public class ChooseMap extends BaseActivity {
 				if(filesName.size()!=0) {
 					Intent intentMyAccount = new Intent(getApplicationContext(), Connect_activity.class);
 					intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
+					BazarStatic.onLine =true;
 					BazarStatic.nomMap = filesName.get(mPager.getCurrentItem());
 					startActivity(intentMyAccount);
 
@@ -286,9 +287,10 @@ public class ChooseMap extends BaseActivity {
 				if(filesName.size()!=0) {
 					Sound.playSound(ChooseMap.this,R.raw.open);
 					Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
-                    intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
+					BazarStatic.onLine =false;
+					BazarStatic.map = new Map(filesName.get(mPager.getCurrentItem()));
 					startActivity(intentMyAccount);
-					BazarStatic.nomMap = filesName.get(mPager.getCurrentItem());
+
 				}
 			}
 		});
@@ -303,7 +305,7 @@ public class ChooseMap extends BaseActivity {
 					editP=true;
 					position=mPager.getCurrentItem();
 					Intent intentMyAccount = new Intent(getApplicationContext(), EditActivity.class);
-					intentMyAccount.putExtra("selected_file", FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()));
+					intentMyAccount.putExtra("selected_file", filesName.get(mPager.getCurrentItem()));
 					startActivity(intentMyAccount);
 				}
 			}
@@ -364,13 +366,13 @@ public class ChooseMap extends BaseActivity {
 
                     try {
                         Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                        FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
-                        bm = bm.copy(Bitmap.Config.ARGB_4444, true);
+						FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
+						bm = bm.copy(Bitmap.Config.ARGB_8888, true);
                         Mat mImg = new Mat();
                         Utils.bitmapToMat(bm, mImg);
                         Mat edges = new Mat();
                         Imgproc.Canny(mImg,edges,100,100);
-                        bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_4444);
+                        bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
                         Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                         Core.subtract(invertcolormatrix, edges, edges);
                         Utils.matToBitmap(edges, bm);
@@ -388,12 +390,12 @@ public class ChooseMap extends BaseActivity {
                 try {
 
                     Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
-                    bm = bm.copy(Bitmap.Config.ARGB_4444, true);
+                    bm = bm.copy(Bitmap.Config.ARGB_8888, true);
                     Mat mImg = new Mat();
                     Utils.bitmapToMat(bm, mImg);
                     Mat edges = new Mat();
                     Imgproc.Canny(mImg,edges,100,100);
-                    bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_4444);
+                    bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
                     Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                     Core.subtract(invertcolormatrix, edges, edges);
                     Utils.matToBitmap(edges, bm);

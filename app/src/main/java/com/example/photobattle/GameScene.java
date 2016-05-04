@@ -38,6 +38,7 @@ public class GameScene extends Scene {
     public GameScene(Engine engine, Game activity, Camera camera,  VertexBufferObjectManager vobm)
     {
         super();
+        System.out.println("dzqqzz");
         this.engine = engine;
         this.activity = activity;
         this.vbom = vbom;
@@ -45,6 +46,10 @@ public class GameScene extends Scene {
         if(!BazarStatic.onLine)
         {
             createScene();
+        }
+        else
+        {
+                Client.sendReady(Connect_activity.socket);
         }
     }
 

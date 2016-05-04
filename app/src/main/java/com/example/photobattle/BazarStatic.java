@@ -13,13 +13,14 @@ public class BazarStatic {
     public static Map map;
     public static String nomMap;
     public static boolean onLine =false;
+    public final static int reqHeight=720;
 
     public static Bitmap decodeSampledBitmapFromResource(String res
                                                          , int reqHeight) {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
         options.inDither = true;
         options.inJustDecodeBounds = true;
         System.out.println(res);
