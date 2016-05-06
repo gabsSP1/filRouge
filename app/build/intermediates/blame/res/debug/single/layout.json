@@ -52,12 +52,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_connect_activity.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
-    },
-    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",

@@ -8,12 +8,12 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_right.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\in_from_left.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
@@ -28,12 +28,12 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\anim.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
-    },
-    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\in_from_right.xml"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\out_to_left.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\anim\\out_to_left.xml"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\anim\\anim_button.xml",

@@ -1,6 +1,7 @@
 package com.example.photobattle;
 
 import android.app.Activity;
+import android.graphics.Color;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -9,10 +10,15 @@ import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.text.Text;
 import org.andengine.extension.physics.box2d.FixedStepPhysicsWorld;
 import org.andengine.extension.physics.box2d.PhysicsWorld;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontFactory;
+import org.andengine.opengl.texture.TextureOptions;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.util.HorizontalAlign;
 
 import static org.andengine.extension.physics.box2d.PhysicsFactory.*;
 
@@ -29,7 +35,6 @@ public class GameScene extends Scene {
     private PhysicsWorld physicsWorld;
     public static Player persoOne;
     public static Player persoTwo;
-    private Sprite[][] obstacles;
 
     //---------------------------------------------
     // CONSTRUCTOR
@@ -60,18 +65,16 @@ public class GameScene extends Scene {
         createHUD();
         createPhysics();
         persoOne = new Player(50f, 50f, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, true);
+        this.attachChild(persoOne);
         if (BazarStatic.onLine)
         {
             persoTwo = new Player(50f, 50f, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, false);
             this.attachChild(persoTwo);
+            lauchCountDown();
         }
-        System.out.println(persoTwo);
-        int width = BazarStatic.map.getContours().getWidth();
-        int height = BazarStatic.map.getContours().getHeight();
-        obstacles = new Sprite[width][height];
 
 
-        this.attachChild(persoOne);
+
 
     }
 
@@ -113,6 +116,48 @@ public class GameScene extends Scene {
 
     }
 
+    public void lauchCountDown()
+    {
+        textPosition(activity.text);
+        this.attachChild(activity.text);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        activity.text.setText("2");
+        textPosition(activity.text);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        activity.text.setText("1");
+        textPosition(activity.text);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        textPosition(activity.text);
+        this.detachChild(activity.text);
+       this.attachChild(activity.textGo);
+        textPosition(activity.textGo);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.detachChild(activity.textGo);
+        persoOne.launchPhysics();
+        if(BazarStatic.onLine)
+        persoTwo.launchPhysics();
+    }
 
 
+    private void textPosition(Text text)
+    {
+        text.setX(Game.CAMERA_WIDTH/2-text.getScaleCenterX());
+        text.setY(Game.CAMERA_HEIGHT/2-text.getScaleCenterY());
+    }
 }

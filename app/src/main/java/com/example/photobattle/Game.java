@@ -17,8 +17,6 @@ import android.widget.RelativeLayout;
 import org.andengine.engine.Engine;
 import org.andengine.engine.LimitedFPSEngine;
 import org.andengine.engine.camera.Camera;
-import org.andengine.engine.handler.timer.ITimerCallback;
-import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -26,6 +24,7 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
@@ -42,8 +41,8 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import java.util.List;
 
-import Joystick.JoystickMovedListener;
-import Joystick.JoystickView;
+import com.example.photobattle.Joystick.JoystickMovedListener;
+import com.example.photobattle.Joystick.JoystickView;
 
 
 /*
@@ -66,6 +65,11 @@ public class Game extends SimpleBaseGameActivity {
 
 
     Camera camera;
+
+
+    Text text;
+    Text textGo;
+
 
 
     public EngineOptions onCreateEngineOptions() {
@@ -333,6 +337,14 @@ public class Game extends SimpleBaseGameActivity {
             playerTexture1.load();
             playerTexture2.load();
 
+
+            BitmapTextureAtlas fontTextureAtlas = new BitmapTextureAtlas(game.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+            Font font = FontFactory.createFromAsset(game.getFontManager(), fontTextureAtlas,game.getAssets(),"p.TTF",100f,true, Color.BLACK);
+            game.getEngine().getTextureManager().loadTexture(fontTextureAtlas);
+            text = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, font, "3", game.getVertexBufferObjectManager());
+            textGo = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, font, "Go !", game.getVertexBufferObjectManager());
+            font.load();
+
             mEngine.registerUpdateHandler(new FPSLogger());
 
             gameScene = new GameScene(mEngine, game, camera, getVertexBufferObjectManager());
@@ -343,6 +355,8 @@ public class Game extends SimpleBaseGameActivity {
             backgroundTexture.load();
             gameScene.setBackground(sprite);
             mEngine.setScene(gameScene);
+            if(!BazarStatic.onLine)
+            gameScene.lauchCountDown();
             return null;
         }
     }

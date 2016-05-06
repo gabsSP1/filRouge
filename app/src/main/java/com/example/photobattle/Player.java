@@ -29,10 +29,12 @@ public class Player extends AnimatedSprite
     private float vY;
     private Map map;
     private etatPerso etat;
+    PhysicsWorld physicsWorld;
 
     private final float GRAVITY = 1f;
     private final float VITESSE_Y_MAX = 10.0f;
     private final float VITESSE_X_MAX = 10f;
+    boolean j1;
 
     enum etatPerso{ON_GROUND, JUMP};
     // ---------------------------------------------
@@ -46,6 +48,13 @@ public class Player extends AnimatedSprite
         vX = 0.0f;
         vY = 0.0f;
         etat = etatPerso.JUMP;
+        this.physicsWorld = physicsWorld;
+        this.j1= j1;
+
+    }
+
+    public void launchPhysics()
+    {
         if(j1)
         {
             createPhysicsJ1(physicsWorld);
