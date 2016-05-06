@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,6 @@ import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
-import org.andengine.opengl.texture.ITexture;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -49,6 +49,8 @@ import com.example.photobattle.Joystick.JoystickView;
 Lance le jeu, et surtout le MainGamePanel
  */
 public class Game extends SimpleBaseGameActivity {
+    boolean inGame=true;
+
     public static int CAMERA_WIDTH;
     public static int CAMERA_HEIGHT;
     private static GameScene gameScene;
@@ -59,6 +61,8 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas playerTexture1;
     private BitmapTextureAtlas playerTexture2;
     private Button quit;
+    private Button pause;
+    Button restart;
     SpriteBackground sprite;
 
     private JoystickView joystickView;
@@ -69,7 +73,8 @@ public class Game extends SimpleBaseGameActivity {
     Text text;
     Text textGo;
     Text textLoading;
-
+    BitmapTextureAtlas fontTextureAtlas;
+    BitmapTextureAtlas fontCountdowTextureAtlas;
 
 
     public EngineOptions onCreateEngineOptions() {
@@ -82,7 +87,7 @@ public class Game extends SimpleBaseGameActivity {
     }
 
     public void onCreateResources()   {
-        BitmapTextureAtlas fontTextureAtlas = new BitmapTextureAtlas(this.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        fontTextureAtlas = new BitmapTextureAtlas(this.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         font = FontFactory.createFromAsset(this.getFontManager(), fontTextureAtlas,this.getAssets(),"p.TTF",45f,true, Color.BLACK);
         this.getEngine().getTextureManager().loadTexture(fontTextureAtlas);
         textLoading =  new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, font, "Loading...", this.getVertexBufferObjectManager());
@@ -101,11 +106,6 @@ public class Game extends SimpleBaseGameActivity {
 
     }
 
-
-    public void onPopulateScene() throws Exception {
-        // TODO Auto-generated method stub
-
-    }
 
     public void onDestroy()
     {
@@ -146,7 +146,6 @@ public class Game extends SimpleBaseGameActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
         int height = size.y;
         FullScreencall();
         final RelativeLayout relativeLayout = new RelativeLayout(this);
@@ -170,7 +169,7 @@ public class Game extends SimpleBaseGameActivity {
         buttonLayoutParmas.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         buttonLayoutParmas.setMargins(105, 0, 0 , 5);
 
-        Button button =new Button(this);
+        final Button button =new Button(this);
         android.widget.RelativeLayout.LayoutParams buttonLayoutParmas2 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -181,7 +180,7 @@ public class Game extends SimpleBaseGameActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                if(event.getAction() == MotionEvent.ACTION_DOWN && inGame)
                 {
                     GameScene.persoOne.jump();
                 }
@@ -211,10 +210,11 @@ public class Game extends SimpleBaseGameActivity {
             }
         });
         quit = new Button(this);
+        quit.setVisibility(View.INVISIBLE);
         android.widget.RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(height/7, height/7);
-        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        buttonLayoutParmas2.setMargins(105, 0, 0, 5);
+        buttonLayoutParmas3.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        buttonLayoutParmas3.addRule(RelativeLayout.CENTER_VERTICAL);
+        buttonLayoutParmas3.setMargins((int)(5*height/7.0), 0, 0, 0);
         relativeLayout.addView(quit, buttonLayoutParmas3);
         quit.setText("X");
         quit.setOnClickListener(new View.OnClickListener() {
@@ -226,12 +226,58 @@ public class Game extends SimpleBaseGameActivity {
                 Game.this.finish();
             }
         });
+
+        restart = new Button(this);
+        restart.setVisibility(View.INVISIBLE);
+        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas5 = new RelativeLayout.LayoutParams(height/7, height/7);
+        buttonLayoutParmas5.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        buttonLayoutParmas5.addRule(RelativeLayout.CENTER_VERTICAL);
+        buttonLayoutParmas5.setMargins(0, 0, (int)(5*height/7.0), 0);
+        relativeLayout.addView(restart, buttonLayoutParmas5);
+        restart.setText(">");
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEngine.start();
+                inGame =true;
+                quit.setVisibility(View.INVISIBLE);
+                restart.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+
+
+        //Menu pause
+        pause = new Button(this);
+        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas4 = new RelativeLayout.LayoutParams(height/7, height/7);
+        buttonLayoutParmas4.setMargins(0, 0, 0, 5);
+        buttonLayoutParmas4.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonLayoutParmas4.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        relativeLayout.addView(pause, buttonLayoutParmas4);
+        pause.setText("||");
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inGame =false;
+                quit.setVisibility(View.VISIBLE);
+                restart.setVisibility(View.VISIBLE);
+                mEngine.stop();
+                relativeLayout.setBackgroundColor(Color.alpha(1));
+
+            }
+        });
         this.setContentView(relativeLayout, relativeLayoutLayoutParams);
 
         Sound.playFightMusic(Game.this);
         if(BazarStatic.onLine) {
             ClientThread.setGameActivity(this);
         }
+
+
+
+
+
     }
 
     public ITiledTextureRegion getPlayerOneTextureRegion() {
@@ -258,6 +304,7 @@ public class Game extends SimpleBaseGameActivity {
             public void onResume()
     {
         super.onResume();
+        FullScreencall();
         if(isAppOnForeground(this))
         {
             Sound.resumeMusic(this,R.raw.mus_fight);
@@ -307,14 +354,6 @@ public class Game extends SimpleBaseGameActivity {
 
     public Font font;
 
-    private void loadMenuFonts()
-    {
-        FontFactory.setAssetBasePath("font/");
-        final ITexture mainFontTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-
-        font = FontFactory.createStrokeFromAsset(this.getFontManager(), mainFontTexture, this.getAssets(), "font.ttf", 50, true, Color.WHITE, 2, Color.BLACK);
-        font.load();
-    }
 
 
     public class LoadGameScne extends AsyncTask<Void, Void, Void>{
@@ -329,7 +368,7 @@ public class Game extends SimpleBaseGameActivity {
             backgroundTexture = new BitmapTextureAtlas(game.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
             backgroundTexture.addTextureAtlasSource(source, 0, 0);
 
-            backgroundTextureRegion = (TextureRegion) TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
+            backgroundTextureRegion =  TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
             playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
             playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
             if(!BazarStatic.onLine)
@@ -340,10 +379,9 @@ public class Game extends SimpleBaseGameActivity {
             playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "personnage.png", 0, 0, 1, 1);
             playerTexture1.load();
             playerTexture2.load();
-
-            BitmapTextureAtlas fontTextureAtlas = new BitmapTextureAtlas(game.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-            fontCountdown = FontFactory.createFromAsset(game.getFontManager(), fontTextureAtlas,game.getAssets(),"p.TTF",100f,true, Color.BLACK);
-            game.getEngine().getTextureManager().loadTexture(fontTextureAtlas);
+            fontCountdowTextureAtlas = new BitmapTextureAtlas(game.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+            fontCountdown = FontFactory.createFromAsset(game.getFontManager(), fontCountdowTextureAtlas,game.getAssets(),"p.TTF",100f,true, Color.BLACK);
+            game.getEngine().getTextureManager().loadTexture(fontCountdowTextureAtlas);
 
             text = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, fontCountdown, "3", game.getVertexBufferObjectManager());
             textGo = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, fontCountdown, "Go !", game.getVertexBufferObjectManager());

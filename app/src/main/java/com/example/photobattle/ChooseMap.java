@@ -430,15 +430,16 @@ public class ChooseMap extends BaseActivity {
 				.setNegativeButton(android.R.string.no, null).show();
 	}
 
-	protected void onRestart() {
-		super.onRestart();
+	public void onResume()
+	{
+		super.onResume();
+		FullScreencall();
 		loadList();
 		initComponent();
 		if(editP) {
 			mPager.setCurrentItem(position);
 			editP=false;
 		}
-
 	}
 
 
