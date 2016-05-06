@@ -66,6 +66,7 @@ public class GameScene extends Scene {
         createPhysics();
         persoOne = new Player(50f, 50f, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, true);
         this.attachChild(persoOne);
+        engine.setScene(this);
         if (BazarStatic.onLine)
         {
             persoTwo = new Player(50f, 50f, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, false);

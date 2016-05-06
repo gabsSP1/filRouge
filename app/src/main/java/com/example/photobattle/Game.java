@@ -62,13 +62,13 @@ public class Game extends SimpleBaseGameActivity {
     SpriteBackground sprite;
 
     private JoystickView joystickView;
-
+    Font fontCountdown;
 
     Camera camera;
 
-
     Text text;
     Text textGo;
+    Text textLoading;
 
 
 
@@ -82,7 +82,11 @@ public class Game extends SimpleBaseGameActivity {
     }
 
     public void onCreateResources()   {
-
+        BitmapTextureAtlas fontTextureAtlas = new BitmapTextureAtlas(this.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        font = FontFactory.createFromAsset(this.getFontManager(), fontTextureAtlas,this.getAssets(),"p.TTF",45f,true, Color.BLACK);
+        this.getEngine().getTextureManager().loadTexture(fontTextureAtlas);
+        textLoading =  new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, font, "Loading...", this.getVertexBufferObjectManager());
+        font.load();
     }
 
     public Scene onCreateScene() {
@@ -90,7 +94,7 @@ public class Game extends SimpleBaseGameActivity {
 //        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("/");
 
 
-        LoadingScene l = new LoadingScene();
+        LoadingScene l = new LoadingScene(this);
         LoadGameScne loadGameScne = new LoadGameScne(this);
         loadGameScne.execute();
         return l;
@@ -251,7 +255,7 @@ public class Game extends SimpleBaseGameActivity {
         this.finish();
     }
 
-    public void onResume()
+            public void onResume()
     {
         super.onResume();
         if(isAppOnForeground(this))
@@ -337,13 +341,13 @@ public class Game extends SimpleBaseGameActivity {
             playerTexture1.load();
             playerTexture2.load();
 
-
             BitmapTextureAtlas fontTextureAtlas = new BitmapTextureAtlas(game.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-            Font font = FontFactory.createFromAsset(game.getFontManager(), fontTextureAtlas,game.getAssets(),"p.TTF",100f,true, Color.BLACK);
+            fontCountdown = FontFactory.createFromAsset(game.getFontManager(), fontTextureAtlas,game.getAssets(),"p.TTF",100f,true, Color.BLACK);
             game.getEngine().getTextureManager().loadTexture(fontTextureAtlas);
-            text = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, font, "3", game.getVertexBufferObjectManager());
-            textGo = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, font, "Go !", game.getVertexBufferObjectManager());
-            font.load();
+
+            text = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, fontCountdown, "3", game.getVertexBufferObjectManager());
+            textGo = new Text(Game.CAMERA_WIDTH/2, Game.CAMERA_HEIGHT/2, fontCountdown, "Go !", game.getVertexBufferObjectManager());
+            game.fontCountdown.load();
 
             mEngine.registerUpdateHandler(new FPSLogger());
 
@@ -354,7 +358,6 @@ public class Game extends SimpleBaseGameActivity {
             sprite = new SpriteBackground(new Sprite(0,0, backgroundTextureRegion, game.getVertexBufferObjectManager()));
             backgroundTexture.load();
             gameScene.setBackground(sprite);
-            mEngine.setScene(gameScene);
             if(!BazarStatic.onLine)
             gameScene.lauchCountDown();
             return null;
