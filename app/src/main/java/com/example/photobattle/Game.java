@@ -83,7 +83,6 @@ public class Game extends SimpleBaseGameActivity {
         camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 
         return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
-
     }
 
     public void onCreateResources()   {
@@ -164,32 +163,13 @@ public class Game extends SimpleBaseGameActivity {
 
         surfaceViewLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas = new RelativeLayout.LayoutParams(height/7, height/7);
+        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas = new RelativeLayout.LayoutParams(height/5, height/5);
         buttonLayoutParmas.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         buttonLayoutParmas.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        buttonLayoutParmas.setMargins(105, 0, 0 , 5);
-
-        final Button button =new Button(this);
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas2 = new RelativeLayout.LayoutParams(height/7, height/7);
-        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        buttonLayoutParmas2.setMargins(105, 0, 0, 5);
-        relativeLayout.addView(button, buttonLayoutParmas2);
-
-        button.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN && inGame)
-                {
-                    GameScene.persoOne.jump();
-                }
-                return false;
-            }
-        });
-
+        buttonLayoutParmas.setMargins(50, 0, 0 , 50);
         joystickView = new JoystickView(this);
-                relativeLayout.addView(joystickView, buttonLayoutParmas);
+        joystickView.setAlpha(0.4f);
+        relativeLayout.addView(joystickView, buttonLayoutParmas);
 
         joystickView.setOnJostickMovedListener(new JoystickMovedListener() {
             @Override
@@ -209,6 +189,30 @@ public class Game extends SimpleBaseGameActivity {
 
             }
         });
+
+
+
+
+        final Button button =new Button(this);
+        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas2 = new RelativeLayout.LayoutParams(height/5, height/5);
+        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        buttonLayoutParmas2.setMargins(0, 0, 50, 50);
+        relativeLayout.addView(button, buttonLayoutParmas2);
+        button.setAlpha(0.5f);
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN && inGame)
+                {
+                    GameScene.persoOne.jump();
+                }
+                return false;
+            }
+        });
+
+
         quit = new Button(this);
         quit.setVisibility(View.INVISIBLE);
         android.widget.RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(height/7, height/7);
@@ -375,10 +379,14 @@ public class Game extends SimpleBaseGameActivity {
             backgroundTextureRegion =  TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
             playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
             playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
+
+
             if(!BazarStatic.onLine)
             {
                 BazarStatic.map.computeObstacle();
             }
+
+
             playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture1, game, "personnage.png", 0, 0, 1, 1);
             playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "personnage.png", 0, 0, 1, 1);
             playerTexture1.load();

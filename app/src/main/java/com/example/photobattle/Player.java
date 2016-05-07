@@ -23,7 +23,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 public class Player extends AnimatedSprite
 {
     private final int height =128;
-    private final int width =64;;
+    private final int width =64;
     private Body body;
     private float vX;
     private float vY;
@@ -123,7 +123,7 @@ public class Player extends AnimatedSprite
 
     public void setpX(int x)
     {
-        if (x+ height < 0)
+        if (x+ width < 0)
         {
             x=Game.CAMERA_WIDTH;
         }
