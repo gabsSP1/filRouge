@@ -153,6 +153,8 @@ public class GameScene extends Scene {
         persoOne.launchPhysics();
         if(BazarStatic.onLine)
         persoTwo.launchPhysics();
+
+        activity.gameLoaded =true;
     }
 
 

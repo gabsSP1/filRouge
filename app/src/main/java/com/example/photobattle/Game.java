@@ -61,10 +61,10 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas playerTexture1;
     private BitmapTextureAtlas playerTexture2;
     private Button quit;
-    private Button pause;
+    public Button pause;
     Button restart;
     SpriteBackground sprite;
-
+    public boolean gameLoaded = false;
     private JoystickView joystickView;
     Font fontCountdown;
 
@@ -250,6 +250,7 @@ public class Game extends SimpleBaseGameActivity {
 
         //Menu pause
         pause = new Button(this);
+        pause.setClickable(false);
         android.widget.RelativeLayout.LayoutParams buttonLayoutParmas4 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas4.setMargins(0, 0, 0, 5);
         buttonLayoutParmas4.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -259,11 +260,14 @@ public class Game extends SimpleBaseGameActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inGame =false;
-                quit.setVisibility(View.VISIBLE);
-                restart.setVisibility(View.VISIBLE);
-                mEngine.stop();
-                relativeLayout.setBackgroundColor(Color.alpha(1));
+                if(gameLoaded) {
+                    inGame = false;
+                    quit.setVisibility(View.VISIBLE);
+                    restart.setVisibility(View.VISIBLE);
+                    if (!BazarStatic.onLine)
+                        mEngine.stop();
+                    relativeLayout.setBackgroundColor(Color.alpha(1));
+                }
 
             }
         });
