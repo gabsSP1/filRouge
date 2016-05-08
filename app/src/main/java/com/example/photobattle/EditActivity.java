@@ -31,6 +31,9 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -170,8 +173,8 @@ public class EditActivity extends BaseActivity {
 				.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String data = "";
-						data += s1.getProgress()+" ";
-						data += sizeEraser.getProgress()+" ";
+						data += s1.getProgress()+"\r\n";
+						data += sizeEraser.getProgress()+"\r\n";
 						WriteSettings(EditActivity.this, data);
 						ReadSettings(EditActivity.this);
 						File dat = new File(FileManager.DATA_PATH, fbackground.getName()+".dat");
@@ -245,30 +248,21 @@ public class EditActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 	}
-	public String ReadSettings(Context context){
+	public void ReadSettings(Context context){
 		File dat = new File(FileManager.DATA_PATH, mapName.getText().toString()+".jpg.dat");
-		String data = null;
 		char[] inputBuffer = new char[255];
 		if (dat.exists()) {
 
 
 				try {
-					FileReader fileReader = new FileReader(dat) ;
-					fileReader.read(inputBuffer);
-					data = new String(inputBuffer);
-					System.out.println("datat "+data);
-					int cpt = 0;
-					String mot = "";
-					while ( cpt < data.length() && data.charAt(cpt) != ' ') {
-						mot += data.charAt(cpt);
-						cpt++;
-					}
+					FileInputStream fstream = new FileInputStream(dat);
+					// Get the object of DataInputStream
+					DataInputStream in = new DataInputStream(fstream);
+					BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+					String mot = br.readLine();
 					int precision = Integer.parseInt(mot);
-					cpt++;
-					while (cpt < data.length() && data.charAt(cpt) != ' ') {
-						mot += data.charAt(cpt);
-						cpt++;
-					}
+					mot = br.readLine();
 					int gomme = Integer.parseInt(mot);
 //					cpt++;
 //					mot = "";
@@ -304,7 +298,6 @@ public class EditActivity extends BaseActivity {
 					s1.setProgress(precision);
 
 					//affiche le contenu de mon fichier dans un popup surgissant
-					Toast.makeText(context, " " + data, Toast.LENGTH_SHORT).show();
 
 				}  catch (IOException e) {
 					e.printStackTrace();
@@ -313,6 +306,5 @@ public class EditActivity extends BaseActivity {
 
 
 
-		return data;
 	}
 }
