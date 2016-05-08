@@ -33,10 +33,15 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 public class EditActivity extends BaseActivity {
 	Bitmap background;
 	Bitmap original;
@@ -94,7 +99,8 @@ public class EditActivity extends BaseActivity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if(erasemode) {
-					System.out.println("dcdjs " + event.getX());
+					System.out.println("x " + event.getX());
+					System.out.println("y " + event.getY());
 					siz = sizeEraser.getProgress();
 					background = erase((int) event.getX(), (int) event.getY(), background);
 				}
@@ -114,8 +120,8 @@ public class EditActivity extends BaseActivity {
 		});
 		s1= (SeekBar) findViewById(R.id.param1);
 		sizeEraser= (SeekBar) findViewById(R.id.sizing);
-		s1.setMax(5);
-		sizeEraser.setMax(500);
+		s1.setMax(500);
+		sizeEraser.setMax(200);
 		try{
 			ReadSettings(this);
 		}
@@ -123,8 +129,6 @@ public class EditActivity extends BaseActivity {
 			Toast.makeText(this, "je peux pas lire les fichiers",Toast.LENGTH_SHORT).show();
 		}
 
-		sizeEraser.setProgress(100);
-		s1.setProgress(2);
 
 		sizeEraser.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
@@ -148,7 +152,7 @@ public class EditActivity extends BaseActivity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				background = original.copy(Bitmap.Config.ARGB_8888, true);
-				background = doFilter(s1.getProgress()*50, s1.getProgress()*50+50, background);
+				background = doFilter(s1.getProgress(), s1.getProgress()+50, background);
 				p.setImageBitmap(background);
 			}
 		});
@@ -168,13 +172,16 @@ public class EditActivity extends BaseActivity {
 						String data = "";
 						data += s1.getProgress()+" ";
 						data += sizeEraser.getProgress()+" ";
-						WriteSettings(EditActivity.this, data +"3  ");
+						WriteSettings(EditActivity.this, data);
 						ReadSettings(EditActivity.this);
+						File dat = new File(FileManager.DATA_PATH, fbackground.getName()+".dat");
 						File picture = new File(FileManager.PICTURE_PATH, fbackground.getName());
 						File n = (new File(FileManager.THRESHOLD_PATH, mapName.getText().toString() + ".jpg"));
 						if (!n.exists()) {
+							dat.renameTo(new File(FileManager.DATA_PATH, mapName.getText().toString() + ".jpg.dat"));
 							fbackground.renameTo(n);
 							picture.renameTo(new File(FileManager.PICTURE_PATH, mapName.getText().toString() + ".jpg"));
+
 						}
 						FileManager.saveBitmap(background, FileManager.THRESHOLD_PATH, fbackground.getName());
 						EditActivity.this.finish();
@@ -204,7 +211,7 @@ public class EditActivity extends BaseActivity {
 		Mat mImg = new Mat();
 		Utils.bitmapToMat(mt, mImg);
 		Mat edges = new Mat();
-		Imgproc.Canny(mImg, edges, s1.getProgress()*50, s1.getProgress()*50+50);
+		Imgproc.Canny(mImg, edges, s1.getProgress(), s1.getProgress()+50);
 		mt.recycle();
 		mt = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
 		Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255, 255, 255));
@@ -227,108 +234,85 @@ public class EditActivity extends BaseActivity {
 		return mut;
 	}
 	public void WriteSettings(Context context, String data){
-		FileOutputStream fOut = null;
-		OutputStreamWriter osw = null;
-		try{
-			File datas = new File(FileManager.PICTURE_PATH, fbackground.getName());
-			File n = (new File(FileManager.DATA_PATH, mapName.getText().toString() + ".dat"));
-			if (!n.exists()) {
-				fbackground.renameTo(n);
-				datas.renameTo(new File(FileManager.PICTURE_PATH, mapName.getText().toString() + ".jpg"));
-			}
-			String nom= mapName.getText().toString(); //le nom de la map que l'on édite
-			fOut = context.openFileOutput(nom+".dat",MODE_APPEND);
-			osw = new OutputStreamWriter(fOut);
-			osw.write(data);
-			osw.flush();
-			//popup surgissant pour le résultat
-			Toast.makeText(context, "Settings saved",Toast.LENGTH_SHORT).show();
-		}
-		catch (Exception e) {
-			Toast.makeText(context, "Settings not saved or file does not exist",Toast.LENGTH_SHORT).show();
-		}
-		finally {
-			try {
-				osw.close();
-				fOut.close();
-			} catch (IOException e) {
-				Toast.makeText(context, "Settings not saved",Toast.LENGTH_SHORT).show();
-			}
+		File dat = new File(FileManager.DATA_PATH, mapName.getText().toString()+".jpg.dat");
+		try {
+			FileWriter fileWriter = new FileWriter(dat) ;
+			fileWriter.append(data);
+			fileWriter.flush();
+			fileWriter.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	public String ReadSettings(Context context){
-		FileInputStream fIn = null;
-		InputStreamReader isr = null;
-		char[] inputBuffer = new char[255];
+		File dat = new File(FileManager.DATA_PATH, mapName.getText().toString()+".jpg.dat");
 		String data = null;
-		try{
-			String nom= mapName.getText().toString(); //le nom de la map que l'on édite
-			fIn = context.openFileInput(nom+".dat");
-			isr = new InputStreamReader(fIn);
-			isr.read(inputBuffer);
-			data = new String(inputBuffer);
-			int cpt = 0;
-			String mot ="";
-			while(data.charAt(cpt) != ' ' && cpt < data.length()){
-				mot += data.charAt(cpt);
-				cpt++;
-			}
-			int precision = Integer.parseInt(mot);
-			cpt++;
-			while(data.charAt(cpt) != ' ' && cpt < data.length()){
-				mot += data.charAt(cpt);
-				cpt++;
-			}
-			int gomme = Integer.parseInt(mot);
-			cpt++;
-			mot ="";
-			while(data.charAt(cpt) != ' ' && cpt < data.length()){
-				mot += data.charAt(cpt);
-				cpt++;
-			}
-			int posx1 = Integer.parseInt(mot);
-			cpt++;
-			mot ="";
-			while(data.charAt(cpt) != ' ' && cpt < data.length()){
-				mot += data.charAt(cpt);
-				cpt++;
-			}
-			int posy1 = Integer.parseInt(mot);
-			cpt++;
-			mot ="";
-			while(data.charAt(cpt) != ' ' && cpt < data.length()){
-				mot += data.charAt(cpt);
-				cpt++;
-			}
-			int posx2 = Integer.parseInt(mot);
-			cpt++;
-			mot ="";
-			while(data.charAt(cpt) != ' ' && cpt < data.length()){
-				mot += data.charAt(cpt);
-				cpt++;
-			}
-			int posy2 = Integer.parseInt(mot);
-			cpt++;
+		char[] inputBuffer = new char[255];
+		if (dat.exists()) {
 
-			sizeEraser.setProgress(gomme);
-			s1.setProgress(precision);
 
-			//affiche le contenu de mon fichier dans un popup surgissant
-			Toast.makeText(context, " "+data,Toast.LENGTH_SHORT).show();
-		}
-		catch (Exception e) {
-			Toast.makeText(context, "Settings not read",Toast.LENGTH_SHORT).show();
-			s1.setProgress(2);
-			sizeEraser.setProgress(100);
-		}
-            /*finally*/ {
-			try {
-				isr.close();
-				fIn.close();
-			} catch (IOException e) {
-				Toast.makeText(context, "Settings not read",Toast.LENGTH_SHORT).show();
+				try {
+					FileReader fileReader = new FileReader(dat) ;
+					fileReader.read(inputBuffer);
+					data = new String(inputBuffer);
+					System.out.println("datat "+data);
+					int cpt = 0;
+					String mot = "";
+					while ( cpt < data.length() && data.charAt(cpt) != ' ') {
+						mot += data.charAt(cpt);
+						cpt++;
+					}
+					int precision = Integer.parseInt(mot);
+					cpt++;
+					while (cpt < data.length() && data.charAt(cpt) != ' ') {
+						mot += data.charAt(cpt);
+						cpt++;
+					}
+					int gomme = Integer.parseInt(mot);
+//					cpt++;
+//					mot = "";
+//					while (cpt < data.length() && data.charAt(cpt) != ' ') {
+//						mot += data.charAt(cpt);
+//						cpt++;
+//					}
+//					int posx1 = Integer.parseInt(mot);
+//					cpt++;
+//					mot = "";
+//					while (cpt < data.length() && data.charAt(cpt) != ' ') {
+//						mot += data.charAt(cpt);
+//						cpt++;
+//					}
+//					int posy1 = Integer.parseInt(mot);
+//					cpt++;
+//					mot = "";
+//					while (cpt < data.length() && data.charAt(cpt) != ' ') {
+//						mot += data.charAt(cpt);
+//						cpt++;
+//					}
+//					int posx2 = Integer.parseInt(mot);
+//					cpt++;
+//					mot = "";
+//					while (cpt < data.length() && data.charAt(cpt) != ' ') {
+//						mot += data.charAt(cpt);
+//						cpt++;
+//					}
+//					int posy2 = Integer.parseInt(mot);
+//					cpt++;
+
+					sizeEraser.setProgress(gomme);
+					s1.setProgress(precision);
+
+					//affiche le contenu de mon fichier dans un popup surgissant
+					Toast.makeText(context, " " + data, Toast.LENGTH_SHORT).show();
+
+				}  catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-		} /**/
+
+
+
 		return data;
 	}
 }
