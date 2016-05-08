@@ -15,10 +15,10 @@
         >
     </EditText>
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="9"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:id="@+id/pictureEdit"
         android:layout_above="@+id/param1"
         android:layout_below="@+id/mapName"></ImageView>

@@ -48,7 +48,6 @@ public class EditActivity extends BaseActivity {
 	LinearLayout l;
 	EditText mapName;
 	ImageView p;
-	boolean inEdit;
 	boolean erasemode;
 	SeekBar s1;
 	SeekBar sizeEraser;
@@ -71,11 +70,10 @@ public class EditActivity extends BaseActivity {
 		if (intent != null) {
 			fbackground = new File(intent.getStringExtra("selected_file"));
 			background = BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+fbackground.getName()
-					, 1080 );
+					, BazarStatic.reqHeight );
 			original =  BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+fbackground.getName()
-					,  1080);
+					,  BazarStatic.reqHeight);
 		}
-		inEdit = false;
 		erasemode = false;
 		eraser = (Button) findViewById(R.id.eraser_edit);
 		eraser.setOnClickListener(new View.OnClickListener() {
@@ -92,10 +90,21 @@ public class EditActivity extends BaseActivity {
 			}
 		});
 		p = (ImageView) findViewById(R.id.pictureEdit);
+		p.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(erasemode) {
+					System.out.println("dcdjs " + event.getX());
+					siz = sizeEraser.getProgress();
+					background = erase((int) event.getX(), (int) event.getY(), background);
+				}
+				return false;
+
+			}
+		});
 		mapName = (EditText) findViewById(R.id.mapName);
 		mapName.setTextColor(Color.BLUE);
 		mapName.setText(fbackground.getName().substring(0, fbackground.getName().indexOf('.')));
-		mapName.setVisibility(View.INVISIBLE);
 		mapName.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -147,64 +156,8 @@ public class EditActivity extends BaseActivity {
 		p.setImageBitmap(background);
 		//ReadSettings(this);
 	}
-	public boolean onTouchEvent(MotionEvent touchevent) {
-		switch (touchevent.getAction()) {
-			// when user first touches the screen to swap
-			case MotionEvent.ACTION_DOWN: {
-				inEdit = !inEdit;
-				if (inEdit) {
-					mapName.setVisibility(View.VISIBLE);
-				} else {
-					mapName.setVisibility(View.INVISIBLE);
-				}
-				if(erasemode) {
-					p.getLocationOnScreen(location);
-					xmap = location[0];
-					ymap = location[1];
-					Log.i("PhotoBattle", "You touched the map bro !");
-					//p.getLocationOnScreen(location);
 
-					/*DisplayMetrics dm = new DisplayMetrics();
-					getWindowManager().getDefaultDisplay().getMetrics(dm);
-					int width=dm.widthPixels;
-					int height=dm.heightPixels;
-					int dens=dm.densityDpi;
-					double wi=(double)width/(double)dens;
-					double hi=(double)height/(double)dens;
-					double x = Math.pow(wi,2);
-					double y = Math.pow(hi,2);
-					double screenInches = Math.sqrt(x+y);*/
 
-					widthmap = (int) background.getWidth();
-					heightmap = (int) background.getHeight();
-					int x = (int) touchevent.getX()*1920/950;
-					int y = (int) touchevent.getY()*1081/550;
-					Log.i("PhotoBattle"," tes coordonnées : x " + x + " - y " + y +" et celle de la map : x "+xmap+" y "+ymap+" longueur " + widthmap + " hauteur "+heightmap );
-					background = erase(x-350,y-200,background);
-					background = erase(x,y,background);
-					if(x <  + heightmap && x > xmap && y < ymap + widthmap && y > ymap)
-					{
-						Log.i("PhotoBattle","You touched the map bro !");
-					}
-				}
-			}
-			case MotionEvent.ACTION_BUTTON_PRESS: {
-				if(erasemode) {
-					int x = (int) touchevent.getX();
-					int y = (int) touchevent.getY();
-					if(x < xmap + heightmap && x > xmap && y < ymap + widthmap && y > ymap)
-					{
-						Log.i("PhotoBattle","You touched the map bro !");
-					}
-				}
-			}
-		}
-		return false;
-	}
-	public void onStop()
-	{
-		super.onStop();
-	}
 	private void showDialog() throws Resources.NotFoundException {
 		new AlertDialog.Builder(this)
 				.setTitle("Save Changes")
@@ -263,8 +216,8 @@ public class EditActivity extends BaseActivity {
 		Bitmap mut = bm.copy(Bitmap.Config.ARGB_8888, true);
 		//x = x+500;
 		//y = y +300;
-		for(int i  = 0 ; i < siz ; i++){
-			for(int j  = 0 ; j < siz ; j++){
+		for(int i  = -siz/2 ; i < siz/2 ; i++){
+			for(int j  = -siz/2 ; j < siz/2 ; j++){
 				//Log.i("PhotoBattle","point " + (x+i)+" "+(y+j)+ " disparait");
 				if(x+i < mut.getWidth() && y + j < mut.getHeight() && x+i > 0 && y+j > 0)
 					mut.setPixel(x+i,y+j,Color.WHITE);
