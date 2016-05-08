@@ -46,10 +46,6 @@ public class Map implements Serializable {
             contours.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteContours = stream.toByteArray();
             System.out.println(byteContours.length);
-            for (int i = 0; i < byteContours.length; i++) {
-//            System.out.println(byteContours[i]);
-            }
-
             ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
             photoOriginal.compress(Bitmap.CompressFormat.PNG, 100, stream2);
             bytePicture = stream2.toByteArray();
