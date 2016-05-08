@@ -15,6 +15,7 @@ public class FileManager {
     public static final String GENERAL_PATH= Environment.getExternalStorageDirectory() + File.separator +"photoBattle";
     public static final String PICTURE_PATH= GENERAL_PATH+ File.separator +"Pictures";
     public static final String THRESHOLD_PATH= GENERAL_PATH+ File.separator +"Threshold";
+    public static final String DATA_PATH = GENERAL_PATH+ File.separator +"Data";
 
     private static int nbMap;
     private static String pictureName;
@@ -30,6 +31,7 @@ public class FileManager {
         createDirectory(GENERAL_PATH);
         createDirectory(PICTURE_PATH);
         createDirectory(THRESHOLD_PATH);
+        createDirectory(DATA_PATH);
     }
 
     //Create a directory to the indicated path
