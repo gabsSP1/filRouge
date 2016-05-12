@@ -148,6 +148,7 @@ public class GameScene extends Scene {
     }
 
     public void lauchCountDown() {
+        activity.text.setText("3");
         textPosition(activity.text);
         this.attachChild(activity.text);
         try {
