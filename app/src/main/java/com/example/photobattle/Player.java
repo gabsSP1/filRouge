@@ -29,6 +29,7 @@ public class Player extends AnimatedSprite
     private float vY;
     private Map map;
     private etatPerso etat;
+    private GameScene scene;
     PhysicsWorld physicsWorld;
 
     private final float GRAVITY = 1f;
@@ -36,17 +37,18 @@ public class Player extends AnimatedSprite
     private final float VITESSE_X_MAX = 10f;
     boolean j1;
 
-    enum etatPerso{ON_GROUND, JUMP};
+    enum etatPerso{ON_GROUND, JUMP, DEAD};
     // ---------------------------------------------
     // CONSTRUCTOR
     // ---------------------------------------------
 
-    public Player(float pX, float pY, VertexBufferObjectManager vbo, ITiledTextureRegion textureRegion, Camera camera, PhysicsWorld physicsWorld, boolean j1)
+    public Player(float pX, float pY, VertexBufferObjectManager vbo, ITiledTextureRegion textureRegion, Camera camera, PhysicsWorld physicsWorld, GameScene scene, boolean j1)
     {
         super(pX, pY, textureRegion, vbo);
         map =BazarStatic.map;
         vX = 0.0f;
         vY = 0.0f;
+        this.scene = scene;
         etat = etatPerso.JUMP;
         this.physicsWorld = physicsWorld;
         this.j1= j1;
@@ -104,18 +106,18 @@ public class Player extends AnimatedSprite
                 }
                 setpY(y);
                 setpX(x);
-                move(x,y);
+                move(x, y);
 
             }
         });
     }
 
-    private int getpX()
+    public int getpX()
     {
         return (int)(body.getPosition().x*PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT- width /2);
     }
 
-    private int getpY()
+    public int getpY()
     {
         return (int)(body.getPosition().y*PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT- height /2);
     }
@@ -123,26 +125,26 @@ public class Player extends AnimatedSprite
 
     public void setpX(int x)
     {
-        if (x+ width < 0)
+        if (x+ width/2 < 0)
         {
-            x=Game.CAMERA_WIDTH;
+            x += Game.CAMERA_WIDTH;
         }
-        else if(getpX()>Game.CAMERA_WIDTH)
+        else if(x>Game.CAMERA_WIDTH - width/2)
         {
-            x=-height;
+            x -= Game.CAMERA_WIDTH;
         }
         body.setTransform((x+width/2)/PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, body.getPosition().y, 0);
     }
 
     public void setpY(int y)
     {
-        if (y+ height < 0)
+        if (y+ height/2 < 0)
         {
-            y=Game.CAMERA_HEIGHT;
+            y += Game.CAMERA_HEIGHT;
         }
-        else if(getpY()>Game.CAMERA_HEIGHT)
+        else if(y >Game.CAMERA_HEIGHT - height/2)
         {
-            y=-height;
+            y -= Game.CAMERA_HEIGHT;
         }
         body.setTransform(body.getPosition().x, (y+height/2)/PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, 0);
     }
@@ -158,184 +160,205 @@ public class Player extends AnimatedSprite
         pix[][] obstacles = map.getObstacles();
 
 
-        if (x > 0 && y > 0) {
 
 
 
-            if (vX < 0) {
-                int stairs = 0;
-                int goRight = 0;
-                int goUp = 0;
-                int[] nbStairs = new int[width];
-                int indiceStairs = 0;
-                outloop:
-                for (int i = x - (int) vX; i >= x; i--) {
-                    int m = i;
-                    if(m >= Game.CAMERA_WIDTH)
-                        m = m - Game.CAMERA_WIDTH;
 
-                    for (int j = y; j < y + height/2; j++) {
-                        int k = j;
-                        if (j >= Game.CAMERA_HEIGHT)
-                            k = j - Game.CAMERA_HEIGHT;
-                        if (obstacles[m][k] == pix.GROUND) {
-                            goRight = i - x + 1;
-                            break outloop;
-                        }
+        if (vX < 0) {
+            int stairs = 0;
+            int goRight = 0;
+            int goUp = 0;
+            int[] nbStairs = new int[width];
+            int indiceStairs = 0;
+            outloop:
+            for (int i = x - (int) vX; i >= x; i--) {
+                int m = i;
+                if(m < 0)
+                    m += Game.CAMERA_WIDTH;
+                if(m >= Game.CAMERA_WIDTH)
+                    m -= Game.CAMERA_WIDTH;
+
+                for (int j = y; j < y + height/2; j++) {
+                    int k = j;
+                    if(j < 0)
+                        k += Game.CAMERA_HEIGHT;
+                    if (j >= Game.CAMERA_HEIGHT)
+                        k -= Game.CAMERA_HEIGHT;
+                    if (obstacles[m][k] == pix.GROUND) {
+                        goRight = i - x;
+                        break outloop;
                     }
-                    for (int j = y + height / 2; j <= y + height; j++) {
-                        int k = j;
-                        if (j >= Game.CAMERA_HEIGHT)
-                            k = j - Game.CAMERA_HEIGHT;
-                        if (obstacles[m][k] == pix.GROUND) {
-                            if (indiceStairs == width)
-                                indiceStairs = 0;
-                            nbStairs[indiceStairs++] = stairs;
+                }
+                for (int j = y + height / 2; j <= y + height; j++) {
+                    int k = j;
+                    if(j < 0)
+                        k += Game.CAMERA_HEIGHT;
+                    if (j >= Game.CAMERA_HEIGHT)
+                        k -= Game.CAMERA_HEIGHT;
+                    if (obstacles[m][k] == pix.GROUND) {
+                        if (indiceStairs == width)
+                            indiceStairs = 0;
+                        nbStairs[indiceStairs++] = stairs;
 
-                            stairs = y+height - j;
-                            for (int l = y - stairs; l < y; l++) {
-                                for (int p = m; p <= m+width+1; p++)
+                        stairs = y+height - j;
+                        for (int l = y - stairs; l < y; l++) {
+                            for (int p = m; p <= m+width+1; p++)
+                            {
+                                int z = p;
+                                if(z >= Game.CAMERA_WIDTH)
+                                    z = p - Game.CAMERA_WIDTH;
+
+                                if(z <0)
+                                    z = p + Game.CAMERA_WIDTH;
+                                k = l;
+                                if (l >= Game.CAMERA_HEIGHT)
+                                    k = l - Game.CAMERA_HEIGHT;
+                                if (l < 0)
+                                    k = l + Game.CAMERA_HEIGHT;
+                                if (obstacles[z][k] == pix.GROUND)
                                 {
-                                    int z = p;
-                                    if(z >= Game.CAMERA_WIDTH)
-                                        z = p - Game.CAMERA_WIDTH;
 
-                                    if(z <0)
-                                        z = p + Game.CAMERA_WIDTH;
-                                    k = l;
-                                    if (l >= Game.CAMERA_HEIGHT)
-                                        k = l - Game.CAMERA_HEIGHT;
-                                    if (l < 0)
-                                        k = l + Game.CAMERA_HEIGHT;
-                                    if (obstacles[z][k] == pix.GROUND)
-                                    {
-
-                                        goRight = i - x + 1;
-                                        break outloop;
-                                    }
+                                    goRight = i - x;
+                                    break outloop;
                                 }
                             }
                         }
                     }
-
-                }
-                for (int n = 0; n < width; n++)
-                    if (goUp < nbStairs[n])
-                        goUp = nbStairs[n];
-                y -= goUp;
-                x += goRight;
-
-            }
-
-            else if (vX > 0) {
-                int stairs = 0;
-                int goLeft = 0;
-                int goUp = 0;
-                int[] nbStairs = new int[width];
-                int indiceStairs = 0;
-                outloop:
-                for (int i = x + width - (int) vX; i <= x + width; i++) {
-                    int m = i;
-                    if(i >= Game.CAMERA_WIDTH)
-                        m = i - Game.CAMERA_WIDTH;
-
-                    for (int j = y; j < y + height/2; j++) {
-                        int k = j;
-                        if (j >= Game.CAMERA_HEIGHT)
-                            k = j - Game.CAMERA_HEIGHT;
-                        if (obstacles[m][k] == pix.GROUND) {
-                            goLeft = x+width-i;
-                            break outloop;
-                        }
-                    }
-                    for (int j = y + height/2; j <= y + height; j++) {
-                        int k = j;
-                        if (j >= Game.CAMERA_HEIGHT)
-                            k = j - Game.CAMERA_HEIGHT;
-                        if (obstacles[m][k] == pix.GROUND) {
-                            if (indiceStairs == width)
-                                indiceStairs = 0;
-                            nbStairs[indiceStairs++] = stairs;
-
-                            stairs = y+height - j;
-                            for (int l = y - stairs; l < y; l++) {
-                                for(int p = m-1; p<= m+width; p++)
-                                {
-                                    int z = p;
-                                    if(p < 0)
-                                        z = p + Game.CAMERA_WIDTH;
-                                    if(p >= Game.CAMERA_WIDTH)
-                                        z = p - Game.CAMERA_WIDTH;
-                                    k = l;
-                                    if (l >= Game.CAMERA_HEIGHT)
-                                        k = l - Game.CAMERA_HEIGHT;
-                                    if(l < 0)
-                                        k = l + Game.CAMERA_HEIGHT;
-                                    if (obstacles[z][k] == pix.GROUND)
-                                    {
-                                        goLeft = x + width - i;
-                                        break outloop;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-                for (int n = 0; n < width; n++)
-                    if (goUp < nbStairs[n])
-                        goUp = nbStairs[n];
-                y -= goUp;
-                x -= goLeft;
-
-            }
-
-
-            if (vY < 0) {
-                int goDown = 0;
-                outloop:
-                for (int i = x; i <= x + width; i++) {
-                    int m = i;
-                    if(i >= Game.CAMERA_WIDTH)
-                        m = i - Game.CAMERA_WIDTH;
-                    for (int j = y-(int)vY; j >= y; j--) {
-                        int k = j;
-                        if (j >= Game.CAMERA_HEIGHT)
-                            k = j - Game.CAMERA_HEIGHT;
-                        if (obstacles[m][k] == pix.GROUND) {
-                            goDown = j-y+1;
-                            break outloop;
-                        }
-                    }
                 }
 
-                y += goDown;
             }
-            else if (vY > 0) {
-                int goUp = 0;
-                outloop:
-                for (int i = x; i <= x + width; i++) {
-                    int m = i;
-                    if(i >= Game.CAMERA_WIDTH)
-                        m = i - Game.CAMERA_WIDTH;
-                    for (int j = y + height-(int)vY; j <= y + height; j++) {
-                        int k = j;
-                        if (j >= Game.CAMERA_HEIGHT)
-                            k = j - Game.CAMERA_HEIGHT;
-                        if (obstacles[m][k] == pix.GROUND) {
-                            goUp = y+height-j;
-                            etat = etatPerso.ON_GROUND;
-                            vY = 0.f;
-                            break outloop;
-                        }
-                    }
-                }
-
-                y -= goUp;
-            }
-
+            for (int n = 0; n < width; n++)
+                if (goUp < nbStairs[n])
+                    goUp = nbStairs[n];
+            y -= goUp;
+            x += goRight;
 
         }
+
+        else if (vX > 0) {
+            int stairs = 0;
+            int goLeft = 0;
+            int goUp = 0;
+            int[] nbStairs = new int[width];
+            int indiceStairs = 0;
+            outloop:
+            for (int i = x + width - (int) vX; i <= x + width; i++) {
+                int m = i;
+                if(m < 0)
+                    m += Game.CAMERA_WIDTH;
+                if(i >= Game.CAMERA_WIDTH)
+                    m = i - Game.CAMERA_WIDTH;
+
+                for (int j = y; j < y + height/2; j++) {
+                    int k = j;
+                    if(j < 0)
+                        k += Game.CAMERA_HEIGHT;
+                    if (j >= Game.CAMERA_HEIGHT)
+                        k -= Game.CAMERA_HEIGHT;
+                    if (obstacles[m][k] == pix.GROUND) {
+                        goLeft = x+width-i;
+                        break outloop;
+                    }
+                }
+                for (int j = y + height/2; j <= y + height; j++) {
+                    int k = j;
+                    if(j < 0)
+                        k += Game.CAMERA_HEIGHT;
+                    if (j >= Game.CAMERA_HEIGHT)
+                        k -= Game.CAMERA_HEIGHT;
+                    if (obstacles[m][k] == pix.GROUND) {
+                        if (indiceStairs == width)
+                            indiceStairs = 0;
+                        nbStairs[indiceStairs++] = stairs;
+
+                        stairs = y+height - j;
+                        for (int l = y - stairs; l < y; l++) {
+                            for(int p = m-1; p<= m+width; p++)
+                            {
+                                int z = p;
+                                if(p < 0)
+                                    z = p + Game.CAMERA_WIDTH;
+                                if(p >= Game.CAMERA_WIDTH)
+                                    z = p - Game.CAMERA_WIDTH;
+                                k = l;
+                                if (l >= Game.CAMERA_HEIGHT)
+                                    k = l - Game.CAMERA_HEIGHT;
+                                if(l < 0)
+                                    k = l + Game.CAMERA_HEIGHT;
+                                if (obstacles[z][k] == pix.GROUND)
+                                {
+                                    goLeft = x + width - i;
+                                    break outloop;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            for (int n = 0; n < width; n++)
+                if (goUp < nbStairs[n])
+                    goUp = nbStairs[n];
+            y -= goUp;
+            x -= goLeft;
+
+        }
+
+
+        if (vY < 0) {
+            int goDown = 0;
+            outloop:
+            for (int i = x; i <= x + width; i++) {
+                int m = i;
+                if( i < 0)
+                    m += Game.CAMERA_WIDTH;
+                if(i >= Game.CAMERA_WIDTH)
+                    m = i - Game.CAMERA_WIDTH;
+                for (int j = y-(int)vY; j >= y; j--) {
+                    int k = j;
+                    if(j < 0)
+                        k += Game.CAMERA_HEIGHT;
+                    if (j >= Game.CAMERA_HEIGHT)
+                        k -= Game.CAMERA_HEIGHT;
+                    if (obstacles[m][k] == pix.GROUND) {
+                        goDown = j-y+1;
+                        vY = 0.0f;
+                        break outloop;
+                    }
+                }
+            }
+
+            y += goDown;
+        }
+        else if (vY > 0) {
+            int goUp = 0;
+            outloop:
+            for (int i = x; i <= x + width; i++) {
+                int m = i;
+                if(i < 0)
+                    m += Game.CAMERA_WIDTH;
+                if(i >= Game.CAMERA_WIDTH)
+                    m = i - Game.CAMERA_WIDTH;
+                for (int j = y + height-(int)vY; j <= y + height; j++) {
+                    int k = j;
+                    if(j < 0)
+                        k += Game.CAMERA_HEIGHT;
+                    if (j >= Game.CAMERA_HEIGHT)
+                        k -= Game.CAMERA_HEIGHT;
+                    if (obstacles[m][k] == pix.GROUND) {
+                        goUp = y+height-j;
+                        etat = etatPerso.ON_GROUND;
+                        vY = 0.f;
+                        break outloop;
+                    }
+                }
+            }
+
+            y -= goUp;
+        }
+
+
+
 
          setpX(x);
         setpY(y);
@@ -364,6 +387,9 @@ public class Player extends AnimatedSprite
         this.vY = vY;
     }
 
+    public int getpWidth() {return width;}
+    public int getpHeight() {return height;}
+
     public void goRight()
     {
         setVX(3.3f);
@@ -381,13 +407,22 @@ public class Player extends AnimatedSprite
 
     public void jump()
     {
-        if(vY==0)
+        if(etat == etatPerso.ON_GROUND)
         {
             setVY(-30f);
             etat = etatPerso.JUMP;
         }
 //        setVY(-30f);
     }
+
+    public void die()
+    {
+        etat = etatPerso.DEAD;
+        System.out.println("Died");
+        //scene.endPartySolo();
+    }
+
+
 
 
 

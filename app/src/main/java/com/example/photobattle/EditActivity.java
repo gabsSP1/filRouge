@@ -77,8 +77,7 @@ public class EditActivity extends BaseActivity {
 		Intent intent = getIntent();
 		if (intent != null) {
 			fbackground = new File(intent.getStringExtra("selected_file"));
-			background = BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+fbackground.getName()
-					, BazarStatic.reqHeight );
+			background = BitmapFactory.decodeFile(FileManager.THRESHOLD_PATH+File.separator+fbackground.getName());
 			original =  BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+fbackground.getName()
 					,  BazarStatic.reqHeight);
 		}

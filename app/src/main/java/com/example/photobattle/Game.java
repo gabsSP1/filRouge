@@ -58,8 +58,11 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas backgroundTexture;
     private ITiledTextureRegion playerOneTextureRegion;
     private ITiledTextureRegion playerTwoTextureRegion;
+    private ITiledTextureRegion obstacleTextureRegion;
     private BitmapTextureAtlas playerTexture1;
     private BitmapTextureAtlas playerTexture2;
+    private BitmapTextureAtlas obstacleTexture;
+
     private Button quit;
     public Button pause;
     Button restart;
@@ -112,9 +115,14 @@ public class Game extends SimpleBaseGameActivity {
         backgroundTexture.unload();
         playerTexture2.unload();
         playerTexture1.unload();
+        obstacleTexture.unload();
         playerTexture1 = null;
+        playerTexture2 = null;
+        obstacleTexture = null;
+        backgroundTexture = null;
         playerOneTextureRegion = null;
         playerTwoTextureRegion =null;
+        obstacleTextureRegion = null;
         backgroundTextureRegion =null;
         gameScene.disposeScene();
         BazarStatic.map.recycle();
@@ -155,7 +163,7 @@ public class Game extends SimpleBaseGameActivity {
         this.mRenderSurfaceView.setRenderer(this.mEngine, this);
 
 
-        final android.widget.RelativeLayout.LayoutParams surfaceViewLayoutParams = new RelativeLayout.LayoutParams(BaseGameActivity.createSurfaceViewLayoutParams());
+        final RelativeLayout.LayoutParams surfaceViewLayoutParams = new RelativeLayout.LayoutParams(BaseGameActivity.createSurfaceViewLayoutParams());
         surfaceViewLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
         relativeLayout.addView(this.mRenderSurfaceView, surfaceViewLayoutParams);
@@ -163,7 +171,7 @@ public class Game extends SimpleBaseGameActivity {
 
         surfaceViewLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas = new RelativeLayout.LayoutParams(height/5, height/5);
+        RelativeLayout.LayoutParams buttonLayoutParmas = new RelativeLayout.LayoutParams(height/5, height/5);
         buttonLayoutParmas.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         buttonLayoutParmas.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         buttonLayoutParmas.setMargins(50, 0, 0 , 50);
@@ -194,7 +202,7 @@ public class Game extends SimpleBaseGameActivity {
 
 
         final Button button =new Button(this);
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas2 = new RelativeLayout.LayoutParams(height/5, height/5);
+        RelativeLayout.LayoutParams buttonLayoutParmas2 = new RelativeLayout.LayoutParams(height/5, height/5);
         buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         buttonLayoutParmas2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         buttonLayoutParmas2.setMargins(0, 0, 50, 50);
@@ -215,7 +223,7 @@ public class Game extends SimpleBaseGameActivity {
 
         quit = new Button(this);
         quit.setVisibility(View.INVISIBLE);
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(height/7, height/7);
+        RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas3.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         buttonLayoutParmas3.addRule(RelativeLayout.CENTER_VERTICAL);
         buttonLayoutParmas3.setMargins((int)(5*height/7.0), 0, 0, 0);
@@ -233,7 +241,7 @@ public class Game extends SimpleBaseGameActivity {
 
         restart = new Button(this);
         restart.setVisibility(View.INVISIBLE);
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas5 = new RelativeLayout.LayoutParams(height/7, height/7);
+        RelativeLayout.LayoutParams buttonLayoutParmas5 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas5.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         buttonLayoutParmas5.addRule(RelativeLayout.CENTER_VERTICAL);
         buttonLayoutParmas5.setMargins(0, 0, (int)(5*height/7.0), 0);
@@ -255,7 +263,7 @@ public class Game extends SimpleBaseGameActivity {
         //Menu pause
         pause = new Button(this);
         pause.setClickable(false);
-        android.widget.RelativeLayout.LayoutParams buttonLayoutParmas4 = new RelativeLayout.LayoutParams(height/7, height/7);
+        RelativeLayout.LayoutParams buttonLayoutParmas4 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas4.setMargins(0, 0, 0, 5);
         buttonLayoutParmas4.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         buttonLayoutParmas4.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -288,13 +296,11 @@ public class Game extends SimpleBaseGameActivity {
 
     }
 
-    public ITiledTextureRegion getPlayerOneTextureRegion() {
-        return playerOneTextureRegion;
-    }
+    public ITiledTextureRegion getPlayerOneTextureRegion() {return playerOneTextureRegion;}
 
-    public ITiledTextureRegion getPlayerTwoTextureRegion() {
-        return playerTwoTextureRegion;
-    }
+    public ITiledTextureRegion getPlayerTwoTextureRegion() {return playerTwoTextureRegion;}
+
+    public ITiledTextureRegion getObstacleTextureRegion() {return obstacleTextureRegion;}
 
     public void onPause()
     {
@@ -372,13 +378,14 @@ public class Game extends SimpleBaseGameActivity {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            BitmapTextureAtlasSource source = new BitmapTextureAtlasSource(BazarStatic.map.getPhotoOriginal());
+            BitmapTextureAtlasSource source = new BitmapTextureAtlasSource(BazarStatic.map.getContours());
             backgroundTexture = new BitmapTextureAtlas(game.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
             backgroundTexture.addTextureAtlasSource(source, 0, 0);
 
             backgroundTextureRegion =  TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
             playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
             playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
+            obstacleTexture = new BitmapTextureAtlas(game.getTextureManager(), 32, 32);
 
 
             if(!BazarStatic.onLine)
@@ -389,8 +396,10 @@ public class Game extends SimpleBaseGameActivity {
 
             playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture1, game, "personnage.png", 0, 0, 1, 1);
             playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "personnage.png", 0, 0, 1, 1);
+            obstacleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.obstacleTexture, game, "goomba.png", 0, 0, 1, 1);
             playerTexture1.load();
             playerTexture2.load();
+            obstacleTexture.load();
             fontCountdowTextureAtlas = new BitmapTextureAtlas(game.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
             fontCountdown = FontFactory.createFromAsset(game.getFontManager(), fontCountdowTextureAtlas,game.getAssets(),"p.TTF",100f,true, Color.BLACK);
             game.getEngine().getTextureManager().loadTexture(fontCountdowTextureAtlas);

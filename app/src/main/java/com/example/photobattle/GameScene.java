@@ -20,6 +20,9 @@ import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.HorizontalAlign;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.andengine.extension.physics.box2d.PhysicsFactory.*;
 
 /**
@@ -35,6 +38,7 @@ public class GameScene extends Scene {
     private PhysicsWorld physicsWorld;
     public static Player persoOne;
     public static Player persoTwo;
+    public static LinkedList<Obstacle> obstacleList;
 
     //---------------------------------------------
     // CONSTRUCTOR
@@ -64,19 +68,37 @@ public class GameScene extends Scene {
     public  void createScene() {
         createHUD();
         createPhysics();
-        persoOne = new Player(50f, 50f, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, true);
+        persoOne = new Player(50f, 50f, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
         this.attachChild(persoOne);
-        engine.setScene(this);
+
         if (BazarStatic.onLine)
         {
-            persoTwo = new Player(50f, 50f, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, false);
+            persoTwo = new Player(50f, 50f, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, this, false);
             this.attachChild(persoTwo);
             lauchCountDown();
         }
+        else
+        {
+            obstacleList = new LinkedList<>();
+            Obstacle ob = new Obstacle(activity.CAMERA_WIDTH / 2, activity.CAMERA_HEIGHT/2, vbom, activity.getObstacleTextureRegion(), camera, physicsWorld, persoOne, this);
+            this.attachChild(ob);
+            obstacleList.add(ob);
+        }
+        engine.setScene(this);
 
 
+    }
 
+    public void addObstacle(Obstacle parent)
+    {
+        int x = parent.getpX();
+        int y = parent.getpY();
 
+        Obstacle ob = new Obstacle(x, y, vbom, activity.getObstacleTextureRegion(), camera, physicsWorld, persoOne, this);
+        this.attachChild(ob);
+        ob.launchPhysics();
+        obstacleList.add(ob);
+        System.out.println("Nouvel obstacle crée x: "+x+" ; y: "+y+";");
     }
 
 
@@ -102,6 +124,10 @@ public class GameScene extends Scene {
     public  void disposeScene()
     {
         persoOne.detachSelf();
+        for(int i =0; i < obstacleList.size(); i++)
+        {
+            obstacleList.get(i).detachSelf();
+        }
 //        persoTwo.dispose();
         this.detachSelf();
         this.dispose();
@@ -117,8 +143,7 @@ public class GameScene extends Scene {
 
     }
 
-    public void lauchCountDown()
-    {
+    public void lauchCountDown() {
         textPosition(activity.text);
         this.attachChild(activity.text);
         try {
@@ -142,7 +167,7 @@ public class GameScene extends Scene {
         }
         textPosition(activity.text);
         this.detachChild(activity.text);
-       this.attachChild(activity.textGo);
+        this.attachChild(activity.textGo);
         textPosition(activity.textGo);
         try {
             Thread.sleep(1000);
@@ -152,7 +177,9 @@ public class GameScene extends Scene {
         this.detachChild(activity.textGo);
         persoOne.launchPhysics();
         if(BazarStatic.onLine)
-        persoTwo.launchPhysics();
+            persoTwo.launchPhysics();
+        else
+            obstacleList.getFirst().launchPhysics();
 
         activity.gameLoaded =true;
     }
@@ -162,5 +189,21 @@ public class GameScene extends Scene {
     {
         text.setX(Game.CAMERA_WIDTH/2-text.getScaleCenterX());
         text.setY(Game.CAMERA_HEIGHT/2-text.getScaleCenterY());
+    }
+
+    public void endPartySolo()
+    {
+        engine.stop();
+        textPosition(activity.text);
+        this.attachChild(activity.text);
+        activity.text.setText("YOU DIED");
+        textPosition(activity.text);
+        try {
+        Thread.sleep(2500);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.detachChild(activity.text);
+        activity.finish();
     }
 }
