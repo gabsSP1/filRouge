@@ -30,6 +30,7 @@ public class MenuApp extends BaseActivity{
 	Animation animSettings;
 	Button join;
 	Button mute;
+    boolean pause;
 	InterstitialAd mInterstitialAd;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,12 @@ public class MenuApp extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		FullScreencall();
         setContentView(R.layout.activity_menu_app);
+        pause = false;
 		mInterstitialAd = new InterstitialAd(this);
 		mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.setAdListener(new AdListener() {
             public void onAdLoaded() {
-                if(isAppOnForeground(getApplicationContext())) {
+                if(!pause) {
                     mInterstitialAd.show();
                 }
             }
@@ -126,13 +128,11 @@ public class MenuApp extends BaseActivity{
 		});
 
 	}
-	public void onRestart()
+	public void onResume()
 	{
-		super.onRestart();
-		/*View decorView = getWindow().getDecorView();
-		int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-				| View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-		decorView.setSystemUiVisibility(uiOptions);*/
+		super.onResume();
+        FullScreencall();
+        pause = false;
 
 	}
 	@Override
@@ -163,4 +163,10 @@ public class MenuApp extends BaseActivity{
 
         mInterstitialAd.loadAd(adRequest);
 	}
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        pause =true;
+    }
 }
