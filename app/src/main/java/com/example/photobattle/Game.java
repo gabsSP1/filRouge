@@ -158,6 +158,7 @@ public class Game extends SimpleBaseGameActivity {
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
+        int width = size.x;
         FullScreencall();
         final RelativeLayout relativeLayout = new RelativeLayout(this);
         final FrameLayout.LayoutParams relativeLayoutLayoutParams = new FrameLayout.LayoutParams(
@@ -229,8 +230,8 @@ public class Game extends SimpleBaseGameActivity {
         quit.setVisibility(View.INVISIBLE);
         RelativeLayout.LayoutParams buttonLayoutParmas3 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas3.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        buttonLayoutParmas3.addRule(RelativeLayout.CENTER_VERTICAL);
-        buttonLayoutParmas3.setMargins((int)(5*height/7.0), 0, 0, 0);
+        buttonLayoutParmas3.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonLayoutParmas3.setMargins((int)(width/2-height/7.0), height/2, 0, 0);
         relativeLayout.addView(quit, buttonLayoutParmas3);
         quit.setText("X");
         quit.setOnClickListener(new View.OnClickListener() {
@@ -247,29 +248,30 @@ public class Game extends SimpleBaseGameActivity {
         restart.setVisibility(View.INVISIBLE);
         RelativeLayout.LayoutParams buttonLayoutParmas5 = new RelativeLayout.LayoutParams(height/7, height/7);
         buttonLayoutParmas5.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        buttonLayoutParmas5.addRule(RelativeLayout.CENTER_VERTICAL);
-        buttonLayoutParmas5.setMargins(0, 0, (int)(5*height/7.0), 0);
+        buttonLayoutParmas5.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonLayoutParmas5.setMargins(0, height/2, (int)(width/2-height/7.0), 0);
         relativeLayout.addView(restart, buttonLayoutParmas5);
         restart.setText(">");
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                quit.setVisibility(View.INVISIBLE);
+                restart.setVisibility(View.INVISIBLE);
+                textDie.setVisibility(View.INVISIBLE);
                 if(!endGame) {
+                    textDie.setText("Pause...");
                     mEngine.start();
                     inGame = true;
-                    quit.setVisibility(View.INVISIBLE);
-                    restart.setVisibility(View.INVISIBLE);
+
                 }
                 else
                 {
 //                    gameScene.detachAll();
-
-                    quit.setVisibility(View.INVISIBLE);
-                    restart.setVisibility(View.INVISIBLE);
                     new AsyncTask<Void, Void, Void>(){
 
                         @Override
                         protected Void doInBackground(Void... params) {
+
                             gameScene.detachChildren();
                             gameScene.reset();
                             gameScene.createScene();
@@ -277,6 +279,7 @@ public class Game extends SimpleBaseGameActivity {
                             gameLoaded =false;
                             endGame =false;
                             gameScene.lauchCountDown();
+//                            mEngine.start();
                             return null;
                         }
                     }.execute();
@@ -287,14 +290,15 @@ public class Game extends SimpleBaseGameActivity {
 
 
         textDie = new TextView(this);
-        textDie.setText("Game Over !");
+        textDie.setText("Pause..");
         textDie.setVisibility(View.INVISIBLE);
         textDie.setTextColor(Color.BLACK);
         textDie.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
         textDie.setTypeface(Typeface.createFromAsset(getAssets(),"p.TTF"));
         RelativeLayout.LayoutParams buttonLayoutParmas6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        buttonLayoutParmas6.addRule(RelativeLayout.CENTER_VERTICAL);
         buttonLayoutParmas6.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        buttonLayoutParmas6.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonLayoutParmas6.setMargins(0, (int)(height/2-1.5*height/7.0), 0, 0);
         relativeLayout.addView(textDie, buttonLayoutParmas6);
 
 
@@ -315,9 +319,11 @@ public class Game extends SimpleBaseGameActivity {
             @Override
             public void onClick(View v) {
                 if(gameLoaded && !endGame) {
+                    textDie.setText("Pause...");
                     inGame = false;
                     quit.setVisibility(View.VISIBLE);
                     restart.setVisibility(View.VISIBLE);
+                    textDie.setVisibility(View.VISIBLE);
                     if (!BazarStatic.onLine)
                         mEngine.stop();
                     relativeLayout.setBackgroundColor(Color.alpha(1));

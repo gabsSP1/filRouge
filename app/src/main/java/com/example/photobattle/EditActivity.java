@@ -100,13 +100,16 @@ public class EditActivity extends BaseActivity {
 		p.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				System.out.println("coucou");
 				if(erasemode) {
-					System.out.println("x " + event.getX());
-					System.out.println("y " + event.getY());
-					siz = sizeEraser.getProgress();
-					background = erase((int) event.getX(), (int) event.getY(), background);
+					if(event.getAction() == MotionEvent.ACTION_MOVE) {
+						System.out.println("x " + event.getX());
+						System.out.println("y " + event.getY());
+						siz = sizeEraser.getProgress();
+						background = erase((int) event.getX(), (int) event.getY(), background);
+					}
 				}
-				return false;
+				return true;
 
 			}
 		});

@@ -96,7 +96,6 @@ public class Obstacle extends AnimatedSprite {
 
         if(!( pX > x+width  ||  pX+pWidth < x  ||  pY > y+height  ||  pY+pHeight < y ))
         {
-            System.out.println("Die "+getpX()+" "+getpY());
             player.die();
         }
 

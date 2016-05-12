@@ -206,46 +206,34 @@ public class GameScene extends Scene {
         }*/
 
 //        engine.stop();
-        detachAll();
         activity.endGame = true;
+        detachAll();
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
 //stuff that updates ui
+                activity.textDie.setText("Game Over");
                 activity.textDie.setVisibility(View.VISIBLE);
-
-            }
-        });
-
-        try {
-        Thread.sleep(1500);
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-//stuff that updates ui
-                activity.textDie.setVisibility(View.INVISIBLE);
                 activity.restart.setText("retart");
                 activity.restart.setVisibility(View.VISIBLE);
                 activity.quit.setVisibility(View.VISIBLE);
+
             }
         });
-//        engine.stop();
+
+
 
     }
 
     public void detachAll()
     {
-        detachSprite(persoOne, persoOne.getBody());
         for(Obstacle obs : obstacleList)
         {
             detachSprite(obs, obs.getBody());
         }
+        detachSprite(persoOne, persoOne.getBody());
+
     }
 
     public void detachSprite(final Sprite sprite, final Body body){

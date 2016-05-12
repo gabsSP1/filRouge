@@ -31,7 +31,7 @@ public class Player extends AnimatedSprite
     private etatPerso etat;
     private GameScene scene;
     PhysicsWorld physicsWorld;
-
+    boolean dead;
     private final float GRAVITY = 1f;
     private final float VITESSE_Y_MAX = 10.0f;
     private final float VITESSE_X_MAX = 10f;
@@ -52,6 +52,7 @@ public class Player extends AnimatedSprite
         etat = etatPerso.JUMP;
         this.physicsWorld = physicsWorld;
         this.j1= j1;
+        dead =false;
 
     }
 
@@ -422,8 +423,8 @@ public class Player extends AnimatedSprite
 
     public void die()
     {
-        if(etat != etatPerso.DEAD) {
-            etat = etatPerso.DEAD;
+        if(!dead) {
+            dead =true;
             System.out.println("Died");
             scene.endPartySolo();
         }
