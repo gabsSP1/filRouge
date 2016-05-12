@@ -66,8 +66,9 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas playerTexture2;
     private BitmapTextureAtlas obstacleTexture;
 
-    private Button quit;
+    Button quit;
     public Button pause;
+    boolean endGame =false;
     Button restart;
     SpriteBackground sprite;
     public boolean gameLoaded = false;
@@ -253,12 +254,37 @@ public class Game extends SimpleBaseGameActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEngine.start();
-                inGame =true;
-                quit.setVisibility(View.INVISIBLE);
-                restart.setVisibility(View.INVISIBLE);
+                if(!endGame) {
+                    mEngine.start();
+                    inGame = true;
+                    quit.setVisibility(View.INVISIBLE);
+                    restart.setVisibility(View.INVISIBLE);
+                }
+                else
+                {
+//                    gameScene.detachAll();
+
+                    quit.setVisibility(View.INVISIBLE);
+                    restart.setVisibility(View.INVISIBLE);
+                    new AsyncTask<Void, Void, Void>(){
+
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            gameScene.detachChildren();
+                            gameScene.reset();
+                            gameScene.createScene();
+//                    mEngine.start();
+                            gameLoaded =false;
+                            endGame =false;
+                            gameScene.lauchCountDown();
+                            return null;
+                        }
+                    }.execute();
+
+                }
             }
         });
+
 
         textDie = new TextView(this);
         textDie.setText("Game Over !");
@@ -288,7 +314,7 @@ public class Game extends SimpleBaseGameActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(gameLoaded) {
+                if(gameLoaded && !endGame) {
                     inGame = false;
                     quit.setVisibility(View.VISIBLE);
                     restart.setVisibility(View.VISIBLE);

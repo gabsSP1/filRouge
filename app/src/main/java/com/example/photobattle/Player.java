@@ -55,6 +55,11 @@ public class Player extends AnimatedSprite
 
     }
 
+
+    public Body getBody() {
+        return body;
+    }
+
     public void launchPhysics()
     {
         if(j1)

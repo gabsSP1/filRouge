@@ -5,14 +5,17 @@ import android.graphics.Color;
 import android.view.View;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.extension.physics.box2d.FixedStepPhysicsWorld;
+import org.andengine.extension.physics.box2d.PhysicsConnector;
 import org.andengine.extension.physics.box2d.PhysicsWorld;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
@@ -194,22 +197,67 @@ public class GameScene extends Scene {
 
     public void endPartySolo()
     {
+
+        /*persoOne.getBody().setActive(false);
+        for(Obstacle obs : obstacleList)
+        {
+            obs.getBody().setActive(false);
+        }*/
+
+//        engine.stop();
+        detachAll();
+        activity.endGame = true;
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
 //stuff that updates ui
                 activity.textDie.setVisibility(View.VISIBLE);
-                engine.stop();
+
             }
         });
 
         try {
-        Thread.sleep(2500);
+        Thread.sleep(1500);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-        this.detachChild(activity.text);
-        activity.finish();
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+//stuff that updates ui
+                activity.textDie.setVisibility(View.INVISIBLE);
+                activity.restart.setText("retart");
+                activity.restart.setVisibility(View.VISIBLE);
+                activity.quit.setVisibility(View.VISIBLE);
+            }
+        });
+//        engine.stop();
+
     }
+
+    public void detachAll()
+    {
+        detachSprite(persoOne, persoOne.getBody());
+        for(Obstacle obs : obstacleList)
+        {
+            detachSprite(obs, obs.getBody());
+        }
+    }
+
+    public void detachSprite(final Sprite sprite, final Body body){
+        engine.runOnUpdateThread(new Runnable(){
+
+            @Override
+            public void run() {
+
+                physicsWorld.unregisterPhysicsConnector(physicsWorld.getPhysicsConnectorManager().findPhysicsConnectorByShape(sprite));
+                physicsWorld.destroyBody(body);
+//                detachChild(sprite);
+            }});
+    }
+
+
 }

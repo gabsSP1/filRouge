@@ -45,6 +45,10 @@ public class Obstacle extends AnimatedSprite {
         nano = System.nanoTime();
     }
 
+    public Body getBody() {
+        return body;
+    }
+
     public void launchPhysics()
     {
         createPhysicsObstacle(physicsWorld);
@@ -92,6 +96,7 @@ public class Obstacle extends AnimatedSprite {
 
         if(!( pX > x+width  ||  pX+pWidth < x  ||  pY > y+height  ||  pY+pHeight < y ))
         {
+            System.out.println("Die "+getpX()+" "+getpY());
             player.die();
         }
 
