@@ -305,6 +305,10 @@ public class EditActivity extends BaseActivity {
 					e.printStackTrace();
 				}
 			}
+		else
+		{
+			s1.setProgress(100);
+		}
 
 
 

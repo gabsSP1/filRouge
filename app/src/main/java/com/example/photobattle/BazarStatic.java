@@ -3,6 +3,7 @@ package com.example.photobattle;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.provider.Settings;
 
 /**
@@ -56,5 +57,25 @@ public class BazarStatic {
         return inSampleSize;
     }
 
-
+    public static Bitmap epaissirContours(Bitmap originale, Bitmap contours)
+    {
+        System.out.println("Contours "+contours.getWidth()+" "+contours.getHeight()+" Originale :"+originale.getWidth()+" "+originale.getHeight());
+        Bitmap bm =originale.copy(Bitmap.Config.RGB_565, true);
+        for(int i = 0; i< contours.getWidth(); i++)
+        {
+            for(int j=0; j<contours.getHeight(); j++)
+            {
+                if(contours.getPixel(i,j)!=Color.WHITE) {
+//                    for (int w = i - 2; w < i + 3; w++) {
+//                        for (int h = j - 2; h < j + 3; h++) {
+//                            if (j >= 0 && j < contours.getHeight() && i >= 0 && i < contours.getWidth()) {
+                                bm.setPixel(i, j, Color.BLACK);
+//                            }
+//                        }
+//                    }
+                }
+            }
+        }
+        return bm;
+    }
 }

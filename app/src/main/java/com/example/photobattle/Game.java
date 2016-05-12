@@ -46,6 +46,9 @@ import java.util.List;
 
 import com.example.photobattle.Joystick.JoystickMovedListener;
 import com.example.photobattle.Joystick.JoystickView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 
 /*
@@ -74,7 +77,7 @@ public class Game extends SimpleBaseGameActivity {
     public boolean gameLoaded = false;
     private JoystickView joystickView;
     Font fontCountdown;
-
+    AdView adView;
     Camera camera;
 
     Text text;
@@ -255,6 +258,8 @@ public class Game extends SimpleBaseGameActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                adView.setVisibility(View.INVISIBLE);
+                requestNewInterstitial();
                 quit.setVisibility(View.INVISIBLE);
                 restart.setVisibility(View.INVISIBLE);
                 textDie.setVisibility(View.INVISIBLE);
@@ -319,6 +324,7 @@ public class Game extends SimpleBaseGameActivity {
             @Override
             public void onClick(View v) {
                 if(gameLoaded && !endGame) {
+                    adView.setVisibility(View.VISIBLE);
                     textDie.setText("Pause...");
                     inGame = false;
                     quit.setVisibility(View.VISIBLE);
@@ -332,6 +338,23 @@ public class Game extends SimpleBaseGameActivity {
             }
         });
         this.setContentView(relativeLayout, relativeLayoutLayoutParams);
+
+        adView = new AdView(this);
+
+        final FrameLayout.LayoutParams adViewLayoutParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_HORIZONTAL | Gravity.TOP);
+
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdSize(AdSize.SMART_BANNER);
+        adView.setVisibility(View.INVISIBLE);
+
+
+
+
+        relativeLayout.addView(adView,adViewLayoutParams);
+        requestNewInterstitial();
 
         Sound.playFightMusic(Game.this);
         if(BazarStatic.onLine) {
@@ -469,6 +492,15 @@ public class Game extends SimpleBaseGameActivity {
             gameScene.lauchCountDown();
             return null;
         }
+    }
+
+    private void requestNewInterstitial() {
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("C7B8E8FD2DBFCD9EA1412F167AD58A33")
+                .build();
+
+        adView.loadAd(adRequest);
     }
 
 }

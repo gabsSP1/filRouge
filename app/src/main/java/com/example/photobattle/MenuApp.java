@@ -16,6 +16,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.io.File;
 import java.util.List;
 
@@ -26,13 +30,37 @@ public class MenuApp extends BaseActivity{
 	Animation animSettings;
 	Button join;
 	Button mute;
-
+	InterstitialAd mInterstitialAd;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		this.overridePendingTransition(0, 0);
 		super.onCreate(savedInstanceState);
 		FullScreencall();
-		setContentView(R.layout.activity_menu_app);
+        setContentView(R.layout.activity_menu_app);
+		mInterstitialAd = new InterstitialAd(this);
+		mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if(isAppOnForeground(getApplicationContext())) {
+                    mInterstitialAd.show();
+                }
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                FullScreencall();
+            }
+        });
+		requestNewInterstitial();
+//		mInterstitialAd.show();
+
+//		mInterstitialAd.setAdListener(new AdListener() {
+//			@Override
+//			public void onAdClosed() {
+//			}
+//		});
+
 		FileManager.initialyzeTreeFile();
 
 		Sound.playMenuMusic(this.getApplicationContext());
@@ -90,7 +118,6 @@ public class MenuApp extends BaseActivity{
 		mute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				if(Sound.muteMusic()==1)
 					mute.setBackgroundResource(R.drawable.full_sound);
 				else
@@ -126,5 +153,14 @@ public class MenuApp extends BaseActivity{
 			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 			decorView.setSystemUiVisibility(uiOptions);
 		}
+	}
+
+	private void requestNewInterstitial() {
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("C7B8E8FD2DBFCD9EA1412F167AD58A33").addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
 	}
 }

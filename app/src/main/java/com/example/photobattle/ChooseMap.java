@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.example.photobattle.R;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -365,18 +366,22 @@ public class ChooseMap extends BaseActivity {
                 if (data != null && resultCode == Activity.RESULT_OK) {
 
                     try {
-                        Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-						FileManager.saveBitmap(bm, FileManager.PICTURE_PATH, pictureName);
-						bm = bm.copy(Bitmap.Config.ARGB_8888, true);
-                        Mat mImg = new Mat();
-                        Utils.bitmapToMat(bm, mImg);
-                        Mat edges = new Mat();
-                        Imgproc.Canny(mImg,edges,100,100);
-                        bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
-                        Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
-                        Core.subtract(invertcolormatrix, edges, edges);
-                        Utils.matToBitmap(edges, bm);
-                        FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
+						Bitmap origine = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+						int width =origine.getWidth()*720/origine.getHeight();
+						origine = origine.createScaledBitmap(origine, width, 720, true);
+						FileManager.saveBitmap(origine, FileManager.PICTURE_PATH, pictureName);
+						Bitmap bm = origine.copy(Bitmap.Config.ARGB_8888, true);
+						Mat mImg = new Mat();
+						Utils.bitmapToMat(bm, mImg);
+						Mat edges = new Mat();
+						Imgproc.Canny(mImg,edges,100,100);
+						bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
+						Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
+						Core.subtract(invertcolormatrix, edges, edges);
+						Utils.matToBitmap(edges, bm);
+//						Bitmap imGame = BazarStatic.epaissirContours(origine,bm);
+//						FileManager.saveBitmap(imGame, FileManager.GAME_PICTURE_PATH, pictureName);
+						FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
 						bm.recycle();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -389,8 +394,11 @@ public class ChooseMap extends BaseActivity {
 
                 try {
 
-                    Bitmap bm = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
-                    bm = bm.copy(Bitmap.Config.ARGB_8888, true);
+                    Bitmap origine = BitmapFactory.decodeFile(FileManager.PICTURE_PATH + File.separator + pictureName);
+					int width =origine.getWidth()*720/origine.getHeight();
+					origine = origine.createScaledBitmap(origine, width, 720, true);
+					FileManager.saveBitmap(origine, FileManager.PICTURE_PATH, pictureName);
+                    Bitmap bm = origine.copy(Bitmap.Config.ARGB_8888, true);
                     Mat mImg = new Mat();
                     Utils.bitmapToMat(bm, mImg);
                     Mat edges = new Mat();
@@ -399,6 +407,8 @@ public class ChooseMap extends BaseActivity {
                     Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                     Core.subtract(invertcolormatrix, edges, edges);
                     Utils.matToBitmap(edges, bm);
+//					Bitmap imGame = BazarStatic.epaissirContours(origine,bm);
+//					FileManager.saveBitmap(imGame, FileManager.GAME_PICTURE_PATH, pictureName);
                     FileManager.saveBitmap(bm, FileManager.THRESHOLD_PATH, pictureName);
 					bm.recycle();
                 } catch (Exception e) {

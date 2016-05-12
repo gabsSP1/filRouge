@@ -8,12 +8,12 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\mus_menu.mp3"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_fight.mp3",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\mus_fight.mp3"
-    },
-    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\open.ogg",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\open.ogg"
+    },
+    {
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_fight.mp3",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\raw\\mus_fight.mp3"
     },
     {
         "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\open.ogg",
@@ -22,6 +22,10 @@
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_menu.mp3",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\raw\\mus_menu.mp3"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\gtm_analytics",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-analytics\\8.4.0\\res\\raw\\gtm_analytics"
     },
     {
         "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\raw\\mus_fight.mp3",

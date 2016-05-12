@@ -215,6 +215,7 @@ public class GameScene extends Scene {
 //stuff that updates ui
                 activity.textDie.setText("Game Over");
                 activity.textDie.setVisibility(View.VISIBLE);
+                activity.adView.setVisibility(View.VISIBLE);
                 activity.restart.setText("retart");
                 activity.restart.setVisibility(View.VISIBLE);
                 activity.quit.setVisibility(View.VISIBLE);

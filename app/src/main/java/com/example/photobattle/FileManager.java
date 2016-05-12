@@ -16,7 +16,7 @@ public class FileManager {
     public static final String PICTURE_PATH= GENERAL_PATH+ File.separator +"Pictures";
     public static final String THRESHOLD_PATH= GENERAL_PATH+ File.separator +"Threshold";
     public static final String DATA_PATH = GENERAL_PATH+ File.separator +"Data";
-
+    public static final String GAME_PICTURE_PATH = GENERAL_PATH+ File.separator +"GamePicture";
     private static int nbMap;
     private static String pictureName;
 
@@ -32,6 +32,7 @@ public class FileManager {
         createDirectory(PICTURE_PATH);
         createDirectory(THRESHOLD_PATH);
         createDirectory(DATA_PATH);
+        createDirectory(GAME_PICTURE_PATH);
     }
 
     //Create a directory to the indicated path
