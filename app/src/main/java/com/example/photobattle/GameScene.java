@@ -2,6 +2,7 @@ package com.example.photobattle;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.view.View;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -193,11 +194,16 @@ public class GameScene extends Scene {
 
     public void endPartySolo()
     {
-        engine.stop();
-        textPosition(activity.text);
-        this.attachChild(activity.text);
-        activity.text.setText("YOU DIED");
-        textPosition(activity.text);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+//stuff that updates ui
+                activity.textDie.setVisibility(View.VISIBLE);
+                engine.stop();
+            }
+        });
+
         try {
         Thread.sleep(2500);
         } catch(InterruptedException e) {

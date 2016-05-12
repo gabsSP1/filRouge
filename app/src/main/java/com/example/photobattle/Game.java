@@ -5,8 +5,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.LimitedFPSEngine;
@@ -78,7 +81,7 @@ public class Game extends SimpleBaseGameActivity {
     Text textLoading;
     BitmapTextureAtlas fontTextureAtlas;
     BitmapTextureAtlas fontCountdowTextureAtlas;
-
+    TextView textDie;
 
     public EngineOptions onCreateEngineOptions() {
         CAMERA_WIDTH = BazarStatic.map.getContours().getWidth();
@@ -256,6 +259,19 @@ public class Game extends SimpleBaseGameActivity {
                 restart.setVisibility(View.INVISIBLE);
             }
         });
+
+        textDie = new TextView(this);
+        textDie.setText("Game Over !");
+        textDie.setVisibility(View.INVISIBLE);
+        textDie.setTextColor(Color.BLACK);
+        textDie.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
+        textDie.setTypeface(Typeface.createFromAsset(getAssets(),"p.TTF"));
+        RelativeLayout.LayoutParams buttonLayoutParmas6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        buttonLayoutParmas6.addRule(RelativeLayout.CENTER_VERTICAL);
+        buttonLayoutParmas6.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        relativeLayout.addView(textDie, buttonLayoutParmas6);
+
+
 
 
 

@@ -417,9 +417,11 @@ public class Player extends AnimatedSprite
 
     public void die()
     {
-        etat = etatPerso.DEAD;
-        System.out.println("Died");
-        //scene.endPartySolo();
+        if(etat != etatPerso.DEAD) {
+            etat = etatPerso.DEAD;
+            System.out.println("Died");
+            scene.endPartySolo();
+        }
     }
 
 
