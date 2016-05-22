@@ -92,7 +92,11 @@ public class Map implements Serializable {
                 if ((line = br.readLine()) != null) {
                     yposJ2 = Integer.parseInt(line);
                 }
-
+                if(yposJ1 == yposJ2 && xposJ1 == xposJ2)
+                {
+                    yposJ2 = 0;
+                    xposJ2 = contours.getWidth();
+                }
 
                 in.close();
 

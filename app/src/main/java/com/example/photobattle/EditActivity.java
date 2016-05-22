@@ -115,6 +115,7 @@ public class EditActivity extends BaseActivity {
 			public void onClick(View v) {
 				try{
 					coordGomme = ReadSettings(EditActivity.this);
+					background = doFilter(s1.getProgress(), s1.getProgress() + 50, original);
 					dataToWrite = coordGomme;
 					p.setImageBitmap(background);
 				}
@@ -139,74 +140,62 @@ public class EditActivity extends BaseActivity {
 		reset.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				s1.setProgress(100);
 				dataToWrite = "";
+				background = doFilter(100,150, original);
+				p.setImageBitmap(background);
+
 			}
 		});
 		p = (ImageView) findViewById(R.id.pictureEdit);
 		p.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-
 				float eventX = event.getX();
 				float eventY = event.getY();
-				float[] eventXY = new float[] {eventX, eventY};
+				float[] eventXY = new float[]{eventX, eventY};
 
 				Matrix invertMatrix = new Matrix();
 				p.getImageMatrix().invert(invertMatrix);
 
 				invertMatrix.mapPoints(eventXY);
-				int x = Integer.valueOf((int)eventXY[0]);
-				int y = Integer.valueOf((int)eventXY[1]);
+				int x = Integer.valueOf((int) eventXY[0]);
+				int y = Integer.valueOf((int) eventXY[1]);
 
-				System.out.println(
-						"touched position: "
-								+ String.valueOf(eventX) + " / "
-								+ String.valueOf(eventY));
-				System.out.println(
-						"touched position: "
-								+ String.valueOf(x) + " / "
-								+ String.valueOf(y));
 
 				Drawable imgDrawable = p.getDrawable();
-				Bitmap bitmap = ((BitmapDrawable)imgDrawable).getBitmap();
+				Bitmap bitmap = ((BitmapDrawable) imgDrawable).getBitmap();
 
-				System.out.println(
-						"drawable size: "
-								+ String.valueOf(bitmap.getWidth()) + " / "
-								+ String.valueOf(bitmap.getHeight()));
+
 
 				//Limit x, y range within bitmap
-				if(x < 0){
+				if (x < 0) {
 					x = 0;
-				}else if(x > bitmap.getWidth()-1){
-					x = bitmap.getWidth()-1;
+				} else if (x > bitmap.getWidth() - 1) {
+					x = bitmap.getWidth() - 1;
 				}
 
-				if(y < 0){
+				if (y < 0) {
 					y = 0;
-				}else if(y > bitmap.getHeight()-1){
-					y = bitmap.getHeight()-1;
+				} else if (y > bitmap.getHeight() - 1) {
+					y = bitmap.getHeight() - 1;
 				}
+				if(event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
 
-				System.out.println("x "+x+" y "+y);
+					if (erasemode && !positionmode) {
+						siz = sizeEraser.getProgress();
+						background = erase(x, y, background);
+						dataToWrite += x + "\r\n" + y + "\r\n" + sizeEraser.getProgress() + "\r\n";
+					}
 
-
-
-				if (erasemode && !positionmode) {
-					System.out.println("x " + x);
-					System.out.println("y " + y);
-					siz = sizeEraser.getProgress();
-					background = erase(x,y, background);
-					dataToWrite +=  x+"\r\n" +y +"\r\n" +sizeEraser.getProgress()+"\r\n";
 				}
-				if(positionmode && !erasemode) {
-					if(pos%2 == 1) {
-						xposJ2 =  x;
-						yposJ2 =  y;
+				if (positionmode && !erasemode) {
+					if (pos % 2 == 1) {
+						xposJ2 = x;
+						yposJ2 = y;
 						pos++;
 						Toast.makeText(EditActivity.this, "Position joueur 1 enregistrée", Toast.LENGTH_SHORT).show();
-					}
-					else {
+					} else {
 						xposJ1 = x;
 						yposJ1 = y;
 						pos++;
@@ -214,7 +203,7 @@ public class EditActivity extends BaseActivity {
 					}
 				}
 
-				return false;
+				return true;
 
 			}
 		});
@@ -361,7 +350,7 @@ public class EditActivity extends BaseActivity {
 		Utils.bitmapToMat(mt, mImg);
 		Mat edges = new Mat();
 		Imgproc.Canny(mImg, edges, s1.getProgress(), s1.getProgress()+50);
-		mt.recycle();
+//		mt.recycle();
 		mt = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
 		Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255, 255, 255));
 		Core.subtract(invertcolormatrix, edges, edges);
@@ -411,6 +400,10 @@ public class EditActivity extends BaseActivity {
 				String line = "";
 				if((line = br.readLine()) != null){
 					s1.setProgress(Integer.parseInt(line));
+				}
+				else
+				{
+					s1.setProgress(100);
 				}
 				if((line = br.readLine()) != null){
 					xposJ1 = Integer.parseInt(line);

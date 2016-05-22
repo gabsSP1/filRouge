@@ -398,7 +398,7 @@ public class ChooseMap extends BaseActivity {
 						Mat mImg = new Mat();
 						Utils.bitmapToMat(bm, mImg);
 						Mat edges = new Mat();
-						Imgproc.Canny(mImg,edges,100,100);
+						Imgproc.Canny(mImg,edges,100,150);
 						bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
 						Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
 						Core.subtract(invertcolormatrix, edges, edges);
@@ -426,7 +426,7 @@ public class ChooseMap extends BaseActivity {
                     Mat mImg = new Mat();
                     Utils.bitmapToMat(bm, mImg);
                     Mat edges = new Mat();
-                    Imgproc.Canny(mImg,edges,100,100);
+                    Imgproc.Canny(mImg,edges,100,150);
                     bm = Bitmap.createBitmap(mImg.cols(), mImg.rows(),Bitmap.Config.ARGB_8888);
                     Mat invertcolormatrix = new Mat(edges.rows(),edges.cols(), edges.type(), new Scalar(255,255,255));
                     Core.subtract(invertcolormatrix, edges, edges);
