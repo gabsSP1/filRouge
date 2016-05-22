@@ -498,9 +498,9 @@ public class Game extends SimpleBaseGameActivity {
             backgroundTexture.addTextureAtlasSource(source, 0, 0);
 
             backgroundTextureRegion =  TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
-            playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
-            playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 128, 256);
-            obstacleTexture = new BitmapTextureAtlas(game.getTextureManager(), 32, 32);
+            playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 900, 100);
+            playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 900, 100);
+            obstacleTexture = new BitmapTextureAtlas(game.getTextureManager(), 700, 100);
 
 
             if(!BazarStatic.onLine)
@@ -509,9 +509,9 @@ public class Game extends SimpleBaseGameActivity {
             }
 
 
-            playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture1, game, "personnage.png", 0, 0, 1, 1);
-            playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "personnage.png", 0, 0, 1, 1);
-            obstacleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.obstacleTexture, game, "goomba.png", 0, 0, 1, 1);
+            playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "sprite_klonk_2.png", 0, 0, 9, 1);
+            playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "sprite_klonk_2.png", 0, 0, 9, 1);
+            obstacleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.obstacleTexture, game, "sprite_bandelette_2.png", 0, 0, 7, 1);
             playerTexture1.load();
             playerTexture2.load();
             obstacleTexture.load();

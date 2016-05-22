@@ -17,8 +17,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
  */
 public class Obstacle extends AnimatedSprite {
 
-    private static final int height =32;
-    private static final int width =32;
+    private static final int height =100;
+    private static final int width =100;
     private Body body;
     private float vX;
     private float vY;

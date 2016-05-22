@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.extension.physics.box2d.PhysicsConnector;
 import org.andengine.extension.physics.box2d.PhysicsFactory;
 import org.andengine.extension.physics.box2d.PhysicsWorld;
@@ -24,8 +25,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
  */
 public class Player extends AnimatedSprite
 {
-    private final int height =128;
-    private final int width =64;
+    private final int height =100;
+    private final int width =100;
     private Body body;
     private float vX;
     private float vY;
@@ -55,6 +56,7 @@ public class Player extends AnimatedSprite
         this.physicsWorld = physicsWorld;
         this.j1= j1;
         dead =false;
+        setCurrentTileIndex(4);
 
     }
 
@@ -170,13 +172,7 @@ public class Player extends AnimatedSprite
         }
         body.setTransform(body.getPosition().x, (y+height/2)/PhysicsConstants.PIXEL_TO_METER_RATIO_DEFAULT, 0);
     }
-    public void setRunning()
-    {
 
-        final long[] PLAYER_ANIMATE = new long[] { 100, 100, 100 };
-
-        animate(PLAYER_ANIMATE, 0, 2, true);
-    }
 
     public void move(int x, int y) {
         pix[][] obstacles = map.getObstacles();
@@ -377,9 +373,34 @@ public class Player extends AnimatedSprite
             }
 
             y -= goUp;
+
+
         }
-
-
+        System.out.println("Etat :"+etat+" vX "+vX+" vY "+vY);
+        if(etat == etatPerso.JUMP && vX>0 && vY<0)
+        {
+            setCurrentTileIndex(8);
+        }
+        else if(etat == etatPerso.JUMP && vX<0 && vY<0)
+        {
+            setCurrentTileIndex(0);
+        }
+        else if (vX<0)
+        {
+            setCurrentTileIndex(3);
+        }
+        else if (vX>0)
+        {
+            setCurrentTileIndex(5);
+        }
+        else if(vX == 0 && vY <0)
+        {
+            setCurrentTileIndex(8);
+        }
+        else if(vX == 0)
+        {
+            setCurrentTileIndex(4);
+        }
          setpX(x);
         setpY(y);
 
