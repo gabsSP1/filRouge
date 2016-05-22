@@ -122,6 +122,13 @@ public class GameScene extends Scene {
 
     public void addObstacle(Obstacle parent)
     {
+        activity.scoreSolo++;
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activity.refreshScore();
+            }
+        });
         int x = parent.getpX();
         int y = parent.getpY();
 
@@ -255,17 +262,26 @@ public class GameScene extends Scene {
 //        engine.stop();
         activity.endGame = true;
         detachAll();
+        if(activity.scoreSolo > BazarStatic.map.getHighScore())
+        {
+            FileManager.saveScoreSolo(activity.scoreSolo);
+            BazarStatic.map.setHighScore(activity.scoreSolo);
+            System.out.println("highScore");
+        }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
 //stuff that updates ui
+                activity.refreshScore();
                 activity.textDie.setText("Game Over");
                 activity.textDie.setVisibility(View.VISIBLE);
                 activity.adView.setVisibility(View.VISIBLE);
                 activity.restart.setText("retart");
                 activity.restart.setVisibility(View.VISIBLE);
                 activity.quit.setVisibility(View.VISIBLE);
+
+
 
             }
         });

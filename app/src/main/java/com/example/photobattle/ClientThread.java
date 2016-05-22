@@ -65,6 +65,15 @@ public class ClientThread extends Thread {
                             ((Game)gameActivity).textDie.setText("You loose ...");
 //                            ((Game)gameActivity).getGameScene().stopEngine();
                             ((Game)gameActivity).getGameScene().endPartyMulti();
+                            if(BazarStatic.host)
+                            {
+                                ((Game)gameActivity).scoreGuest++;
+                            }
+                            else
+                            {
+                                ((Game)gameActivity).scoreHost++;
+                            }
+                            ((Game)gameActivity).refreshScore();
                         }
                     });
 
@@ -76,6 +85,15 @@ public class ClientThread extends Thread {
                         @Override
                         public void run() {
                             ((Game)gameActivity).textDie.setText("You Won !");
+                            if(BazarStatic.host)
+                            {
+                                ((Game)gameActivity).scoreHost++;
+                            }
+                            else
+                            {
+                                ((Game)gameActivity).scoreGuest++;
+                            }
+                            ((Game)gameActivity).refreshScore();
 //                            ((Game)gameActivity).getGameScene().stopEngine();
                             ((Game)gameActivity).getGameScene().endPartyMulti();
                         }

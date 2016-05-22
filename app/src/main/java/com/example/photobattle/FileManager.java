@@ -5,6 +5,8 @@ import android.os.Environment;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.OutputStream;
 
 /**
@@ -17,8 +19,8 @@ public class FileManager {
     public static final String THRESHOLD_PATH= GENERAL_PATH+ File.separator +"Threshold";
     public static final String DATA_PATH = GENERAL_PATH+ File.separator +"Data";
     public static final String GAME_PICTURE_PATH = GENERAL_PATH+ File.separator +"GamePicture";
+    public static final String SCORE_PATH= GENERAL_PATH+ File.separator +"Scores";
     private static int nbMap;
-    private static String pictureName;
 
 
     public static void clearFiles()
@@ -26,8 +28,24 @@ public class FileManager {
 
     }
 
+
+    public static void saveScoreSolo(int i)
+    {
+        File dat = new File(FileManager.SCORE_PATH,BazarStatic.map.getName()+".txt");
+        try {
+            FileWriter fileWriter = new FileWriter(dat) ;
+            fileWriter.append(Integer.toString(i));
+            fileWriter.flush();
+            fileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void initialyzeTreeFile()
     {
+        createDirectory(SCORE_PATH);
         createDirectory(GENERAL_PATH);
         createDirectory(PICTURE_PATH);
         createDirectory(THRESHOLD_PATH);

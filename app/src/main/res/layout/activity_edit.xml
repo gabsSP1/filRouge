@@ -57,7 +57,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text ="Précision Filtre"
+        android:text ="Filter Precision"
         android:id="@+id/textView2"
         android:layout_marginLeft="50dp"
         android:layout_alignBottom="@+id/param1"
@@ -78,7 +78,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text ="Taille gomme"
+        android:text ="Rubber Size"
         android:id="@+id/gommeTexte"
         android:layout_alignTop="@+id/sizing"
         android:layout_centerHorizontal="true"

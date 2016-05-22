@@ -21,6 +21,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,6 +53,9 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 
 public class EditActivity extends BaseActivity {
+
+
+
 	Bitmap background;
 	Bitmap original;
 	File fbackground;
@@ -82,9 +87,11 @@ public class EditActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		FullScreencall();
 		setContentView(R.layout.activity_edit);
 		Intent intent = getIntent();
+		final Animation anim= AnimationUtils.loadAnimation(this, R.anim.anim_button);
 		if (intent != null) {
 			fbackground = new File(intent.getStringExtra("selected_file"));
 			background = BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+fbackground.getName()
@@ -96,6 +103,7 @@ public class EditActivity extends BaseActivity {
 		eraser.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(anim);
 				Toast.makeText(EditActivity.this, "Mode gomme", Toast.LENGTH_SHORT).show();
 				erasemode = true;
 				if(positionmode)
@@ -106,6 +114,8 @@ public class EditActivity extends BaseActivity {
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(anim);
+				Sound.playSound(getApplicationContext(), R.raw.open);
 				showDialog();
 			}
 		});
@@ -113,6 +123,7 @@ public class EditActivity extends BaseActivity {
 		clean.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(anim);
 				try{
 					coordGomme = ReadSettings(EditActivity.this);
 					background = doFilter(s1.getProgress(), s1.getProgress() + 50, original);
@@ -131,6 +142,7 @@ public class EditActivity extends BaseActivity {
 		position.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(anim);
 				Toast.makeText(EditActivity.this, "Mode positionnement des personnages", Toast.LENGTH_SHORT).show();
 				positionmode = true;
 				if(erasemode)
@@ -138,9 +150,11 @@ public class EditActivity extends BaseActivity {
 			}
 		});
 		reset = (Button) findViewById(R.id.reset);
+
 		reset.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(anim);
 				s1.setProgress(100);
 				dataToWrite = "";
 				background = doFilter(100,150, original);
@@ -302,10 +316,11 @@ public class EditActivity extends BaseActivity {
 	private void showDialog() throws Resources.NotFoundException {
 		new AlertDialog.Builder(this)
 				.setTitle("Save Changes")
-				.setMessage("Do you want to save your changes")
+				.setMessage("Do you want to save your changes \n It will erase your HighScore !")
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
+						(new File(FileManager.DATA_PATH + File.separator +mapName.getText().toString()+".txt")).delete();
 						String data = "";
 						data += s1.getProgress()+"\r\n";
 						data += xposJ1+"\r\n"+yposJ1+"\r\n"+xposJ2+"\r\n"+yposJ2+"\r\n";

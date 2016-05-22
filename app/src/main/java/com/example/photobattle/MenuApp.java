@@ -125,6 +125,7 @@ public class MenuApp extends BaseActivity{
 		mute.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(animSettings);
 				if(Sound.muteMusic()==1)
 					mute.setBackgroundResource(R.drawable.full_sound);
 				else

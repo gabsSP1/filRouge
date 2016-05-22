@@ -69,6 +69,7 @@ public class Game extends SimpleBaseGameActivity {
     private BitmapTextureAtlas playerTexture1;
     private BitmapTextureAtlas playerTexture2;
     private BitmapTextureAtlas obstacleTexture;
+    TextView score;
 
     Button quit;
     public Button pause;
@@ -80,6 +81,11 @@ public class Game extends SimpleBaseGameActivity {
     Font fontCountdown;
     AdView adView;
     Camera camera;
+    int scoreGuest;
+    int scoreHost;
+
+    int nbVague;
+    int scoreSolo = 1;
 
     Text text;
     Text textGo;
@@ -158,6 +164,7 @@ public class Game extends SimpleBaseGameActivity {
 
     @Override
     protected void onSetContentView() {
+        this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -259,6 +266,8 @@ public class Game extends SimpleBaseGameActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                scoreSolo = 1;
+
                 adView.setVisibility(View.INVISIBLE);
                 requestNewInterstitial();
                 quit.setVisibility(View.INVISIBLE);
@@ -272,6 +281,8 @@ public class Game extends SimpleBaseGameActivity {
                 }
                 else
                 {
+                    scoreSolo = 1;
+                    refreshScore();
 //                    gameScene.detachAll();
                     new AsyncTask<Void, Void, Void>(){
 
@@ -287,6 +298,7 @@ public class Game extends SimpleBaseGameActivity {
                             if(!BazarStatic.onLine) {
                                 gameScene.createScene();
                                 gameScene.lauchCountDown();
+
                             }
                             else
                             {
@@ -345,7 +357,23 @@ public class Game extends SimpleBaseGameActivity {
 
             }
         });
+
+        score = new TextView(this);
+        RelativeLayout.LayoutParams buttonLayoutParmasScore = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if(BazarStatic.onLine)
+        {
+            refreshScore();
+        }
+        else
+        {
+            refreshScore();
+        }
+        buttonLayoutParmasScore.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        buttonLayoutParmasScore.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        relativeLayout.addView(score, buttonLayoutParmasScore);
+
         this.setContentView(relativeLayout, relativeLayoutLayoutParams);
+
 
         adView = new AdView(this);
 
@@ -443,7 +471,15 @@ public class Game extends SimpleBaseGameActivity {
         gameScene.createScene();
     }
 
-
+    public void refreshScore()
+    {
+        if(BazarStatic.onLine) {
+            score.setText("Guest " + scoreGuest + "-" + scoreHost + " Host");
+        }
+        else {
+            score.setText("Score :"+scoreSolo+" High Socre"+BazarStatic.map.getHighScore());
+        }
+    }
 
     public Font font;
 

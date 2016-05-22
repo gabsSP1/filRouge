@@ -457,6 +457,8 @@ public class ChooseMap extends BaseActivity {
 						position=mPager.getCurrentItem()-1;
 						(new File(FileManager.THRESHOLD_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
 						(new File(FileManager.PICTURE_PATH + File.separator + filesName.get(mPager.getCurrentItem()))).delete();
+						(new File(FileManager.DATA_PATH + File.separator + filesName.get(mPager.getCurrentItem())+".dat")).delete();
+						(new File(FileManager.DATA_PATH + File.separator + filesName.get(mPager.getCurrentItem())+".txt")).delete();
 						loadList();
 						initComponent();
 					}

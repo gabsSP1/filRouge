@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,6 +31,8 @@ public class JoinActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Animation anim= AnimationUtils.loadAnimation(this, R.anim.anim_button);
+        this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
         FullScreencall();
         setContentView(R.layout.activity_join);
         launch=false;
@@ -39,6 +43,8 @@ public class JoinActivity extends BaseActivity {
         ( (Button) findViewById(R.id.back_join)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(anim);
+                Sound.playSound(getApplicationContext(), R.raw.open);
                 JoinActivity.this.finish();
             }
         });

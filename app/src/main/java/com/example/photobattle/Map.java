@@ -33,18 +33,25 @@ enum pix {VIDE, GROUND};
 public class Map implements Serializable {
     private static final String TAG = Map.class.getSimpleName();
     private transient pix obstacles [][];
+
     byte[] bytePicture;
     byte[] byteContours;
     int xposJ1;
     int xposJ2;
     int yposJ1;
     int yposJ2;
+    private int highScore;
     transient Bitmap contours;
     transient Bitmap photoOriginal;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
 
     public Map(String pictureName)
     {
-
+        name = pictureName;
         contours =  BazarStatic.decodeSampledBitmapFromResource(FileManager.THRESHOLD_PATH+File.separator+pictureName
                 ,  BazarStatic.reqHeight);
         photoOriginal =BazarStatic.decodeSampledBitmapFromResource(FileManager.PICTURE_PATH+File.separator+pictureName
@@ -109,10 +116,40 @@ public class Map implements Serializable {
             }
         }
 
+        File sc = new File(FileManager.SCORE_PATH, getName()+".txt");
+        if (sc.exists()) {
+
+
+            try {
+
+                // Open the file that is the first
+                // command line parameter
+                FileInputStream fstream = new FileInputStream(sc);
+                // Get the object of DataInputStream
+                DataInputStream in = new DataInputStream(fstream);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String line = "";
+                if ((line = br.readLine()) != null) {
+//                    s1.setProgress(Integer.parseInt(line));
+                    highScore = Integer.parseInt(line);
+                } else {
+                    highScore = 0;
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+
 
     }
-
-
+    public void setHighScore(int highScore)
+    {
+        this.highScore = highScore;
+    }
+    public int getHighScore() {
+        return highScore;
+    }
 
     public void computeObstacle()
     {
