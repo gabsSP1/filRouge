@@ -117,6 +117,7 @@ public class EditActivity extends BaseActivity {
 					coordGomme = ReadSettings(EditActivity.this);
 					background = doFilter(s1.getProgress(), s1.getProgress() + 50, original);
 					dataToWrite = coordGomme;
+					ReadSettings(getApplicationContext());
 					p.setImageBitmap(background);
 				}
 				catch(Exception e){
