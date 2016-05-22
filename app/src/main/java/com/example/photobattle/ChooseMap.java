@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -71,7 +72,7 @@ public class ChooseMap extends BaseActivity {
 	boolean editP;
 	Button onLine;
 
-    private BaseLoaderCallback mOpenCVCallBack = new BaseLoaderCallback(this) {
+   /* private BaseLoaderCallback mOpenCVCallBack = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
             switch (status) {
@@ -87,7 +88,30 @@ public class ChooseMap extends BaseActivity {
                 break;
             }
         }
-    };
+    };*/
+
+	protected static final String TAG = "HelloOpenCV";
+
+	static {
+		System.loadLibrary("opencv_java3");
+		if (!OpenCVLoader.initDebug())
+			Log.e(TAG, "Failed to load OpenCV!");
+	}
+   private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+	   @Override
+	   public void onManagerConnected(int status) {
+		   switch (status) {
+			   case LoaderCallbackInterface.SUCCESS:
+			   {
+//				   Log.i(TAG, "OpenCV loaded successfully");
+//				   mOpenCvCameraView.enableView();
+			   } break;
+			   default:
+				   super.onManagerConnected(status);
+				   break;
+		   }
+	   }
+   };
 
 	// A static dataset to back the ViewPager adapter
 
@@ -97,10 +121,10 @@ public class ChooseMap extends BaseActivity {
 		this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		FullScreencall();
 		setContentView(R.layout.activity_map);
-        if (!OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_2, this, mOpenCVCallBack))
-        {
-            //Log.e(TAG, "Cannot connect to OpenCV Manager");
-        }
+//        if (!OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_2, this, mOpenCVCallBack))
+//        {
+//            //Log.e(TAG, "Cannot connect to OpenCV Manager");
+//        }
 		editP=false;
 		setNbMap(0);
 		loadList();
@@ -444,6 +468,7 @@ public class ChooseMap extends BaseActivity {
 	{
 		super.onResume();
 		FullScreencall();
+		mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
 		loadList();
 		initComponent();
 		if(editP) {
@@ -463,6 +488,14 @@ public class ChooseMap extends BaseActivity {
 			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 			decorView.setSystemUiVisibility(uiOptions);
 		}
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		Intent i = new Intent(Intent.ACTION_MAIN);
+		i.addCategory(Intent.CATEGORY_HOME);
+		startActivity(i);
 	}
 }
 

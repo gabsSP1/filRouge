@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -39,6 +41,9 @@ public class MenuApp extends BaseActivity{
 		FullScreencall();
         setContentView(R.layout.activity_menu_app);
         pause = false;
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"p.TTF");
+		((TextView)findViewById(R.id.title)).setTypeface(tf);
 		mInterstitialAd = new InterstitialAd(this);
 		mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.setAdListener(new AdListener() {
@@ -153,6 +158,16 @@ public class MenuApp extends BaseActivity{
 			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 			decorView.setSystemUiVisibility(uiOptions);
 		}
+
+
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		Intent i = new Intent(Intent.ACTION_MAIN);
+		i.addCategory(Intent.CATEGORY_HOME);
+		startActivity(i);
 	}
 
 	private void requestNewInterstitial() {

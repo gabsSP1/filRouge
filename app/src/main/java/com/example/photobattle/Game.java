@@ -3,6 +3,7 @@ package com.example.photobattle;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -279,11 +280,18 @@ public class Game extends SimpleBaseGameActivity {
 
                             gameScene.detachChildren();
                             gameScene.reset();
-                            gameScene.createScene();
+
 //                    mEngine.start();
                             gameLoaded =false;
                             endGame =false;
-                            gameScene.lauchCountDown();
+                            if(!BazarStatic.onLine) {
+                                gameScene.createScene();
+                                gameScene.lauchCountDown();
+                            }
+                            else
+                            {
+                                Client.sendReady(Connect_activity.socket);
+                            }
 //                            mEngine.start();
                             return null;
                         }
@@ -386,7 +394,7 @@ public class Game extends SimpleBaseGameActivity {
         this.finish();
     }
 
-            public void onResume()
+    public void onResume()
     {
         super.onResume();
         FullScreencall();
@@ -449,7 +457,7 @@ public class Game extends SimpleBaseGameActivity {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            BitmapTextureAtlasSource source = new BitmapTextureAtlasSource(BazarStatic.map.getContours());
+            BitmapTextureAtlasSource source = new BitmapTextureAtlasSource(BazarStatic.map.getPhotoOriginal());
             backgroundTexture = new BitmapTextureAtlas(game.getTextureManager(), CAMERA_WIDTH, CAMERA_HEIGHT);
             backgroundTexture.addTextureAtlasSource(source, 0, 0);
 
@@ -502,5 +510,15 @@ public class Game extends SimpleBaseGameActivity {
 
         adView.loadAd(adRequest);
     }
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
+    }
 
+    public static GameScene getGameScene() {
+        return gameScene;
+    }
 }

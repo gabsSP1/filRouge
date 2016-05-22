@@ -5,13 +5,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tom on 29/02/2016.
  */
 public class Client {
 
+
+    private static List<ClientThread> clients =new ArrayList<>();
     static Socket serverSocket=null;
 
     /**
@@ -23,14 +28,21 @@ public class Client {
      * @return le Socket d'échange
      */
     public static Socket connect(String host,  Context context, Activity act) {
+
+        boolean connect= false;
+        serverSocket = null;
         try {
-            serverSocket = new Socket(host, Connect_activity.PORT);
+            serverSocket = new Socket();
+            serverSocket.connect(new InetSocketAddress(host, Connect_activity.PORT),500);
+            ClientThread ct = new ClientThread(serverSocket, context, act);
+            ct.start();
+            clients.add(ct);
         } catch (IOException e) {
             e.printStackTrace();
+            serverSocket = null;
         }
 
-        ClientThread ct = new ClientThread(serverSocket, context, act);
-        ct.start();
+
 
         return serverSocket;
     }
@@ -145,5 +157,43 @@ public class Client {
 //            e.printStackTrace();
 //        }
 //    }
+
+    public static void sendWin()
+    {
+        Command com = new Command("win", 0 , 0);
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+            oos.writeObject(com);
+        } catch (IOException e) {
+            System.err.println("Erreur dans l'envoi du win");
+        }
+    }
+
+    public static void sendWinRecieved()
+    {
+        Command com = new Command("winRecieved", 0 , 0);
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(serverSocket.getOutputStream());
+            oos.writeObject(com);
+        } catch (IOException e) {
+            System.err.println("Erreur dans l'envoi du win");
+        }
+    }
+
+    public static void quit()
+    {
+        for (ClientThread ct : clients)
+        {
+            ct.quitClient();
+        }
+        try {
+            if(serverSocket != null)
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

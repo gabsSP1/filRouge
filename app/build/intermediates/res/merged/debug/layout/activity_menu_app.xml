@@ -12,8 +12,9 @@
         android:textStyle="bold"
         android:textSize="40dp"
         android:layout_margin="20dp"
-        android:textColorLink="#ca5e5e"
+        android:textColorLink="#888888"
         android:textColor="#842020"
+        android:id="@+id/title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
     <Button

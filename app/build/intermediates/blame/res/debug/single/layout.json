@@ -16,12 +16,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
-        "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
+        "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
@@ -36,12 +36,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_big_media.xml"
-    },
-    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_big_media.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
@@ -56,16 +56,16 @@
         "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_item_powered_by_google.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-location\\8.4.0\\res\\layout\\place_autocomplete_item_powered_by_google.xml"
+        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
+        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_fragment.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-location\\8.4.0\\res\\layout\\place_autocomplete_fragment.xml"
     },
     {
-        "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\image_view_layout.xml",
-        "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_item_powered_by_google.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-location\\8.4.0\\res\\layout\\place_autocomplete_item_powered_by_google.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_layout.xml",
@@ -76,12 +76,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_big_media_narrow.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_media.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_join.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_join.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_media.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
@@ -92,12 +92,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-location\\8.4.0\\res\\layout\\place_autocomplete_progress.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_media_route_chooser_dialog.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\23.0.0\\res\\layout\\mr_media_route_chooser_dialog.xml"
-    },
-    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_edit.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_edit.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_media_route_chooser_dialog.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\23.0.0\\res\\layout\\mr_media_route_chooser_dialog.xml"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_join.xml",
@@ -112,12 +112,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_screen_simple.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_media_cancel_action.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
@@ -140,32 +140,32 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
-        "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
-        "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_map.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_action_bar_up_container.xml"
+        "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_loading.xml",
+        "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_media_action.xml"
     },
     {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
         "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu_app.xml",
         "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\activity_menu_app.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\select_dialog_item_material.xml"
-    },
-    {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\game_layout.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\game_layout.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\select_dialog_item_material.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
@@ -180,32 +180,32 @@
         "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\image_view_layout.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_connect_activity.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\layout\\activity_connect_activity.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_connect_activity.xml",
         "source": "C:\\Users\\Akainiro\\Documents\\filRouge\\app\\src\\main\\res\\layout\\activity_connect_activity.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_screen_content_include.xml"
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_connect_activity.xml",
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\activity_connect_activity.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_screen_content_include.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
@@ -228,12 +228,12 @@
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_item_prediction.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-location\\8.4.0\\res\\layout\\place_autocomplete_item_prediction.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
@@ -244,12 +244,12 @@
         "source": "E:\\Tom\\AndroidStudioProjects\\filRouge\\app\\src\\main\\res\\layout\\layout_loading.xml"
     },
     {
-        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
-        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_part_time.xml"
-    },
-    {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.0\\res\\layout\\notification_template_part_time.xml"
     },
     {
         "merged": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",

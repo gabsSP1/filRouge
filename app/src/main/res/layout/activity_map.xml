@@ -31,7 +31,8 @@
 		android:layout_height="0px"
 		android:layout_weight="18"
 		android:layout_marginLeft="30dp"
-		android:layout_marginRight="30dp">
+		android:layout_marginRight="30dp"
+		android:background="@drawable/back">
 		<TextView
 			android:id="@+id/no_picture"
 			android:layout_width="match_parent"

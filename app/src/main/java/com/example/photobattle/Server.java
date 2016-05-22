@@ -15,29 +15,35 @@ public class Server extends Thread {
 
     static Socket socJ1;
     static Socket socJ2;
+    private boolean  ready;
+    private ServerThread ct1;
+    private ServerThread ct2;
     Command map;
+    ServerSocket listenSocket;
     static int port;
     Activity act;
     public Server(int port,Activity pact) {
         Server.port = port;
         act = pact;
+        ready=false;
     }
 
     /**
      * Run du thread. Accepte la connexion des deux clients
      */
     public void run() {
-        ServerSocket listenSocket;
+
 
         try {
             listenSocket = new ServerSocket(Connect_activity.PORT);
             System.out.println("Server ready...");
-
+            ready=true;
             // Admission du premier Client (l'host)
             socJ1 = listenSocket.accept();
+
             System.out.println("Connexion from:" + socJ1.getInetAddress());
-            ServerThread ct = new ServerThread(socJ1, this);
-            ct.start();
+            ct1 = new ServerThread(socJ1, this);
+            ct1.start();
             sendLog("Server Ready");
             // Admission du deuxième Client
             socJ2 = listenSocket.accept();
@@ -52,7 +58,7 @@ public class Server extends Thread {
 
                         }
                     });
-            ServerThread ct2 = new ServerThread(socJ2, this);
+            ct2 = new ServerThread(socJ2, this);
             ct2.start();
             try {
                 ObjectOutputStream socOut = new ObjectOutputStream(socJ2.getOutputStream());
@@ -75,7 +81,7 @@ public class Server extends Thread {
      * @param com
      *            la commande à envoyer
      */
-    public void sendCommand(Command com, Socket socketfrom) {
+    public void sendCommand(Command com, Socket socketfrom, ServerThread ct) {
         // Si on veut bouger un joueur sur l'écran du J1
         switch (com.getTypeAction()) {
             case "setcooj1":
@@ -150,6 +156,45 @@ public class Server extends Thread {
                     e.printStackTrace();
                 }
                 break;
+
+            case "win": {
+                try {
+                    if(ct == ct1) {
+
+                        ObjectOutputStream socOut2 = new ObjectOutputStream(socJ2.getOutputStream());
+
+                        socOut2.writeObject(com);
+                    }
+                    else
+                    {
+                        ObjectOutputStream socOut1 = new ObjectOutputStream(socJ1.getOutputStream());
+                        socOut1.writeObject(com);
+                    }
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+                break;
+                case "winRecieved":
+                {
+                    try {
+                        if(ct == ct1) {
+
+                            ObjectOutputStream socOut2 = new ObjectOutputStream(socJ2.getOutputStream());
+
+                            socOut2.writeObject(com);
+                        }
+                        else
+                        {
+                            ObjectOutputStream socOut1 = new ObjectOutputStream(socJ1.getOutputStream());
+                            socOut1.writeObject(com);
+                        }
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -164,5 +209,35 @@ public class Server extends Thread {
 
                     }
                 });
+    }
+
+    public void quitServer()
+    {
+        if(ct1 != null)
+        ct1.quitServerThread();
+        if(ct2!=null)
+        ct1.quitServerThread();
+//        try {
+//            socJ1.close();
+//            socJ2.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        try {
+            if(listenSocket!=null) {
+                listenSocket.close();
+                System.out.println("server killed");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 }

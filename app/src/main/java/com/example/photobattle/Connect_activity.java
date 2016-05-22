@@ -26,6 +26,7 @@ public class Connect_activity extends BaseActivity {
     static Button play;
     String pictureName;
     static Socket socket;
+    public int etat=0;
     final static int PORT = 5234;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,22 @@ public class Connect_activity extends BaseActivity {
         ipGlobale.setText(getIPGlob());
         /*LaunchClient l =new LaunchClient(this);
         l.execute();*/
+
+        ((Button)findViewById(R.id.back_connect)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Connect_activity.this.finish();
+            }
+        });
+
+
         play =(Button) findViewById(R.id.bstart);
         play.setText("En attente d'une connection...");
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Client.launch(socket);
+                etat = 2;
                 BazarStatic.onLine = true;
                 Intent intentMyAccount = new Intent(getApplicationContext(), Game.class);
                 startActivity(intentMyAccount);
@@ -66,14 +77,23 @@ public class Connect_activity extends BaseActivity {
             BazarStatic.map =new Map(BazarStatic.nomMap);
             s = new Server(PORT,activity);
             s.start();
+            while(!s.isReady());
             socket = Client.connect("localhost", getApplicationContext(), Connect_activity.this);
-            System.out.println("pictureaName");
             BazarStatic.host =true;
             return null;
         }
 
     }
 
+    public void onDestroy()
+    {
+        super.onDestroy();
+        Client.quit();
+        if(s!=null) {
+            s.quitServer();
+        }
+
+    }
 
     private String getIPLoc()
     {
@@ -148,9 +168,36 @@ public class Connect_activity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        logConnexion.setText("");
-        play.setText("En attente d'une connection...");
-        LaunchClient l =new LaunchClient(this);
-        l.execute();
+//        Client.quit();
+//        if(s!=null)
+//        s.quitServer();
+        if(etat == 0) {
+            logConnexion.setText("");
+            play.setText("En attente d'une connection...");
+            LaunchClient l = new LaunchClient(this);
+            etat = 1;
+            l.execute();
+        }
+        if(etat == 2)
+        {
+            Client.quit();
+            if(s!=null) {
+                s.quitServer();
+            }
+            logConnexion.setText("");
+            play.setText("En attente d'une connection...");
+            LaunchClient l = new LaunchClient(this);
+            etat = 1;
+            l.execute();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
     }
 }

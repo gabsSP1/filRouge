@@ -1,5 +1,6 @@
 package com.example.photobattle;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,9 +9,13 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -30,6 +35,10 @@ public class Map implements Serializable {
     private transient pix obstacles [][];
     byte[] bytePicture;
     byte[] byteContours;
+    int xposJ1;
+    int xposJ2;
+    int yposJ1;
+    int yposJ2;
     transient Bitmap contours;
     transient Bitmap photoOriginal;
 
@@ -53,6 +62,48 @@ public class Map implements Serializable {
         }
 
 
+        File dat = new File(FileManager.DATA_PATH, pictureName+".dat");
+        String data = null;
+        //char[] inputBuffer = new char[255];
+        if (dat.exists()) {
+
+
+            try {
+
+                // Open the file that is the first
+                // command line parameter
+                FileInputStream fstream = new FileInputStream(dat);
+                // Get the object of DataInputStream
+                DataInputStream in = new DataInputStream(fstream);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String line = "";
+                if ((line = br.readLine()) != null) {
+//                    s1.setProgress(Integer.parseInt(line));
+                }
+                if ((line = br.readLine()) != null) {
+                    xposJ1 = Integer.parseInt(line);
+                }
+                if ((line = br.readLine()) != null) {
+                    yposJ1 = Integer.parseInt(line);
+                }
+                if ((line = br.readLine()) != null) {
+                    xposJ2 = Integer.parseInt(line);
+                }
+                if ((line = br.readLine()) != null) {
+                    yposJ2 = Integer.parseInt(line);
+                }
+
+
+                in.close();
+
+
+                //affiche le contenu de mon fichier dans un popup surgissant
+                //Toast.makeText(context, " precision" + s1.getProgress() +" x1" + xposJ1 +" y1" + xposJ1 +" x2" + xposJ2 +" y2" + yposJ2 +"  "+coordGomme, Toast.LENGTH_SHORT).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
     }

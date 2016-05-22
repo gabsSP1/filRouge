@@ -17,10 +17,12 @@ public class ClientThread extends Thread {
     private Socket serverSocket;
     Activity connectActivity;
     static Activity gameActivity = null;
+    private boolean quit;
     ClientThread(Socket s, Context context, Activity act) {
         serverSocket = s;
         this.context=context;
         this.connectActivity = act;
+        quit = false;
     }
 
     /**
@@ -30,7 +32,7 @@ public class ClientThread extends Thread {
         Command com;
 
         try {
-            while (true) {
+            while (!quit) {
 
                 ObjectInputStream ois = new ObjectInputStream(serverSocket.getInputStream());
                 com =  (Command) ois.readObject();
@@ -55,6 +57,31 @@ public class ClientThread extends Thread {
                             e.printStackTrace();
                         }
                     }
+
+                if (com.getTypeAction().equals("win")) {
+                    gameActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((Game)gameActivity).textDie.setText("You loose ...");
+//                            ((Game)gameActivity).getGameScene().stopEngine();
+                            ((Game)gameActivity).getGameScene().endPartyMulti();
+                        }
+                    });
+
+                    Client.sendWinRecieved();
+                }
+
+                if (com.getTypeAction().equals("winRecieved")) {
+                    gameActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((Game)gameActivity).textDie.setText("You Won !");
+//                            ((Game)gameActivity).getGameScene().stopEngine();
+                            ((Game)gameActivity).getGameScene().endPartyMulti();
+                        }
+                    });
+
+                }
 
                     if (com.getTypeAction().equals("launch")) {
                         Intent intentMyAccount = new Intent(context, Game.class);
@@ -101,6 +128,10 @@ public class ClientThread extends Thread {
     public static void setGameActivity(Activity gact)
     {
         gameActivity = gact;
+    }
+    public void quitClient ()
+    {
+        quit =true;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.photobattle;
 
 
+import android.view.View;
+
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -103,6 +105,20 @@ public class Player extends AnimatedSprite
             public void onUpdate(float pSecondsElapsed)
             {
                 super.onUpdate(pSecondsElapsed);
+//                System.out.println(GameScene.persoTwo.getpX()+" "+GameScene.persoTwo.getpY()+" "+getpX()+getpY());
+//                System.out.println((getpY()-height)-GameScene.persoTwo.getpY()+" "+(getpY()-height-GameScene.persoTwo.getpY())+" "+getpX()+getpY());
+                if(BazarStatic.onLine && (getpY()-height)-GameScene.persoTwo.getpY()<20 && getpY()-height-GameScene.persoTwo.getpY()>-20 )// && getpX()>(GameScene.persoTwo.getpX()-width) && getpX()<(GameScene.persoTwo.getpX()+width))
+                {
+                    Client.sendWin();
+                    scene.engine.stop();
+
+//                    scene.activity.textDie.setText("You win !");
+//                    scene.endPartyMulti();
+                    System.out.println("win");
+
+                }
+
+
                 int x=(int)(getpX()+ vX);
                  setVY((vY + GRAVITY));
                 int y =(int)(getpY()+ vY);
@@ -362,8 +378,6 @@ public class Player extends AnimatedSprite
 
             y -= goUp;
         }
-
-
 
 
          setpX(x);

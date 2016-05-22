@@ -9,6 +9,9 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.andengine.entity.text.Text;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -20,6 +23,7 @@ import java.util.Enumeration;
 public class JoinActivity extends BaseActivity {
     EditText editText;
     Button bjoin;
+    TextView etatCo;
     static boolean  launch;
     Socket client;
     @Override
@@ -28,18 +32,40 @@ public class JoinActivity extends BaseActivity {
         FullScreencall();
         setContentView(R.layout.activity_join);
         launch=false;
+        etatCo = (TextView) findViewById(R.id.etatCo);
         editText = (EditText) findViewById(R.id.ipfield);
+
+
+        ( (Button) findViewById(R.id.back_join)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JoinActivity.this.finish();
+            }
+        });
 
         bjoin = (Button) findViewById(R.id.bjoin);
         String s="";
         bjoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Client.quit();
                LaunchClient l = new LaunchClient(editText.getText().toString());
                 l.execute();
             }
         });
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        etatCo.setText("");
+        Client.quit();
+    }
+
+    public void onDestroy()
+    {
+        super.onDestroy();
+        Client.quit();
     }
 
     public class LaunchClient extends AsyncTask<Void, Void, Void> {
@@ -59,6 +85,21 @@ public class JoinActivity extends BaseActivity {
             BazarStatic.host =false;
             BazarStatic.onLine =true;
             Connect_activity.socket = Client.connect(host, getApplicationContext(),null);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(Connect_activity.socket == null)
+                    {
+                        etatCo.setText("Connection failed, retry");
+                        Client.quit();
+                    }
+                    else
+                    {
+                        etatCo.setText("Connection success !");
+                    }
+                }
+            });
+
             return null;
         }
     }
@@ -87,6 +128,14 @@ public class JoinActivity extends BaseActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
     }
 }
 

@@ -10,10 +10,12 @@ public class ServerThread extends Thread {
 
     private Socket clientSocket;
     private Server serverFrom;
+    boolean quit;
 
     ServerThread(Socket s, Server se) {
         this.clientSocket = s;
         this.serverFrom = se;
+        quit = false;
     }
 
     /**
@@ -25,10 +27,10 @@ public class ServerThread extends Thread {
 
         try {
 
-            while (true) {
+            while (!quit) {
                 ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
                 com = (Command) ois.readObject();
-               serverFrom.sendCommand(com,clientSocket);
+               serverFrom.sendCommand(com,clientSocket, this);
                 if(com.getTypeAction().equals("quit"))
                     break;
             }
@@ -40,6 +42,11 @@ public class ServerThread extends Thread {
             e.printStackTrace();
         }
         System.out.println("ServerThread correctement terminé");
+    }
+
+    public void quitServerThread()
+    {
+        quit = true;
     }
 
 }

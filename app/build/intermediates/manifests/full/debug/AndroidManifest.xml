@@ -53,8 +53,12 @@
             android:name="com.example.photobattle.Game"
             android:label="@string/title_activity_game"
             android:screenOrientation="landscape" />
-        <activity android:name="com.example.photobattle.Connect_activity" />
-        <activity android:name="com.example.photobattle.JoinActivity" />
+        <activity
+            android:name="com.example.photobattle.Connect_activity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.example.photobattle.JoinActivity"
+            android:screenOrientation="landscape" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

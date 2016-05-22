@@ -49,8 +49,8 @@
             android:name=".Game"
             android:label="@string/title_activity_game"
             android:screenOrientation="landscape" />
-        <activity android:name=".Connect_activity" />
-        <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".Connect_activity" android:screenOrientation="landscape"/>
+        <activity android:name=".JoinActivity" android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

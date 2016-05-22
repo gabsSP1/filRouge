@@ -7,15 +7,13 @@
     <ImageView
         android:id="@+id/image_view_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="12"
+        android:layout_height="match_parent"
         android:scaleType="centerInside" >
     </ImageView>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:gravity="center"
         android:id="@+id/image_name"/>

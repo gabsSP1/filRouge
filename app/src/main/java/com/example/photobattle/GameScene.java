@@ -70,27 +70,54 @@ public class GameScene extends Scene {
     // ABSTRACTION
     //---------------------------------------------
     public  void createScene() {
-        createHUD();
-        createPhysics();
-        persoOne = new Player(50f, 50f, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
-        this.attachChild(persoOne);
+
 
         if (BazarStatic.onLine)
         {
-            persoTwo = new Player(50f, 50f, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, this, false);
+            createHUD();
+            createPhysics();
+            if(BazarStatic.host) {
+                persoOne = new Player(BazarStatic.map.xposJ1, BazarStatic.map.yposJ1, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
+
+
+                persoTwo = new Player(BazarStatic.map.xposJ2, BazarStatic.map.yposJ2, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, this, false);
+            }
+
+            else
+            {
+                persoTwo = new Player(BazarStatic.map.xposJ1, BazarStatic.map.yposJ1, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
+
+
+                persoOne  = new Player(BazarStatic.map.xposJ2, BazarStatic.map.yposJ2, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, this, false);
+            }
+
+                this.attachChild(persoOne);
             this.attachChild(persoTwo);
+            engine.setScene(this);
             lauchCountDown();
         }
         else
         {
+            createHUD();
+            createPhysics();
+            persoOne =  new Player(BazarStatic.map.xposJ1, BazarStatic.map.yposJ1, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
+            this.attachChild(persoOne);
+
+
             obstacleList = new LinkedList<>();
             Obstacle ob = new Obstacle(activity.CAMERA_WIDTH / 2, activity.CAMERA_HEIGHT/2, vbom, activity.getObstacleTextureRegion(), camera, physicsWorld, persoOne, this);
             this.attachChild(ob);
             obstacleList.add(ob);
+            engine.setScene(this);
         }
-        engine.setScene(this);
 
 
+
+    }
+
+    public void stopEngine()
+    {
+        engine.stop();
     }
 
     public void addObstacle(Obstacle parent)
@@ -128,9 +155,10 @@ public class GameScene extends Scene {
     public  void disposeScene()
     {
         persoOne.detachSelf();
-        for(int i =0; i < obstacleList.size(); i++)
-        {
-            obstacleList.get(i).detachSelf();
+        if(!BazarStatic.onLine) {
+            for (int i = 0; i < obstacleList.size(); i++) {
+                obstacleList.get(i).detachSelf();
+            }
         }
 //        persoTwo.dispose();
         this.detachSelf();
@@ -145,6 +173,25 @@ public class GameScene extends Scene {
 
 
 
+    }
+
+    public void endPartyMulti()
+    {
+        activity.endGame = true;
+        detachAll();
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+//stuff that updates ui
+                activity.textDie.setVisibility(View.VISIBLE);
+                activity.adView.setVisibility(View.VISIBLE);
+                activity.restart.setText("retart");
+                activity.restart.setVisibility(View.VISIBLE);
+                activity.quit.setVisibility(View.VISIBLE);
+
+            }
+        });
     }
 
     public void lauchCountDown() {
@@ -229,9 +276,14 @@ public class GameScene extends Scene {
 
     public void detachAll()
     {
-        for(Obstacle obs : obstacleList)
+        if(!(BazarStatic.onLine)) {
+            for (Obstacle obs : obstacleList) {
+                detachSprite(obs, obs.getBody());
+            }
+        }
+        else
         {
-            detachSprite(obs, obs.getBody());
+            detachSprite(persoTwo, persoTwo.getBody());
         }
         detachSprite(persoOne, persoOne.getBody());
 

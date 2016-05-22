@@ -137,11 +137,15 @@ ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:48:9-
 	android:name
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:49:13-33
 activity#com.example.photobattle.Connect_activity
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:9-54
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:9-91
+	android:screenOrientation
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:52-89
 	android:name
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:52:19-51
 activity#com.example.photobattle.JoinActivity
-ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:9-59
+ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:9-97
+	android:screenOrientation
+		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:48-85
 	android:name
 		ADDED from E:\Dev\AndroidProject\filRouge\app\src\main\AndroidManifest.xml:53:19-47
 uses-permission#android.permission.ACCESS_NETWORK_STATE
