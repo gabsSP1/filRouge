@@ -5,6 +5,11 @@ import android.view.View;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -69,10 +74,12 @@ public class Player extends AnimatedSprite
     {
         if(j1)
         {
+
             createPhysicsJ1(physicsWorld);
         }
         else
         {
+
             createPhysicsJ2(physicsWorld);
         }
     }
@@ -81,7 +88,7 @@ public class Player extends AnimatedSprite
     private void createPhysicsJ2(PhysicsWorld physicsWorld)
     {
         body = PhysicsFactory.createBoxBody(physicsWorld, this, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
-        body.setUserData("per2");
+        body.setUserData("player2");
         body.setFixedRotation(false);
 
         physicsWorld.registerPhysicsConnector(new PhysicsConnector(this, body, true, false)
@@ -98,7 +105,7 @@ public class Player extends AnimatedSprite
     private void createPhysicsJ1(PhysicsWorld physicsWorld)
     {
         body = PhysicsFactory.createBoxBody(physicsWorld, this, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
-        body.setUserData("per");
+        body.setUserData("player1");
         body.setFixedRotation(false);
 
         physicsWorld.registerPhysicsConnector(new PhysicsConnector(this, body, true, false)
@@ -109,16 +116,16 @@ public class Player extends AnimatedSprite
                 super.onUpdate(pSecondsElapsed);
 //                System.out.println(GameScene.persoTwo.getpX()+" "+GameScene.persoTwo.getpY()+" "+getpX()+getpY());
 //                System.out.println((getpY()-height)-GameScene.persoTwo.getpY()+" "+(getpY()-height-GameScene.persoTwo.getpY())+" "+getpX()+getpY());
-                if(BazarStatic.onLine && (getpY()-height)-GameScene.persoTwo.getpY()<20 && getpY()-height-GameScene.persoTwo.getpY()>-20 )// && getpX()>(GameScene.persoTwo.getpX()-width) && getpX()<(GameScene.persoTwo.getpX()+width))
-                {
-                    Client.sendWin();
-                    scene.engine.stop();
-
-//                    scene.activity.textDie.setText("You win !");
-//                    scene.endPartyMulti();
-                    System.out.println("win");
-
-                }
+//                if(BazarStatic.onLine && (getpY()-height)-GameScene.persoTwo.getpY()<20 && getpY()-height-GameScene.persoTwo.getpY()>-20 )// && getpX()>(GameScene.persoTwo.getpX()-width) && getpX()<(GameScene.persoTwo.getpX()+width))
+//                {
+//                    Client.sendWin();
+//                    scene.engine.stop();
+//
+////                    scene.activity.textDie.setText("You win !");
+////                    scene.endPartyMulti();
+//                    System.out.println("win");
+//
+//                }
 
 
                 int x=(int)(getpX()+ vX);
@@ -376,7 +383,6 @@ public class Player extends AnimatedSprite
 
 
         }
-        System.out.println("Etat :"+etat+" vX "+vX+" vY "+vY);
         if(etat == etatPerso.JUMP && vX>0 && vY<0)
         {
             setCurrentTileIndex(8);

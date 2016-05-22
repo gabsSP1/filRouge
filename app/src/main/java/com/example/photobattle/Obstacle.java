@@ -27,6 +27,7 @@ public class Obstacle extends AnimatedSprite {
     boolean filsCree;
     private long nano;
 
+
     private final static float VITESSE_Y_MAX = 5.0f;
     private final static float VITESSE_X_MAX = 5.0f;
     private final static long COUNTDOWN = 4;
@@ -51,13 +52,14 @@ public class Obstacle extends AnimatedSprite {
 
     public void launchPhysics()
     {
+
         createPhysicsObstacle(physicsWorld);
     }
 
     private void createPhysicsObstacle(PhysicsWorld physicsWorld)
     {
         body = PhysicsFactory.createBoxBody(physicsWorld, this, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
-        body.setUserData("obst");
+        body.setUserData("obstacle");
         body.setFixedRotation(false);
         for(int i=0; i<body.getFixtureList().size();i++){
             body.getFixtureList().get(i).setSensor(true);
@@ -72,7 +74,7 @@ public class Obstacle extends AnimatedSprite {
                 int y = (int) (getpY() + vY);
                 setpY(y);
                 setpX(x);
-                checkDeath(x, y);
+//                checkDeath(x, y);
                 if (!filsCree && (System.nanoTime() - nano)/1000000000 > COUNTDOWN) {
                     filsCree = true;
                     createChild();
@@ -86,20 +88,20 @@ public class Obstacle extends AnimatedSprite {
         scene.addObstacle(this);
     }
 
-    private void checkDeath(int x, int y)
-    {
-        int pX = player.getpX();
-        int pY = player.getpY();
-
-        int pWidth = player.getpWidth();
-        int pHeight = player.getpHeight();
-
-        if(!( pX > x+width  ||  pX+pWidth < x  ||  pY > y+height  ||  pY+pHeight < y ))
-        {
-            player.die();
-        }
-
-    }
+//    private void checkDeath(int x, int y)
+//    {
+//        int pX = player.getpX();
+//        int pY = player.getpY();
+//
+//        int pWidth = player.getpWidth();
+//        int pHeight = player.getpHeight();
+//
+//        if(!( pX > x+width  ||  pX+pWidth < x  ||  pY > y+height  ||  pY+pHeight < y ))
+//        {
+//            player.die();
+//        }
+//
+//    }
 
     public void setRunning()
     {

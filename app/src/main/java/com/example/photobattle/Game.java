@@ -509,7 +509,7 @@ public class Game extends SimpleBaseGameActivity {
             }
 
 
-            playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "sprite_klonk_2.png", 0, 0, 9, 1);
+            playerOneTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture1, game, "sprite_klonk_2.png", 0, 0, 9, 1);
             playerTwoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.playerTexture2, game, "sprite_klonk_2.png", 0, 0, 9, 1);
             obstacleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(game.obstacleTexture, game, "sprite_bandelette_2.png", 0, 0, 7, 1);
             playerTexture1.load();

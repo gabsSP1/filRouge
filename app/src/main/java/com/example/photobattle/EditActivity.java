@@ -204,6 +204,9 @@ public class EditActivity extends BaseActivity {
 					}
 
 				}
+
+				if(event.getAction() == MotionEvent.ACTION_DOWN)
+				{
 				if (positionmode && !erasemode) {
 					if (pos % 2 == 1) {
 						xposJ2 = x;
@@ -216,6 +219,7 @@ public class EditActivity extends BaseActivity {
 						pos++;
 						Toast.makeText(EditActivity.this, "Position joueur 2 enregistrée", Toast.LENGTH_SHORT).show();
 					}
+				}
 				}
 
 				return true;

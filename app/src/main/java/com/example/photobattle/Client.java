@@ -33,7 +33,7 @@ public class Client {
         serverSocket = null;
         try {
             serverSocket = new Socket();
-            serverSocket.connect(new InetSocketAddress(host, Connect_activity.PORT),500);
+            serverSocket.connect(new InetSocketAddress(host, Connect_activity.PORT));//,1000);
             ClientThread ct = new ClientThread(serverSocket, context, act);
             ct.start();
             clients.add(ct);

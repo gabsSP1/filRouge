@@ -6,7 +6,12 @@ import android.view.View;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Manifold;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;
@@ -85,10 +90,10 @@ public class GameScene extends Scene {
 
             else
             {
-                persoTwo = new Player(BazarStatic.map.xposJ1, BazarStatic.map.yposJ1, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
+                persoTwo = new Player(BazarStatic.map.xposJ1, BazarStatic.map.yposJ1, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, this, false);
 
 
-                persoOne  = new Player(BazarStatic.map.xposJ2, BazarStatic.map.yposJ2, vbom, activity.getPlayerTwoTextureRegion(), camera, physicsWorld, this, false);
+                persoOne  = new Player(BazarStatic.map.xposJ2, BazarStatic.map.yposJ2, vbom, activity.getPlayerOneTextureRegion(), camera, physicsWorld, this, true);
             }
 
                 this.attachChild(persoOne);
@@ -143,6 +148,7 @@ public class GameScene extends Scene {
     private void createPhysics()
     {
         physicsWorld = new FixedStepPhysicsWorld(60, new Vector2(0, 0), false);
+        physicsWorld.setContactListener(contactListener());
         registerUpdateHandler(physicsWorld);
     }
 
@@ -316,6 +322,58 @@ public class GameScene extends Scene {
 //                detachChild(sprite);
             }});
     }
+
+
+    private ContactListener contactListener() {
+        ContactListener contactListener = new ContactListener() {
+
+            @Override
+            public void beginContact(Contact contact) {
+                final Fixture x1 = contact.getFixtureA();
+                final Fixture x2 = contact.getFixtureB();
+
+                if (x1.getBody().getUserData() != null && x2.getBody().getUserData() != null)
+                {
+                    if ((x2.getBody().getUserData().equals("player1") && x1.getBody().getUserData().equals("obstacle")) || (x1.getBody().getUserData().equals("player1") && x2.getBody().getUserData().equals("obstacle")))
+                    {
+                        if (!BazarStatic.onLine)
+                        {
+                            persoOne.die();
+                        }
+                    }
+                    else if((x2.getBody().getUserData().equals("player1") && x1.getBody().getUserData().equals("player2")) || (x1.getBody().getUserData().equals("player1") && x2.getBody().getUserData().equals("player2")))
+                    {
+                         if((persoOne.getpY()+persoOne.getHeight() - persoTwo.getpY()<15) && (persoOne.getpY()+persoOne.getHeight() - persoTwo.getpY()>-15 && persoOne.getVY()>0))
+                            {
+                                System.out.println("win");
+                                Client.sendWin();
+//                                engine.stop();
+                            }
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+
+            }
+        };
+        return contactListener;
+    }
+
 
 
 }
