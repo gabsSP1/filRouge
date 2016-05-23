@@ -499,8 +499,8 @@ public class Game extends SimpleBaseGameActivity {
             backgroundTexture.addTextureAtlasSource(source, 0, 0);
 
             backgroundTextureRegion =  TextureRegionFactory.createFromSource(backgroundTexture, source, 0, 0);
-            playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 900, 100);
-            playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 900, 100);
+            playerTexture1 = new BitmapTextureAtlas(game.getTextureManager(), 770, 100);
+            playerTexture2 = new BitmapTextureAtlas(game.getTextureManager(), 770, 100);
             obstacleTexture = new BitmapTextureAtlas(game.getTextureManager(), 700, 100);
 
 
