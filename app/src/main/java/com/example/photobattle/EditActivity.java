@@ -239,6 +239,7 @@ public class EditActivity extends BaseActivity {
 		s1= (SeekBar) findViewById(R.id.param1);
 		sizeEraser= (SeekBar) findViewById(R.id.sizing);
 		s1.setMax(500);
+
 		sizeEraser.setMax(200);
 
 
@@ -312,6 +313,7 @@ public class EditActivity extends BaseActivity {
 			Toast.makeText(this, "je peux pas lire les fichiers",Toast.LENGTH_SHORT).show();
 		}
 		sizeEraser.setProgress(100);
+
 		p.setImageBitmap(background);
 		//ReadSettings(this);
 	}
@@ -420,10 +422,12 @@ public class EditActivity extends BaseActivity {
 				String line = "";
 				if((line = br.readLine()) != null){
 					s1.setProgress(Integer.parseInt(line));
+					System.out.println(Integer.parseInt(line));
 				}
 				else
 				{
 					s1.setProgress(100);
+					System.out.println("progress 100");
 				}
 				if((line = br.readLine()) != null){
 					xposJ1 = Integer.parseInt(line);
@@ -463,7 +467,13 @@ public class EditActivity extends BaseActivity {
 
 			}  catch (IOException e) {
 				e.printStackTrace();
+				s1.setProgress(100);
 			}
+		}
+		else
+		{
+			s1.setProgress(100);
+			setProgress(100);
 		}
 
 

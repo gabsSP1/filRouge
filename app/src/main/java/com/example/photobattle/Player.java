@@ -3,6 +3,7 @@ package com.example.photobattle;
 
 import android.view.View;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -104,9 +106,16 @@ public class Player extends AnimatedSprite
 
     private void createPhysicsJ1(PhysicsWorld physicsWorld)
     {
-        body = PhysicsFactory.createBoxBody(physicsWorld, this, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
+        PolygonShape p = new PolygonShape();
+        Vector2 v1 = new Vector2(20,0);
+        Vector2 v2 = new Vector2(20,20);
+        Vector2 v3 = new Vector2(40,20);
+        Vector2 v4 = new Vector2(40,0);
+        Vector2[] pVerctices = {v1, v2, v3, v4};
+        body = PhysicsFactory.createPolygonBody(physicsWorld, this, pVerctices, BodyDef.BodyType.DynamicBody, PhysicsFactory.createFixtureDef(0, 0, 0));
         body.setUserData("player1");
         body.setFixedRotation(false);
+
 
         physicsWorld.registerPhysicsConnector(new PhysicsConnector(this, body, true, false)
         {

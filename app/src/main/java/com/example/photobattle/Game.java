@@ -359,6 +359,7 @@ public class Game extends SimpleBaseGameActivity {
         });
 
         score = new TextView(this);
+        score.setTextColor(Color.RED);
         RelativeLayout.LayoutParams buttonLayoutParmasScore = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         if(BazarStatic.onLine)
         {
@@ -477,7 +478,7 @@ public class Game extends SimpleBaseGameActivity {
             score.setText("Guest " + scoreGuest + "-" + scoreHost + " Host");
         }
         else {
-            score.setText("Score :"+scoreSolo+" High Socre"+BazarStatic.map.getHighScore());
+            score.setText("Score :"+scoreSolo+" High Score :"+BazarStatic.map.getHighScore());
         }
     }
 

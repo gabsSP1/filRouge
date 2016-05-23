@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\res\\merged\\debug\\values-eu-rES\\values-eu-rES.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 259,
+                    "endOffset": 360
+                },
+                "from": {
+                    "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\8.4.0\\res\\values-eu-rES\\common_strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 170,
+                        "endColumn": 263,
+                        "endOffset": 429
+                    }
+                }
+            }
+        ]
+    }
+]
