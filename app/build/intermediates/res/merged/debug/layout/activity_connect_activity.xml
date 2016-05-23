@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.photobattle.Connect_activity"
+    tools:context="com.photogame.imarena.Connect_activity"
     android:background="@drawable/background_app"
     android:weightSum="1">
 

@@ -4,7 +4,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.example.photobattle"
+        applicationId "com.photogame.imarena"
         minSdkVersion 17
         targetSdkVersion 21
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.photobattle"
+    package="com.photogame.imarena"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -32,7 +32,7 @@
         android:largeHeap="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
-            android:name="com.example.photobattle.MenuApp"
+            android:name="com.photogame.imarena.MenuApp"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -42,24 +42,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.photobattle.ChooseMap"
+            android:name="com.photogame.imarena.ChooseMap"
             android:label="@string/title_activity_map"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.example.photobattle.EditActivity"
+            android:name="com.photogame.imarena.EditActivity"
             android:label="@string/title_activity_edit"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.example.photobattle.Game"
+            android:name="com.photogame.imarena.Game"
             android:label="@string/title_activity_game"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.example.photobattle.Connect_activity"
+            android:name="com.photogame.imarena.Connect_activity"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.example.photobattle.JoinActivity"
+            android:name="com.photogame.imarena.JoinActivity"
             android:screenOrientation="landscape" />
-        <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"

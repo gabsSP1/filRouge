@@ -91,20 +91,27 @@
                     "startLine": 12,
                     "startColumn": 4,
                     "startOffset": 1217,
-                    "endColumn": 48,
-                    "endOffset": 1261
+                    "endColumn": 44,
+                    "endOffset": 1257
                 },
                 "from": {
-                    "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
+                    "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 44,
+                        "endOffset": 99
+                    }
                 }
             },
             {
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1266,
+                    "startOffset": 1262,
                     "endColumn": 91,
-                    "endOffset": 1353
+                    "endOffset": 1349
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\8.4.0\\res\\values\\auth_strings.xml"
@@ -114,9 +121,9 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1358,
+                    "startOffset": 1354,
                     "endColumn": 87,
-                    "endOffset": 1441
+                    "endOffset": 1437
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\8.4.0\\res\\values\\auth_strings.xml"
@@ -126,9 +133,9 @@
                 "to": {
                     "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 1446,
+                    "startOffset": 1442,
                     "endColumn": 218,
-                    "endOffset": 1660
+                    "endOffset": 1656
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\8.4.0\\res\\values\\common_strings.xml"
@@ -138,9 +145,9 @@
                 "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 1665,
+                    "startOffset": 1661,
                     "endColumn": 88,
-                    "endOffset": 1749
+                    "endOffset": 1745
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-ads\\8.4.0\\res\\values\\admob_strings.xml"
@@ -150,9 +157,9 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 1754,
+                    "startOffset": 1750,
                     "endColumn": 71,
-                    "endOffset": 1821
+                    "endOffset": 1817
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-ads\\8.4.0\\res\\values\\admob_strings.xml"
@@ -162,9 +169,9 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 1826,
+                    "startOffset": 1822,
                     "endColumn": 43,
-                    "endOffset": 1865
+                    "endOffset": 1861
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-ads\\8.4.0\\res\\values\\admob_strings.xml"
@@ -174,9 +181,9 @@
                 "to": {
                     "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 1870,
+                    "startOffset": 1866,
                     "endColumn": 52,
-                    "endOffset": 1918
+                    "endOffset": 1914
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -186,9 +193,9 @@
                 "to": {
                     "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 1923,
+                    "startOffset": 1919,
                     "endColumn": 33,
-                    "endOffset": 1952
+                    "endOffset": 1948
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -198,9 +205,9 @@
                 "to": {
                     "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 1957,
+                    "startOffset": 1953,
                     "endColumn": 95,
-                    "endOffset": 2048
+                    "endOffset": 2044
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-ads\\8.4.0\\res\\values\\admob_strings.xml"
@@ -210,9 +217,9 @@
                 "to": {
                     "startLine": 22,
                     "startColumn": 4,
-                    "startOffset": 2053,
+                    "startOffset": 2049,
                     "endColumn": 58,
-                    "endOffset": 2107
+                    "endOffset": 2103
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-ads\\8.4.0\\res\\values\\admob_strings.xml"
@@ -222,9 +229,9 @@
                 "to": {
                     "startLine": 23,
                     "startColumn": 4,
-                    "startOffset": 2112,
+                    "startOffset": 2108,
                     "endColumn": 60,
-                    "endOffset": 2168
+                    "endOffset": 2164
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -234,9 +241,9 @@
                 "to": {
                     "startLine": 24,
                     "startColumn": 4,
-                    "startOffset": 2173,
+                    "startOffset": 2169,
                     "endColumn": 52,
-                    "endOffset": 2221
+                    "endOffset": 2217
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -246,9 +253,9 @@
                 "to": {
                     "startLine": 25,
                     "startColumn": 4,
-                    "startOffset": 2226,
+                    "startOffset": 2222,
                     "endColumn": 50,
-                    "endOffset": 2272
+                    "endOffset": 2268
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -258,9 +265,9 @@
                 "to": {
                     "startLine": 26,
                     "startColumn": 4,
-                    "startOffset": 2277,
+                    "startOffset": 2273,
                     "endColumn": 59,
-                    "endOffset": 2332
+                    "endOffset": 2328
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -270,9 +277,9 @@
                 "to": {
                     "startLine": 27,
                     "startColumn": 4,
-                    "startOffset": 2337,
+                    "startOffset": 2333,
                     "endColumn": 35,
-                    "endOffset": 2368
+                    "endOffset": 2364
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\strings.xml"
@@ -282,10 +289,10 @@
                 "to": {
                     "startLine": 28,
                     "startColumn": 4,
-                    "startOffset": 2373,
+                    "startOffset": 2369,
                     "endLine": 34,
                     "endColumn": 12,
-                    "endOffset": 2659
+                    "endOffset": 2655
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\styles.xml"
@@ -295,31 +302,23 @@
                 "to": {
                     "startLine": 35,
                     "startColumn": 4,
-                    "startOffset": 2664,
+                    "startOffset": 2660,
                     "endLine": 38,
                     "endColumn": 12,
-                    "endOffset": 2820
+                    "endOffset": 2816
                 },
                 "from": {
-                    "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\styles.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 525,
-                        "endLine": 18,
-                        "endColumn": 12,
-                        "endOffset": 684
-                    }
+                    "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\src\\main\\res\\values\\styles.xml"
                 }
             },
             {
                 "to": {
                     "startLine": 39,
                     "startColumn": 4,
-                    "startOffset": 2825,
+                    "startOffset": 2821,
                     "endLine": 46,
                     "endColumn": 10,
-                    "endOffset": 3244
+                    "endOffset": 3240
                 },
                 "from": {
                     "file": "E:\\Dev\\AndroidProject\\filRouge\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-ads\\8.4.0\\res\\values\\admob_iap_style.xml"

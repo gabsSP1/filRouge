@@ -10,7 +10,7 @@
     <integer name="google_play_services_version">8487000</integer>
     <string name="accept">Accept</string>
     <string name="action_settings">Settings</string>
-    <string name="app_name">PhotoBattle</string>
+    <string name="app_name">ImArena</string>
     <string name="auth_google_play_services_client_facebook_display_name">Facebook</string>
     <string name="auth_google_play_services_client_google_display_name">Google</string>
     <string name="common_google_play_services_unknown_issue"><ns1:g id="app_name">%1$s</ns1:g> is having trouble with Google Play services. If the problem persists, please contact the developer for assistance.</string>
